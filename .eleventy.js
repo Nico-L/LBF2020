@@ -55,10 +55,10 @@ module.exports = function(eleventyConfig) {
     "src/eleventy/images": "images"
   });
   eleventyConfig.addPassthroughCopy({
-    "src/eleventy/css": "assets/css"
+    "src/eleventy/css": "css"
   });
   eleventyConfig.addPassthroughCopy({
-    "src/eleventy/_includes/js/*": "assets/js"
+    "src/eleventy/_includes/js/*": "js"
   });
 
   return {
