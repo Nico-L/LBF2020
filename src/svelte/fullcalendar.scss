@@ -5,6 +5,7 @@
 @import '~@fullcalendar/timegrid/main.css';
 */
 //core sccs
+/* purgecss start ignore */
 @import './fullCalendar/common';
 @import './fullCalendar/standard';
 @import './fullCalendar/toolbar';
@@ -13,3 +14,4 @@
 @media print {
   @import './fullCalendar/print';
 }
+/* purgecss end ignore */
