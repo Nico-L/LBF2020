@@ -15,5 +15,5 @@ const urlImageMachine = "{{machine.urlImage}}"
 </script>
 <script>const dispoMachines = [{% for horaires in dispoMachines %}[{% for horaire in horaires%}{"start": {{horaire.start}}, "end": {{horaire.end}}}{% endfor %}], {% endfor %}]
 </script>
-<script src="/assets/js/bundle.js"></script>
+<script src="/js/bundle.js"></script>
 {% endblock %}

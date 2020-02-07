@@ -3,7 +3,7 @@ a {
 }
 
 a:not(.inactive):hover {
-  background-image: url("../images/svg/fondLBF2.svg");
+  background-image: url("/images/svg/fondLBF2.svg");
   background-repeat: no-repeat;
 }
 
