@@ -1,0 +1,17 @@
+---
+title: Les Machines
+layout: baseLBF
+---
+
+<h1 class="mt-12 mx-auto sm:mt-1 text-3xl sm:text-4xl text-center">
+    Réservation des machines
+  </h1>
+  <div class="text-lg text-center mb-2">Sélectionnez la machine à réserver</div>
+<div class="flex flex-col sm:flex-row items-center sm:justify-around sm:items-stretch sm:flex-wrap">
+    {%- for machine in lesMachines -%}
+  <a href="/reservation/{{machine.titre | slug}}" class="w-72 sm:w-48 bg-orangeLBF border border-orangeLBF rounded mb-2">
+    <img src="https://res.cloudinary.com/la-bonne-fabrique/image/upload/ar_1:1,c_fill/w_auto,c_scale/{{machine.urlImage}}" class="rounded-t sm:rounded-t"/>
+    <div class="mx-1 text-center text-xl sm:text-base">{{machine.titre}}</div>
+  </a>
+{% endfor %}
+</div>

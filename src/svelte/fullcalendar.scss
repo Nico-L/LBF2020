@@ -1,0 +1,15 @@
+// must manually import the stylesheets for each plugin
+/*
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+@import '~@fullcalendar/timegrid/main.css';
+*/
+//core sccs
+@import './fullCalendar/common';
+@import './fullCalendar/standard';
+@import './fullCalendar/toolbar';
+@import './fullCalendar/view';
+@import './fullCalendar/timegrid.scss';
+@media print {
+  @import './fullCalendar/print';
+}

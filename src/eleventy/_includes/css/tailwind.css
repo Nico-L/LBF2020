@@ -1,0 +1,15 @@
+/* purgecss start 
+@tailwind base;
+/* purgecss end ignore */
+@import "tailwindcss/base";
+@import "./LBF/LBF.css";
+/* import css svelte*/
+@import "./svelte/bundle.css";
+
+/* purgecss start ignore 
+@tailwind components;
+/* purgecss end ignore */
+@import "tailwindcss/components";
+
+/*@tailwind utilities;*/
+@import "tailwindcss/utilities";

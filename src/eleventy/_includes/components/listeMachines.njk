@@ -1,0 +1,57 @@
+{%- for machine in lesMachines -%}
+        <div class="w-320px sm:w-480px mb-4 mx-0 bg-{{couleursLBF[loop.index0].couleur}} flex flex-col-reverse sm:flex-row rounded-lg border border-{{couleursLBF[loop.index0].racine}}-100">
+        <div class="w-full flex-wrap mb-3 sm:w-5/12 mr-px p-1 flex sm:flex-col flex-row text-black items-end">
+        <div class="w-1/2 sm:w-full flex">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 26.458 26.458" class="object-left w-1/3">
+                    <path d="M11.291 6.558a.917.917 0 00.632.247c.22 0 .44-.083.633-.247a.88.88 0 000-1.264l-.935-.936h11.657l-.936.936a.88.88 0 000 1.264.917.917 0 00.633.247c.22 0 .44-.083.632-.247l2.447-2.447a.88.88 0 000-1.264L23.607.4a.88.88 0 00-1.265 0 .88.88 0 000 1.264l.936.935H11.62l.908-.908a.88.88 0 000-1.264.88.88 0 00-1.266 0L8.846 2.875a.88.88 0 000 1.264zm-5.993 5.966a.917.917 0 00.633.247c.22 0 .44-.083.632-.247a.88.88 0 000-1.264L4.116 8.84a.88.88 0 00-1.265 0L.405 11.287a.88.88 0 000 1.264.88.88 0 001.264 0l.935-.935v11.657l-.907-.907a.88.88 0 00-1.264 0 .88.88 0 000 1.264l2.447 2.447a.917.917 0 00.631.247c.22 0 .44-.083.633-.247l2.447-2.447a.88.88 0 000-1.264.88.88 0 00-1.266 0l-.935.935V11.616zm20.123-3.932H9.477a.869.869 0 00-.88.88v15.945c0 .495.385.88.88.88h15.944c.496 0 .88-.385.88-.88V9.473a.869.869 0 00-.88-.88zm-.879 15.945H10.356V10.352h14.158v14.186z" fill="#050505" stroke="#0a0a0a" stroke-width=".27534030000000004"/>
+                </svg>
+            <div class="text-sm mt-4 sm:w-2/3">{{machine.taille}} mm²</div>
+        </div>
+        <div class="flex flex-row sm:mt-4 w-1/2 sm:w-full">
+                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 17.198 17.198" class="object-left w-1/3 pl-2 align-bottom">
+                    <g fill="#050505" stroke="#0a0a0a"><path d="M9.791 5.34a.606.606 0 00.418.164.641.641 0 00.418-.164.582.582 0 000-.837l-1.62-1.6a.582.582 0 00-.836 0L6.553 4.522a.582.582 0 000 .837.582.582 0 00.836 0l.62-.62v7.713l-.601-.6a.582.582 0 00-.837 0 .582.582 0 000 .837l1.619 1.618a.606.606 0 00.417.164.641.641 0 00.42-.164l1.619-1.618a.582.582 0 000-.837.582.582 0 00-.837 0l-.62.619V4.739z" stroke-width=".18187637999999998"/><path d="M16.224.132H.974a.83.83 0 00-.842.842v15.251c0 .473.367.841.842.841h15.25a.83.83 0 00.842-.84V.973a.83.83 0 00-.842-.842zm-.84 15.252H1.814V1.814h13.543v13.57z" stroke-width=".2633729"/></g>
+                </svg>
+            <div class="text-sm w-2/3 pt-1">{{machine.epaisseur}} mm</div>
+        </div>
+        {% if (machine.tagMachine=='cnc') or (machine.tagMachine=='laser') %}
+        <div class="flex mt-3 items-start w-full">
+        <img src="/images/svg/{{machine.tagMachine}}Cut.png" srcset="/images/svg/{{machine.tagMachine}}Cut.svg" alt="icone {{machine.tagMachine}}" width="50px">
+            <div class="text-sm w-2/3 flex flex-col ml-2">
+            <ul class="text-sm hidden sm:block">
+            {%- for decoupe in machine.decoupe -%}
+                    <li>{{decoupe}}</li>
+                    {%- endfor -%}
+                    </ul>
+                <div class="sm:hidden">
+                {% for decoupe in machine.decoupe %}
+                    {% if loop.last %}{{decoupe}}{% else %}{{decoupe}}, {% endif %}
+                    {% endfor %}
+                </div>
+                </div>
+        </div>
+        <div class="flex flex-row w-full items-start mt-3">
+                <img src="/images/svg/{{machine.tagMachine}}Etch.png" srcset="/images/svg/{{machine.tagMachine}}Etch.svg" alt="icone {{machine.tagMachine}}" width="50px">
+        
+            <div class="text-sm w-2/3 flex flex-col ml-2"><ul class="text-sm hidden sm:block">
+                    {%- for gravure in machine.gravure -%}
+                    <li>{{gravure}}</li>
+                    {%- endfor -%}
+                    </ul>
+                    <div class="sm:hidden">
+                {% for gravure in machine.gravure %}
+                    {% if loop.last %}{{gravure}}{% else %}{{gravure}}, {% endif %}
+                    {% endfor %}
+                </div>
+                </div>
+        </div>
+                {% endif %}
+        </div>
+
+        <div class="sm:w-7/12 flex flex-col bg-white rounded-t-lg sm:rounded-br-lg sm:rounded-tl-none">
+        <img src="https://res.cloudinary.com/la-bonne-fabrique/image/upload/ar_16:9,c_fill/w_auto,c_scale/{{machine.urlImage}}" class="rounded-t-lg sm:rounded-tl-none"/>
+        <div class="text-xl p-1 text-center font-bold capitalize mt-1 align-middle">{{machine.titre}}</div>
+        <div class="text-base text-justify p-1 align-top rounded-br-lg">{{machine.description}}
+        </div>
+        </div>
+        </div>
+  {%- endfor -%}

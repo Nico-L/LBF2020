@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/assets/css/styles.css">
+    <title>{{ title }}</title>
+    {% include "social.njk" %}
+  </head>
+  <body class="relative container bg-fondLBF sm:w-full">
+  <div class="flex flex-row sm:flex-col ">
+          <div class="sm:flex sm:flex-row flex-col">    
+            {% include "components/navigation.njk" %}
+            <div class="sm:flex-1 w-screen mt-12 sm:mt-1 " id="bobby">
+                {# include content #}
+                {{ content | safe }}
+            </div>
+        </div>
+  </div>
+    {% block scripts %}
+    {% endblock %}
+  </body>
+</html>

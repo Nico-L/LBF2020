@@ -1,0 +1,19 @@
+---
+title: Réservation Machine
+layout: baseLBF
+pagination:
+  data: lesMachines
+  size: 1
+  alias: machine
+permalink: "reservation/{{ machine.titre | slug }}/index.html"
+---
+{% block scripts %}
+<script>
+const titreMachine = "{{machine.titre}}"
+const idMachine = "{{machine.id}}"
+const urlImageMachine = "{{machine.urlImage}}"
+</script>
+<script>const dispoMachines = [{% for horaires in dispoMachines %}[{% for horaire in horaires%}{"start": {{horaire.start}}, "end": {{horaire.end}}}{% endfor %}], {% endfor %}]
+</script>
+<script src="/assets/js/bundle.js"></script>
+{% endblock %}
