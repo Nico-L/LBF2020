@@ -9,7 +9,55 @@
   let workingFlag = true; //flag to switch when async query
   let workingMessage = ""; //message du processus
   let recupReservations = false;
+  let listeDureesReservations = [
+    { label: "une demi-heure", valeur: 0.5 },
+    { label: "une heure", valeur: 1 },
+    { label: "deux heures", valeur: 2 }
+  ];
+  let listeDureesPossibles = [];
 
+  function listeDureesReservationsPossibles(selectionDate) {
+    listeDureesPossibles = [];
+    listeDureesReservations.forEach(uneDuree => {
+      let finReservation = new Date(selectionDate);
+      const ajoutHeures = Math.floor(uneDuree.valeur);
+      const ajoutMinutes = uneDuree.valeur - ajoutHeures;
+      if (ajoutHeures > 0) {
+        finReservation.setHours(selectionDate.getHours() + ajoutHeures);
+      }
+      if (ajoutMinutes > 0) {
+        finReservation.setMinutes(selectionDate.getMinutes() + ajoutMinutes * 60);
+      }
+      var flagEvent = true;
+      var flagDispo = true;
+      for (let i = 0; i < eventDispoMachines.length; i++) {
+        if (
+          selectionDate >= eventDispoMachines[i].start &&
+          selectionDate < eventDispoMachines[i].end &&
+          finReservation > eventDispoMachines[i].end
+        ) {
+          flagDispo = false;
+          break;
+        }
+      }
+      for (let i = 0; i < calendarEvents.length; i++) {
+        let start = new Date(calendarEvents[i].start);
+        let end = new Date(calendarEvents[i].end);
+        if (selectionDate < start && finReservation > start) {
+          flagEvent = false;
+          break;
+        }
+      }
+      if (flagEvent && flagDispo) {
+        listeDureesPossibles = [
+          ...listeDureesPossibles,
+          { label: uneDuree.label, valeur: uneDuree.valeur }
+        ];
+      }
+    });
+  }
+
+  // formattage date
   const options = {
     weekday: "long",
     year: "numeric",
@@ -20,11 +68,15 @@
   };
 
   // donnée réserveur
-  let nom = "bob ";
-  let prenom = "bibi";
-  let email = "luchier@gmail.com";
   let debutReservation = new Date();
   let duree = 0.5;
+  let saveInfo = false;
+  if (localStorage["userInfo"]) {
+    var userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    saveInfo = true;
+  } else {
+    var userInfo = { nom: "", prenom: "", email: "" };
+  }
 
   //fullcalendar
   import FullCalendar from "svelte-fullcalendar";
@@ -59,16 +111,16 @@
       cache: "no-cache",
       body: JSON.stringify({
         query: `query listeReservations($idReservation: uuid) {
-                  __typename
-                  reservationMachines(where: {id: {_eq: $idReservation}}) {
-                  dateDebut
-                  dateFin
-                  email
-                  machine {
-                    titre
-                  }
-                  }
-                  }`,
+                                                            __typename
+                                                            reservationMachines(where: {id: {_eq: $idReservation}}) {
+                                                            dateDebut
+                                                            dateFin
+                                                            email
+                                                            machine {
+                                                              titre
+                                                            }
+                                                            }
+                                                            }`,
         variables: {
           idReservation: idReservation
         }
@@ -105,13 +157,13 @@
         cache: "no-cache",
         body: JSON.stringify({
           query: `mutation effaceReservation($idReservation: uuid) {
-                __typename
-                delete_reservationMachines(where: {id: {_eq: $idReservation}}) {
-                  returning {
-                    id
-                  }
-                }
-              }`,
+                                                          __typename
+                                                          delete_reservationMachines(where: {id: {_eq: $idReservation}}) {
+                                                            returning {
+                                                              id
+                                                            }
+                                                          }
+                                                        }`,
           variables: {
             idReservation: idReservation
           }
@@ -143,12 +195,12 @@
       cache: "no-cache",
       body: JSON.stringify({
         query: `query listeReservations($idMachine: uuid) {
-                __typename
-                reservationMachines(where: {dateDebut: {_gte: "now()"}, _and: {idMachine: {_eq: $idMachine}}}) {
-                  dateDebut
-                  dateFin
-                }
-              }`,
+                                                                __typename
+                                                                reservationMachines(where: {dateDebut: {_gte: "now()"}, _and: {idMachine: {_eq: $idMachine}}}) {
+                                                                  dateDebut
+                                                                  dateFin
+                                                                }
+                                                              }`,
         variables: {
           idMachine: idMachine
         }
@@ -190,6 +242,7 @@
   function handleDateClick(arg) {
     let numJour = arg.date.getDay();
     leJourSelection = arg.date;
+    listeDureesReservationsPossibles(leJourSelection);
     let leJour = eventDispoMachines.filter(event => {
       return numJour === event.numJour;
     })[0];
@@ -237,6 +290,13 @@
 
   // gestion ajout réservation
   function enregistrementReservation() {
+    //verification si on doit poser une cookie ou l'enlever
+    if (saveInfo) {
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
+    }
+    if (!saveInfo && localStorage["userInfo"]) {
+      localStorage.removeItem("userInfo");
+    }
     workingFlag = true;
     workingMessage = "Enregistrement de votre réservation en cours";
     var finReservation = new Date(debutReservation);
@@ -256,20 +316,20 @@
       method: "POST",
       body: JSON.stringify({
         query: `
-                                                        mutation ajoutReservation($dateDebut: timestamptz,$dateFin: timestamptz, $email: String, $idMachine: uuid, $nom: String, $prenom: String) {
-                                                          insert_reservationMachines(objects: {dateDebut: $dateDebut, dateFin: $dateFin, email: $email, idMachine: $idMachine, nom: $nom, prenom: $prenom}) {
-                                                            returning {
-                                                              id
-                                                            }
-                                                          }
-                                                        }`,
+                                                                                  mutation ajoutReservation($dateDebut: timestamptz,$dateFin: timestamptz, $email: String, $idMachine: uuid, $nom: String, $prenom: String) {
+                                                                                    insert_reservationMachines(objects: {dateDebut: $dateDebut, dateFin: $dateFin, email: $email, idMachine: $idMachine, nom: $nom, prenom: $prenom}) {
+                                                                                      returning {
+                                                                                        id
+                                                                                      }
+                                                                                    }
+                                                                                  }`,
         variables: {
           dateDebut: debutReservation,
           dateFin: finReservation,
-          email: email,
+          email: userInfo.email,
           idMachine: idMachine,
-          nom: nom,
-          prenom: prenom
+          nom: userInfo.nom,
+          prenom: userInfo.prenom
         }
       })
     })
@@ -283,10 +343,10 @@
             ? duree.toString() + " heures"
             : duree.toString() + " heure";
         let arrayMails = [];
-        arrayMails.push(email);
+        arrayMails.push(userInfo.email);
         let envoiMail = {
           machine: titreMachine,
-          prenom: prenom,
+          prenom: userInfo.prenom,
           duration: dureeString,
           jour: leJourSelection
             .toLocaleDateString("fr-fr", options)
@@ -304,17 +364,17 @@
           method: "POST",
           body: JSON.stringify({
             query: `
-                                                  mutation envoiMail($email: [String!]!, $template: String) {
-                                                    sendEmail(
-                                                      from: "atelierdusappey@gmail.com"
-                                                      to: $email
-                                                      templateId: "d-08bb9e1b96ac4d56a9210660cac6cd07"
-                                                      dynamic_template_data: $template
-                                                    ) {
-                                                      success
-                                                    }
-                                                  }
-                                                `,
+                                                              mutation envoiMail($email: [String!]!, $template: String) {
+                                                                sendEmail(
+                                                                  from: "atelierdusappey@gmail.com"
+                                                                  to: $email
+                                                                  templateId: "d-08bb9e1b96ac4d56a9210660cac6cd07"
+                                                                  dynamic_template_data: $template
+                                                                ) {
+                                                                  success
+                                                                }
+                                                              }
+                                                            `,
             variables: {
               email: arrayMails,
               template: JSON.stringify(envoiMail)
@@ -349,36 +409,33 @@
 </h2>
 <h3 class="text-lg font-bold text-center text-vertLBF border-b border-vertLBF pb-3 mb-1" slot="sousTitre">{leJourSelection.toLocaleDateString('fr-fr',
 	options).replace(":", "h")}</h3>
-  <hr />
 <div class="text-justify">
-	Merci de préciser vos coordonnées ci-dessous. Vous recevrez un email de confirmation qui contiendra un lien pour
-	effacer votre réservation si besoin. Il est donc important d'entrer une adresse valide.
-	<hr />
+  <div class="text-lg font-medium">Vos coordonnées</div>
 	<div class="flex flex-row mt-2">
-		<input class="w-1/2 bg-white border-2 border-lbforange-400 rounded-lg py-2 px-4 block appearance-none leading-normal mr-1 focus:outline-none focus:bg-white focus:border-lbfvert-600"
-		 type="text" placeholder="nom" bind:value={nom}>
+	<input class="w-1/2 bg-white border-2 border-lbforange-400 rounded-lg py-2 px-4 block appearance-none leading-normal mr-1 focus:outline-none focus:bg-white focus:border-lbfvert-600"
+		 type="text" placeholder="nom" bind:value={userInfo.nom}>
 		<input class="w-1/2 bg-white focus:outline-none focus:bg-white focus:border-lbfvert-600 border-2 border-lbforange-400 rounded-lg py-2 px-4 block appearance-none leading-normal ml-1"
-		 type="text" placeholder="prénom" bind:value={prenom}>
+		 type="text" placeholder="prénom" bind:value={userInfo.prenom}>
 	</div>
 	<input class="mt-2 w-full bg-white focus:outline-none focus:bg-white focus:border-lbfvert-600 border-2 border-lbforange-400 rounded-lg py-2 px-4 block appearance-none leading-normal"
-	 type="email" placeholder="adresse email" bind:value={email}/>
-	<div class="w-full mt-1 text-lg font-bold">Durée de votre réservation</div>
-	<div class="ml-1 sm:ml-4">
-		<label class="inline-flex items-center">
+	 type="email" placeholder="adresse email" bind:value={userInfo.email}/>
+   	<div class="text-base">
+     Vous recevrez un email de confirmation qui contiendra un lien pour
+	effacer votre réservation si besoin. Il est donc important d'entrer une adresse valide.
+     </div>
+     <label class="mx-8 pr-8 my-1 text-base">
+     <input type="checkbox" class="form-checkbox text-lbfvert-600" bind:checked={saveInfo} />
+     Enregistrer mes coordonnées pour la prochaine fois (ces informations sont stockées sur votre machine)
+     </label>
+     <div class="w-full mt-1 text-lg font-bold">Durée de votre réservation</div>
+	<div class="mx-1 flex justify-around">
+  {#each listeDureesPossibles as laDuree}
+  		<label class="flex items-center">
 			<input type="radio" class="form-radio border-2 border-lbforange-400 text-lbfvert-600 focus:outline-none h-6 w-6 sm:h-4 sm:w-4"
-			 bind:group={duree} value={0.5}>
-			<span class="ml-2">1/2 heure</span>
+			 bind:group={duree} value={laDuree.valeur}>
+			<span class="ml-2">{laDuree.label}</span>
 		</label>
-		<label class="inline-flex items-center ml-6">
-			<input type="radio" class="form-radio border-2 border-lbforange-400 text-lbfvert-600 focus:outline-none h-6 w-6 sm:h-4 sm:w-4"
-			 bind:group={duree} value={1}>
-			<span class="ml-2">1 heure</span>
-		</label>
-    <label class="inline-flex items-center ml-6">
-			<input type="radio" class="form-radio border-2 border-lbforange-400 text-lbfvert-600 focus:outline-none h-6 w-6 sm:h-4 sm:w-4"
-			 bind:group={duree} value={2}>
-			<span class="ml-2">2 heure</span>
-		</label>
+  {/each}
 	</div>
 </div>
 
