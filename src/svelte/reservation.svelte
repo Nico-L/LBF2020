@@ -69,6 +69,7 @@
 
   // donnée réserveur
   let debutReservation = new Date();
+  var flagChoixDate = false;
   let duree = 0.5;
   let saveInfo = false;
   if (localStorage["userInfo"]) {
@@ -111,16 +112,16 @@
       cache: "no-cache",
       body: JSON.stringify({
         query: `query listeReservations($idReservation: uuid) {
-                                                            __typename
-                                                            reservationMachines(where: {id: {_eq: $idReservation}}) {
-                                                            dateDebut
-                                                            dateFin
-                                                            email
-                                                            machine {
-                                                              titre
-                                                            }
-                                                            }
-                                                            }`,
+            __typename
+            reservationMachines(where: {id: {_eq: $idReservation}}) {
+                dateDebut
+                dateFin
+                email
+                machine {
+                 titre
+                }
+            }
+        }`,
         variables: {
           idReservation: idReservation
         }
@@ -157,13 +158,13 @@
         cache: "no-cache",
         body: JSON.stringify({
           query: `mutation effaceReservation($idReservation: uuid) {
-                                                          __typename
-                                                          delete_reservationMachines(where: {id: {_eq: $idReservation}}) {
-                                                            returning {
-                                                              id
-                                                            }
-                                                          }
-                                                        }`,
+            __typename
+                delete_reservationMachines(where: {id: {_eq: $idReservation}}) {
+                    returning {
+                    id
+                    }
+                }
+            }`,
           variables: {
             idReservation: idReservation
           }
@@ -195,13 +196,13 @@
       cache: "no-cache",
       body: JSON.stringify({
         query: `query listeReservations($idMachine: uuid) {
-                                                                __typename
-                                                                reservationMachines(where: {dateDebut: {_gte: "now()"}, _and: {idMachine: {_eq: $idMachine}}}) {
-                                                                  dateDebut
-                                                                  dateFin
-                                                                }
-                                                              }`,
-        variables: {
+            __typename
+            reservationMachines(where: {dateDebut: {_gte: "now()"}, _and: {idMachine: {_eq: $idMachine}}}) {
+            dateDebut
+            dateFin
+            }
+        }`,
+    variables: {
           idMachine: idMachine
         }
       })
@@ -252,6 +253,7 @@
       arg.date < leJour.end;
     if (creneauDispo) {
       debutReservation = arg.date;
+      flagChoixDate = true;
       showModalReservation = true;
     } else {
       showModalMauvaisCreneau = true;
@@ -290,6 +292,10 @@
 
   // gestion ajout réservation
   function enregistrementReservation() {
+    // verif qu'une date a été choisie, sinon, return (spam ?)
+    if (!flagChoixDate) {
+      return;
+    }
     //verification si on doit poser une cookie ou l'enlever
     if (saveInfo) {
       localStorage.setItem("userInfo", JSON.stringify(userInfo));
@@ -316,13 +322,13 @@
       method: "POST",
       body: JSON.stringify({
         query: `
-                                                                                  mutation ajoutReservation($dateDebut: timestamptz,$dateFin: timestamptz, $email: String, $idMachine: uuid, $nom: String, $prenom: String) {
-                                                                                    insert_reservationMachines(objects: {dateDebut: $dateDebut, dateFin: $dateFin, email: $email, idMachine: $idMachine, nom: $nom, prenom: $prenom}) {
-                                                                                      returning {
-                                                                                        id
-                                                                                      }
-                                                                                    }
-                                                                                  }`,
+            mutation ajoutReservation($dateDebut: timestamptz,$dateFin: timestamptz, $email: String, $idMachine: uuid, $nom: String, $prenom: String) {
+                insert_reservationMachines(objects: {dateDebut: $dateDebut, dateFin: $dateFin, email: $email, idMachine: $idMachine, nom: $nom, prenom: $prenom}) {
+                returning {
+                    id
+                }
+                }
+            }`,
         variables: {
           dateDebut: debutReservation,
           dateFin: finReservation,
@@ -364,17 +370,17 @@
           method: "POST",
           body: JSON.stringify({
             query: `
-                                                              mutation envoiMail($email: [String!]!, $template: String) {
-                                                                sendEmail(
-                                                                  from: "atelierdusappey@gmail.com"
-                                                                  to: $email
-                                                                  templateId: "d-08bb9e1b96ac4d56a9210660cac6cd07"
-                                                                  dynamic_template_data: $template
-                                                                ) {
-                                                                  success
-                                                                }
-                                                              }
-                                                            `,
+                mutation envoiMail($email: [String!]!, $template: String) {
+                    sendEmail(
+                    from: "atelierdusappey@gmail.com"
+                    to: $email
+                    templateId: "d-08bb9e1b96ac4d56a9210660cac6cd07"
+                    dynamic_template_data: $template
+                    ) {
+                    success
+                    }
+                }
+                `,
             variables: {
               email: arrayMails,
               template: JSON.stringify(envoiMail)
@@ -398,12 +404,13 @@
     workingFlag = false;
     workingMessage = "";
     showModalReservation = false;
+    flagChoixDate = false;
   }
   let disabled = true;
 </script>
 
-{#if showModalReservation}
-<Modal on:close="{() => showModalReservation = false}">
+{#if showModalReservation && flagChoixDate}
+<Modal on:close="{() => {showModalReservation = false; flagChoixDate = false}}">
 <h2 class="text-xl sm:text-2xl font-bold text-center" slot="titre">
 	Réservation de {titreMachine}
 </h2>
@@ -418,7 +425,7 @@
 		 type="text" placeholder="prénom" bind:value={userInfo.prenom}>
 	</div>
 	<input class="mt-2 w-full bg-white focus:outline-none focus:bg-white focus:border-lbfvert-600 border-2 border-lbforange-400 rounded-lg py-2 px-4 block appearance-none leading-normal"
-	 type="email" placeholder="adresse email" bind:value={userInfo.email}/>
+	 type="email" placeholder="adresse email" bind:value={userInfo.email} required/>
    	<div class="text-base">
      Vous recevrez un email de confirmation qui contiendra un lien pour
 	effacer votre réservation si besoin. Il est donc important d'entrer une adresse valide.

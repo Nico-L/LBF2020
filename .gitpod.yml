@@ -1,0 +1,8 @@
+tasks:
+  - init: yarn install && yarn run build
+    command: yarn run start
+
+vscode:
+  extensions:
+    - JamesBirtles.svelte-vscode@0.9.3:aT2nc+VyKmuFE9yDTcvKcw==
+    - luwenjiechn.nunjucks-vscode-snippets@0.0.6:QpbsGBPAIH03SukS0WvnWg==

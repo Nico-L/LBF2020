@@ -8,6 +8,9 @@
 # secrets
 .env
 
+#ide configs
+/.codesandbox
+
 # macOS related files
 .DS_Store
 .AppleDouble
