@@ -36,17 +36,6 @@ async function fetchMachinesData() {
   return leFetch.json();
 }
 
-async function machinesData() {
-    axios({
-  url: graphqlURL,
-  method: 'post',
-  headers: {'Content-Type': 'application/json','Cache-Control' : 'no-store'},
-  data: {
-    query: query
-  }
-}).then((results) => {console.log('axios data', results.data)})
-}
-
 module.exports = async function() {
   let result = await fetchMachinesData();
   //console.log("retour",result.errors[0].extensions)
