@@ -1,5 +1,5 @@
 {%- for machine in lesMachines -%}
-        <div class="w-320px sm:w-480px mb-4 mx-0 bg-{{couleursLBF[loop.index0].couleur}} flex flex-col-reverse sm:flex-row rounded-lg border border-{{couleursLBF[loop.index0].racine}}-100">
+        <div class="w-320px sm:w-480px mb-4 mx-0 border {% include "components/classCartesMachines.njk" %} flex flex-col-reverse sm:flex-row rounded-lg">
         <div class="w-full flex-wrap mb-3 sm:w-5/12 mr-px p-1 flex sm:flex-col flex-row text-black items-end">
         <div class="w-1/2 sm:w-full flex">
                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 26.458 26.458" class="object-left w-1/3">

@@ -2,22 +2,21 @@ module.exports = {
   theme: {
     colors: {
       transparent: "transparent",
-
       black: "#000",
       white: "#fff",
       fondLBF: "#FCFCFC",
-      orangeLBF: "#EE732E",
+      orangeLBF: "#ee732e",
       bleuLBF: "#4bbcc4",
-      vertLBF: "#93C021",
+      vertLBF: "#93c021",
       rougeLBF: "#e02933",
-      jauneLBF: "#FCC62D",
+      jauneLBF: "#fcc62d",
       lbforange: {
-        50: "#fff4e3",
-        100: "#ffe1b9",
-        200: "#ffce8d",
+        50: "#FFF4E3",
+        100: "#FFE1B9",
+        200: "#FFCE8D",
         300: "#ffba62",
         400: "#ffab45",
-        500: "#ff9e36",
+        500: "#ff9E36",
         600: "#fc9234",
         700: "#f58331",
         800: "#EE732E",
@@ -71,7 +70,7 @@ module.exports = {
         400: "#f9ed55",
         500: "#f6e833",
         600: "#fddd36",
-        700: "#FCC62D",
+        700: "#fcc62d",
         800: "#fbad24",
         900: "#f78413"
       },

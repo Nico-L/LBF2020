@@ -1,7 +1,7 @@
 [
-  {"couleur": "lbfrouge-600", "racine": "lbfrouge"},
-  {"couleur": "lbfjaune-700", "racine": "lbfjaune"},
-  {"couleur": "lbfbleu-400", "racine": "lbfbleu"},
-  {"couleur": "lbforange-800", "racine": "lbforange"},
-  {"couleur": "lbfvert-500", "racine": "lbfvert"}
+  {"fond": "rouge", "racine": "lbfrouge"},
+  {"fond": "jaune", "racine": "lbfjaune"},
+  {"fond": "bleu", "racine": "lbfbleu"},
+  {"fond": "orange", "racine": "lbforange"},
+  {"fond": "vert", "racine": "lbfvert"}
 ]
