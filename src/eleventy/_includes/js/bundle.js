@@ -15533,8 +15533,6 @@ var app = (function () {
 
     // (487:0) {#if !recupReservations}
     function create_if_block_1(ctx) {
-    	let h1;
-    	let t2;
     	let current;
 
     	let fullcalendar_props = {
@@ -15565,16 +15563,9 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
-    			h1 = element("h1");
-    			h1.textContent = `Réservation de ${titreMachine}`;
-    			t2 = space();
     			create_component(fullcalendar.$$.fragment);
-    			attr_dev(h1, "class", "text-center text-xl sm:text-3xl");
-    			add_location(h1, file$2, 487, 0, 17308);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, h1, anchor);
-    			insert_dev(target, t2, anchor);
     			mount_component(fullcalendar, target, anchor);
     			current = true;
     		},
@@ -15593,8 +15584,6 @@ var app = (function () {
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(h1);
-    			if (detaching) detach_dev(t2);
     			/*fullcalendar_binding*/ ctx[43](null);
     			destroy_component(fullcalendar, detaching);
     		}
@@ -15611,7 +15600,7 @@ var app = (function () {
     	return block;
     }
 
-    // (505:0) {#if recupReservations}
+    // (504:0) {#if recupReservations}
     function create_if_block$1(ctx) {
     	let div1;
     	let svg;
@@ -15647,7 +15636,7 @@ var app = (function () {
     			attr_dev(animate0, "keyTimes", "0; 1");
     			attr_dev(animate0, "keySplines", "0.165, 0.84, 0.44, 1");
     			attr_dev(animate0, "repeatCount", "indefinite");
-    			add_location(animate0, file$2, 509, 4, 18181);
+    			add_location(animate0, file$2, 508, 4, 18101);
     			attr_dev(animate1, "attributeName", "stroke-opacity");
     			attr_dev(animate1, "begin", "0s");
     			attr_dev(animate1, "dur", "1.8s");
@@ -15656,11 +15645,11 @@ var app = (function () {
     			attr_dev(animate1, "keyTimes", "0; 1");
     			attr_dev(animate1, "keySplines", "0.3, 0.61, 0.355, 1");
     			attr_dev(animate1, "repeatCount", "indefinite");
-    			add_location(animate1, file$2, 510, 4, 18345);
+    			add_location(animate1, file$2, 509, 4, 18265);
     			attr_dev(circle0, "cx", "22");
     			attr_dev(circle0, "cy", "22");
     			attr_dev(circle0, "r", "1");
-    			add_location(circle0, file$2, 508, 3, 18145);
+    			add_location(circle0, file$2, 507, 3, 18065);
     			attr_dev(animate2, "attributeName", "r");
     			attr_dev(animate2, "begin", "-0.9s");
     			attr_dev(animate2, "dur", "1.8s");
@@ -15669,7 +15658,7 @@ var app = (function () {
     			attr_dev(animate2, "keyTimes", "0; 1");
     			attr_dev(animate2, "keySplines", "0.165, 0.84, 0.44, 1");
     			attr_dev(animate2, "repeatCount", "indefinite");
-    			add_location(animate2, file$2, 513, 4, 18569);
+    			add_location(animate2, file$2, 512, 4, 18489);
     			attr_dev(animate3, "attributeName", "stroke-opacity");
     			attr_dev(animate3, "begin", "-0.9s");
     			attr_dev(animate3, "dur", "1.8s");
@@ -15678,23 +15667,23 @@ var app = (function () {
     			attr_dev(animate3, "keyTimes", "0; 1");
     			attr_dev(animate3, "keySplines", "0.3, 0.61, 0.355, 1");
     			attr_dev(animate3, "repeatCount", "indefinite");
-    			add_location(animate3, file$2, 514, 4, 18736);
+    			add_location(animate3, file$2, 513, 4, 18656);
     			attr_dev(circle1, "cx", "22");
     			attr_dev(circle1, "cy", "22");
     			attr_dev(circle1, "r", "1");
-    			add_location(circle1, file$2, 512, 3, 18533);
+    			add_location(circle1, file$2, 511, 3, 18453);
     			attr_dev(g, "fill", "none");
     			attr_dev(g, "fill-rule", "evenodd");
     			attr_dev(g, "stroke-width", "2");
-    			add_location(g, file$2, 507, 2, 18088);
+    			add_location(g, file$2, 506, 2, 18008);
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr_dev(svg, "class", "stroke-current text-lbfvert-500 h-20 w-20 mx-auto");
     			attr_dev(svg, "viewBox", "0 0 50 50");
-    			add_location(svg, file$2, 506, 2, 17966);
+    			add_location(svg, file$2, 505, 2, 17886);
     			attr_dev(div0, "class", "w-3/4 text-center mx-auto");
-    			add_location(div0, file$2, 518, 1, 18942);
+    			add_location(div0, file$2, 517, 1, 18862);
     			attr_dev(div1, "class", "mx-auto my-auto");
-    			add_location(div1, file$2, 505, 1, 17933);
+    			add_location(div1, file$2, 504, 1, 17853);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -15718,7 +15707,7 @@ var app = (function () {
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(505:0) {#if recupReservations}",
+    		source: "(504:0) {#if recupReservations}",
     		ctx
     	});
 

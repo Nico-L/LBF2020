@@ -485,7 +485,6 @@ L'adresse email n'est renseignée ou elle ne correspond pas à l'adresse utilis�
 
 <div class="z-1 flex flex-col max-w-4xl h-3xl">
 {#if !recupReservations}
-<h1 class="text-center text-xl sm:text-3xl">Réservation de {titreMachine}</h1>
 		<FullCalendar
 			bind:this={calendarComponentRef}
       plugins={[timeGridPlugin, interactionPlugin]}
