@@ -50,7 +50,7 @@
         <div class="sm:w-7/12 flex flex-col bg-white rounded-t-lg sm:rounded-br-lg sm:rounded-tl-none">
         <img src="https://res.cloudinary.com/la-bonne-fabrique/image/upload/ar_16:9,c_fill/w_auto,c_scale/{{machine.urlImage}}" class="rounded-t-lg sm:rounded-tl-none"/>
         <div class="text-xl p-1 text-center font-bold capitalize mt-1 align-middle">{{machine.titre}}</div>
-        <div class="text-base text-justify p-1 align-top rounded-br-lg">{{machine.description}}
+        <div class="text-base text-justify p-1 align-top rounded-br-lg">{{machine.description | safe}}
         </div>
         </div>
         </div>
