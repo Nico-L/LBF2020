@@ -1,5 +1,14 @@
 module.exports = {
   theme: {
+    minWidth: {
+        '0': '0',
+        '1/4': '25%',
+        '1/2': '50%',
+        '3/4': '75%',
+        'full': '100%',
+        '340px': '340px',
+        '16': '4rem'
+    },
     colors: {
       transparent: "transparent",
       black: "#000",
@@ -92,7 +101,8 @@ module.exports = {
       "10px": "10px",
       "200px": "200px",
       "40px": "40px",
-      "320px": "320px",
+      "340px": "340px",
+      "180px": "180px",
       "480px": "480px",
       "0": "0",
       "1": "0.25rem",
@@ -104,6 +114,7 @@ module.exports = {
       "8": "2rem",
       "10": "2.5rem",
       "12": "3rem",
+      "14": "3.5rem",
       "16": "4rem",
       "20": "5rem",
       "24": "6rem",
@@ -134,6 +145,9 @@ module.exports = {
         "72": "18rem",
         "84": "21rem",
         "96": "24rem"
+      },
+      inset: {
+        "-1": "-0.25rem",
       }
     }
   },

@@ -1,6 +1,20 @@
-//const { DateTime } = require("luxon");
+const { DateTime } = require("luxon");
 //const util = require("util");
 const slugify = require("slugify");
+const moisShort = [
+    "jan.",
+    "fév.",
+    "mars",
+    "avr.",
+    "mai",
+    "juin",
+    "juill.",
+    "août",
+    "sept.",
+    "oct.",
+    "nov.",
+    "déc."
+];
 
 module.exports = function(eleventyConfig) {
   // Layout aliases for convenience
@@ -17,6 +31,33 @@ module.exports = function(eleventyConfig) {
     };
     return slugify(input, options);
   });
+
+  //récupération de l'horaire dans la fiche de l'atelier
+eleventyConfig.addFilter("getHoraire", function(value) {
+    var d = DateTime.fromISO(value).setZone("Europe/Paris");
+    var minute = d.minute == 0 ? '00': d.minute;
+    return d.hour + "h" + minute;
+});
+
+  //récupération du jour dans la fiche de l'atelier
+eleventyConfig.addFilter("getJour", function(value) {
+    var d = DateTime.fromISO(value).setZone("Europe/Paris");
+    return d.day;
+});
+
+  //récupération du mois (short) dans la fiche de l'atelier
+eleventyConfig.addFilter("getMoisShort", function(value) {
+    var d = (new Date(value)).getMonth();
+    return moisShort[d];
+});
+
+// récupération nb de places restantes
+eleventyConfig.addFilter("getPlacesRestantes", function(inscrits, nbPlaces) {
+    console.log('inscrits', inscrits)
+    var reste = inscrits ? nbPlaces - inscrits.length:nbPlaces;
+    const retour = reste == 0 ? "Complet": reste + " places restantes";
+    return retour;
+});
 
   // a debug utility
   eleventyConfig.addFilter("dump", obj => {
