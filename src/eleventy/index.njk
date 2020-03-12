@@ -2,23 +2,6 @@
 title: L'atelier de la Bonne Fabrique
 layout: baseLBF
 ---
-<div class="sm:mt-6 mt-12 mx-1">
-<h1 class="sm:text-3xl text-xl font-bold mb-2 text-center">Bienvenue sur le site de l'atelier de la Bonne Fabrique</h1>
-<div class="max-w-xl mx-auto border-2 border-lbforange-600 p-2 rounded">
-<p>Le site est en pleine construction. &Agrave; terme, vous aurez à votre disposition (liste non exhaustive) :</p>
-<ul class="list-disc ml-8 mb-1">
-<li>La liste de nos machines et un système de réservation</li>
-<li>La liste des prochains ateliers et la possibilité de vous y inscrire</li>
-<li>Un espace regroupant les réalisations des utilisateurs de l'atelier</li>
-</ul>
-<p>
-&Eacute;tat d'achèvement du site :
-<ul class="list-disc ml-8 mb-1">
-<li><a href="/machines/" class="text-lbfvert-500">La liste des machines est fonctionnelle</a></li>
-<li><a href="/tarifs/" class="text-lbforange-600">La liste de nos tarifs est fonctionnelle</a></li>
-</ul>
-</p>
-</div>
 <div class="flex flex-row items-stretch flex-wrap justify-around">
 {% for atelier in lesAteliers %}
 <div class="relative min-w-340px w-340px bg-white border border-lbforange-600 rounded mx-1 my-1">
@@ -33,7 +16,7 @@ layout: baseLBF
         {% if atelier.surInscription %}
         <div class="absolute flex flex-row -bottom-1 left-0 content-center">
             <div class="bg-orangeLBF flex flex-row mr-1 text-white text-xs px-1">
-                <div class="my-auto">{{atelier.inscrits | getPlacesRestantes(atelier.nbParticipants)}}</div>
+                <div class="my-auto">{{atelier.inscritsAteliers | getPlacesRestantes(atelier.nbParticipants)}}</div>
             </div>
             <div class="bg-orangeLBF flex flex-row content-center rounded-r px-1">
                 <svg class="fill-current text-white my-auto" width="16" height="16" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">

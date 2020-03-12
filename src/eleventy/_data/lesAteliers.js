@@ -5,7 +5,7 @@ const graphqlURL = process.env.HASURA_ENDPOINT;
 const query = `
 query lesAteliers {
   __typename
-  ateliers(order_by: {dateDebut: asc}) {
+  ateliers(where: {espaceBF: {espace: {_eq: "Latelier"}}}, order_by: {dateDebut: asc}) {
     id
     titre
     dateFin
@@ -16,7 +16,12 @@ query lesAteliers {
     surInscription
     tarifs
     urlImage
-    inscrits
+    inscritsAteliers {
+      id
+      email
+      nom
+      prenom
+    }
   }
 }
 `;

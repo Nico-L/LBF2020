@@ -53,9 +53,8 @@ eleventyConfig.addFilter("getMoisShort", function(value) {
 
 // récupération nb de places restantes
 eleventyConfig.addFilter("getPlacesRestantes", function(inscrits, nbPlaces) {
-    console.log('inscrits', inscrits)
     var reste = inscrits ? nbPlaces - inscrits.length:nbPlaces;
-    const retour = reste == 0 ? "Complet": reste + " places restantes";
+    const retour = reste == 0 ? "Complet" : reste === 1 ? "Dernière place" : reste + " places restantes";
     return retour;
 });
 
