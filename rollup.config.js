@@ -4,11 +4,12 @@ import commonjs from "@rollup/plugin-commonjs";
 //import livereload from "rollup-plugin-livereload";
 import {terser} from "rollup-plugin-terser";
 import postcss from "rollup-plugin-postcss";
+import svelte_preprocess_postcss from 'svelte-preprocess-postcss';
 
 const production = !process.env.ROLLUP_WATCH;
 
 export default [{
-  input: "src/svelte/main.js",
+  input: "src/svelte/calendrier/main.js",
   output: {
     sourcemap: true,
     format: "iife",
@@ -33,8 +34,7 @@ export default [{
     // https://github.com/rollup/plugins/tree/master/packages/commonjs
     resolve({
       browser: false,
-      dedupe: importee =>
-        importee === "svelte" || importee.startsWith("svelte/")
+      dedupe: importee => importee === "svelte" || importee.startsWith("svelte/")
     }),
     commonjs({include: ["node_modules/**"]}),
     // In dev mode, call `npm run start` once
@@ -54,33 +54,35 @@ export default [{
   }
 },
 {
-  input: "src/inscription/main.js",
+  input: "src/svelte/inscriptions/main.js",
   output: {
     sourcemap: true,
     format: "iife",
-    name: "app",
+    name: "appInscription",
     file: "src/eleventy/_includes/js/inscriptionAteliers.js"
   },
   plugins: [
     svelte({
+      customElement: true,
       // enable run-time checks when not in production
       dev: !production,
+      // different de l'app normale pour prendre en compte tailwind dans le composant web
+      preprocess: {
+        style: svelte_preprocess_postcss(),
+     },
       // we'll extract any component CSS out into
       // a separate file — better for performance
       css: css => {
         css.write("src/eleventy/_includes/css/svelte/inscriptionAteliers.css");
       }
     }),
-    postcss(),
     // If you have external dependencies installed from
     // npm, you'll most likely need these plugins. In
     // some cases you'll need additional configuration —
     // consult the documentation for details:
     // https://github.com/rollup/plugins/tree/master/packages/commonjs
     resolve({
-      browser: false,
-      dedupe: importee =>
-        importee === "svelte" || importee.startsWith("svelte/")
+      browser: false
     }),
     commonjs({include: ["node_modules/**"]}),
     // In dev mode, call `npm run start` once

@@ -9,6 +9,11 @@ module.exports = {
         '340px': '340px',
         '16': '4rem'
     },
+    maxHeight: {
+           '0': '0',
+           '5/6': '83%',
+           'full': '100%',
+          },
     colors: {
       transparent: "transparent",
       black: "#000",
@@ -148,6 +153,7 @@ module.exports = {
       },
       inset: {
         "-1": "-0.25rem",
+        "-2": "-0.5rem"
       }
     }
   },

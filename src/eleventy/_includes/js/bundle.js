@@ -14621,8 +14621,8 @@ var app = (function () {
     var css = ".fc{direction:ltr;text-align:left}.fc-rtl{text-align:right}body .fc{font-size:1em}.fc-highlight{background:#bce8f1;opacity:.3}.fc-bgevent{background:#8fdf82;opacity:.3}.fc-nonbusiness{background:#d7d7d7}.fc-popover{position:absolute;box-shadow:0 2px 6px rgba(0,0,0,.15)}.fc-popover .fc-header{display:-webkit-box;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;flex-direction:row;-webkit-box-pack:justify;justify-content:space-between;-webkit-box-align:center;align-items:center;padding:2px 4px}.fc-rtl .fc-popover .fc-header{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;flex-direction:row-reverse}.fc-popover .fc-header .fc-title{margin:0 2px}.fc-popover .fc-header .fc-close{cursor:pointer;opacity:.65;font-size:1.1em}.fc-divider{border-style:solid;border-width:1px}hr.fc-divider{height:0;margin:0;padding:0 0 2px;border-width:1px 0}.fc-bg,.fc-bgevent-skeleton,.fc-highlight-skeleton,.fc-mirror-skeleton{position:absolute;top:0;left:0;right:0}.fc-bg{bottom:0}.fc-bg table{height:100%}.fc table{width:100%;box-sizing:border-box;table-layout:fixed;border-collapse:collapse;border-spacing:0;font-size:1em}.fc th{text-align:center}.fc td,.fc th{border-style:solid;border-width:1px;padding:0;vertical-align:top}.fc td.fc-today{border-style:double}a[data-goto]{cursor:pointer}a[data-goto]:hover{text-decoration:underline}.fc .fc-row{border-style:solid;border-width:0}.fc-row table{border-left:0 hidden transparent;border-right:0 hidden transparent;border-bottom:0 hidden transparent}.fc-row:first-child table{border-top:0 hidden transparent}.fc-row{position:relative}.fc-row .fc-bg{z-index:1}.fc-row .fc-bgevent-skeleton,.fc-row .fc-highlight-skeleton{bottom:0}.fc-row .fc-bgevent-skeleton table,.fc-row .fc-highlight-skeleton table{height:100%}.fc-row .fc-bgevent-skeleton td,.fc-row .fc-highlight-skeleton td{border-color:transparent}.fc-row .fc-bgevent-skeleton{z-index:2}.fc-row .fc-highlight-skeleton{z-index:3}.fc-row .fc-content-skeleton{position:relative;z-index:4;padding-bottom:2px}.fc-row .fc-mirror-skeleton{z-index:5}.fc .fc-row .fc-content-skeleton table,.fc .fc-row .fc-content-skeleton td,.fc .fc-row .fc-mirror-skeleton td{background:none;border-color:transparent}.fc-row .fc-content-skeleton td,.fc-row .fc-mirror-skeleton td{border-bottom:0}.fc-row .fc-content-skeleton tbody td,.fc-row .fc-mirror-skeleton tbody td{border-top:0}.fc-scroller{-webkit-overflow-scrolling:touch}.fc-scroller>.fc-day-grid,.fc-scroller>.fc-time-grid{position:relative;width:100%}.fc-event{position:relative;display:block;font-size:.85em;line-height:1.4;border-radius:3px;border-color:#34787b}.fc-event,.fc-event-dot{background-color:#34787b}.fc-event,.fc-event:hover{color:#fff;text-decoration:none}.fc-event.fc-draggable,.fc-event[href]{cursor:pointer}.fc-not-allowed,.fc-not-allowed .fc-event{cursor:not-allowed}.fc-event .fc-content{position:relative;z-index:2}.fc-event .fc-resizer{position:absolute;z-index:4;display:none}.fc-event.fc-allow-mouse-resize .fc-resizer,.fc-event.fc-selected .fc-resizer{display:block}.fc-event.fc-selected .fc-resizer:before{content:\"\";position:absolute;z-index:99;top:50%;left:50%;width:40px;height:40px;margin-left:-20px;margin-top:-20px}.fc-event.fc-selected{z-index:99!important;box-shadow:0 2px 5px rgba(0,0,0,.2)}.fc-event.fc-selected:after{content:\"\";position:absolute;z-index:1;top:-1px;right:-1px;bottom:-1px;left:-1px;background:#000;opacity:.25}.fc-event.fc-dragging.fc-selected{box-shadow:0 2px 7px rgba(0,0,0,.3)}.fc-event.fc-dragging:not(.fc-selected){opacity:.75}.fc-h-event.fc-selected:before{content:\"\";position:absolute;z-index:3;top:-10px;bottom:-10px;left:0;right:0}.fc-ltr .fc-h-event.fc-not-start,.fc-rtl .fc-h-event.fc-not-end{margin-left:0;border-left-width:0;padding-left:1px;border-top-left-radius:0;border-bottom-left-radius:0}.fc-ltr .fc-h-event.fc-not-end,.fc-rtl .fc-h-event.fc-not-start{margin-right:0;border-right-width:0;padding-right:1px;border-top-right-radius:0;border-bottom-right-radius:0}.fc-ltr .fc-h-event .fc-start-resizer,.fc-rtl .fc-h-event .fc-end-resizer{cursor:w-resize;left:-1px}.fc-ltr .fc-h-event .fc-end-resizer,.fc-rtl .fc-h-event .fc-start-resizer{cursor:e-resize;right:-1px}.fc-h-event.fc-allow-mouse-resize .fc-resizer{width:7px;top:-1px;bottom:-1px}.fc-h-event.fc-selected .fc-resizer{border-radius:4px;width:6px;height:6px;border:1px solid;border-color:inherit;background:#fff;top:50%;margin-top:-4px}.fc-ltr .fc-h-event.fc-selected .fc-start-resizer,.fc-rtl .fc-h-event.fc-selected .fc-end-resizer{margin-left:-4px}.fc-ltr .fc-h-event.fc-selected .fc-end-resizer,.fc-rtl .fc-h-event.fc-selected .fc-start-resizer{margin-right:-4px}.fc-day-grid-event{margin:1px 2px 0;padding:0 1px}tr:first-child>td>.fc-day-grid-event{margin-top:2px}.fc-mirror-skeleton tr:first-child>td>.fc-day-grid-event{margin-top:0}.fc-day-grid-event .fc-content{white-space:nowrap;overflow:hidden}.fc-day-grid-event .fc-time{font-weight:700}.fc-ltr .fc-day-grid-event.fc-allow-mouse-resize .fc-start-resizer,.fc-rtl .fc-day-grid-event.fc-allow-mouse-resize .fc-end-resizer{margin-left:-2px}.fc-ltr .fc-day-grid-event.fc-allow-mouse-resize .fc-end-resizer,.fc-rtl .fc-day-grid-event.fc-allow-mouse-resize .fc-start-resizer{margin-right:-2px}a.fc-more{margin:1px 3px;font-size:.85em;cursor:pointer;text-decoration:none}a.fc-more:hover{text-decoration:underline}.fc-limited{display:none}.fc-day-grid .fc-row{z-index:1}.fc-more-popover{z-index:2;width:220px}.fc-more-popover .fc-event-container{padding:10px}.fc-now-indicator{position:absolute;border:0 solid red}.fc-unselectable{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}.fc-unthemed .fc-content,.fc-unthemed .fc-divider,.fc-unthemed .fc-list-heading td,.fc-unthemed .fc-list-view,.fc-unthemed .fc-popover,.fc-unthemed .fc-row,.fc-unthemed tbody,.fc-unthemed td,.fc-unthemed th,.fc-unthemed thead{border-color:#ddd}.fc-unthemed .fc-popover{background-color:#fff}.fc-unthemed .fc-divider,.fc-unthemed .fc-list-heading td,.fc-unthemed .fc-popover .fc-header{background:#eee}.fc-unthemed td.fc-today{background:#fcf8e3}.fc-unthemed .fc-disabled-day{background:#d7d7d7;opacity:.3}@font-face{font-family:fcicons;src:url(\"data:application/x-font-ttf;charset=utf-8;base64,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\") format(\"truetype\");font-weight:400;font-style:normal}.fc-icon{font-family:fcicons!important;speak:none;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.fc-icon-chevron-left:before{content:\"\\e900\"}.fc-icon-chevron-right:before{content:\"\\e901\"}.fc-icon-chevrons-left:before{content:\"\\e902\"}.fc-icon-chevrons-right:before{content:\"\\e903\"}.fc-icon-minus-square:before{content:\"\\e904\"}.fc-icon-plus-square:before{content:\"\\e905\"}.fc-icon-x:before{content:\"\\e906\"}.fc-icon{display:inline-block;width:1em;height:1em;text-align:center}.fc-button{border-radius:0;overflow:visible;text-transform:none;margin:0;font-family:inherit;font-size:inherit;line-height:inherit}.fc-button:focus{outline:1px dotted;outline:5px auto -webkit-focus-ring-color}.fc-button{-webkit-appearance:button}.fc-button:not(:disabled){cursor:pointer}.fc-button::-moz-focus-inner{padding:0;border-style:none}.fc-button{display:inline-block;font-weight:400;color:#212529;text-align:center;vertical-align:middle;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-color:transparent;border:1px solid transparent;padding:.4em .65em;font-size:1em;border-radius:.25em;line-height:1}.fc-button:hover{color:#212529;text-decoration:none}.fc-button:focus{outline:0;box-shadow:0 0 0 .2rem rgba(44,62,80,.25)}.fc-button:disabled{opacity:1}.fc-button-primary{color:#fff;background-color:#fc9234}.fc-button-primary:hover{color:#fff;background-color:#ffab45}.fc-button-primary:focus{box-shadow:0 0 0 .2rem rgba(76,91,106,.5)}.fc-button-primary:disabled{background-color:transparent;color:transparent}.fc-button-primary:not(:disabled).fc-button-active,.fc-button-primary:not(:disabled):active{color:#fff;background-color:#1a252f;border-color:#151e27}.fc-button-primary:not(:disabled).fc-button-active:focus,.fc-button-primary:not(:disabled):active:focus{box-shadow:0 0 0 .2rem rgba(76,91,106,.5)}.fc-button .fc-icon{vertical-align:middle;font-size:1rem}.fc-button-group{position:relative;display:-webkit-inline-box;display:inline-flex;vertical-align:middle}.fc-button-group>.fc-button{position:relative;-webkit-box-flex:1;flex:1 1 auto}.fc-button-group>.fc-button.fc-button-active,.fc-button-group>.fc-button:active,.fc-button-group>.fc-button:focus,.fc-button-group>.fc-button:hover{z-index:1}.fc-button-group>.fc-button:not(:first-child){margin-left:-1px}.fc-button-group>.fc-button:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0}.fc-button-group>.fc-button:not(:first-child){border-top-left-radius:0;border-bottom-left-radius:0}.fc-unthemed .fc-popover{border-width:1px;border-style:solid}.fc-unthemed .fc-list-item:hover td{background-color:#f5f5f5}.fc-toolbar{display:-webkit-box;display:flex;-webkit-box-pack:justify;justify-content:space-between;-webkit-box-align:center;align-items:center}.fc-toolbar.fc-header-toolbar{margin-bottom:.5em}.fc-toolbar.fc-footer-toolbar{margin-top:1.5em}.fc-toolbar>*>:not(:first-child){margin-left:.75em}.fc-toolbar h2{font-size:1.25rem;font-weight:700;color:#ee732e;text-align:center}@media (min-width:768px){.fc-toolbar h2{font-size:1.5rem;font-weight:700;color:#ee732e}}.fc-view-container{position:relative}.fc-view-container *,.fc-view-container :after,.fc-view-container :before{box-sizing:content-box}.fc-view,.fc-view>table{position:relative;z-index:1}.fc-timeGrid-view .fc-day-grid{position:relative;z-index:2}.fc-timeGrid-view .fc-day-grid .fc-row{min-height:3em}.fc-timeGrid-view .fc-day-grid .fc-row .fc-content-skeleton{padding-bottom:1em}.fc .fc-axis{vertical-align:middle;padding:0 4px;white-space:nowrap}.fc-ltr .fc-axis{text-align:right}.fc-rtl .fc-axis{text-align:left}.fc-time-grid,.fc-time-grid-container{position:relative;z-index:1}.fc-time-grid{min-height:100%}.fc-time-grid table{border:0 hidden transparent}.fc-time-grid>.fc-bg{z-index:1}.fc-time-grid .fc-slats,.fc-time-grid>hr{position:relative;z-index:2}.fc-time-grid .fc-content-col{position:relative}.fc-time-grid .fc-content-skeleton{position:absolute;z-index:3;top:0;left:0;right:0}.fc-time-grid .fc-business-container{position:relative;z-index:1}.fc-time-grid .fc-bgevent-container{position:relative;z-index:2}.fc-time-grid .fc-highlight-container{z-index:3}.fc-time-grid .fc-event-container{position:relative;z-index:4}.fc-time-grid .fc-now-indicator-line{z-index:5}.fc-time-grid .fc-mirror-container{position:relative;z-index:6}.fc-time-grid .fc-slats td{height:1.5em;border-bottom:0}.fc-time-grid .fc-slats .fc-minor td{border-top-style:dotted}.fc-time-grid .fc-highlight-container{position:relative}.fc-time-grid .fc-highlight{position:absolute;left:0;right:0}.fc-ltr .fc-time-grid .fc-event-container{margin:0 2.5% 0 2px}.fc-rtl .fc-time-grid .fc-event-container{margin:0 2px 0 2.5%}.fc-time-grid .fc-bgevent,.fc-time-grid .fc-event{position:absolute;z-index:1}.fc-time-grid .fc-bgevent{left:0;right:0}.fc-time-grid-event{margin-bottom:1px}.fc-time-grid-event-inset{box-shadow:0 0 0 1px #fff}.fc-time-grid-event.fc-not-start{border-top-width:0;padding-top:1px;border-top-left-radius:0;border-top-right-radius:0}.fc-time-grid-event.fc-not-end{border-bottom-width:0;padding-bottom:1px;border-bottom-left-radius:0;border-bottom-right-radius:0}.fc-time-grid-event .fc-content{overflow:hidden;max-height:100%}.fc-time-grid-event .fc-time,.fc-time-grid-event .fc-title{padding:0 1px}.fc-time-grid-event .fc-time{font-size:.85em;white-space:nowrap}.fc-time-grid-event.fc-short .fc-content{white-space:nowrap}.fc-time-grid-event.fc-short .fc-time,.fc-time-grid-event.fc-short .fc-title{display:inline-block;vertical-align:top}.fc-time-grid-event.fc-short .fc-time span{display:none}.fc-time-grid-event.fc-short .fc-time:before{content:attr(data-start)}.fc-time-grid-event.fc-short .fc-time:after{content:\"\\000A0-\\000A0\"}.fc-time-grid-event.fc-short .fc-title{font-size:.85em;padding:0}.fc-time-grid-event.fc-allow-mouse-resize .fc-resizer{left:0;right:0;bottom:0;height:8px;overflow:hidden;line-height:8px;font-size:11px;font-family:monospace;text-align:center;cursor:s-resize}.fc-time-grid-event.fc-allow-mouse-resize .fc-resizer:after{content:\"=\"}.fc-time-grid-event.fc-selected .fc-resizer{border-radius:5px;width:8px;height:8px;border:1px solid;border-color:inherit;background:#fff;left:50%;margin-left:-5px;bottom:-5px}.fc-time-grid .fc-now-indicator-line{border-top-width:1px;left:0;right:0}.fc-time-grid .fc-now-indicator-arrow{margin-top:-5px}.fc-ltr .fc-time-grid .fc-now-indicator-arrow{left:0;border-width:5px 0 5px 6px;border-top-color:transparent;border-bottom-color:transparent}.fc-rtl .fc-time-grid .fc-now-indicator-arrow{right:0;border-width:5px 6px 5px 0;border-top-color:transparent;border-bottom-color:transparent}@media print{.fc{max-width:100%!important}.fc-event{background:#fff!important;color:#000!important;page-break-inside:avoid}.fc-event .fc-resizer{display:none}.fc-row,.fc hr,.fc tbody,.fc td,.fc th,.fc thead{border-color:#ccc!important;background:#fff!important}.fc-bg,.fc-bgevent-container,.fc-bgevent-skeleton,.fc-business-container,.fc-highlight-container,.fc-highlight-skeleton,.fc-mirror-container,.fc-mirror-skeleton{display:none}.fc tbody .fc-row{height:auto!important;min-height:0!important}.fc tbody .fc-row .fc-content-skeleton{position:static;padding-bottom:0!important}.fc tbody .fc-row .fc-content-skeleton tbody tr:last-child td{padding-bottom:1em}.fc tbody .fc-row .fc-content-skeleton table{height:1em}.fc-more,.fc-more-cell{display:none!important}.fc tr.fc-limited{display:table-row!important}.fc td.fc-limited{display:table-cell!important}.fc-popover{display:none}.fc-time-grid{min-height:0!important}.fc-timeGrid-view .fc-axis{display:none}.fc-slats,.fc-time-grid hr{display:none!important}.fc-time-grid .fc-content-skeleton{position:static}.fc-time-grid .fc-content-skeleton table{height:4em}.fc-time-grid .fc-event-container{margin:0!important}.fc-time-grid .fc-event{position:static!important;margin:3px 2px!important}.fc-time-grid .fc-event.fc-not-end{border-bottom-width:1px!important}.fc-time-grid .fc-event.fc-not-end:after{content:\"...\"}.fc-time-grid .fc-event.fc-not-start{border-top-width:1px!important}.fc-time-grid .fc-event.fc-not-start:before{content:\"...\"}.fc-time-grid .fc-event .fc-time{white-space:normal!important}.fc-time-grid .fc-event .fc-time span{display:none}.fc-time-grid .fc-event .fc-time:after{content:attr(data-full)}.fc-day-grid-container,.fc-scroller,.fc-time-grid-container{overflow:visible!important;height:auto!important}.fc-row{border:0!important;margin:0!important}.fc-button-group,.fc button{display:none}}";
     styleInject(css);
 
-    /* src/svelte/reservation.svelte generated by Svelte v3.17.2 */
-    const file$2 = "src/svelte/reservation.svelte";
+    /* src/svelte/calendrier/reservation.svelte generated by Svelte v3.17.2 */
+    const file$2 = "src/svelte/calendrier/reservation.svelte";
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
@@ -14630,7 +14630,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (412:0) {#if showModalReservation && flagChoixDate}
+    // (411:0) {#if showModalReservation && flagChoixDate}
     function create_if_block_5(ctx) {
     	let current;
 
@@ -14684,14 +14684,14 @@ var app = (function () {
     		block,
     		id: create_if_block_5.name,
     		type: "if",
-    		source: "(412:0) {#if showModalReservation && flagChoixDate}",
+    		source: "(411:0) {#if showModalReservation && flagChoixDate}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (414:0) <h2 class="text-xl sm:text-2xl font-bold text-center" slot="titre">
+    // (413:0) <h2 class="text-xl sm:text-2xl font-bold text-center" slot="titre">
     function create_titre_slot_2(ctx) {
     	let h2;
 
@@ -14704,7 +14704,7 @@ var app = (function () {
 
     			attr_dev(h2, "class", "text-xl sm:text-2xl font-bold text-center");
     			attr_dev(h2, "slot", "titre");
-    			add_location(h2, file$2, 413, 0, 13375);
+    			add_location(h2, file$2, 412, 0, 13303);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h2, anchor);
@@ -14719,14 +14719,14 @@ var app = (function () {
     		block,
     		id: create_titre_slot_2.name,
     		type: "slot",
-    		source: "(414:0) <h2 class=\\\"text-xl sm:text-2xl font-bold text-center\\\" slot=\\\"titre\\\">",
+    		source: "(413:0) <h2 class=\\\"text-xl sm:text-2xl font-bold text-center\\\" slot=\\\"titre\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (417:0) <h3 class="text-lg font-bold text-center text-vertLBF border-b border-vertLBF pb-3 mb-1" slot="sousTitre">
+    // (416:0) <h3 class="text-lg font-bold text-center text-vertLBF border-b border-vertLBF pb-3 mb-1" slot="sousTitre">
     function create_sousTitre_slot_1(ctx) {
     	let h3;
     	let t_value = /*leJourSelection*/ ctx[9].toLocaleDateString("fr-fr", /*options*/ ctx[15]).replace(":", "h") + "";
@@ -14738,7 +14738,7 @@ var app = (function () {
     			t = text(t_value);
     			attr_dev(h3, "class", "text-lg font-bold text-center text-vertLBF border-b border-vertLBF pb-3 mb-1");
     			attr_dev(h3, "slot", "sousTitre");
-    			add_location(h3, file$2, 416, 0, 13483);
+    			add_location(h3, file$2, 415, 0, 13411);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h3, anchor);
@@ -14756,14 +14756,14 @@ var app = (function () {
     		block,
     		id: create_sousTitre_slot_1.name,
     		type: "slot",
-    		source: "(417:0) <h3 class=\\\"text-lg font-bold text-center text-vertLBF border-b border-vertLBF pb-3 mb-1\\\" slot=\\\"sousTitre\\\">",
+    		source: "(416:0) <h3 class=\\\"text-lg font-bold text-center text-vertLBF border-b border-vertLBF pb-3 mb-1\\\" slot=\\\"sousTitre\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (439:2) {#each listeDureesPossibles as laDuree}
+    // (438:2) {#each listeDureesPossibles as laDuree}
     function create_each_block(ctx) {
     	let label;
     	let input;
@@ -14788,11 +14788,11 @@ var app = (function () {
     			input.__value = input_value_value = /*laDuree*/ ctx[45].valeur;
     			input.value = input.__value;
     			/*$$binding_groups*/ ctx[38][0].push(input);
-    			add_location(input, file$2, 440, 3, 15243);
+    			add_location(input, file$2, 439, 3, 15171);
     			attr_dev(span, "class", "ml-2");
-    			add_location(span, file$2, 442, 3, 15422);
+    			add_location(span, file$2, 441, 3, 15350);
     			attr_dev(label, "class", "flex items-center");
-    			add_location(label, file$2, 439, 4, 15205);
+    			add_location(label, file$2, 438, 4, 15133);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, label, anchor);
@@ -14828,14 +14828,14 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(439:2) {#each listeDureesPossibles as laDuree}",
+    		source: "(438:2) {#each listeDureesPossibles as laDuree}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (449:0) <button on:click={enregistrementReservation} slot="boutonFonction" class="bg-vertLBF mx-1 px-2 rounded">
+    // (448:0) <button on:click={enregistrementReservation} slot="boutonFonction" class="bg-vertLBF mx-1 px-2 rounded">
     function create_boutonFonction_slot_1(ctx) {
     	let button;
     	let dispose;
@@ -14846,7 +14846,7 @@ var app = (function () {
     			button.textContent = "Réserver";
     			attr_dev(button, "slot", "boutonFonction");
     			attr_dev(button, "class", "bg-vertLBF mx-1 px-2 rounded");
-    			add_location(button, file$2, 448, 0, 15507);
+    			add_location(button, file$2, 447, 0, 15435);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -14863,14 +14863,14 @@ var app = (function () {
     		block,
     		id: create_boutonFonction_slot_1.name,
     		type: "slot",
-    		source: "(449:0) <button on:click={enregistrementReservation} slot=\\\"boutonFonction\\\" class=\\\"bg-vertLBF mx-1 px-2 rounded\\\">",
+    		source: "(448:0) <button on:click={enregistrementReservation} slot=\\\"boutonFonction\\\" class=\\\"bg-vertLBF mx-1 px-2 rounded\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (413:0) <Modal on:close="{() => {showModalReservation = false; flagChoixDate = false}}">
+    // (412:0) <Modal on:close="{() => {showModalReservation = false; flagChoixDate = false}}">
     function create_default_slot_2(ctx) {
     	let t0;
     	let t1;
@@ -14935,35 +14935,35 @@ var app = (function () {
 
     			t13 = space();
     			attr_dev(div0, "class", "text-lg font-medium");
-    			add_location(div0, file$2, 419, 2, 13700);
+    			add_location(div0, file$2, 418, 2, 13628);
     			attr_dev(input0, "class", "w-1/2 bg-white border-2 border-lbforange-400 rounded-lg py-2 px-4 block appearance-none leading-normal mr-1 focus:outline-none focus:bg-white focus:border-lbfvert-600");
     			attr_dev(input0, "type", "text");
     			attr_dev(input0, "placeholder", "nom");
-    			add_location(input0, file$2, 421, 1, 13792);
+    			add_location(input0, file$2, 420, 1, 13720);
     			attr_dev(input1, "class", "w-1/2 bg-white focus:outline-none focus:bg-white focus:border-lbfvert-600 border-2 border-lbforange-400 rounded-lg py-2 px-4 block appearance-none leading-normal ml-1");
     			attr_dev(input1, "type", "text");
     			attr_dev(input1, "placeholder", "prénom");
-    			add_location(input1, file$2, 423, 2, 14038);
+    			add_location(input1, file$2, 422, 2, 13966);
     			attr_dev(div1, "class", "flex flex-row mt-2");
-    			add_location(div1, file$2, 420, 1, 13757);
+    			add_location(div1, file$2, 419, 1, 13685);
     			attr_dev(input2, "class", "mt-2 w-full bg-white focus:outline-none focus:bg-white focus:border-lbfvert-600 border-2 border-lbforange-400 rounded-lg py-2 px-4 block appearance-none leading-normal");
     			attr_dev(input2, "type", "email");
     			attr_dev(input2, "placeholder", "adresse email");
     			input2.required = true;
-    			add_location(input2, file$2, 426, 1, 14298);
+    			add_location(input2, file$2, 425, 1, 14226);
     			attr_dev(div2, "class", "text-base");
-    			add_location(div2, file$2, 428, 4, 14569);
+    			add_location(div2, file$2, 427, 4, 14497);
     			attr_dev(input3, "type", "checkbox");
     			attr_dev(input3, "class", "form-checkbox text-lbfvert-600");
-    			add_location(input3, file$2, 433, 5, 14822);
+    			add_location(input3, file$2, 432, 5, 14750);
     			attr_dev(label, "class", "mx-8 pr-8 my-1 text-base");
-    			add_location(label, file$2, 432, 5, 14775);
+    			add_location(label, file$2, 431, 5, 14703);
     			attr_dev(div3, "class", "w-full mt-1 text-lg font-bold");
-    			add_location(div3, file$2, 436, 5, 15040);
+    			add_location(div3, file$2, 435, 5, 14968);
     			attr_dev(div4, "class", "mx-1 flex justify-around");
-    			add_location(div4, file$2, 437, 1, 15118);
+    			add_location(div4, file$2, 436, 1, 15046);
     			attr_dev(div5, "class", "text-justify");
-    			add_location(div5, file$2, 418, 0, 13670);
+    			add_location(div5, file$2, 417, 0, 13598);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, t0, anchor);
@@ -15059,14 +15059,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_2.name,
     		type: "slot",
-    		source: "(413:0) <Modal on:close=\\\"{() => {showModalReservation = false; flagChoixDate = false}}\\\">",
+    		source: "(412:0) <Modal on:close=\\\"{() => {showModalReservation = false; flagChoixDate = false}}\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (453:0) {#if showModalMauvaisCreneau}
+    // (452:0) {#if showModalMauvaisCreneau}
     function create_if_block_4(ctx) {
     	let current;
 
@@ -15119,14 +15119,14 @@ var app = (function () {
     		block,
     		id: create_if_block_4.name,
     		type: "if",
-    		source: "(453:0) {#if showModalMauvaisCreneau}",
+    		source: "(452:0) {#if showModalMauvaisCreneau}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (455:2) <h2 class="text-lg font-bold" slot="titre">
+    // (454:2) <h2 class="text-lg font-bold" slot="titre">
     function create_titre_slot_1(ctx) {
     	let h2;
 
@@ -15136,7 +15136,7 @@ var app = (function () {
     			h2.textContent = "Horaire indisponible";
     			attr_dev(h2, "class", "text-lg font-bold");
     			attr_dev(h2, "slot", "titre");
-    			add_location(h2, file$2, 454, 2, 15756);
+    			add_location(h2, file$2, 453, 2, 15684);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h2, anchor);
@@ -15150,14 +15150,14 @@ var app = (function () {
     		block,
     		id: create_titre_slot_1.name,
     		type: "slot",
-    		source: "(455:2) <h2 class=\\\"text-lg font-bold\\\" slot=\\\"titre\\\">",
+    		source: "(454:2) <h2 class=\\\"text-lg font-bold\\\" slot=\\\"titre\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (454:1) <Modal busy={false} on:close="{() => showModalMauvaisCreneau = false}">
+    // (453:1) <Modal busy={false} on:close="{() => showModalMauvaisCreneau = false}">
     function create_default_slot_1(ctx) {
     	let t;
 
@@ -15178,14 +15178,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_1.name,
     		type: "slot",
-    		source: "(454:1) <Modal busy={false} on:close=\\\"{() => showModalMauvaisCreneau = false}\\\">",
+    		source: "(453:1) <Modal busy={false} on:close=\\\"{() => showModalMauvaisCreneau = false}\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (463:0) {#if showModalEffacerReservation}
+    // (462:0) {#if showModalEffacerReservation}
     function create_if_block_2(ctx) {
     	let current;
 
@@ -15240,14 +15240,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(463:0) {#if showModalEffacerReservation}",
+    		source: "(462:0) {#if showModalEffacerReservation}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (465:0) <h2 class="text-xl sm:text-2xl font-bold text-center" slot="titre">
+    // (464:0) <h2 class="text-xl sm:text-2xl font-bold text-center" slot="titre">
     function create_titre_slot(ctx) {
     	let h2;
 
@@ -15257,7 +15257,7 @@ var app = (function () {
     			h2.textContent = "Abandon de réservation";
     			attr_dev(h2, "class", "text-xl sm:text-2xl font-bold text-center");
     			attr_dev(h2, "slot", "titre");
-    			add_location(h2, file$2, 464, 0, 16017);
+    			add_location(h2, file$2, 463, 0, 15945);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h2, anchor);
@@ -15271,14 +15271,14 @@ var app = (function () {
     		block,
     		id: create_titre_slot.name,
     		type: "slot",
-    		source: "(465:0) <h2 class=\\\"text-xl sm:text-2xl font-bold text-center\\\" slot=\\\"titre\\\">",
+    		source: "(464:0) <h2 class=\\\"text-xl sm:text-2xl font-bold text-center\\\" slot=\\\"titre\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (468:0) <h3 class="text-lg font-bold text-center text-vertLBF border-b border-vertLBF pb-3 mb-1 mt-2" slot="sousTitre">
+    // (467:0) <h3 class="text-lg font-bold text-center text-vertLBF border-b border-vertLBF pb-3 mb-1 mt-2" slot="sousTitre">
     function create_sousTitre_slot(ctx) {
     	let h3;
     	let t_value = /*dataReservation*/ ctx[12].dateDebut.toLocaleDateString("fr-fr", /*options*/ ctx[15]).replace(":", "h") + "";
@@ -15290,7 +15290,7 @@ var app = (function () {
     			t = text(t_value);
     			attr_dev(h3, "class", "text-lg font-bold text-center text-vertLBF border-b border-vertLBF pb-3 mb-1 mt-2");
     			attr_dev(h3, "slot", "sousTitre");
-    			add_location(h3, file$2, 467, 0, 16118);
+    			add_location(h3, file$2, 466, 0, 16046);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h3, anchor);
@@ -15308,14 +15308,14 @@ var app = (function () {
     		block,
     		id: create_sousTitre_slot.name,
     		type: "slot",
-    		source: "(468:0) <h3 class=\\\"text-lg font-bold text-center text-vertLBF border-b border-vertLBF pb-3 mb-1 mt-2\\\" slot=\\\"sousTitre\\\">",
+    		source: "(467:0) <h3 class=\\\"text-lg font-bold text-center text-vertLBF border-b border-vertLBF pb-3 mb-1 mt-2\\\" slot=\\\"sousTitre\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (478:0) {#if !flagEmailVerifie}
+    // (477:0) {#if !flagEmailVerifie}
     function create_if_block_3(ctx) {
     	let t;
 
@@ -15335,14 +15335,14 @@ var app = (function () {
     		block,
     		id: create_if_block_3.name,
     		type: "if",
-    		source: "(478:0) {#if !flagEmailVerifie}",
+    		source: "(477:0) {#if !flagEmailVerifie}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (477:0) <div slot="message" class="text-sm">
+    // (476:0) <div slot="message" class="text-sm">
     function create_message_slot(ctx) {
     	let div;
     	let if_block = !/*flagEmailVerifie*/ ctx[13] && create_if_block_3(ctx);
@@ -15353,7 +15353,7 @@ var app = (function () {
     			if (if_block) if_block.c();
     			attr_dev(div, "slot", "message");
     			attr_dev(div, "class", "text-sm");
-    			add_location(div, file$2, 476, 0, 16857);
+    			add_location(div, file$2, 475, 0, 16785);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -15381,14 +15381,14 @@ var app = (function () {
     		block,
     		id: create_message_slot.name,
     		type: "slot",
-    		source: "(477:0) <div slot=\\\"message\\\" class=\\\"text-sm\\\">",
+    		source: "(476:0) <div slot=\\\"message\\\" class=\\\"text-sm\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (482:0) <button on:click={abandonReservation} type="button" slot="boutonFonction" class="bg-vertLBF mx-1 px-2 rounded disabled:hidden" disabled={!flagEmailVerifie}>
+    // (481:0) <button on:click={abandonReservation} type="button" slot="boutonFonction" class="bg-vertLBF mx-1 px-2 rounded disabled:hidden" disabled={!flagEmailVerifie}>
     function create_boutonFonction_slot(ctx) {
     	let button;
     	let t;
@@ -15403,7 +15403,7 @@ var app = (function () {
     			attr_dev(button, "slot", "boutonFonction");
     			attr_dev(button, "class", "bg-vertLBF mx-1 px-2 rounded disabled:hidden");
     			button.disabled = button_disabled_value = !/*flagEmailVerifie*/ ctx[13];
-    			add_location(button, file$2, 481, 0, 17037);
+    			add_location(button, file$2, 480, 0, 16965);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -15425,14 +15425,14 @@ var app = (function () {
     		block,
     		id: create_boutonFonction_slot.name,
     		type: "slot",
-    		source: "(482:0) <button on:click={abandonReservation} type=\\\"button\\\" slot=\\\"boutonFonction\\\" class=\\\"bg-vertLBF mx-1 px-2 rounded disabled:hidden\\\" disabled={!flagEmailVerifie}>",
+    		source: "(481:0) <button on:click={abandonReservation} type=\\\"button\\\" slot=\\\"boutonFonction\\\" class=\\\"bg-vertLBF mx-1 px-2 rounded disabled:hidden\\\" disabled={!flagEmailVerifie}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (464:0) <Modal on:close="{() => showModalEffacerReservation = false}">
+    // (463:0) <Modal on:close="{() => showModalEffacerReservation = false}">
     function create_default_slot(ctx) {
     	let t0;
     	let t1;
@@ -15467,14 +15467,14 @@ var app = (function () {
     			input = element("input");
     			t8 = space();
     			t9 = space();
-    			add_location(hr, file$2, 469, 2, 16322);
-    			add_location(b, file$2, 471, 94, 16471);
+    			add_location(hr, file$2, 468, 2, 16250);
+    			add_location(b, file$2, 470, 94, 16399);
     			attr_dev(div, "class", "text-justify mb-1 pb-3 border-b");
-    			add_location(div, file$2, 470, 0, 16330);
+    			add_location(div, file$2, 469, 0, 16258);
     			attr_dev(input, "class", "mt-3 w-full bg-white focus:outline-none focus:bg-white focus:border-lbfvert-600 border-2 border-lbforange-400 rounded-lg py-2 px-4 block appearance-none leading-normal");
     			attr_dev(input, "type", "email");
     			attr_dev(input, "placeholder", "adresse email");
-    			add_location(input, file$2, 473, 1, 16571);
+    			add_location(input, file$2, 472, 1, 16499);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, t0, anchor);
@@ -15523,14 +15523,14 @@ var app = (function () {
     		block,
     		id: create_default_slot.name,
     		type: "slot",
-    		source: "(464:0) <Modal on:close=\\\"{() => showModalEffacerReservation = false}\\\">",
+    		source: "(463:0) <Modal on:close=\\\"{() => showModalEffacerReservation = false}\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (487:0) {#if !recupReservations}
+    // (486:0) {#if !recupReservations}
     function create_if_block_1(ctx) {
     	let current;
 
@@ -15592,14 +15592,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(487:0) {#if !recupReservations}",
+    		source: "(486:0) {#if !recupReservations}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (504:0) {#if recupReservations}
+    // (503:0) {#if recupReservations}
     function create_if_block$1(ctx) {
     	let div1;
     	let svg;
@@ -15635,7 +15635,7 @@ var app = (function () {
     			attr_dev(animate0, "keyTimes", "0; 1");
     			attr_dev(animate0, "keySplines", "0.165, 0.84, 0.44, 1");
     			attr_dev(animate0, "repeatCount", "indefinite");
-    			add_location(animate0, file$2, 508, 4, 18101);
+    			add_location(animate0, file$2, 507, 4, 18029);
     			attr_dev(animate1, "attributeName", "stroke-opacity");
     			attr_dev(animate1, "begin", "0s");
     			attr_dev(animate1, "dur", "1.8s");
@@ -15644,11 +15644,11 @@ var app = (function () {
     			attr_dev(animate1, "keyTimes", "0; 1");
     			attr_dev(animate1, "keySplines", "0.3, 0.61, 0.355, 1");
     			attr_dev(animate1, "repeatCount", "indefinite");
-    			add_location(animate1, file$2, 509, 4, 18265);
+    			add_location(animate1, file$2, 508, 4, 18193);
     			attr_dev(circle0, "cx", "22");
     			attr_dev(circle0, "cy", "22");
     			attr_dev(circle0, "r", "1");
-    			add_location(circle0, file$2, 507, 3, 18065);
+    			add_location(circle0, file$2, 506, 3, 17993);
     			attr_dev(animate2, "attributeName", "r");
     			attr_dev(animate2, "begin", "-0.9s");
     			attr_dev(animate2, "dur", "1.8s");
@@ -15657,7 +15657,7 @@ var app = (function () {
     			attr_dev(animate2, "keyTimes", "0; 1");
     			attr_dev(animate2, "keySplines", "0.165, 0.84, 0.44, 1");
     			attr_dev(animate2, "repeatCount", "indefinite");
-    			add_location(animate2, file$2, 512, 4, 18489);
+    			add_location(animate2, file$2, 511, 4, 18417);
     			attr_dev(animate3, "attributeName", "stroke-opacity");
     			attr_dev(animate3, "begin", "-0.9s");
     			attr_dev(animate3, "dur", "1.8s");
@@ -15666,23 +15666,23 @@ var app = (function () {
     			attr_dev(animate3, "keyTimes", "0; 1");
     			attr_dev(animate3, "keySplines", "0.3, 0.61, 0.355, 1");
     			attr_dev(animate3, "repeatCount", "indefinite");
-    			add_location(animate3, file$2, 513, 4, 18656);
+    			add_location(animate3, file$2, 512, 4, 18584);
     			attr_dev(circle1, "cx", "22");
     			attr_dev(circle1, "cy", "22");
     			attr_dev(circle1, "r", "1");
-    			add_location(circle1, file$2, 511, 3, 18453);
+    			add_location(circle1, file$2, 510, 3, 18381);
     			attr_dev(g, "fill", "none");
     			attr_dev(g, "fill-rule", "evenodd");
     			attr_dev(g, "stroke-width", "2");
-    			add_location(g, file$2, 506, 2, 18008);
+    			add_location(g, file$2, 505, 2, 17936);
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr_dev(svg, "class", "stroke-current text-lbfvert-500 h-20 w-20 mx-auto");
     			attr_dev(svg, "viewBox", "0 0 50 50");
-    			add_location(svg, file$2, 505, 2, 17886);
+    			add_location(svg, file$2, 504, 2, 17814);
     			attr_dev(div0, "class", "w-3/4 text-center mx-auto");
-    			add_location(div0, file$2, 517, 1, 18862);
+    			add_location(div0, file$2, 516, 1, 18790);
     			attr_dev(div1, "class", "mx-auto my-auto");
-    			add_location(div1, file$2, 504, 1, 17853);
+    			add_location(div1, file$2, 503, 1, 17781);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -15706,7 +15706,7 @@ var app = (function () {
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(504:0) {#if recupReservations}",
+    		source: "(503:0) {#if recupReservations}",
     		ctx
     	});
 
@@ -15739,7 +15739,7 @@ var app = (function () {
     			t3 = space();
     			if (if_block4) if_block4.c();
     			attr_dev(div, "class", "z-1 flex flex-col max-w-4xl h-3xl");
-    			add_location(div, file$2, 485, 0, 17233);
+    			add_location(div, file$2, 484, 0, 17161);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -16037,8 +16037,6 @@ var app = (function () {
     	}
 
     	function verifEmail() {
-    		console.log("input et email", this.value == dataReservation.email);
-
     		if (this.value === dataReservation.email) {
     			$$invalidate(13, flagEmailVerifie = true);
     		}

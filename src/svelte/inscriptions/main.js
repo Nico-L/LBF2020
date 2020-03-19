@@ -1,0 +1,1 @@
+export { default as appInscription } from "./inscriptions.svelte";

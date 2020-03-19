@@ -6,6 +6,7 @@
 @import "./LBF/LBF.css";
 /* import css svelte*/
 @import "./svelte/bundle.css";
+@import "./svelte/inscriptionAteliers.css";
 
 /*@tailwind components;*/
 /* purgecss start ignore */

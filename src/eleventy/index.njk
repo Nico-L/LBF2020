@@ -5,30 +5,22 @@ layout: baseLBF
 <div class="flex flex-row items-stretch flex-wrap justify-around">
 {% for atelier in lesAteliers %}
 <div class="relative min-w-340px w-340px bg-white border border-lbforange-600 rounded mx-1 my-1">
-    <div class="absolute top-0 left-0 bg-orangeLBF min-h-16 h-16 w-16 rounded-br z-10">
-        <div class="text-white text-3xl font-bold my-0 p-0 text-center mx-auto">{{atelier.dateDebut | getJour}}</div>
-        <div class="text-white text-base font-bold my-0 p-0 text-center -mt-2 mx-auto">{{atelier.dateDebut | getMoisShort}}</div>
+    <div class="h-14 ml-16 flex flex-row content-center">
+        <h1 class="text-lg font-bold mx-auto my-auto pl-2">{{atelier.titre}}</h1>
     </div>
-<div class="h-14 ml-16 flex flex-row content-center">
-    <h1 class="text-lg font-bold mx-auto my-auto pl-2">{{atelier.titre}}</h1>
-</div>
-    <div class="relative z-0 h-180px" style="background-image: url(https://res.cloudinary.com/la-bonne-fabrique/image/upload/ar_16:9,c_fill/w_340,c_scale/{{atelier.urlImage}})">
+    <div class="relative h-180px" style="background-image: url(https://res.cloudinary.com/la-bonne-fabrique/image/upload/ar_16:9,c_fill/w_340,c_scale/{{atelier.urlImage}})">
         {% if atelier.surInscription %}
-        <div class="absolute flex flex-row -bottom-1 left-0 content-center">
-            <div class="bg-orangeLBF flex flex-row mr-1 text-white text-xs px-1">
-                <div class="my-auto">{{atelier.inscritsAteliers | getPlacesRestantes(atelier.nbParticipants)}}</div>
-            </div>
-            <div class="bg-orangeLBF flex flex-row content-center rounded-r px-1">
-                <svg class="fill-current text-white my-auto" width="16" height="16" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
-                    <path fill="currentColor" d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z"/>
-                </svg>
-                <div class="text-white text-xs my-auto">inscriptions</div>
-            </div>
+        <div class="absolute -bottom-2 left-0">
+            <une-inscription id_atelier="{{atelier.id}}" />
         </div>
         {% endif %}
     </div>
+    <div class="absolute top-0 left-0 bg-orangeLBF min-h-16 h-16 w-16 rounded-br mb-4">
+        <div class="text-white text-3xl font-bold my-0 p-0 text-center mx-auto">{{atelier.dateDebut | getJour}}</div>
+        <div class="text-white text-base font-bold my-0 p-0 text-center -mt-2 mx-auto">{{atelier.dateDebut | getMoisShort}}</div>
+    </div>
     <div class="mb-20">
-        <div class="text-base text-justify mx-2 my-1 pb-2">
+        <div class="text-base text-justify mx-2 mt-2 mb-1 pb-2">
             {{atelier.description | safe}}
         </div>
         <div class="absolute flex flex-row justify-around inset-x-0 mx-2 pt-1 bottom-0 border-t border-lbforange-600 h-20" >
@@ -63,3 +55,7 @@ layout: baseLBF
 </div>
 
 </div>
+
+{% block scripts %}
+<script src="/js/inscriptionAteliers.js"></script>
+{% endblock %}

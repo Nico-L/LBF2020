@@ -1,7 +1,7 @@
 <script>
   import { getContext } from "svelte";
   import { onMount } from "svelte";
-  import Modal from "./components/Modal.svelte";
+  import Modal from "../components/Modal.svelte";
 
   // modal réservation
   let showModalReservation = false;
@@ -142,7 +142,6 @@
   }
 
   function verifEmail() {
-    console.log("input et email", this.value == dataReservation.email);
     if (this.value === dataReservation.email) {
       flagEmailVerifie = true;
     }
@@ -521,5 +520,6 @@ L'adresse email n'est renseignée ou elle ne correspond pas à l'adresse utilis�
 	</div>
 {/if}
 	</div>
+  
 <style>
 </style>
