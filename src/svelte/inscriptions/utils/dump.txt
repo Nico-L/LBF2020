@@ -1,0 +1,119 @@
+{#if showModalInscription}
+<div class="z-100 fixed w-full h-full top-0 left-0 flex items-center justify-center">
+	<div class="absolute w-full h-full  bg-black opacity-75 top-0 left-0 cursor-pointer" on:click={close}>
+	</div>
+	<div class="relative overflow-auto max-h-5/6 w-5/6 sm:w-3/4 lg:w-1/2 bg-white flex flex-col p-4 items-start rounded" role="dialog" aria-modal="true">
+		<h2 class="text-xl w-full pb-1 mb-1 border-b-2 border-vertLBF font-bold">
+			Votre inscription
+		</h2>
+		<hr class="mb-1" />
+		<div class="mb-1 text-base font-medium text-justify">
+			Merci de renseigner votre adresse mail et de cliquer sur vérifier.
+		</div>
+		<div class="flex content-center flex-wrap w-full justify-around">
+			<input on:input={flagEmailVerifie = false} class="w-full sm:w-4/5 mt-2 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfvert-600 border-2 border-lbfvert-400 rounded-lg px-4 block appearance-none leading-normal"
+	 			type="email" placeholder="adresse email" bind:value={emailInscription} />
+			{#if actionEncours}
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current text-lbfvert-500 h-12 w-12 mx-auto mt-2" viewBox="0 0 50 50">
+                    <g fill="none" fill-rule="evenodd" stroke-width="2">
+                        <circle cx="22" cy="22" r="1">
+                            <animate attributeName="r" begin="0s" dur="1.8s" values="1; 20" calcMode="spline" keyTimes="0; 1" keySplines="0.165, 0.84, 0.44, 1" repeatCount="indefinite"/>
+                            <animate attributeName="stroke-opacity" begin="0s" dur="1.8s" values="1; 0" calcMode="spline" keyTimes="0; 1" keySplines="0.3, 0.61, 0.355, 1" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="22" cy="22" r="1">
+                            <animate attributeName="r" begin="-0.9s" dur="1.8s" values="1; 20" calcMode="spline" keyTimes="0; 1" keySplines="0.165, 0.84, 0.44, 1" repeatCount="indefinite"/>
+                            <animate attributeName="stroke-opacity" begin="-0.9s" dur="1.8s" values="1; 0" calcMode="spline" keyTimes="0; 1" keySplines="0.3, 0.61, 0.355, 1" repeatCount="indefinite"/>
+                        </circle>
+                    </g>
+                </svg>
+			{:else if !flagEmailVerifie}
+			<button on:click={verifInscrits} class="w-full sm:w-20 mt-2 mx-1 px-2 h-10 border-2 border-vertLBF rounded text-vertLBF font-semibold" type="button">
+				Envoyer
+			</button>
+			{/if}
+		</div>
+        {#if !flagEmailVerifie}
+            <div class="text-base text-justify">
+            Une fois votre mail validé, vous pourrez&nbsp;:
+                <ul class="list-disc ml-6">
+                    <li> Si l'atelier n'est pas complet, entrer les nom et prénom (seul le prénom est requis) de la ou des personnes participant à l'atelier</li>
+                    <li> Si vous avez déjà effectué une inscription à cet atelier, vous pourrez modifier celle-ci ou vous désinscrire.</li>
+                </ul>
+            </div>
+		{:else if nbPlaces === 0 && listeInscrits.length === 0}
+            <h2 class="text-base text-bleuLBF w-full mt-2 mx-2 pb-1 mb-1 font-bold">
+                Cet atelier est complet. Nos ateliers sont régulièrement proposés, surveillez cet espace pour le prochain.
+            </h2>
+        {:else}
+		    <div class="text-lg font-bold mt-2 text-bleuLBF">Liste des inscriptions</div>
+			{#each listeInscrits as inscrit}
+			<div class="w-full flex flex-row justify-start mb-4">
+				<div class="flex flex-col sm:flex-row flex-wrap ">
+					<div class="flex flex-col sm:mr-2">
+						<div class="ml-1 text-xs m-0 p-0 font-medium text-bleuLBF">Prénom</div>
+						<input class="mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal"
+							type="text" placeholder="prenom" bind:value={inscrit.prenom}/>
+					</div>
+					<div class="flex flex-col sm:mr-2">
+						<div class="ml-1 text-xs m-0 p-0 font-medium text-bleuLBF">Nom</div>
+						<input class="mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal"
+							type="text" placeholder="nom" bind:value={inscrit.nom}/>
+					</div>
+				</div>
+                {#if listeInscrits.length > 1}
+				<div class="my-auto sm:w-12 w-20">
+					<svg on:click={confirmerEffaceInscrit(inscrit.id, inscrit)} class="mx-auto cursor-pointer mt-3 h-12 w-12 sm:h-8 sm:w-8 stroke-current text-lbfbleu-600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" data-prefix="far" data-icon="trash-alt" viewBox="0 0 448 512">
+						<path fill="currentColor" d="M268 416h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12zM432 80h-82.41l-34-56.7A48 48 0 00274.41 0H173.59a48 48 0 00-41.16 23.3L98.41 80H16A16 16 0 000 96v16a16 16 0 0016 16h16v336a48 48 0 0048 48h288a48 48 0 0048-48V128h16a16 16 0 0016-16V96a16 16 0 00-16-16zM171.84 50.91A6 6 0 01177 48h94a6 6 0 015.15 2.91L293.61 80H154.39zM368 464H80V128h288zm-212-48h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12z"/>
+					</svg>
+				</div>
+                {/if}
+			</div>
+			{/each}
+			{#each nouveauxInscrits as nouvelInscrit, index ('nI' + index)}
+				<div class="w-full flex flex-row justify-start mb-4">
+					<div class="flex flex-col sm:flex-row flex-wrap ">
+						<div class="flex flex-col sm:mr-2">
+							<div class="ml-1 text-xs m-0 p-0 font-medium text-bleuLBF">Prénom</div>
+							<input on:input={validationSave} class="mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal"
+								type="text" placeholder="prenom" bind:value={nouvelInscrit.prenom}/>
+                            {#if nouvelInscrit.prenom===""}
+                                <div class="text-sm sm:text-xs md:text-sm font-medium text-rougeLBF ">Au moins le prénom est requis.</div>
+                            {/if}
+                        </div>
+						<div class="flex flex-col sm:mr-2">
+							<div class="ml-1 text-xs m-0 p-0 font-medium text-bleuLBF">Nom</div>
+							<input class="mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal"
+								type="text" placeholder="nom" bind:value={nouvelInscrit.nom}/>
+						</div>
+					</div>
+                    <div class="my-auto sm:w-12 w-20 ">
+                        <svg on:click={soustraitInscrit(index)} class="mx-auto cursor-pointer mt-3 h-12 w-12 sm:h-8 sm:w-8 stroke-current text-rougeLBF" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" data-prefix="far" data-icon="trash-alt" viewBox="0 0 448 512">
+                            <path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"/>
+                        </svg>
+                    </div>
+				</div>
+			{/each}
+            {#if (nbPlaces-nouveauxInscrits.length) === 0}
+                <div class="text-sm sm:text-xs md:text-sm font-medium text-rougeLBF ">Cet atelier ne peut accepter plus de participants.</div>
+            {/if}
+            <div>
+                {#if (nbPlaces-nouveauxInscrits.length) > 0}
+                    <button on:click={ajoutInscrit} class="mt-1 mx-1 px-1 border-2 border-vertLBF rounded text-base font-medium text-vertLBF">
+                        Ajouter un participant
+                    </button>
+                {/if}
+                {#if listeInscrits.length > 0}
+                    <button on:click={() => flagVerifDesinscription = true} class="mt-1 mx-1 px-1 border-2 border-orangeLBF rounded text-base font-medium text-orangeLBF">
+                        Se désinscrire
+                    </button>
+                {/if}
+                {#if flagSaveValide}
+                <button on:click={insertInscrits}  class="mt-1 mx-1 px-1 border-2 border-bleuLBF rounded text-base font-medium text-bleuLBF">
+                    Enregistrer
+                </button>
+                {/if}
+            </div>
+		{/if}
+	</div>
+</div>
+{/if}

@@ -69,6 +69,27 @@ export async function effacerInscription(email, idAtelier) {
   return mutation
 }
 
+export async function effacerInscritById(idInscrit) {
+  const mutation = await fetch("https://graphql.labonnefabrique.fr/v1/graphql", {
+    method: "POST",
+    cache: "no-cache",
+    body: JSON.stringify({
+      query: `mutation effacerInscription($id: uuid) {
+        __typename
+        delete_inscritsAteliers(where: {id: {_eq: $id}}){
+          affected_rows
+        }
+      }`,
+      variables: {
+        id: idInscrit
+      }
+    })
+  }).then(async retour => {
+        let resultat = await retour.json();
+  })
+  return mutation
+}
+
 export async function nbInscrits(idAtelier) {
   const query = await fetch("https://graphql.labonnefabrique.fr/v1/graphql", {
     method: "POST",

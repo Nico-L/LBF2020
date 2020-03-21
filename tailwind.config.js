@@ -9,6 +9,17 @@ module.exports = {
         '340px': '340px',
         '16': '4rem'
     },
+    maxWidth: {
+        '1/4': '25%',
+        '1/2': '50%',
+        '3/4': '75%',
+        'full': '100%',
+        '1/6': '17%',
+        '2/6': '33%',
+        '3/6': '50%',
+        '4/6': '66%',
+        '5/6': '83%'
+    },
     maxHeight: {
            '0': '0',
            '5/6': '83%',
@@ -160,7 +171,8 @@ module.exports = {
   variants: {
     cursor: ["hover", "focus", "disabled"],
     backgroundColor: ["hover", "focus", "disabled"],
-    display: ["responsive", "disabled"]
+    display: ["responsive", "disabled"],
+    maxWidth: ["responsive"]
   },
   plugins: [require("@tailwindcss/custom-forms")]
 };
