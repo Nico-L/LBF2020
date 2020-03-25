@@ -361,6 +361,7 @@
             urlEffacerResa.pathname +
             "?idReservation=" +
             idNewResa,
+            altMachine: titreMachine,
           urlImageMail:
             "https://res.cloudinary.com/la-bonne-fabrique/image/upload/ar_1.5,w_auto,c_fill/" +
             urlImageMachine

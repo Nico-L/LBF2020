@@ -14704,7 +14704,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (411:0) {#if showModalReservation && flagChoixDate}
+    // (412:0) {#if showModalReservation && flagChoixDate}
     function create_if_block_5(ctx) {
     	let current;
 
@@ -14758,14 +14758,14 @@ var app = (function () {
     		block,
     		id: create_if_block_5.name,
     		type: "if",
-    		source: "(411:0) {#if showModalReservation && flagChoixDate}",
+    		source: "(412:0) {#if showModalReservation && flagChoixDate}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (413:0) <h2 class="text-xl sm:text-2xl font-bold text-center" slot="titre">
+    // (414:0) <h2 class="text-xl sm:text-2xl font-bold text-center" slot="titre">
     function create_titre_slot_2(ctx) {
     	let h2;
 
@@ -14778,7 +14778,7 @@ var app = (function () {
 
     			attr_dev(h2, "class", "text-xl sm:text-2xl font-bold text-center");
     			attr_dev(h2, "slot", "titre");
-    			add_location(h2, file$2, 412, 0, 13303);
+    			add_location(h2, file$2, 413, 0, 13342);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h2, anchor);
@@ -14793,14 +14793,14 @@ var app = (function () {
     		block,
     		id: create_titre_slot_2.name,
     		type: "slot",
-    		source: "(413:0) <h2 class=\\\"text-xl sm:text-2xl font-bold text-center\\\" slot=\\\"titre\\\">",
+    		source: "(414:0) <h2 class=\\\"text-xl sm:text-2xl font-bold text-center\\\" slot=\\\"titre\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (416:0) <h3 class="text-lg font-bold text-center text-vertLBF border-b border-vertLBF pb-3 mb-1" slot="sousTitre">
+    // (417:0) <h3 class="text-lg font-bold text-center text-vertLBF border-b border-vertLBF pb-3 mb-1" slot="sousTitre">
     function create_sousTitre_slot_1(ctx) {
     	let h3;
     	let t_value = /*leJourSelection*/ ctx[9].toLocaleDateString("fr-fr", /*options*/ ctx[15]).replace(":", "h") + "";
@@ -14812,7 +14812,7 @@ var app = (function () {
     			t = text(t_value);
     			attr_dev(h3, "class", "text-lg font-bold text-center text-vertLBF border-b border-vertLBF pb-3 mb-1");
     			attr_dev(h3, "slot", "sousTitre");
-    			add_location(h3, file$2, 415, 0, 13411);
+    			add_location(h3, file$2, 416, 0, 13450);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h3, anchor);
@@ -14830,14 +14830,14 @@ var app = (function () {
     		block,
     		id: create_sousTitre_slot_1.name,
     		type: "slot",
-    		source: "(416:0) <h3 class=\\\"text-lg font-bold text-center text-vertLBF border-b border-vertLBF pb-3 mb-1\\\" slot=\\\"sousTitre\\\">",
+    		source: "(417:0) <h3 class=\\\"text-lg font-bold text-center text-vertLBF border-b border-vertLBF pb-3 mb-1\\\" slot=\\\"sousTitre\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (438:2) {#each listeDureesPossibles as laDuree}
+    // (439:2) {#each listeDureesPossibles as laDuree}
     function create_each_block(ctx) {
     	let label;
     	let input;
@@ -14862,11 +14862,11 @@ var app = (function () {
     			input.__value = input_value_value = /*laDuree*/ ctx[45].valeur;
     			input.value = input.__value;
     			/*$$binding_groups*/ ctx[38][0].push(input);
-    			add_location(input, file$2, 439, 3, 15171);
+    			add_location(input, file$2, 440, 3, 15210);
     			attr_dev(span, "class", "ml-2");
-    			add_location(span, file$2, 441, 3, 15350);
+    			add_location(span, file$2, 442, 3, 15389);
     			attr_dev(label, "class", "flex items-center");
-    			add_location(label, file$2, 438, 4, 15133);
+    			add_location(label, file$2, 439, 4, 15172);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, label, anchor);
@@ -14903,14 +14903,14 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(438:2) {#each listeDureesPossibles as laDuree}",
+    		source: "(439:2) {#each listeDureesPossibles as laDuree}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (448:0) <button on:click={enregistrementReservation} slot="boutonFonction" class="bg-vertLBF mx-1 px-2 rounded">
+    // (449:0) <button on:click={enregistrementReservation} slot="boutonFonction" class="bg-vertLBF mx-1 px-2 rounded">
     function create_boutonFonction_slot_1(ctx) {
     	let button;
     	let dispose;
@@ -14921,7 +14921,7 @@ var app = (function () {
     			button.textContent = "Réserver";
     			attr_dev(button, "slot", "boutonFonction");
     			attr_dev(button, "class", "bg-vertLBF mx-1 px-2 rounded");
-    			add_location(button, file$2, 447, 0, 15435);
+    			add_location(button, file$2, 448, 0, 15474);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, button, anchor);
@@ -14939,14 +14939,14 @@ var app = (function () {
     		block,
     		id: create_boutonFonction_slot_1.name,
     		type: "slot",
-    		source: "(448:0) <button on:click={enregistrementReservation} slot=\\\"boutonFonction\\\" class=\\\"bg-vertLBF mx-1 px-2 rounded\\\">",
+    		source: "(449:0) <button on:click={enregistrementReservation} slot=\\\"boutonFonction\\\" class=\\\"bg-vertLBF mx-1 px-2 rounded\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (412:0) <Modal on:close="{() => {showModalReservation = false; flagChoixDate = false}}">
+    // (413:0) <Modal on:close="{() => {showModalReservation = false; flagChoixDate = false}}">
     function create_default_slot_2(ctx) {
     	let t0;
     	let t1;
@@ -15012,35 +15012,35 @@ var app = (function () {
 
     			t13 = space();
     			attr_dev(div0, "class", "text-lg font-medium");
-    			add_location(div0, file$2, 418, 2, 13628);
+    			add_location(div0, file$2, 419, 2, 13667);
     			attr_dev(input0, "class", "w-1/2 bg-white border-2 border-lbforange-400 rounded-lg py-2 px-4 block appearance-none leading-normal mr-1 focus:outline-none focus:bg-white focus:border-lbfvert-600");
     			attr_dev(input0, "type", "text");
     			attr_dev(input0, "placeholder", "nom");
-    			add_location(input0, file$2, 420, 1, 13720);
+    			add_location(input0, file$2, 421, 1, 13759);
     			attr_dev(input1, "class", "w-1/2 bg-white focus:outline-none focus:bg-white focus:border-lbfvert-600 border-2 border-lbforange-400 rounded-lg py-2 px-4 block appearance-none leading-normal ml-1");
     			attr_dev(input1, "type", "text");
     			attr_dev(input1, "placeholder", "prénom");
-    			add_location(input1, file$2, 422, 2, 13966);
+    			add_location(input1, file$2, 423, 2, 14005);
     			attr_dev(div1, "class", "flex flex-row mt-2");
-    			add_location(div1, file$2, 419, 1, 13685);
+    			add_location(div1, file$2, 420, 1, 13724);
     			attr_dev(input2, "class", "mt-2 w-full bg-white focus:outline-none focus:bg-white focus:border-lbfvert-600 border-2 border-lbforange-400 rounded-lg py-2 px-4 block appearance-none leading-normal");
     			attr_dev(input2, "type", "email");
     			attr_dev(input2, "placeholder", "adresse email");
     			input2.required = true;
-    			add_location(input2, file$2, 425, 1, 14226);
+    			add_location(input2, file$2, 426, 1, 14265);
     			attr_dev(div2, "class", "text-base");
-    			add_location(div2, file$2, 427, 4, 14497);
+    			add_location(div2, file$2, 428, 4, 14536);
     			attr_dev(input3, "type", "checkbox");
     			attr_dev(input3, "class", "form-checkbox text-lbfvert-600");
-    			add_location(input3, file$2, 432, 5, 14750);
+    			add_location(input3, file$2, 433, 5, 14789);
     			attr_dev(label, "class", "mx-8 pr-8 my-1 text-base");
-    			add_location(label, file$2, 431, 5, 14703);
+    			add_location(label, file$2, 432, 5, 14742);
     			attr_dev(div3, "class", "w-full mt-1 text-lg font-bold");
-    			add_location(div3, file$2, 435, 5, 14968);
+    			add_location(div3, file$2, 436, 5, 15007);
     			attr_dev(div4, "class", "mx-1 flex justify-around");
-    			add_location(div4, file$2, 436, 1, 15046);
+    			add_location(div4, file$2, 437, 1, 15085);
     			attr_dev(div5, "class", "text-justify");
-    			add_location(div5, file$2, 417, 0, 13598);
+    			add_location(div5, file$2, 418, 0, 13637);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, t0, anchor);
@@ -15138,14 +15138,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_2.name,
     		type: "slot",
-    		source: "(412:0) <Modal on:close=\\\"{() => {showModalReservation = false; flagChoixDate = false}}\\\">",
+    		source: "(413:0) <Modal on:close=\\\"{() => {showModalReservation = false; flagChoixDate = false}}\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (452:0) {#if showModalMauvaisCreneau}
+    // (453:0) {#if showModalMauvaisCreneau}
     function create_if_block_4(ctx) {
     	let current;
 
@@ -15198,14 +15198,14 @@ var app = (function () {
     		block,
     		id: create_if_block_4.name,
     		type: "if",
-    		source: "(452:0) {#if showModalMauvaisCreneau}",
+    		source: "(453:0) {#if showModalMauvaisCreneau}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (454:2) <h2 class="text-lg font-bold" slot="titre">
+    // (455:2) <h2 class="text-lg font-bold" slot="titre">
     function create_titre_slot_1(ctx) {
     	let h2;
 
@@ -15215,7 +15215,7 @@ var app = (function () {
     			h2.textContent = "Horaire indisponible";
     			attr_dev(h2, "class", "text-lg font-bold");
     			attr_dev(h2, "slot", "titre");
-    			add_location(h2, file$2, 453, 2, 15684);
+    			add_location(h2, file$2, 454, 2, 15723);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h2, anchor);
@@ -15229,14 +15229,14 @@ var app = (function () {
     		block,
     		id: create_titre_slot_1.name,
     		type: "slot",
-    		source: "(454:2) <h2 class=\\\"text-lg font-bold\\\" slot=\\\"titre\\\">",
+    		source: "(455:2) <h2 class=\\\"text-lg font-bold\\\" slot=\\\"titre\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (453:1) <Modal busy={false} on:close="{() => showModalMauvaisCreneau = false}">
+    // (454:1) <Modal busy={false} on:close="{() => showModalMauvaisCreneau = false}">
     function create_default_slot_1(ctx) {
     	let t;
 
@@ -15257,14 +15257,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_1.name,
     		type: "slot",
-    		source: "(453:1) <Modal busy={false} on:close=\\\"{() => showModalMauvaisCreneau = false}\\\">",
+    		source: "(454:1) <Modal busy={false} on:close=\\\"{() => showModalMauvaisCreneau = false}\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (462:0) {#if showModalEffacerReservation}
+    // (463:0) {#if showModalEffacerReservation}
     function create_if_block_2(ctx) {
     	let current;
 
@@ -15319,14 +15319,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(462:0) {#if showModalEffacerReservation}",
+    		source: "(463:0) {#if showModalEffacerReservation}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (464:0) <h2 class="text-xl sm:text-2xl font-bold text-center" slot="titre">
+    // (465:0) <h2 class="text-xl sm:text-2xl font-bold text-center" slot="titre">
     function create_titre_slot(ctx) {
     	let h2;
 
@@ -15336,7 +15336,7 @@ var app = (function () {
     			h2.textContent = "Abandon de réservation";
     			attr_dev(h2, "class", "text-xl sm:text-2xl font-bold text-center");
     			attr_dev(h2, "slot", "titre");
-    			add_location(h2, file$2, 463, 0, 15945);
+    			add_location(h2, file$2, 464, 0, 15984);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h2, anchor);
@@ -15350,14 +15350,14 @@ var app = (function () {
     		block,
     		id: create_titre_slot.name,
     		type: "slot",
-    		source: "(464:0) <h2 class=\\\"text-xl sm:text-2xl font-bold text-center\\\" slot=\\\"titre\\\">",
+    		source: "(465:0) <h2 class=\\\"text-xl sm:text-2xl font-bold text-center\\\" slot=\\\"titre\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (467:0) <h3 class="text-lg font-bold text-center text-vertLBF border-b border-vertLBF pb-3 mb-1 mt-2" slot="sousTitre">
+    // (468:0) <h3 class="text-lg font-bold text-center text-vertLBF border-b border-vertLBF pb-3 mb-1 mt-2" slot="sousTitre">
     function create_sousTitre_slot(ctx) {
     	let h3;
     	let t_value = /*dataReservation*/ ctx[12].dateDebut.toLocaleDateString("fr-fr", /*options*/ ctx[15]).replace(":", "h") + "";
@@ -15369,7 +15369,7 @@ var app = (function () {
     			t = text(t_value);
     			attr_dev(h3, "class", "text-lg font-bold text-center text-vertLBF border-b border-vertLBF pb-3 mb-1 mt-2");
     			attr_dev(h3, "slot", "sousTitre");
-    			add_location(h3, file$2, 466, 0, 16046);
+    			add_location(h3, file$2, 467, 0, 16085);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h3, anchor);
@@ -15387,14 +15387,14 @@ var app = (function () {
     		block,
     		id: create_sousTitre_slot.name,
     		type: "slot",
-    		source: "(467:0) <h3 class=\\\"text-lg font-bold text-center text-vertLBF border-b border-vertLBF pb-3 mb-1 mt-2\\\" slot=\\\"sousTitre\\\">",
+    		source: "(468:0) <h3 class=\\\"text-lg font-bold text-center text-vertLBF border-b border-vertLBF pb-3 mb-1 mt-2\\\" slot=\\\"sousTitre\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (477:0) {#if !flagEmailVerifie}
+    // (478:0) {#if !flagEmailVerifie}
     function create_if_block_3(ctx) {
     	let t;
 
@@ -15414,14 +15414,14 @@ var app = (function () {
     		block,
     		id: create_if_block_3.name,
     		type: "if",
-    		source: "(477:0) {#if !flagEmailVerifie}",
+    		source: "(478:0) {#if !flagEmailVerifie}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (476:0) <div slot="message" class="text-sm">
+    // (477:0) <div slot="message" class="text-sm">
     function create_message_slot(ctx) {
     	let div;
     	let if_block = !/*flagEmailVerifie*/ ctx[13] && create_if_block_3(ctx);
@@ -15432,7 +15432,7 @@ var app = (function () {
     			if (if_block) if_block.c();
     			attr_dev(div, "slot", "message");
     			attr_dev(div, "class", "text-sm");
-    			add_location(div, file$2, 475, 0, 16785);
+    			add_location(div, file$2, 476, 0, 16824);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -15460,14 +15460,14 @@ var app = (function () {
     		block,
     		id: create_message_slot.name,
     		type: "slot",
-    		source: "(476:0) <div slot=\\\"message\\\" class=\\\"text-sm\\\">",
+    		source: "(477:0) <div slot=\\\"message\\\" class=\\\"text-sm\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (481:0) <button on:click={abandonReservation} type="button" slot="boutonFonction" class="bg-vertLBF mx-1 px-2 rounded disabled:hidden" disabled={!flagEmailVerifie}>
+    // (482:0) <button on:click={abandonReservation} type="button" slot="boutonFonction" class="bg-vertLBF mx-1 px-2 rounded disabled:hidden" disabled={!flagEmailVerifie}>
     function create_boutonFonction_slot(ctx) {
     	let button;
     	let t;
@@ -15482,7 +15482,7 @@ var app = (function () {
     			attr_dev(button, "slot", "boutonFonction");
     			attr_dev(button, "class", "bg-vertLBF mx-1 px-2 rounded disabled:hidden");
     			button.disabled = button_disabled_value = !/*flagEmailVerifie*/ ctx[13];
-    			add_location(button, file$2, 480, 0, 16965);
+    			add_location(button, file$2, 481, 0, 17004);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, button, anchor);
@@ -15505,14 +15505,14 @@ var app = (function () {
     		block,
     		id: create_boutonFonction_slot.name,
     		type: "slot",
-    		source: "(481:0) <button on:click={abandonReservation} type=\\\"button\\\" slot=\\\"boutonFonction\\\" class=\\\"bg-vertLBF mx-1 px-2 rounded disabled:hidden\\\" disabled={!flagEmailVerifie}>",
+    		source: "(482:0) <button on:click={abandonReservation} type=\\\"button\\\" slot=\\\"boutonFonction\\\" class=\\\"bg-vertLBF mx-1 px-2 rounded disabled:hidden\\\" disabled={!flagEmailVerifie}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (463:0) <Modal on:close="{() => showModalEffacerReservation = false}">
+    // (464:0) <Modal on:close="{() => showModalEffacerReservation = false}">
     function create_default_slot(ctx) {
     	let t0;
     	let t1;
@@ -15547,14 +15547,14 @@ var app = (function () {
     			input = element("input");
     			t8 = space();
     			t9 = space();
-    			add_location(hr, file$2, 468, 2, 16250);
-    			add_location(b, file$2, 470, 94, 16399);
+    			add_location(hr, file$2, 469, 2, 16289);
+    			add_location(b, file$2, 471, 94, 16438);
     			attr_dev(div, "class", "text-justify mb-1 pb-3 border-b");
-    			add_location(div, file$2, 469, 0, 16258);
+    			add_location(div, file$2, 470, 0, 16297);
     			attr_dev(input, "class", "mt-3 w-full bg-white focus:outline-none focus:bg-white focus:border-lbfvert-600 border-2 border-lbforange-400 rounded-lg py-2 px-4 block appearance-none leading-normal");
     			attr_dev(input, "type", "email");
     			attr_dev(input, "placeholder", "adresse email");
-    			add_location(input, file$2, 472, 1, 16499);
+    			add_location(input, file$2, 473, 1, 16538);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, t0, anchor);
@@ -15604,14 +15604,14 @@ var app = (function () {
     		block,
     		id: create_default_slot.name,
     		type: "slot",
-    		source: "(463:0) <Modal on:close=\\\"{() => showModalEffacerReservation = false}\\\">",
+    		source: "(464:0) <Modal on:close=\\\"{() => showModalEffacerReservation = false}\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (486:0) {#if !recupReservations}
+    // (487:0) {#if !recupReservations}
     function create_if_block_1(ctx) {
     	let current;
 
@@ -15673,14 +15673,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(486:0) {#if !recupReservations}",
+    		source: "(487:0) {#if !recupReservations}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (503:0) {#if recupReservations}
+    // (504:0) {#if recupReservations}
     function create_if_block$1(ctx) {
     	let div1;
     	let svg;
@@ -15716,7 +15716,7 @@ var app = (function () {
     			attr_dev(animate0, "keyTimes", "0; 1");
     			attr_dev(animate0, "keySplines", "0.165, 0.84, 0.44, 1");
     			attr_dev(animate0, "repeatCount", "indefinite");
-    			add_location(animate0, file$2, 507, 4, 18029);
+    			add_location(animate0, file$2, 508, 4, 18068);
     			attr_dev(animate1, "attributeName", "stroke-opacity");
     			attr_dev(animate1, "begin", "0s");
     			attr_dev(animate1, "dur", "1.8s");
@@ -15725,11 +15725,11 @@ var app = (function () {
     			attr_dev(animate1, "keyTimes", "0; 1");
     			attr_dev(animate1, "keySplines", "0.3, 0.61, 0.355, 1");
     			attr_dev(animate1, "repeatCount", "indefinite");
-    			add_location(animate1, file$2, 508, 4, 18193);
+    			add_location(animate1, file$2, 509, 4, 18232);
     			attr_dev(circle0, "cx", "22");
     			attr_dev(circle0, "cy", "22");
     			attr_dev(circle0, "r", "1");
-    			add_location(circle0, file$2, 506, 3, 17993);
+    			add_location(circle0, file$2, 507, 3, 18032);
     			attr_dev(animate2, "attributeName", "r");
     			attr_dev(animate2, "begin", "-0.9s");
     			attr_dev(animate2, "dur", "1.8s");
@@ -15738,7 +15738,7 @@ var app = (function () {
     			attr_dev(animate2, "keyTimes", "0; 1");
     			attr_dev(animate2, "keySplines", "0.165, 0.84, 0.44, 1");
     			attr_dev(animate2, "repeatCount", "indefinite");
-    			add_location(animate2, file$2, 511, 4, 18417);
+    			add_location(animate2, file$2, 512, 4, 18456);
     			attr_dev(animate3, "attributeName", "stroke-opacity");
     			attr_dev(animate3, "begin", "-0.9s");
     			attr_dev(animate3, "dur", "1.8s");
@@ -15747,23 +15747,23 @@ var app = (function () {
     			attr_dev(animate3, "keyTimes", "0; 1");
     			attr_dev(animate3, "keySplines", "0.3, 0.61, 0.355, 1");
     			attr_dev(animate3, "repeatCount", "indefinite");
-    			add_location(animate3, file$2, 512, 4, 18584);
+    			add_location(animate3, file$2, 513, 4, 18623);
     			attr_dev(circle1, "cx", "22");
     			attr_dev(circle1, "cy", "22");
     			attr_dev(circle1, "r", "1");
-    			add_location(circle1, file$2, 510, 3, 18381);
+    			add_location(circle1, file$2, 511, 3, 18420);
     			attr_dev(g, "fill", "none");
     			attr_dev(g, "fill-rule", "evenodd");
     			attr_dev(g, "stroke-width", "2");
-    			add_location(g, file$2, 505, 2, 17936);
+    			add_location(g, file$2, 506, 2, 17975);
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr_dev(svg, "class", "stroke-current text-lbfvert-500 h-20 w-20 mx-auto");
     			attr_dev(svg, "viewBox", "0 0 50 50");
-    			add_location(svg, file$2, 504, 2, 17814);
+    			add_location(svg, file$2, 505, 2, 17853);
     			attr_dev(div0, "class", "w-3/4 text-center mx-auto");
-    			add_location(div0, file$2, 516, 1, 18790);
+    			add_location(div0, file$2, 517, 1, 18829);
     			attr_dev(div1, "class", "mx-auto my-auto");
-    			add_location(div1, file$2, 503, 1, 17781);
+    			add_location(div1, file$2, 504, 1, 17820);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -15787,7 +15787,7 @@ var app = (function () {
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(503:0) {#if recupReservations}",
+    		source: "(504:0) {#if recupReservations}",
     		ctx
     	});
 
@@ -15820,7 +15820,7 @@ var app = (function () {
     			t3 = space();
     			if (if_block4) if_block4.c();
     			attr_dev(div, "class", "z-1 flex flex-col max-w-4xl h-3xl");
-    			add_location(div, file$2, 484, 0, 17161);
+    			add_location(div, file$2, 485, 0, 17200);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -16320,6 +16320,7 @@ var app = (function () {
     				duration: dureeString,
     				jour: leJourSelection.toLocaleDateString("fr-fr", options).replace(":", "h"),
     				urlDelete: urlEffacerResa.origin + urlEffacerResa.pathname + "?idReservation=" + idNewResa,
+    				altMachine: titreMachine,
     				urlImageMail: "https://res.cloudinary.com/la-bonne-fabrique/image/upload/ar_1.5,w_auto,c_fill/" + urlImageMachine
     			};
 

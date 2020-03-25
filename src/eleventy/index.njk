@@ -11,7 +11,7 @@ layout: baseLBF
     <div class="relative h-180px" style="background-image: url(https://res.cloudinary.com/la-bonne-fabrique/image/upload/ar_16:9,c_fill/w_340,c_scale/{{atelier.urlImage}})">
         {% if atelier.surInscription %}
         <div class="absolute -bottom-2 left-0">
-            <une-inscription id_atelier="{{atelier.id}}" />
+            <une-inscription id_atelier="{{atelier.id}}" url_illustration="{{atelier.urlImage}}" titre_atelier="{{atelier.titre}}" date_atelier="{{atelier.dateDebut | dateInscription(atelier.dateFin)}}"/>
         </div>
         {% endif %}
     </div>

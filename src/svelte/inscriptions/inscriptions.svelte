@@ -4,12 +4,19 @@
     import { onMount, tick  } from "svelte";
     import Modal from "../components/ModalPerso.svelte";
 
-	export let id_atelier = 'nope';
+    export let id_atelier = 'nope';
+    export let url_illustration = 'logoLBFSeul_a1t4af.png';
+    export let date_atelier = '';
+    export let titre_atelier = 'Un titre Atelier';
+
+    // récupération adresse pour vérifier si arrivée d'un lien de désinscription
+    var urlModifInscription = window.location.search;
+    var urlMail = window.location.origin +  window.location.pathname
+
     /* variables */
     var testModal = false
 	var placesRestantes = "Calculs en cours..."
 	let showModalInscription = false
-	var emailInscription = "bob@bobby.fr"
     var listeInscrits = []
     var nbPlaces = -1
     var nouveauxInscrits = [{nom: "", prenom: ""}]
@@ -20,12 +27,39 @@
     var flagVerifDesinscription = false
     var flagComplet = false
     var flagSaveValide = false
+    var busyEffacerInscription = false
+    var confirmeDesinscription = false
+    var busyEffacerInscrit = false
+    var confirmeDesinscrit = false
+    var confirmeInscription = false
+    let saveInfo = false;
+    let modal;
+    if (localStorage["emailInscription"]) {
+        var emailInscription = JSON.parse(localStorage.getItem("emailInscription"));
+        saveInfo = true;
+    } else {
+        var emailInscription = "";
+    }
 	/*functions*/
-	import * as gestionInscriptions from './utils/graphqlInscrits.js'
+    import * as gestionInscriptions from '../utils/graphqlInscrits.js'
+    import { envoiMail } from '../utils/graphqlEmails.js'
 
 //récupération nb inscrits au montage
 onMount(async () => {
+    var extracted = /\?idInscription=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})&email=([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/i.exec(urlModifInscription)
     await tick()
+    if (extracted!==null) {
+    var idAtelierModif = extracted[1]
+    var emailModif = extracted [2]
+    if (idAtelierModif === id_atelier) {
+        emailInscription = emailModif
+        if (localStorage["emailInscription"]) {
+            saveInfo = true;
+        }
+        afficheModal()
+        verifInscrits()
+    }
+    }
     nbInscrits()
 });
 
@@ -45,6 +79,7 @@ onMount(async () => {
     }
 
 	async function verifInscrits() {
+        saveInfoEmail()
 		actionEncours = true
         listeInscrits = await gestionInscriptions.getInscrits(emailInscription, id_atelier)
         if (listeInscrits.length > 0) {nouveauxInscrits = []} else { nouveauxInscrits = [{nom: "", prenom: ""}]}
@@ -53,29 +88,54 @@ onMount(async () => {
 	}
 
 	async function insertInscrits() {
-		var insertInscriptions = []
+        saveInfoEmail()
+        var insertInscriptions = []
+        var listeInscriptionsEmail = []
 		nouveauxInscrits.forEach((inscription) => {
-			if (!(inscription.prenom === "" && inscription.nom === "")) insertInscriptions.push({"email": emailInscription, "prenom": inscription.prenom, "nom": inscription.nom, "atelier": id_atelier})
+			if (!(inscription.prenom === "" && inscription.nom === "")) {
+                insertInscriptions.push({"email": emailInscription, "prenom": inscription.prenom, "nom": inscription.nom, "atelier": id_atelier})
+                listeInscriptionsEmail.push({"prenom": inscription.prenom, "nom": inscription.nom})
+            }
 		})
         var insertInscrits = await gestionInscriptions.ajoutInscrits(insertInscriptions)
+        var arrayMails = []
+        arrayMails.push(emailInscription)
+        var infoMail = {
+            subject: "Confirmation de votre inscription",
+            titreAtelier: titre_atelier,
+            date: date_atelier,
+            participants: listeInscriptionsEmail,
+            urlDesinscription: urlMail + "?idInscription=" + id_atelier +
+                "&email=" + emailInscription,
+            altMachine: "Illustration Atelier",
+            urlImageMail: "https://res.cloudinary.com/la-bonne-fabrique/image/upload/ar_1.5,w_auto,c_fill/" + url_illustration
+        };
+        envoiMail(arrayMails, infoMail)
         nbInscrits()
         close()
+        confirmeInscription = true
 	}
 
 	async function effacerInscription() {
+        saveInfoEmail()
+        busyEffacerInscription = true
         var effacerInscription = await gestionInscriptions.effacerInscription(emailInscription, id_atelier)
         nbInscrits()
+        busyEffacerInscription = false
         close()
         close()
+        confirmeDesinscription = true
     }
     
     async function effacerInscrit() {
-        actionEncours = true
+        saveInfoEmail()
+        busyEffacerInscrit = true
         var effacerInscritById = await gestionInscriptions.effacerInscritById(desinscrit.id)
         nbInscrits()
-        actionEncours = false
+        busyEffacerInscrit = false
         close()
         close()
+        confirmeDesinscrit = true
     }
 
 // gestion table nouveaux inscrits
@@ -107,7 +167,16 @@ onMount(async () => {
         })
         flagSaveValide = estValide
     }
-
+// sauvegarde mail en local
+function saveInfoEmail() {
+    //verification si on doit poser une cookie ou l'enlever
+    if (saveInfo) {
+        localStorage.setItem("emailInscription", JSON.stringify(emailInscription));
+    }
+    if (!saveInfo && localStorage["emailInscription"]) {
+        localStorage.removeItem("emailInscription");
+    }
+}
 //modal
 	function afficheModal() {
         showModalInscription = true
@@ -115,6 +184,18 @@ onMount(async () => {
 	}
 
 	function close() {
+        if (confirmeInscription) {
+            confirmeInscription = false
+            return
+        }
+        if (confirmeDesinscription) {
+            confirmeDesinscription = false
+            return
+        }
+        if (confirmeDesinscrit) {
+            confirmeDesinscrit = false
+            return
+        }
 		if (flagVerifEffacer || flagVerifDesinscription) {
             flagVerifEffacer = false
             flagVerifDesinscription = false
@@ -124,21 +205,30 @@ onMount(async () => {
 	}
 
 	const handle_keydown = e => {
+        if (!showModalInscription) {return}
 	  if (e.key === "Escape") {
 	    close();
 	    return;
-	  }
-	  if (e.key === "Tab") {
-	    // trap focus
-	    const nodes = modal.querySelectorAll("*");
-	    const tabbable = Array.from(nodes).filter(n => n.tabIndex >= 0);
-	    let index = tabbable.indexOf(document.activeElement);
+      }
+      if (e.key === "Enter") {
+          ajoutInscrit();
+          e.preventDefault();
+      }
+	  /*if (e.key === "Tab") {
+        // trap focus
+        console.log('modal', modal)
+        const nodes = modal.querySelectorAll("*");
+        console.log('nodes', nodes)
+        const tabbable = Array.from(nodes).filter(n => n.tabIndex >= 0);
+        console.log('tabbable', tabbable)
+        let index = tabbable.indexOf(DocumentOrShadowRoot.activeElement);
+        console.log('index', index)
 	    if (index === -1 && e.shiftKey) index = 0;
 	    index += tabbable.length + (e.shiftKey ? -1 : 1);
 	    index %= tabbable.length;
 	    tabbable[index].focus();
 	    e.preventDefault();
-	  }
+	  }*/
 	};
 </script>
 
@@ -159,7 +249,7 @@ onMount(async () => {
 <div class="z-100 fixed w-full h-full top-0 left-0 flex items-center justify-center">
 	<div class="absolute w-full h-full  bg-black opacity-75 top-0 left-0 cursor-pointer" on:click={close}>
 	</div>
-	<div class="relative overflow-auto max-h-5/6 w-5/6 sm:w-3/4 lg:w-1/2 bg-white flex flex-col p-4 items-start rounded" role="dialog" aria-modal="true">
+	<div class="relative overflow-auto max-h-5/6 w-5/6 sm:max-w-620px bg-white flex flex-col p-4 items-start rounded" role="dialog" aria-modal="true" >
 		<h2 class="text-xl w-full pb-1 mb-1 border-b-2 border-vertLBF font-bold">
 			Votre inscription
 		</h2>
@@ -167,28 +257,34 @@ onMount(async () => {
 		<div class="mb-1 text-base font-medium text-justify">
 			Merci de renseigner votre adresse mail et de cliquer sur vérifier.
 		</div>
-		<div class="flex content-center flex-wrap w-full justify-around">
-			<input on:input={flagEmailVerifie = false} class="w-full sm:w-4/5 mt-2 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfvert-600 border-2 border-lbfvert-400 rounded-lg px-4 block appearance-none leading-normal"
-	 			type="email" placeholder="adresse email" bind:value={emailInscription} />
-			{#if actionEncours}
-                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current text-lbfvert-500 h-12 w-12 mx-auto mt-2" viewBox="0 0 50 50">
-                    <g fill="none" fill-rule="evenodd" stroke-width="2">
-                        <circle cx="22" cy="22" r="1">
-                            <animate attributeName="r" begin="0s" dur="1.8s" values="1; 20" calcMode="spline" keyTimes="0; 1" keySplines="0.165, 0.84, 0.44, 1" repeatCount="indefinite"/>
-                            <animate attributeName="stroke-opacity" begin="0s" dur="1.8s" values="1; 0" calcMode="spline" keyTimes="0; 1" keySplines="0.3, 0.61, 0.355, 1" repeatCount="indefinite"/>
-                        </circle>
-                        <circle cx="22" cy="22" r="1">
-                            <animate attributeName="r" begin="-0.9s" dur="1.8s" values="1; 20" calcMode="spline" keyTimes="0; 1" keySplines="0.165, 0.84, 0.44, 1" repeatCount="indefinite"/>
-                            <animate attributeName="stroke-opacity" begin="-0.9s" dur="1.8s" values="1; 0" calcMode="spline" keyTimes="0; 1" keySplines="0.3, 0.61, 0.355, 1" repeatCount="indefinite"/>
-                        </circle>
-                    </g>
-                </svg>
-			{:else if !flagEmailVerifie}
-			<button on:click={verifInscrits} class="w-full sm:w-20 mt-2 mx-1 px-2 h-10 border-2 border-vertLBF rounded text-vertLBF font-semibold" type="button">
-				Envoyer
-			</button>
-			{/if}
-		</div>
+        <div class="flex flex-col">
+            <div class="flex flex-row content-center justify-center">
+                <input on:input={flagEmailVerifie = false} class="mt-2 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfvert-600 border-2 border-lbfvert-400 rounded-lg px-4 block appearance-none leading-normal"
+                    type="email" placeholder="adresse email" bind:value={emailInscription} />
+                {#if actionEncours}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current text-lbfvert-500 h-12 w-12 mx-auto mt-2" viewBox="0 0 50 50">
+                        <g fill="none" fill-rule="evenodd" stroke-width="2">
+                            <circle cx="22" cy="22" r="1">
+                                <animate attributeName="r" begin="0s" dur="1.8s" values="1; 20" calcMode="spline" keyTimes="0; 1" keySplines="0.165, 0.84, 0.44, 1" repeatCount="indefinite"/>
+                                <animate attributeName="stroke-opacity" begin="0s" dur="1.8s" values="1; 0" calcMode="spline" keyTimes="0; 1" keySplines="0.3, 0.61, 0.355, 1" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="22" cy="22" r="1">
+                                <animate attributeName="r" begin="-0.9s" dur="1.8s" values="1; 20" calcMode="spline" keyTimes="0; 1" keySplines="0.165, 0.84, 0.44, 1" repeatCount="indefinite"/>
+                                <animate attributeName="stroke-opacity" begin="-0.9s" dur="1.8s" values="1; 0" calcMode="spline" keyTimes="0; 1" keySplines="0.3, 0.61, 0.355, 1" repeatCount="indefinite"/>
+                            </circle>
+                        </g>
+                    </svg>
+                {:else if !flagEmailVerifie}
+                <button on:click={verifInscrits} class="w-full sm:w-20 mt-2 mx-1 px-2 h-10 border-2 border-vertLBF rounded text-vertLBF font-semibold" type="button">
+                    Vérifier
+                </button>
+                {/if}
+            </div>
+            <label class="mx-8 pr-8 my-1 text-sm">
+                <input type="checkbox" class="form-checkbox text-lbfvert-600" bind:checked={saveInfo} />
+                Enregistrer mon adresse email pour la prochaine fois (ces informations sont stockées sur votre machine)
+            </label>
+        </div>
         {#if !flagEmailVerifie}
             <div class="text-base text-justify">
             Une fois votre mail validé, vous pourrez&nbsp;:
@@ -226,30 +322,36 @@ onMount(async () => {
                 {/if}
 			</div>
 			{/each}
+            <div bind:this={modal}>
 			{#each nouveauxInscrits as nouvelInscrit, index ('nI' + index)}
-				<div class="w-full flex flex-row justify-start mb-4">
-					<div class="flex flex-col sm:flex-row flex-wrap ">
-						<div class="flex flex-col sm:mr-2">
-							<div class="ml-1 text-xs m-0 p-0 font-medium text-bleuLBF">Prénom</div>
-							<input on:input={validationSave} class="mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal"
-								type="text" placeholder="prenom" bind:value={nouvelInscrit.prenom}/>
-                            {#if nouvelInscrit.prenom===""}
-                                <div class="text-sm sm:text-xs md:text-sm font-medium text-rougeLBF ">Au moins le prénom est requis.</div>
-                            {/if}
+				<div class="w-full flex flex-col justify-start">
+                    <div class="flex flex-row justify-end">
+                        <div class="flex flex-col sm:flex-row">
+                            <div class="flex flex-col">
+                                <div class="ml-1 text-xs m-0 p-0 font-medium text-bleuLBF">Prénom</div>
+                                <input on:input={validationSave} class="mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal"
+                                    type="text" placeholder="prenom" bind:value={nouvelInscrit.prenom}/>
+                            </div>
+                            <div class="flex flex-col">
+                                <div class="ml-1 text-xs m-0 p-0 font-medium text-bleuLBF">Nom</div>
+                                <input class="mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal"
+                                    type="text" placeholder="nom" bind:value={nouvelInscrit.nom}/>
+                            </div>
                         </div>
-						<div class="flex flex-col sm:mr-2">
-							<div class="ml-1 text-xs m-0 p-0 font-medium text-bleuLBF">Nom</div>
-							<input class="mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal"
-								type="text" placeholder="nom" bind:value={nouvelInscrit.nom}/>
-						</div>
-					</div>
-                    <div class="my-auto sm:w-12 w-20 ">
-                        <svg on:click={soustraitInscrit(index)} class="mx-auto cursor-pointer mt-3 h-12 w-12 sm:h-8 sm:w-8 stroke-current text-rougeLBF" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" data-prefix="far" data-icon="trash-alt" viewBox="0 0 448 512">
-                            <path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"/>
-                        </svg>
+                        <div class="my-auto">
+                            <svg on:click={soustraitInscrit(index)} class="mx-auto cursor-pointer mt-3 h-12 w-12 md:h-8 md:w-8 stroke-current text-rougeLBF" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" data-prefix="far" data-icon="trash-alt" viewBox="0 0 448 512">
+                                <path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"/>
+                            </svg>
+                        </div>
                     </div>
+                    {#if nouvelInscrit.prenom===""}
+                        <div class="text-sm font-medium text-rougeLBF ">Au moins le prénom est requis.</div>
+                    {:else}
+                        <div class="text-sm font-medium text-rougeLBF ">&nbsp;</div>
+                    {/if}
 				</div>
 			{/each}
+            </div>
             {#if (nbPlaces-nouveauxInscrits.length) === 0}
                 <div class="text-sm sm:text-xs md:text-sm font-medium text-rougeLBF ">Cet atelier ne peut accepter plus de participants.</div>
             {/if}
@@ -275,55 +377,44 @@ onMount(async () => {
 </div>
 {/if}
 {#if flagVerifDesinscription}
-    <mon-modal has_bouton_bleu="true" on:close={close} on:boutonBleu={effacerInscription}>
+    <mon-modal has_bouton_bleu="true" bouton_bleu_busy={busyEffacerInscription} on:close={close} on:boutonBleu={effacerInscription}>
         <span slot="titre">Confirmation</span>
             Merci de confirmer votre désinscription.
         <span slot="boutonBleu">Confirmer</span>
+        <span slot="boutonDefaut">Annuler</span>
     </mon-modal>
 {/if}
 {#if flagVerifEffacer}
-    <mon-modal has_bouton_bleu="true" on:close={close} on:boutonBleu={effacerInscrit}>
+    <mon-modal has_bouton_bleu="true" bouton_bleu_busy={busyEffacerInscrit} on:close={close} on:boutonBleu={effacerInscrit}>
         <span slot="titre">Confirmation</span>
             Merci de confirmer la désinscription de {desinscrit.prenom}
         <span slot="boutonBleu">Confirmer</span>
+        <span slot="boutonDefaut">Annuler</span>
     </mon-modal>
-<!-- 
-	<div class="z-100 fixed w-full h-full top-0 left-0 flex items-center justify-center">
-		<div class="absolute w-full h-full  bg-black opacity-75 top-0 left-0 cursor-pointer" on:click={close}></div>
-		<div class="relative overflow-auto bg-white flex flex-col p-2 items-start rounded" role="dialog" aria-modal="true">
-			<div class="relative overflow-auto bg-white flex flex-col p-2 items-start rounded" role="dialog" aria-modal="true">
-                {#if actionEncours}
-                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current text-lbfvert-500 h-20 w-20 mx-auto my-auto mt-2" viewBox="0 0 50 50">
-                        <g fill="none" fill-rule="evenodd" stroke-width="2">
-                            <circle cx="22" cy="22" r="1">
-                                <animate attributeName="r" begin="0s" dur="1.8s" values="1; 20" calcMode="spline" keyTimes="0; 1" keySplines="0.165, 0.84, 0.44, 1" repeatCount="indefinite"/>
-                                <animate attributeName="stroke-opacity" begin="0s" dur="1.8s" values="1; 0" calcMode="spline" keyTimes="0; 1" keySplines="0.3, 0.61, 0.355, 1" repeatCount="indefinite"/>
-                            </circle>
-                            <circle cx="22" cy="22" r="1">
-                                <animate attributeName="r" begin="-0.9s" dur="1.8s" values="1; 20" calcMode="spline" keyTimes="0; 1" keySplines="0.165, 0.84, 0.44, 1" repeatCount="indefinite"/>
-                                <animate attributeName="stroke-opacity" begin="-0.9s" dur="1.8s" values="1; 0" calcMode="spline" keyTimes="0; 1" keySplines="0.3, 0.61, 0.355, 1" repeatCount="indefinite"/>
-                            </circle>
-                        </g>
-                    </svg>
-                {:else}
-                    <h2 class="text-xl w-full mx-2 pb-1 mb-1 border-b-2 border-vertLBF font-bold">
-                        Confirmation
-                    </h2>
-                    <hr class="mb-1" />
-                    <div class="mx-2">Merci de confirmer la désinscription de {desinscrit.prenom}</div>
-                    <div class="flex justify-center mt-3 mx-2">
-                        <button on:click={close} class="mx-1 px-1 border-2 border-bleuLBF rounded text-base font-medium text-bleuLBF">
-                            Annuler
-                        </button>
-                        <button on:click={effacerInscrit} class="mx-1 px-1 border-2 border-orangeLBF rounded text-base font-medium text-orangeLBF">
-                            Confirmer
-                        </button>
-                    </div>
-                {/if}
-            </div>
-		</div>
-	</div>
-    -->
+{/if}
+{#if confirmeDesinscription}
+    <mon-modal on:close={close} on:boutonBleu={effacerInscrit}>
+        <span slot="titre">Votre desinscription</span>
+            Votre désinscription a bien été enregistrée. 
+        <span slot="boutonBleu">Confirmer</span>
+    </mon-modal>
+{/if}
+{#if confirmeDesinscrit}
+    <mon-modal on:close={close} on:boutonBleu={effacerInscrit}>
+        <span slot="titre">Desinscription</span>
+           {desinscrit.prenom} est bien désinscrit.
+        <span slot="boutonBleu">Confirmer</span>
+    </mon-modal>
+{/if}
+{#if confirmeInscription}
+    <mon-modal on:close={close} on:boutonBleu={effacerInscrit}>
+        <span slot="titre">Votre inscription</span>
+        <span class="text-justify">
+            Votre inscription a bien été enregistrée. Vous allez recevoir un mail de confirmation qui contient un lien vous permettant éventuellement de vous désinscrire.<br />
+            Si vous ne l'avez pas reçu dans les prochaines minutes, il y a pu avoir un problème de notre serveur ou une erreur dans l'adresse enregistrée. Cela ne compromet pas votre inscription, mais nous serons dans l'impossibilité de vous contacter si besoin.
+        </span>
+        <span slot="boutonBleu">Confirmer</span>
+    </mon-modal>
 {/if}
 <slot>
 </slot>

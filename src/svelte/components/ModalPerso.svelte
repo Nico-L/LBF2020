@@ -5,6 +5,7 @@
     import { get_current_component } from "svelte/internal"
 
     export let has_bouton_bleu = false;
+    export let bouton_bleu_busy = false;
 
     var actionEncours = false
     //const dispatch = createEventDispatcher();
@@ -43,18 +44,33 @@
 
 <div class="z-100 fixed w-full h-full top-0 left-0 flex items-center justify-center">
     <div class="absolute w-full h-full bg-black opacity-75 top-0 left-0 cursor-pointer" on:click={close}></div>
-    <div class="relative overflow-auto bg-white p-2 rounded" role="dialog" aria-modal="true" bind:this={modal}>
+    <div class="max-w-5/6 relative overflow-auto bg-white p-2 rounded" role="dialog" aria-modal="true" bind:this={modal}>
             <h2 class="text-xl w-full pb-1 mb-1 border-b-2 border-bleuLBF font-bold">
                 <slot name="titre">Un titre</slot>
             </h2>
             <div class="mx-2"><slot>Le corps de la fenêtre</slot> </div>
             <div class="flex justify-end mt-3 mx-2">
                 <button on:click={close} class="mx-1 px-1 border-2 border-orangeLBF rounded text-base font-medium text-orangeLBF">
-                    Annuler
+                    <slot name="boutonDefaut">Fermer</slot>
                 </button>
                 {#if has_bouton_bleu}
-                    <button on:click={boutonBleu} class="mx-1 px-1 border-2 border-bleuLBF rounded text-base font-medium text-bleuLBF">
-                        <slot name="boutonBleu">BoutonBleu</slot>
+                    <button on:click={() => {if (!bouton_bleu_busy) {boutonBleu()}}} class="w-24 h-10 mx-1 px-1 border-2 border-bleuLBF rounded text-base font-medium text-bleuLBF">
+                        {#if bouton_bleu_busy}
+                            <svg xmlns="http://www.w3.org/2000/svg" class="fill-current stroke-current text-bleuLBF-500 bg-bleuLBF-500 h-8 w-8 mx-auto mt-1" viewBox="0 0 50 50">
+                                <g fill="none" fill-rule="evenodd" stroke-width="2">
+                                    <circle cx="22" cy="22" r="1">
+                                        <animate attributeName="r" begin="0s" dur="1.8s" values="1; 20" calcMode="spline" keyTimes="0; 1" keySplines="0.165, 0.84, 0.44, 1" repeatCount="indefinite"/>
+                                        <animate attributeName="stroke-opacity" begin="0s" dur="1.8s" values="1; 0" calcMode="spline" keyTimes="0; 1" keySplines="0.3, 0.61, 0.355, 1" repeatCount="indefinite"/>
+                                    </circle>
+                                    <circle cx="22" cy="22" r="1">
+                                        <animate attributeName="r" begin="-0.9s" dur="1.8s" values="1; 20" calcMode="spline" keyTimes="0; 1" keySplines="0.165, 0.84, 0.44, 1" repeatCount="indefinite"/>
+                                        <animate attributeName="stroke-opacity" begin="-0.9s" dur="1.8s" values="1; 0" calcMode="spline" keyTimes="0; 1" keySplines="0.3, 0.61, 0.355, 1" repeatCount="indefinite"/>
+                                    </circle>
+                                </g>
+                            </svg>
+                        {:else}
+                            <slot name="boutonBleu" class="mx-auto">BoutonBleu</slot>
+                        {/if}
                     </button>
                 {/if}
             </div>

@@ -1,6 +1,21 @@
 const { DateTime } = require("luxon");
 //const util = require("util");
 const slugify = require("slugify");
+const mois = [
+    "janvier",
+    "février",
+    "mars",
+    "avril",
+    "mai",
+    "juin",
+    "juillet",
+    "août",
+    "septembre",
+    "octobre",
+    "novembre",
+    "décembre"
+];
+
 const moisShort = [
     "jan.",
     "fév.",
@@ -15,6 +30,16 @@ const moisShort = [
     "nov.",
     "déc."
 ];
+
+const jours = [
+    "dimanche",
+    "lundi",
+    "mardi",
+    "mercredi",
+    "jeudi",
+    "vendredi",
+    "samedi"
+]
 
 module.exports = function(eleventyConfig) {
   // Layout aliases for convenience
@@ -51,11 +76,15 @@ eleventyConfig.addFilter("getMoisShort", function(value) {
     return moisShort[d];
 });
 
-// récupération nb de places restantes
-eleventyConfig.addFilter("getPlacesRestantes", function(inscrits, nbPlaces) {
-    var reste = inscrits ? nbPlaces - inscrits.length:nbPlaces;
-    const retour = reste == 0 ? "Complet" : reste === 1 ? "Dernière place" : reste + " places restantes";
-    return retour;
+eleventyConfig.addFilter("dateInscription", function(debut, fin) {
+    var leDebut = DateTime.fromISO(debut).setZone("Europe/Paris"); 
+    var laFin = DateTime.fromISO(fin).setZone("Europe/Paris");
+    var leJour = (new Date(debut)).getDate();
+    var leJourSemaine = jours[(new Date(debut)).getDay()];
+    var leMois = mois[(new Date(debut)).getMonth()]
+    var minuteDebut = leDebut.minute == 0 ? '00': leDebut.minute;
+    var minuteFin = laFin.minute == 0 ? '00': laFin.minute;
+    return 'le ' + leJourSemaine + ' ' + leJour + ' ' + leMois + ' de ' + leDebut.hour + 'h' + minuteDebut + ' à ' + laFin.hour + 'h' + minuteFin;
 });
 
   // a debug utility
