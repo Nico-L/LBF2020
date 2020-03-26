@@ -27,6 +27,8 @@
     var flagVerifDesinscription = false
     var flagComplet = false
     var flagSaveValide = false
+    var flagEmailVide = false
+    var flagEmailInvalide = false
     var busyEffacerInscription = false
     var confirmeDesinscription = false
     var busyEffacerInscrit = false
@@ -80,7 +82,8 @@ onMount(async () => {
 
 	async function verifInscrits() {
         console.log("emailInscription", emailInscription)
-        if(emailInscription==="") {return}
+        if(emailInscription==="") {flagEmailVide = true; return;}
+        if(/([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/i.exec(emailInscription) === null) {flagEmailInvalide = true; return;}
         saveInfoEmail()
 		actionEncours = true
         listeInscrits = await gestionInscriptions.getInscrits(emailInscription, id_atelier)
@@ -260,12 +263,12 @@ function saveInfoEmail() {
 			Merci de renseigner votre adresse mail et de cliquer sur vérifier.
 		</div>
         <div class="flex flex-col">
-            <div class="flex flex-row justify-center content-end">
+            <div class="flex flex-row flex-wrap md:flex-no-wrap justify-start content-end">
                 <div class="flex flex-col mt-1">
                     <div class="ml-1 text-xs m-0 p-0 font-medium text-vertLBF">
                         email
                     </div>
-                    <input on:input={flagEmailVerifie = false} class="h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfvert-600 border-2 border-lbfvert-400 rounded-lg px-4 block appearance-none leading-normal"
+                    <input on:input={() => {flagEmailVerifie = false; flagEmailVide = false; flagEmailInvalide = false;}} class="h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfvert-600 border-2 border-lbfvert-400 rounded-lg px-4 block appearance-none leading-normal"
                         type="email" placeholder="adresse email" bind:value={emailInscription} />
                 </div>
                 <div class="m-0 p-0 mt-1 self-end">
@@ -288,6 +291,16 @@ function saveInfoEmail() {
                         </button>
                     {/if}
                 </div>
+                {#if flagEmailVide}
+                    <div class="m-0 p-0 mt-1 self-end text-rougeLBF">
+                        Veuillez entrer une adresse email pour démarrer l'inscription.
+                    </div>
+                {/if}
+                {#if flagEmailInvalide}
+                    <div class="m-0 p-0 mt-1 self-end text-rougeLBF">
+                        Veuillez entrer une adresse email valide.
+                    </div>
+                {/if}
             </div>
             <label class="mx-8 pr-8 my-1 text-sm">
                 <input type="checkbox" class="form-checkbox text-lbfvert-600" bind:checked={saveInfo} />

@@ -1099,21 +1099,21 @@ var appInscription = (function (exports) {
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[49] = list[i];
-    	child_ctx[50] = list;
-    	child_ctx[51] = i;
-    	return child_ctx;
-    }
-
-    function get_each_context_1(ctx, list, i) {
-    	const child_ctx = ctx.slice();
     	child_ctx[52] = list[i];
     	child_ctx[53] = list;
     	child_ctx[54] = i;
     	return child_ctx;
     }
 
-    // (250:0) {#if showModalInscription}
+    function get_each_context_1(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[55] = list[i];
+    	child_ctx[56] = list;
+    	child_ctx[57] = i;
+    	return child_ctx;
+    }
+
+    // (253:0) {#if showModalInscription}
     function create_if_block_5(ctx) {
     	let div8;
     	let div0;
@@ -1134,19 +1134,23 @@ var appInscription = (function (exports) {
     	let t8;
     	let div4;
     	let t9;
-    	let label;
-    	let input1;
     	let t10;
     	let t11;
+    	let label;
+    	let input1;
+    	let t12;
+    	let t13;
     	let dispose;
 
     	function select_block_type(ctx, dirty) {
-    		if (/*actionEncours*/ ctx[6]) return create_if_block_14;
-    		if (!/*flagEmailVerifie*/ ctx[7]) return create_if_block_15;
+    		if (/*actionEncours*/ ctx[6]) return create_if_block_16;
+    		if (!/*flagEmailVerifie*/ ctx[7]) return create_if_block_17;
     	}
 
     	let current_block_type = select_block_type(ctx);
     	let if_block0 = current_block_type && current_block_type(ctx);
+    	let if_block1 = /*flagEmailVide*/ ctx[11] && create_if_block_15(ctx);
+    	let if_block2 = /*flagEmailInvalide*/ ctx[12] && create_if_block_14(ctx);
 
     	function select_block_type_1(ctx, dirty) {
     		if (!/*flagEmailVerifie*/ ctx[7]) return create_if_block_6;
@@ -1155,7 +1159,7 @@ var appInscription = (function (exports) {
     	}
 
     	let current_block_type_1 = select_block_type_1(ctx);
-    	let if_block1 = current_block_type_1(ctx);
+    	let if_block3 = current_block_type_1(ctx);
 
     	const block = {
     		c: function create() {
@@ -1182,44 +1186,48 @@ var appInscription = (function (exports) {
     			div4 = element("div");
     			if (if_block0) if_block0.c();
     			t9 = space();
+    			if (if_block1) if_block1.c();
+    			t10 = space();
+    			if (if_block2) if_block2.c();
+    			t11 = space();
     			label = element("label");
     			input1 = element("input");
-    			t10 = text("\n                Enregistrer mon adresse email pour la prochaine fois (ces informations sont stockées sur votre machine)");
-    			t11 = space();
-    			if_block1.c();
+    			t12 = text("\n                Enregistrer mon adresse email pour la prochaine fois (ces informations sont stockées sur votre machine)");
+    			t13 = space();
+    			if_block3.c();
     			attr_dev(div0, "class", "absolute w-full h-full  bg-black opacity-75 top-0 left-0 cursor-pointer");
-    			add_location(div0, file$1, 251, 1, 9019);
+    			add_location(div0, file$1, 254, 1, 9240);
     			attr_dev(h2, "class", "text-xl w-full pb-1 mb-1 border-b-2 border-vertLBF font-bold");
-    			add_location(h2, file$1, 254, 2, 9281);
+    			add_location(h2, file$1, 257, 2, 9502);
     			attr_dev(hr, "class", "mb-1");
-    			add_location(hr, file$1, 257, 2, 9386);
+    			add_location(hr, file$1, 260, 2, 9607);
     			attr_dev(div1, "class", "mb-1 text-base font-medium text-justify");
-    			add_location(div1, file$1, 258, 2, 9408);
+    			add_location(div1, file$1, 261, 2, 9629);
     			attr_dev(div2, "class", "ml-1 text-xs m-0 p-0 font-medium text-vertLBF");
-    			add_location(div2, file$1, 264, 20, 9713);
+    			add_location(div2, file$1, 267, 20, 9959);
     			attr_dev(input0, "class", "h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfvert-600 border-2 border-lbfvert-400 rounded-lg px-4 block appearance-none leading-normal");
     			attr_dev(input0, "type", "email");
     			attr_dev(input0, "placeholder", "adresse email");
-    			add_location(input0, file$1, 267, 20, 9850);
+    			add_location(input0, file$1, 270, 20, 10096);
     			attr_dev(div3, "class", "flex flex-col mt-1");
-    			add_location(div3, file$1, 263, 16, 9660);
+    			add_location(div3, file$1, 266, 16, 9906);
     			attr_dev(div4, "class", "m-0 p-0 mt-1 self-end");
-    			add_location(div4, file$1, 270, 16, 10192);
-    			attr_dev(div5, "class", "flex flex-row justify-center content-end");
-    			add_location(div5, file$1, 262, 12, 9589);
+    			add_location(div4, file$1, 273, 16, 10497);
+    			attr_dev(div5, "class", "flex flex-row flex-wrap md:flex-no-wrap justify-start content-end");
+    			add_location(div5, file$1, 265, 12, 9810);
     			attr_dev(input1, "type", "checkbox");
     			attr_dev(input1, "class", "form-checkbox text-lbfvert-600");
-    			add_location(input1, file$1, 292, 16, 11996);
+    			add_location(input1, file$1, 305, 16, 12768);
     			attr_dev(label, "class", "mx-8 pr-8 my-1 text-sm");
-    			add_location(label, file$1, 291, 12, 11941);
+    			add_location(label, file$1, 304, 12, 12713);
     			attr_dev(div6, "class", "flex flex-col");
-    			add_location(div6, file$1, 261, 8, 9549);
+    			add_location(div6, file$1, 264, 8, 9770);
     			attr_dev(div7, "class", "relative overflow-auto max-h-5/6 w-5/6 sm:max-w-620px bg-white flex flex-col p-4 items-start rounded");
     			attr_dev(div7, "role", "dialog");
     			attr_dev(div7, "aria-modal", "true");
-    			add_location(div7, file$1, 253, 1, 9131);
+    			add_location(div7, file$1, 256, 1, 9352);
     			attr_dev(div8, "class", "z-100 fixed w-full h-full top-0 left-0 flex items-center justify-center");
-    			add_location(div8, file$1, 250, 0, 8932);
+    			add_location(div8, file$1, 253, 0, 9153);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div8, anchor);
@@ -1238,40 +1246,33 @@ var appInscription = (function (exports) {
     			append_dev(div3, div2);
     			append_dev(div3, t7);
     			append_dev(div3, input0);
-    			set_input_value(input0, /*emailInscription*/ ctx[18]);
+    			set_input_value(input0, /*emailInscription*/ ctx[20]);
     			append_dev(div5, t8);
     			append_dev(div5, div4);
     			if (if_block0) if_block0.m(div4, null);
-    			append_dev(div6, t9);
+    			append_dev(div5, t9);
+    			if (if_block1) if_block1.m(div5, null);
+    			append_dev(div5, t10);
+    			if (if_block2) if_block2.m(div5, null);
+    			append_dev(div6, t11);
     			append_dev(div6, label);
     			append_dev(label, input1);
-    			input1.checked = /*saveInfo*/ ctx[16];
-    			append_dev(label, t10);
-    			append_dev(div7, t11);
-    			if_block1.m(div7, null);
+    			input1.checked = /*saveInfo*/ ctx[18];
+    			append_dev(label, t12);
+    			append_dev(div7, t13);
+    			if_block3.m(div7, null);
     			if (remount) run_all(dispose);
 
     			dispose = [
-    				listen_dev(div0, "click", /*close*/ ctx[28], false, false, false),
-    				listen_dev(
-    					input0,
-    					"input",
-    					function () {
-    						if (is_function(/*flagEmailVerifie*/ ctx[7] = false)) (/*flagEmailVerifie*/ ctx[7] = false).apply(this, arguments);
-    					},
-    					false,
-    					false,
-    					false
-    				),
-    				listen_dev(input0, "input", /*input0_input_handler*/ ctx[41]),
-    				listen_dev(input1, "change", /*input1_change_handler*/ ctx[42])
+    				listen_dev(div0, "click", /*close*/ ctx[30], false, false, false),
+    				listen_dev(input0, "input", /*input_handler*/ ctx[43], false, false, false),
+    				listen_dev(input0, "input", /*input0_input_handler*/ ctx[44]),
+    				listen_dev(input1, "change", /*input1_change_handler*/ ctx[45])
     			];
     		},
-    		p: function update(new_ctx, dirty) {
-    			ctx = new_ctx;
-
-    			if (dirty[0] & /*emailInscription*/ 262144 && input0.value !== /*emailInscription*/ ctx[18]) {
-    				set_input_value(input0, /*emailInscription*/ ctx[18]);
+    		p: function update(ctx, dirty) {
+    			if (dirty[0] & /*emailInscription*/ 1048576 && input0.value !== /*emailInscription*/ ctx[20]) {
+    				set_input_value(input0, /*emailInscription*/ ctx[20]);
     			}
 
     			if (current_block_type === (current_block_type = select_block_type(ctx)) && if_block0) {
@@ -1286,19 +1287,41 @@ var appInscription = (function (exports) {
     				}
     			}
 
-    			if (dirty[0] & /*saveInfo*/ 65536) {
-    				input1.checked = /*saveInfo*/ ctx[16];
+    			if (/*flagEmailVide*/ ctx[11]) {
+    				if (!if_block1) {
+    					if_block1 = create_if_block_15(ctx);
+    					if_block1.c();
+    					if_block1.m(div5, t10);
+    				}
+    			} else if (if_block1) {
+    				if_block1.d(1);
+    				if_block1 = null;
     			}
 
-    			if (current_block_type_1 === (current_block_type_1 = select_block_type_1(ctx)) && if_block1) {
-    				if_block1.p(ctx, dirty);
-    			} else {
-    				if_block1.d(1);
-    				if_block1 = current_block_type_1(ctx);
+    			if (/*flagEmailInvalide*/ ctx[12]) {
+    				if (!if_block2) {
+    					if_block2 = create_if_block_14(ctx);
+    					if_block2.c();
+    					if_block2.m(div5, null);
+    				}
+    			} else if (if_block2) {
+    				if_block2.d(1);
+    				if_block2 = null;
+    			}
 
-    				if (if_block1) {
-    					if_block1.c();
-    					if_block1.m(div7, null);
+    			if (dirty[0] & /*saveInfo*/ 262144) {
+    				input1.checked = /*saveInfo*/ ctx[18];
+    			}
+
+    			if (current_block_type_1 === (current_block_type_1 = select_block_type_1(ctx)) && if_block3) {
+    				if_block3.p(ctx, dirty);
+    			} else {
+    				if_block3.d(1);
+    				if_block3 = current_block_type_1(ctx);
+
+    				if (if_block3) {
+    					if_block3.c();
+    					if_block3.m(div7, null);
     				}
     			}
     		},
@@ -1309,7 +1332,9 @@ var appInscription = (function (exports) {
     				if_block0.d();
     			}
 
-    			if_block1.d();
+    			if (if_block1) if_block1.d();
+    			if (if_block2) if_block2.d();
+    			if_block3.d();
     			run_all(dispose);
     		}
     	};
@@ -1318,15 +1343,15 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_5.name,
     		type: "if",
-    		source: "(250:0) {#if showModalInscription}",
+    		source: "(253:0) {#if showModalInscription}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (285:48) 
-    function create_if_block_15(ctx) {
+    // (288:48) 
+    function create_if_block_17(ctx) {
     	let button;
     	let dispose;
 
@@ -1336,12 +1361,12 @@ var appInscription = (function (exports) {
     			button.textContent = "Vérifier";
     			attr_dev(button, "class", "w-full sm:w-20 mx-1 px-2 h-10 border-2 border-vertLBF rounded text-vertLBF font-semibold");
     			attr_dev(button, "type", "button");
-    			add_location(button, file$1, 285, 24, 11645);
+    			add_location(button, file$1, 288, 24, 11950);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, button, anchor);
     			if (remount) dispose();
-    			dispose = listen_dev(button, "click", /*verifInscrits*/ ctx[19], false, false, false);
+    			dispose = listen_dev(button, "click", /*verifInscrits*/ ctx[21], false, false, false);
     		},
     		p: noop,
     		d: function destroy(detaching) {
@@ -1352,17 +1377,17 @@ var appInscription = (function (exports) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_15.name,
+    		id: create_if_block_17.name,
     		type: "if",
-    		source: "(285:48) ",
+    		source: "(288:48) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (272:20) {#if actionEncours}
-    function create_if_block_14(ctx) {
+    // (275:20) {#if actionEncours}
+    function create_if_block_16(ctx) {
     	let svg;
     	let g;
     	let circle0;
@@ -1390,7 +1415,7 @@ var appInscription = (function (exports) {
     			attr_dev(animate0, "keyTimes", "0; 1");
     			attr_dev(animate0, "keySplines", "0.165, 0.84, 0.44, 1");
     			attr_dev(animate0, "repeatCount", "indefinite");
-    			add_location(animate0, file$1, 275, 36, 10589);
+    			add_location(animate0, file$1, 278, 36, 10894);
     			attr_dev(animate1, "attributeName", "stroke-opacity");
     			attr_dev(animate1, "begin", "0s");
     			attr_dev(animate1, "dur", "1.8s");
@@ -1399,11 +1424,11 @@ var appInscription = (function (exports) {
     			attr_dev(animate1, "keyTimes", "0; 1");
     			attr_dev(animate1, "keySplines", "0.3, 0.61, 0.355, 1");
     			attr_dev(animate1, "repeatCount", "indefinite");
-    			add_location(animate1, file$1, 276, 36, 10784);
+    			add_location(animate1, file$1, 279, 36, 11089);
     			attr_dev(circle0, "cx", "22");
     			attr_dev(circle0, "cy", "22");
     			attr_dev(circle0, "r", "1");
-    			add_location(circle0, file$1, 274, 32, 10522);
+    			add_location(circle0, file$1, 277, 32, 10827);
     			attr_dev(animate2, "attributeName", "r");
     			attr_dev(animate2, "begin", "-0.9s");
     			attr_dev(animate2, "dur", "1.8s");
@@ -1412,7 +1437,7 @@ var appInscription = (function (exports) {
     			attr_dev(animate2, "keyTimes", "0; 1");
     			attr_dev(animate2, "keySplines", "0.165, 0.84, 0.44, 1");
     			attr_dev(animate2, "repeatCount", "indefinite");
-    			add_location(animate2, file$1, 279, 36, 11095);
+    			add_location(animate2, file$1, 282, 36, 11400);
     			attr_dev(animate3, "attributeName", "stroke-opacity");
     			attr_dev(animate3, "begin", "-0.9s");
     			attr_dev(animate3, "dur", "1.8s");
@@ -1421,19 +1446,19 @@ var appInscription = (function (exports) {
     			attr_dev(animate3, "keyTimes", "0; 1");
     			attr_dev(animate3, "keySplines", "0.3, 0.61, 0.355, 1");
     			attr_dev(animate3, "repeatCount", "indefinite");
-    			add_location(animate3, file$1, 280, 36, 11293);
+    			add_location(animate3, file$1, 283, 36, 11598);
     			attr_dev(circle1, "cx", "22");
     			attr_dev(circle1, "cy", "22");
     			attr_dev(circle1, "r", "1");
-    			add_location(circle1, file$1, 278, 32, 11028);
+    			add_location(circle1, file$1, 281, 32, 11333);
     			attr_dev(g, "fill", "none");
     			attr_dev(g, "fill-rule", "evenodd");
     			attr_dev(g, "stroke-width", "2");
-    			add_location(g, file$1, 273, 28, 10437);
+    			add_location(g, file$1, 276, 28, 10742);
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr_dev(svg, "class", "stroke-current text-lbfvert-500 h-10 w-18 ml-4 ");
     			attr_dev(svg, "viewBox", "0 0 50 50");
-    			add_location(svg, file$1, 272, 24, 10292);
+    			add_location(svg, file$1, 275, 24, 10597);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, svg, anchor);
@@ -1453,16 +1478,76 @@ var appInscription = (function (exports) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_14.name,
+    		id: create_if_block_16.name,
     		type: "if",
-    		source: "(272:20) {#if actionEncours}",
+    		source: "(275:20) {#if actionEncours}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (309:8) {:else}
+    // (294:16) {#if flagEmailVide}
+    function create_if_block_15(ctx) {
+    	let div;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			div.textContent = "Veuillez entrer une adresse email pour démarrer l'inscription.";
+    			attr_dev(div, "class", "m-0 p-0 mt-1 self-end text-rougeLBF");
+    			add_location(div, file$1, 294, 20, 12271);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_15.name,
+    		type: "if",
+    		source: "(294:16) {#if flagEmailVide}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (299:16) {#if flagEmailInvalide}
+    function create_if_block_14(ctx) {
+    	let div;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			div.textContent = "Veuillez entrer une adresse email valide.";
+    			attr_dev(div, "class", "m-0 p-0 mt-1 self-end text-rougeLBF");
+    			add_location(div, file$1, 299, 20, 12517);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_14.name,
+    		type: "if",
+    		source: "(299:16) {#if flagEmailInvalide}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (322:8) {:else}
     function create_else_block$1(ctx) {
     	let div0;
     	let t1;
@@ -1485,7 +1570,7 @@ var appInscription = (function (exports) {
 
     	let each_value = /*nouveauxInscrits*/ ctx[4];
     	validate_each_argument(each_value);
-    	const get_key = ctx => "nI" + /*index*/ ctx[51];
+    	const get_key = ctx => "nI" + /*index*/ ctx[54];
     	validate_each_keys(ctx, each_value, get_each_context, get_key);
 
     	for (let i = 0; i < each_value.length; i += 1) {
@@ -1526,9 +1611,9 @@ var appInscription = (function (exports) {
     			t6 = space();
     			if (if_block3) if_block3.c();
     			attr_dev(div0, "class", "text-lg font-bold mt-2 text-bleuLBF");
-    			add_location(div0, file$1, 309, 6, 13075);
-    			add_location(div1, file$1, 333, 12, 15013);
-    			add_location(div2, file$1, 366, 12, 17807);
+    			add_location(div0, file$1, 322, 6, 13847);
+    			add_location(div1, file$1, 346, 12, 15785);
+    			add_location(div2, file$1, 379, 12, 18579);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div0, anchor);
@@ -1545,7 +1630,7 @@ var appInscription = (function (exports) {
     				each_blocks[i].m(div1, null);
     			}
 
-    			/*div1_binding*/ ctx[47](div1);
+    			/*div1_binding*/ ctx[50](div1);
     			insert_dev(target, t3, anchor);
     			if (if_block0) if_block0.m(target, anchor);
     			insert_dev(target, t4, anchor);
@@ -1557,7 +1642,7 @@ var appInscription = (function (exports) {
     			if (if_block3) if_block3.m(div2, null);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*confirmerEffaceInscrit, listeInscrits*/ 8388612) {
+    			if (dirty[0] & /*confirmerEffaceInscrit, listeInscrits*/ 33554436) {
     				each_value_1 = /*listeInscrits*/ ctx[2];
     				validate_each_argument(each_value_1);
     				let i;
@@ -1581,7 +1666,7 @@ var appInscription = (function (exports) {
     				each_blocks_1.length = each_value_1.length;
     			}
 
-    			if (dirty[0] & /*nouveauxInscrits, soustraitInscrit, validationSave*/ 100663312) {
+    			if (dirty[0] & /*nouveauxInscrits, soustraitInscrit, validationSave*/ 402653200) {
     				const each_value = /*nouveauxInscrits*/ ctx[4];
     				validate_each_argument(each_value);
     				validate_each_keys(ctx, each_value, get_each_context, get_key);
@@ -1649,7 +1734,7 @@ var appInscription = (function (exports) {
     				each_blocks[i].d();
     			}
 
-    			/*div1_binding*/ ctx[47](null);
+    			/*div1_binding*/ ctx[50](null);
     			if (detaching) detach_dev(t3);
     			if (if_block0) if_block0.d(detaching);
     			if (detaching) detach_dev(t4);
@@ -1664,14 +1749,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_else_block$1.name,
     		type: "else",
-    		source: "(309:8) {:else}",
+    		source: "(322:8) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (305:57) 
+    // (318:57) 
     function create_if_block_7(ctx) {
     	let h2;
 
@@ -1680,7 +1765,7 @@ var appInscription = (function (exports) {
     			h2 = element("h2");
     			h2.textContent = "Cet atelier est complet. Nos ateliers sont régulièrement proposés, surveillez cet espace pour le prochain.";
     			attr_dev(h2, "class", "text-base text-bleuLBF w-full mt-2 mx-2 pb-1 mb-1 font-bold");
-    			add_location(h2, file$1, 305, 12, 12839);
+    			add_location(h2, file$1, 318, 12, 13611);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h2, anchor);
@@ -1695,14 +1780,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_7.name,
     		type: "if",
-    		source: "(305:57) ",
+    		source: "(318:57) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (297:8) {#if !flagEmailVerifie}
+    // (310:8) {#if !flagEmailVerifie}
     function create_if_block_6(ctx) {
     	let div;
     	let t0;
@@ -1721,12 +1806,12 @@ var appInscription = (function (exports) {
     			t2 = space();
     			li1 = element("li");
     			li1.textContent = "Si vous avez déjà effectué une inscription à cet atelier, vous pourrez modifier celle-ci ou vous désinscrire.";
-    			add_location(li0, file$1, 300, 20, 12446);
-    			add_location(li1, file$1, 301, 20, 12608);
+    			add_location(li0, file$1, 313, 20, 13218);
+    			add_location(li1, file$1, 314, 20, 13380);
     			attr_dev(ul, "class", "list-disc ml-6");
-    			add_location(ul, file$1, 299, 16, 12398);
+    			add_location(ul, file$1, 312, 16, 13170);
     			attr_dev(div, "class", "text-base text-justify");
-    			add_location(div, file$1, 297, 12, 12285);
+    			add_location(div, file$1, 310, 12, 13057);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1746,14 +1831,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_6.name,
     		type: "if",
-    		source: "(297:8) {#if !flagEmailVerifie}",
+    		source: "(310:8) {#if !flagEmailVerifie}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (325:16) {#if listeInscrits.length > 1}
+    // (338:16) {#if listeInscrits.length > 1}
     function create_if_block_13(ctx) {
     	let div;
     	let svg;
@@ -1767,16 +1852,16 @@ var appInscription = (function (exports) {
     			path = svg_element("path");
     			attr_dev(path, "fill", "currentColor");
     			attr_dev(path, "d", "M268 416h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12zM432 80h-82.41l-34-56.7A48 48 0 00274.41 0H173.59a48 48 0 00-41.16 23.3L98.41 80H16A16 16 0 000 96v16a16 16 0 0016 16h16v336a48 48 0 0048 48h288a48 48 0 0048-48V128h16a16 16 0 0016-16V96a16 16 0 00-16-16zM171.84 50.91A6 6 0 01177 48h94a6 6 0 015.15 2.91L293.61 80H154.39zM368 464H80V128h288zm-212-48h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12z");
-    			add_location(path, file$1, 327, 6, 14431);
+    			add_location(path, file$1, 340, 6, 15203);
     			attr_dev(svg, "class", "mx-auto cursor-pointer mt-3 h-12 w-12 sm:h-8 sm:w-8 stroke-current text-lbfbleu-600");
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr_dev(svg, "aria-hidden", "true");
     			attr_dev(svg, "data-prefix", "far");
     			attr_dev(svg, "data-icon", "trash-alt");
     			attr_dev(svg, "viewBox", "0 0 448 512");
-    			add_location(svg, file$1, 326, 5, 14156);
+    			add_location(svg, file$1, 339, 5, 14928);
     			attr_dev(div, "class", "my-auto sm:w-12 w-20");
-    			add_location(div, file$1, 325, 4, 14116);
+    			add_location(div, file$1, 338, 4, 14888);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div, anchor);
@@ -1788,7 +1873,7 @@ var appInscription = (function (exports) {
     				svg,
     				"click",
     				function () {
-    					if (is_function(/*confirmerEffaceInscrit*/ ctx[23](/*inscrit*/ ctx[52].id, /*inscrit*/ ctx[52]))) /*confirmerEffaceInscrit*/ ctx[23](/*inscrit*/ ctx[52].id, /*inscrit*/ ctx[52]).apply(this, arguments);
+    					if (is_function(/*confirmerEffaceInscrit*/ ctx[25](/*inscrit*/ ctx[55].id, /*inscrit*/ ctx[55]))) /*confirmerEffaceInscrit*/ ctx[25](/*inscrit*/ ctx[55].id, /*inscrit*/ ctx[55]).apply(this, arguments);
     				},
     				false,
     				false,
@@ -1808,14 +1893,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_13.name,
     		type: "if",
-    		source: "(325:16) {#if listeInscrits.length > 1}",
+    		source: "(338:16) {#if listeInscrits.length > 1}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (311:3) {#each listeInscrits as inscrit}
+    // (324:3) {#each listeInscrits as inscrit}
     function create_each_block_1(ctx) {
     	let div5;
     	let div4;
@@ -1832,11 +1917,11 @@ var appInscription = (function (exports) {
     	let dispose;
 
     	function input0_input_handler_1() {
-    		/*input0_input_handler_1*/ ctx[43].call(input0, /*inscrit*/ ctx[52]);
+    		/*input0_input_handler_1*/ ctx[46].call(input0, /*inscrit*/ ctx[55]);
     	}
 
     	function input1_input_handler() {
-    		/*input1_input_handler*/ ctx[44].call(input1, /*inscrit*/ ctx[52]);
+    		/*input1_input_handler*/ ctx[47].call(input1, /*inscrit*/ ctx[55]);
     	}
 
     	let if_block = /*listeInscrits*/ ctx[2].length > 1 && create_if_block_13(ctx);
@@ -1859,25 +1944,25 @@ var appInscription = (function (exports) {
     			t5 = space();
     			if (if_block) if_block.c();
     			attr_dev(div0, "class", "ml-1 text-xs m-0 p-0 font-medium text-bleuLBF");
-    			add_location(div0, file$1, 314, 6, 13348);
+    			add_location(div0, file$1, 327, 6, 14120);
     			attr_dev(input0, "class", "mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal");
     			attr_dev(input0, "type", "text");
     			attr_dev(input0, "placeholder", "prenom");
-    			add_location(input0, file$1, 315, 6, 13426);
+    			add_location(input0, file$1, 328, 6, 14198);
     			attr_dev(div1, "class", "flex flex-col sm:mr-2");
-    			add_location(div1, file$1, 313, 5, 13306);
+    			add_location(div1, file$1, 326, 5, 14078);
     			attr_dev(div2, "class", "ml-1 text-xs m-0 p-0 font-medium text-bleuLBF");
-    			add_location(div2, file$1, 319, 6, 13729);
+    			add_location(div2, file$1, 332, 6, 14501);
     			attr_dev(input1, "class", "mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal");
     			attr_dev(input1, "type", "text");
     			attr_dev(input1, "placeholder", "nom");
-    			add_location(input1, file$1, 320, 6, 13804);
+    			add_location(input1, file$1, 333, 6, 14576);
     			attr_dev(div3, "class", "flex flex-col sm:mr-2");
-    			add_location(div3, file$1, 318, 5, 13687);
+    			add_location(div3, file$1, 331, 5, 14459);
     			attr_dev(div4, "class", "flex flex-col sm:flex-row flex-wrap ");
-    			add_location(div4, file$1, 312, 4, 13250);
+    			add_location(div4, file$1, 325, 4, 14022);
     			attr_dev(div5, "class", "w-full flex flex-row justify-start mb-4");
-    			add_location(div5, file$1, 311, 3, 13192);
+    			add_location(div5, file$1, 324, 3, 13964);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div5, anchor);
@@ -1886,13 +1971,13 @@ var appInscription = (function (exports) {
     			append_dev(div1, div0);
     			append_dev(div1, t1);
     			append_dev(div1, input0);
-    			set_input_value(input0, /*inscrit*/ ctx[52].prenom);
+    			set_input_value(input0, /*inscrit*/ ctx[55].prenom);
     			append_dev(div4, t2);
     			append_dev(div4, div3);
     			append_dev(div3, div2);
     			append_dev(div3, t4);
     			append_dev(div3, input1);
-    			set_input_value(input1, /*inscrit*/ ctx[52].nom);
+    			set_input_value(input1, /*inscrit*/ ctx[55].nom);
     			append_dev(div5, t5);
     			if (if_block) if_block.m(div5, null);
     			if (remount) run_all(dispose);
@@ -1905,12 +1990,12 @@ var appInscription = (function (exports) {
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
 
-    			if (dirty[0] & /*listeInscrits*/ 4 && input0.value !== /*inscrit*/ ctx[52].prenom) {
-    				set_input_value(input0, /*inscrit*/ ctx[52].prenom);
+    			if (dirty[0] & /*listeInscrits*/ 4 && input0.value !== /*inscrit*/ ctx[55].prenom) {
+    				set_input_value(input0, /*inscrit*/ ctx[55].prenom);
     			}
 
-    			if (dirty[0] & /*listeInscrits*/ 4 && input1.value !== /*inscrit*/ ctx[52].nom) {
-    				set_input_value(input1, /*inscrit*/ ctx[52].nom);
+    			if (dirty[0] & /*listeInscrits*/ 4 && input1.value !== /*inscrit*/ ctx[55].nom) {
+    				set_input_value(input1, /*inscrit*/ ctx[55].nom);
     			}
 
     			if (/*listeInscrits*/ ctx[2].length > 1) {
@@ -1937,14 +2022,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(311:3) {#each listeInscrits as inscrit}",
+    		source: "(324:3) {#each listeInscrits as inscrit}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (358:20) {:else}
+    // (371:20) {:else}
     function create_else_block_1(ctx) {
     	let div;
 
@@ -1953,7 +2038,7 @@ var appInscription = (function (exports) {
     			div = element("div");
     			div.textContent = " ";
     			attr_dev(div, "class", "text-sm font-medium text-rougeLBF ");
-    			add_location(div, file$1, 358, 24, 17447);
+    			add_location(div, file$1, 371, 24, 18219);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1967,14 +2052,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_else_block_1.name,
     		type: "else",
-    		source: "(358:20) {:else}",
+    		source: "(371:20) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (356:20) {#if nouvelInscrit.prenom===""}
+    // (369:20) {#if nouvelInscrit.prenom===""}
     function create_if_block_12(ctx) {
     	let div;
 
@@ -1983,7 +2068,7 @@ var appInscription = (function (exports) {
     			div = element("div");
     			div.textContent = "Au moins le prénom est requis.";
     			attr_dev(div, "class", "text-sm font-medium text-rougeLBF ");
-    			add_location(div, file$1, 356, 24, 17310);
+    			add_location(div, file$1, 369, 24, 18082);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1997,14 +2082,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_12.name,
     		type: "if",
-    		source: "(356:20) {#if nouvelInscrit.prenom===\\\"\\\"}",
+    		source: "(369:20) {#if nouvelInscrit.prenom===\\\"\\\"}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (335:3) {#each nouveauxInscrits as nouvelInscrit, index ('nI' + index)}
+    // (348:3) {#each nouveauxInscrits as nouvelInscrit, index ('nI' + index)}
     function create_each_block(key_1, ctx) {
     	let div7;
     	let div6;
@@ -2027,15 +2112,15 @@ var appInscription = (function (exports) {
     	let dispose;
 
     	function input0_input_handler_2() {
-    		/*input0_input_handler_2*/ ctx[45].call(input0, /*nouvelInscrit*/ ctx[49]);
+    		/*input0_input_handler_2*/ ctx[48].call(input0, /*nouvelInscrit*/ ctx[52]);
     	}
 
     	function input1_input_handler_1() {
-    		/*input1_input_handler_1*/ ctx[46].call(input1, /*nouvelInscrit*/ ctx[49]);
+    		/*input1_input_handler_1*/ ctx[49].call(input1, /*nouvelInscrit*/ ctx[52]);
     	}
 
     	function select_block_type_2(ctx, dirty) {
-    		if (/*nouvelInscrit*/ ctx[49].prenom === "") return create_if_block_12;
+    		if (/*nouvelInscrit*/ ctx[52].prenom === "") return create_if_block_12;
     		return create_else_block_1;
     	}
 
@@ -2068,39 +2153,39 @@ var appInscription = (function (exports) {
     			if_block.c();
     			t7 = space();
     			attr_dev(div0, "class", "ml-1 text-xs m-0 p-0 font-medium text-bleuLBF");
-    			add_location(div0, file$1, 339, 32, 15369);
+    			add_location(div0, file$1, 352, 32, 16141);
     			attr_dev(input0, "class", "mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal");
     			attr_dev(input0, "type", "text");
     			attr_dev(input0, "placeholder", "prenom");
-    			add_location(input0, file$1, 340, 32, 15473);
+    			add_location(input0, file$1, 353, 32, 16245);
     			attr_dev(div1, "class", "flex flex-col");
-    			add_location(div1, file$1, 338, 28, 15309);
+    			add_location(div1, file$1, 351, 28, 16081);
     			attr_dev(div2, "class", "ml-1 text-xs m-0 p-0 font-medium text-bleuLBF");
-    			add_location(div2, file$1, 344, 32, 15901);
+    			add_location(div2, file$1, 357, 32, 16673);
     			attr_dev(input1, "class", "mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal");
     			attr_dev(input1, "type", "text");
     			attr_dev(input1, "placeholder", "nom");
-    			add_location(input1, file$1, 345, 32, 16002);
+    			add_location(input1, file$1, 358, 32, 16774);
     			attr_dev(div3, "class", "flex flex-col");
-    			add_location(div3, file$1, 343, 28, 15841);
+    			add_location(div3, file$1, 356, 28, 16613);
     			attr_dev(div4, "class", "flex flex-col sm:flex-row");
-    			add_location(div4, file$1, 337, 24, 15241);
+    			add_location(div4, file$1, 350, 24, 16013);
     			attr_dev(path, "fill", "currentColor");
     			attr_dev(path, "d", "M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z");
-    			add_location(path, file$1, 351, 32, 16693);
+    			add_location(path, file$1, 364, 32, 17465);
     			attr_dev(svg, "class", "mx-auto cursor-pointer mt-3 h-12 w-12 md:h-8 md:w-8 stroke-current text-rougeLBF");
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr_dev(svg, "aria-hidden", "true");
     			attr_dev(svg, "data-prefix", "far");
     			attr_dev(svg, "data-icon", "trash-alt");
     			attr_dev(svg, "viewBox", "0 0 448 512");
-    			add_location(svg, file$1, 350, 28, 16415);
+    			add_location(svg, file$1, 363, 28, 17187);
     			attr_dev(div5, "class", "my-auto");
-    			add_location(div5, file$1, 349, 24, 16365);
+    			add_location(div5, file$1, 362, 24, 17137);
     			attr_dev(div6, "class", "flex flex-row justify-end");
-    			add_location(div6, file$1, 336, 20, 15177);
+    			add_location(div6, file$1, 349, 20, 15949);
     			attr_dev(div7, "class", "w-full flex flex-col justify-start");
-    			add_location(div7, file$1, 335, 4, 15108);
+    			add_location(div7, file$1, 348, 4, 15880);
     			this.first = div7;
     		},
     		m: function mount(target, anchor, remount) {
@@ -2111,13 +2196,13 @@ var appInscription = (function (exports) {
     			append_dev(div1, div0);
     			append_dev(div1, t1);
     			append_dev(div1, input0);
-    			set_input_value(input0, /*nouvelInscrit*/ ctx[49].prenom);
+    			set_input_value(input0, /*nouvelInscrit*/ ctx[52].prenom);
     			append_dev(div4, t2);
     			append_dev(div4, div3);
     			append_dev(div3, div2);
     			append_dev(div3, t4);
     			append_dev(div3, input1);
-    			set_input_value(input1, /*nouvelInscrit*/ ctx[49].nom);
+    			set_input_value(input1, /*nouvelInscrit*/ ctx[52].nom);
     			append_dev(div6, t5);
     			append_dev(div6, div5);
     			append_dev(div5, svg);
@@ -2128,14 +2213,14 @@ var appInscription = (function (exports) {
     			if (remount) run_all(dispose);
 
     			dispose = [
-    				listen_dev(input0, "input", /*validationSave*/ ctx[26], false, false, false),
+    				listen_dev(input0, "input", /*validationSave*/ ctx[28], false, false, false),
     				listen_dev(input0, "input", input0_input_handler_2),
     				listen_dev(input1, "input", input1_input_handler_1),
     				listen_dev(
     					svg,
     					"click",
     					function () {
-    						if (is_function(/*soustraitInscrit*/ ctx[25](/*index*/ ctx[51]))) /*soustraitInscrit*/ ctx[25](/*index*/ ctx[51]).apply(this, arguments);
+    						if (is_function(/*soustraitInscrit*/ ctx[27](/*index*/ ctx[54]))) /*soustraitInscrit*/ ctx[27](/*index*/ ctx[54]).apply(this, arguments);
     					},
     					false,
     					false,
@@ -2146,12 +2231,12 @@ var appInscription = (function (exports) {
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
 
-    			if (dirty[0] & /*nouveauxInscrits*/ 16 && input0.value !== /*nouvelInscrit*/ ctx[49].prenom) {
-    				set_input_value(input0, /*nouvelInscrit*/ ctx[49].prenom);
+    			if (dirty[0] & /*nouveauxInscrits*/ 16 && input0.value !== /*nouvelInscrit*/ ctx[52].prenom) {
+    				set_input_value(input0, /*nouvelInscrit*/ ctx[52].prenom);
     			}
 
-    			if (dirty[0] & /*nouveauxInscrits*/ 16 && input1.value !== /*nouvelInscrit*/ ctx[49].nom) {
-    				set_input_value(input1, /*nouvelInscrit*/ ctx[49].nom);
+    			if (dirty[0] & /*nouveauxInscrits*/ 16 && input1.value !== /*nouvelInscrit*/ ctx[52].nom) {
+    				set_input_value(input1, /*nouvelInscrit*/ ctx[52].nom);
     			}
 
     			if (current_block_type !== (current_block_type = select_block_type_2(ctx))) {
@@ -2175,14 +2260,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(335:3) {#each nouveauxInscrits as nouvelInscrit, index ('nI' + index)}",
+    		source: "(348:3) {#each nouveauxInscrits as nouvelInscrit, index ('nI' + index)}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (364:12) {#if (nbPlaces-nouveauxInscrits.length) === 0}
+    // (377:12) {#if (nbPlaces-nouveauxInscrits.length) === 0}
     function create_if_block_11(ctx) {
     	let div;
 
@@ -2191,7 +2276,7 @@ var appInscription = (function (exports) {
     			div = element("div");
     			div.textContent = "Cet atelier ne peut accepter plus de participants.";
     			attr_dev(div, "class", "text-sm sm:text-xs md:text-sm font-medium text-rougeLBF ");
-    			add_location(div, file$1, 364, 16, 17650);
+    			add_location(div, file$1, 377, 16, 18422);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -2205,14 +2290,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_11.name,
     		type: "if",
-    		source: "(364:12) {#if (nbPlaces-nouveauxInscrits.length) === 0}",
+    		source: "(377:12) {#if (nbPlaces-nouveauxInscrits.length) === 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (368:16) {#if (nbPlaces-nouveauxInscrits.length) > 0}
+    // (381:16) {#if (nbPlaces-nouveauxInscrits.length) > 0}
     function create_if_block_10(ctx) {
     	let button;
     	let dispose;
@@ -2222,12 +2307,12 @@ var appInscription = (function (exports) {
     			button = element("button");
     			button.textContent = "Ajouter un participant";
     			attr_dev(button, "class", "mt-1 mx-1 px-1 border-2 border-vertLBF rounded text-base font-medium text-vertLBF");
-    			add_location(button, file$1, 368, 20, 17894);
+    			add_location(button, file$1, 381, 20, 18666);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, button, anchor);
     			if (remount) dispose();
-    			dispose = listen_dev(button, "click", /*ajoutInscrit*/ ctx[24], false, false, false);
+    			dispose = listen_dev(button, "click", /*ajoutInscrit*/ ctx[26], false, false, false);
     		},
     		p: noop,
     		d: function destroy(detaching) {
@@ -2240,14 +2325,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_10.name,
     		type: "if",
-    		source: "(368:16) {#if (nbPlaces-nouveauxInscrits.length) > 0}",
+    		source: "(381:16) {#if (nbPlaces-nouveauxInscrits.length) > 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (373:16) {#if listeInscrits.length > 0}
+    // (386:16) {#if listeInscrits.length > 0}
     function create_if_block_9(ctx) {
     	let button;
     	let dispose;
@@ -2257,12 +2342,12 @@ var appInscription = (function (exports) {
     			button = element("button");
     			button.textContent = "Se désinscrire";
     			attr_dev(button, "class", "mt-1 mx-1 px-1 border-2 border-orangeLBF rounded text-base font-medium text-orangeLBF");
-    			add_location(button, file$1, 373, 20, 18183);
+    			add_location(button, file$1, 386, 20, 18955);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, button, anchor);
     			if (remount) dispose();
-    			dispose = listen_dev(button, "click", /*click_handler*/ ctx[48], false, false, false);
+    			dispose = listen_dev(button, "click", /*click_handler*/ ctx[51], false, false, false);
     		},
     		p: noop,
     		d: function destroy(detaching) {
@@ -2275,14 +2360,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_9.name,
     		type: "if",
-    		source: "(373:16) {#if listeInscrits.length > 0}",
+    		source: "(386:16) {#if listeInscrits.length > 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (378:16) {#if flagSaveValide}
+    // (391:16) {#if flagSaveValide}
     function create_if_block_8(ctx) {
     	let button;
     	let dispose;
@@ -2292,12 +2377,12 @@ var appInscription = (function (exports) {
     			button = element("button");
     			button.textContent = "Enregistrer";
     			attr_dev(button, "class", "mt-1 mx-1 px-1 border-2 border-bleuLBF rounded text-base font-medium text-bleuLBF");
-    			add_location(button, file$1, 378, 16, 18478);
+    			add_location(button, file$1, 391, 16, 19250);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, button, anchor);
     			if (remount) dispose();
-    			dispose = listen_dev(button, "click", /*insertInscrits*/ ctx[20], false, false, false);
+    			dispose = listen_dev(button, "click", /*insertInscrits*/ ctx[22], false, false, false);
     		},
     		p: noop,
     		d: function destroy(detaching) {
@@ -2310,14 +2395,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_8.name,
     		type: "if",
-    		source: "(378:16) {#if flagSaveValide}",
+    		source: "(391:16) {#if flagSaveValide}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (388:0) {#if flagVerifDesinscription}
+    // (401:0) {#if flagVerifDesinscription}
     function create_if_block_4(ctx) {
     	let mon_modal;
     	let span0;
@@ -2339,14 +2424,14 @@ var appInscription = (function (exports) {
     			span2 = element("span");
     			span2.textContent = "Annuler";
     			attr_dev(span0, "slot", "titre");
-    			add_location(span0, file$1, 389, 8, 18903);
+    			add_location(span0, file$1, 402, 8, 19675);
     			attr_dev(span1, "slot", "boutonBleu");
-    			add_location(span1, file$1, 391, 8, 19003);
+    			add_location(span1, file$1, 404, 8, 19775);
     			attr_dev(span2, "slot", "boutonDefaut");
-    			add_location(span2, file$1, 392, 8, 19052);
+    			add_location(span2, file$1, 405, 8, 19824);
     			set_custom_element_data(mon_modal, "has_bouton_bleu", "true");
-    			set_custom_element_data(mon_modal, "bouton_bleu_busy", /*busyEffacerInscription*/ ctx[11]);
-    			add_location(mon_modal, file$1, 388, 4, 18766);
+    			set_custom_element_data(mon_modal, "bouton_bleu_busy", /*busyEffacerInscription*/ ctx[13]);
+    			add_location(mon_modal, file$1, 401, 4, 19538);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, mon_modal, anchor);
@@ -2358,13 +2443,13 @@ var appInscription = (function (exports) {
     			if (remount) run_all(dispose);
 
     			dispose = [
-    				listen_dev(mon_modal, "close", /*close*/ ctx[28], false, false, false),
-    				listen_dev(mon_modal, "boutonBleu", /*effacerInscription*/ ctx[21], false, false, false)
+    				listen_dev(mon_modal, "close", /*close*/ ctx[30], false, false, false),
+    				listen_dev(mon_modal, "boutonBleu", /*effacerInscription*/ ctx[23], false, false, false)
     			];
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*busyEffacerInscription*/ 2048) {
-    				set_custom_element_data(mon_modal, "bouton_bleu_busy", /*busyEffacerInscription*/ ctx[11]);
+    			if (dirty[0] & /*busyEffacerInscription*/ 8192) {
+    				set_custom_element_data(mon_modal, "bouton_bleu_busy", /*busyEffacerInscription*/ ctx[13]);
     			}
     		},
     		d: function destroy(detaching) {
@@ -2377,14 +2462,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_4.name,
     		type: "if",
-    		source: "(388:0) {#if flagVerifDesinscription}",
+    		source: "(401:0) {#if flagVerifDesinscription}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (396:0) {#if flagVerifEffacer}
+    // (409:0) {#if flagVerifEffacer}
     function create_if_block_3(ctx) {
     	let mon_modal;
     	let span0;
@@ -2411,14 +2496,14 @@ var appInscription = (function (exports) {
     			span2 = element("span");
     			span2.textContent = "Annuler";
     			attr_dev(span0, "slot", "titre");
-    			add_location(span0, file$1, 397, 8, 19272);
+    			add_location(span0, file$1, 410, 8, 20044);
     			attr_dev(span1, "slot", "boutonBleu");
-    			add_location(span1, file$1, 399, 8, 19391);
+    			add_location(span1, file$1, 412, 8, 20163);
     			attr_dev(span2, "slot", "boutonDefaut");
-    			add_location(span2, file$1, 400, 8, 19440);
+    			add_location(span2, file$1, 413, 8, 20212);
     			set_custom_element_data(mon_modal, "has_bouton_bleu", "true");
-    			set_custom_element_data(mon_modal, "bouton_bleu_busy", /*busyEffacerInscrit*/ ctx[13]);
-    			add_location(mon_modal, file$1, 396, 4, 19143);
+    			set_custom_element_data(mon_modal, "bouton_bleu_busy", /*busyEffacerInscrit*/ ctx[15]);
+    			add_location(mon_modal, file$1, 409, 4, 19915);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, mon_modal, anchor);
@@ -2432,15 +2517,15 @@ var appInscription = (function (exports) {
     			if (remount) run_all(dispose);
 
     			dispose = [
-    				listen_dev(mon_modal, "close", /*close*/ ctx[28], false, false, false),
-    				listen_dev(mon_modal, "boutonBleu", /*effacerInscrit*/ ctx[22], false, false, false)
+    				listen_dev(mon_modal, "close", /*close*/ ctx[30], false, false, false),
+    				listen_dev(mon_modal, "boutonBleu", /*effacerInscrit*/ ctx[24], false, false, false)
     			];
     		},
     		p: function update(ctx, dirty) {
     			if (dirty[0] & /*desinscrit*/ 32 && t2_value !== (t2_value = /*desinscrit*/ ctx[5].prenom + "")) set_data_dev(t2, t2_value);
 
-    			if (dirty[0] & /*busyEffacerInscrit*/ 8192) {
-    				set_custom_element_data(mon_modal, "bouton_bleu_busy", /*busyEffacerInscrit*/ ctx[13]);
+    			if (dirty[0] & /*busyEffacerInscrit*/ 32768) {
+    				set_custom_element_data(mon_modal, "bouton_bleu_busy", /*busyEffacerInscrit*/ ctx[15]);
     			}
     		},
     		d: function destroy(detaching) {
@@ -2453,14 +2538,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_3.name,
     		type: "if",
-    		source: "(396:0) {#if flagVerifEffacer}",
+    		source: "(409:0) {#if flagVerifEffacer}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (404:0) {#if confirmeDesinscription}
+    // (417:0) {#if confirmeDesinscription}
     function create_if_block_2(ctx) {
     	let mon_modal;
     	let span0;
@@ -2477,10 +2562,10 @@ var appInscription = (function (exports) {
     			span1 = element("span");
     			span1.textContent = "Confirmer";
     			attr_dev(span0, "slot", "titre");
-    			add_location(span0, file$1, 405, 8, 19605);
+    			add_location(span0, file$1, 418, 8, 20377);
     			attr_dev(span1, "slot", "boutonBleu");
-    			add_location(span1, file$1, 407, 8, 19718);
-    			add_location(mon_modal, file$1, 404, 4, 19537);
+    			add_location(span1, file$1, 420, 8, 20490);
+    			add_location(mon_modal, file$1, 417, 4, 20309);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, mon_modal, anchor);
@@ -2490,8 +2575,8 @@ var appInscription = (function (exports) {
     			if (remount) run_all(dispose);
 
     			dispose = [
-    				listen_dev(mon_modal, "close", /*close*/ ctx[28], false, false, false),
-    				listen_dev(mon_modal, "boutonBleu", /*effacerInscrit*/ ctx[22], false, false, false)
+    				listen_dev(mon_modal, "close", /*close*/ ctx[30], false, false, false),
+    				listen_dev(mon_modal, "boutonBleu", /*effacerInscrit*/ ctx[24], false, false, false)
     			];
     		},
     		p: noop,
@@ -2505,14 +2590,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(404:0) {#if confirmeDesinscription}",
+    		source: "(417:0) {#if confirmeDesinscription}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (411:0) {#if confirmeDesinscrit}
+    // (424:0) {#if confirmeDesinscrit}
     function create_if_block_1$1(ctx) {
     	let mon_modal;
     	let span0;
@@ -2534,10 +2619,10 @@ var appInscription = (function (exports) {
     			span1 = element("span");
     			span1.textContent = "Confirmer";
     			attr_dev(span0, "slot", "titre");
-    			add_location(span0, file$1, 412, 8, 19879);
+    			add_location(span0, file$1, 425, 8, 20651);
     			attr_dev(span1, "slot", "boutonBleu");
-    			add_location(span1, file$1, 414, 8, 19980);
-    			add_location(mon_modal, file$1, 411, 4, 19811);
+    			add_location(span1, file$1, 427, 8, 20752);
+    			add_location(mon_modal, file$1, 424, 4, 20583);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, mon_modal, anchor);
@@ -2549,8 +2634,8 @@ var appInscription = (function (exports) {
     			if (remount) run_all(dispose);
 
     			dispose = [
-    				listen_dev(mon_modal, "close", /*close*/ ctx[28], false, false, false),
-    				listen_dev(mon_modal, "boutonBleu", /*effacerInscrit*/ ctx[22], false, false, false)
+    				listen_dev(mon_modal, "close", /*close*/ ctx[30], false, false, false),
+    				listen_dev(mon_modal, "boutonBleu", /*effacerInscrit*/ ctx[24], false, false, false)
     			];
     		},
     		p: function update(ctx, dirty) {
@@ -2566,14 +2651,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_1$1.name,
     		type: "if",
-    		source: "(411:0) {#if confirmeDesinscrit}",
+    		source: "(424:0) {#if confirmeDesinscrit}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (418:0) {#if confirmeInscription}
+    // (431:0) {#if confirmeInscription}
     function create_if_block$1(ctx) {
     	let mon_modal;
     	let span0;
@@ -2600,13 +2685,13 @@ var appInscription = (function (exports) {
     			span2 = element("span");
     			span2.textContent = "Confirmer";
     			attr_dev(span0, "slot", "titre");
-    			add_location(span0, file$1, 419, 8, 20142);
-    			add_location(br, file$1, 421, 170, 20392);
+    			add_location(span0, file$1, 432, 8, 20914);
+    			add_location(br, file$1, 434, 170, 21164);
     			attr_dev(span1, "class", "text-justify");
-    			add_location(span1, file$1, 420, 8, 20194);
+    			add_location(span1, file$1, 433, 8, 20966);
     			attr_dev(span2, "slot", "boutonBleu");
-    			add_location(span2, file$1, 424, 8, 20686);
-    			add_location(mon_modal, file$1, 418, 4, 20074);
+    			add_location(span2, file$1, 437, 8, 21458);
+    			add_location(mon_modal, file$1, 431, 4, 20846);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, mon_modal, anchor);
@@ -2621,8 +2706,8 @@ var appInscription = (function (exports) {
     			if (remount) run_all(dispose);
 
     			dispose = [
-    				listen_dev(mon_modal, "close", /*close*/ ctx[28], false, false, false),
-    				listen_dev(mon_modal, "boutonBleu", /*effacerInscrit*/ ctx[22], false, false, false)
+    				listen_dev(mon_modal, "close", /*close*/ ctx[30], false, false, false),
+    				listen_dev(mon_modal, "boutonBleu", /*effacerInscrit*/ ctx[24], false, false, false)
     			];
     		},
     		p: noop,
@@ -2636,7 +2721,7 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(418:0) {#if confirmeInscription}",
+    		source: "(431:0) {#if confirmeInscription}",
     		ctx
     	});
 
@@ -2666,9 +2751,9 @@ var appInscription = (function (exports) {
     	let if_block0 = /*showModalInscription*/ ctx[1] && create_if_block_5(ctx);
     	let if_block1 = /*flagVerifDesinscription*/ ctx[9] && create_if_block_4(ctx);
     	let if_block2 = /*flagVerifEffacer*/ ctx[8] && create_if_block_3(ctx);
-    	let if_block3 = /*confirmeDesinscription*/ ctx[12] && create_if_block_2(ctx);
-    	let if_block4 = /*confirmeDesinscrit*/ ctx[14] && create_if_block_1$1(ctx);
-    	let if_block5 = /*confirmeInscription*/ ctx[15] && create_if_block$1(ctx);
+    	let if_block3 = /*confirmeDesinscription*/ ctx[14] && create_if_block_2(ctx);
+    	let if_block4 = /*confirmeDesinscrit*/ ctx[16] && create_if_block_1$1(ctx);
+    	let if_block5 = /*confirmeInscription*/ ctx[17] && create_if_block$1(ctx);
 
     	const block = {
     		c: function create() {
@@ -2699,26 +2784,26 @@ var appInscription = (function (exports) {
     			slot = element("slot");
     			this.c = noop;
     			attr_dev(div0, "class", "my-auto");
-    			add_location(div0, file$1, 239, 2, 7939);
+    			add_location(div0, file$1, 242, 2, 8160);
     			attr_dev(div1, "class", "bg-orangeLBF flex flex-row mr-1 text-black text-sm px-1");
-    			add_location(div1, file$1, 238, 1, 7867);
+    			add_location(div1, file$1, 241, 1, 8088);
     			attr_dev(path, "fill", "currentColor");
     			attr_dev(path, "d", "M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z");
-    			add_location(path, file$1, 243, 3, 8253);
+    			add_location(path, file$1, 246, 3, 8474);
     			attr_dev(svg, "class", "fill-current text-black my-auto");
     			attr_dev(svg, "width", "16");
     			attr_dev(svg, "height", "16");
     			attr_dev(svg, "aria-hidden", "true");
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr_dev(svg, "viewBox", "0 0 640 512");
-    			add_location(svg, file$1, 242, 2, 8105);
+    			add_location(svg, file$1, 245, 2, 8326);
     			attr_dev(div2, "class", "text-black text-sm my-auto");
-    			add_location(div2, file$1, 245, 2, 8804);
+    			add_location(div2, file$1, 248, 2, 9025);
     			attr_dev(div3, "class", "bg-orangeLBF flex flex-row content-center rounded-r px-1 cursor-pointer");
-    			add_location(div3, file$1, 241, 1, 7993);
+    			add_location(div3, file$1, 244, 1, 8214);
     			attr_dev(div4, "class", "flex flex-row content-center");
-    			add_location(div4, file$1, 237, 0, 7823);
-    			add_location(slot, file$1, 427, 0, 20750);
+    			add_location(div4, file$1, 240, 0, 8044);
+    			add_location(slot, file$1, 440, 0, 21522);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -2751,8 +2836,8 @@ var appInscription = (function (exports) {
     			if (remount) run_all(dispose);
 
     			dispose = [
-    				listen_dev(window_1, "keydown", /*handle_keydown*/ ctx[29], false, false, false),
-    				listen_dev(div3, "click", /*afficheModal*/ ctx[27], false, false, false)
+    				listen_dev(window_1, "keydown", /*handle_keydown*/ ctx[31], false, false, false),
+    				listen_dev(div3, "click", /*afficheModal*/ ctx[29], false, false, false)
     			];
     		},
     		p: function update(ctx, dirty) {
@@ -2797,7 +2882,7 @@ var appInscription = (function (exports) {
     				if_block2 = null;
     			}
 
-    			if (/*confirmeDesinscription*/ ctx[12]) {
+    			if (/*confirmeDesinscription*/ ctx[14]) {
     				if (if_block3) {
     					if_block3.p(ctx, dirty);
     				} else {
@@ -2810,7 +2895,7 @@ var appInscription = (function (exports) {
     				if_block3 = null;
     			}
 
-    			if (/*confirmeDesinscrit*/ ctx[14]) {
+    			if (/*confirmeDesinscrit*/ ctx[16]) {
     				if (if_block4) {
     					if_block4.p(ctx, dirty);
     				} else {
@@ -2823,7 +2908,7 @@ var appInscription = (function (exports) {
     				if_block4 = null;
     			}
 
-    			if (/*confirmeInscription*/ ctx[15]) {
+    			if (/*confirmeInscription*/ ctx[17]) {
     				if (if_block5) {
     					if_block5.p(ctx, dirty);
     				} else {
@@ -2895,6 +2980,8 @@ var appInscription = (function (exports) {
     	var flagVerifDesinscription = false;
     	var flagComplet = false;
     	var flagSaveValide = false;
+    	var flagEmailVide = false;
+    	var flagEmailInvalide = false;
     	var busyEffacerInscription = false;
     	var confirmeDesinscription = false;
     	var busyEffacerInscrit = false;
@@ -2920,10 +3007,10 @@ var appInscription = (function (exports) {
     			var emailModif = extracted[2];
 
     			if (idAtelierModif === id_atelier) {
-    				$$invalidate(18, emailInscription = emailModif);
+    				$$invalidate(20, emailInscription = emailModif);
 
     				if (localStorage["emailInscription"]) {
-    					$$invalidate(16, saveInfo = true);
+    					$$invalidate(18, saveInfo = true);
     				}
 
     				afficheModal();
@@ -2954,6 +3041,12 @@ var appInscription = (function (exports) {
     		console.log("emailInscription", emailInscription);
 
     		if (emailInscription === "") {
+    			$$invalidate(11, flagEmailVide = true);
+    			return;
+    		}
+
+    		if ((/([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/i).exec(emailInscription) === null) {
+    			$$invalidate(12, flagEmailInvalide = true);
     			return;
     		}
 
@@ -3009,29 +3102,29 @@ var appInscription = (function (exports) {
     		envoiMail(arrayMails, infoMail);
     		nbInscrits$1();
     		close();
-    		$$invalidate(15, confirmeInscription = true);
+    		$$invalidate(17, confirmeInscription = true);
     	}
 
     	async function effacerInscription$1() {
     		saveInfoEmail();
-    		$$invalidate(11, busyEffacerInscription = true);
+    		$$invalidate(13, busyEffacerInscription = true);
     		var effacerInscription$1 = await effacerInscription(emailInscription, id_atelier);
     		nbInscrits$1();
-    		$$invalidate(11, busyEffacerInscription = false);
+    		$$invalidate(13, busyEffacerInscription = false);
     		close();
     		close();
-    		$$invalidate(12, confirmeDesinscription = true);
+    		$$invalidate(14, confirmeDesinscription = true);
     	}
 
     	async function effacerInscrit() {
     		saveInfoEmail();
-    		$$invalidate(13, busyEffacerInscrit = true);
+    		$$invalidate(15, busyEffacerInscrit = true);
     		var effacerInscritById$1 = await effacerInscritById(desinscrit.id);
     		nbInscrits$1();
-    		$$invalidate(13, busyEffacerInscrit = false);
+    		$$invalidate(15, busyEffacerInscrit = false);
     		close();
     		close();
-    		$$invalidate(14, confirmeDesinscrit = true);
+    		$$invalidate(16, confirmeDesinscrit = true);
     	}
 
     	// gestion table nouveaux inscrits
@@ -3090,17 +3183,17 @@ var appInscription = (function (exports) {
 
     	function close() {
     		if (confirmeInscription) {
-    			$$invalidate(15, confirmeInscription = false);
+    			$$invalidate(17, confirmeInscription = false);
     			return;
     		}
 
     		if (confirmeDesinscription) {
-    			$$invalidate(12, confirmeDesinscription = false);
+    			$$invalidate(14, confirmeDesinscription = false);
     			return;
     		}
 
     		if (confirmeDesinscrit) {
-    			$$invalidate(14, confirmeDesinscrit = false);
+    			$$invalidate(16, confirmeDesinscrit = false);
     			return;
     		}
 
@@ -3153,14 +3246,20 @@ var appInscription = (function (exports) {
     	let { $$slots = {}, $$scope } = $$props;
     	validate_slots("une-inscription", $$slots, []);
 
+    	const input_handler = () => {
+    		$$invalidate(7, flagEmailVerifie = false);
+    		$$invalidate(11, flagEmailVide = false);
+    		$$invalidate(12, flagEmailInvalide = false);
+    	};
+
     	function input0_input_handler() {
     		emailInscription = this.value;
-    		$$invalidate(18, emailInscription);
+    		$$invalidate(20, emailInscription);
     	}
 
     	function input1_change_handler() {
     		saveInfo = this.checked;
-    		$$invalidate(16, saveInfo);
+    		$$invalidate(18, saveInfo);
     	}
 
     	function input0_input_handler_1(inscrit) {
@@ -3185,17 +3284,17 @@ var appInscription = (function (exports) {
 
     	function div1_binding($$value) {
     		binding_callbacks[$$value ? "unshift" : "push"](() => {
-    			$$invalidate(17, modal = $$value);
+    			$$invalidate(19, modal = $$value);
     		});
     	}
 
     	const click_handler = () => $$invalidate(9, flagVerifDesinscription = true);
 
     	$$self.$set = $$props => {
-    		if ("id_atelier" in $$props) $$invalidate(30, id_atelier = $$props.id_atelier);
-    		if ("url_illustration" in $$props) $$invalidate(31, url_illustration = $$props.url_illustration);
-    		if ("date_atelier" in $$props) $$invalidate(32, date_atelier = $$props.date_atelier);
-    		if ("titre_atelier" in $$props) $$invalidate(33, titre_atelier = $$props.titre_atelier);
+    		if ("id_atelier" in $$props) $$invalidate(32, id_atelier = $$props.id_atelier);
+    		if ("url_illustration" in $$props) $$invalidate(33, url_illustration = $$props.url_illustration);
+    		if ("date_atelier" in $$props) $$invalidate(34, date_atelier = $$props.date_atelier);
+    		if ("titre_atelier" in $$props) $$invalidate(35, titre_atelier = $$props.titre_atelier);
     	};
 
     	$$self.$capture_state = () => ({
@@ -3221,6 +3320,8 @@ var appInscription = (function (exports) {
     		flagVerifDesinscription,
     		flagComplet,
     		flagSaveValide,
+    		flagEmailVide,
+    		flagEmailInvalide,
     		busyEffacerInscription,
     		confirmeDesinscription,
     		busyEffacerInscrit,
@@ -3248,10 +3349,10 @@ var appInscription = (function (exports) {
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ("id_atelier" in $$props) $$invalidate(30, id_atelier = $$props.id_atelier);
-    		if ("url_illustration" in $$props) $$invalidate(31, url_illustration = $$props.url_illustration);
-    		if ("date_atelier" in $$props) $$invalidate(32, date_atelier = $$props.date_atelier);
-    		if ("titre_atelier" in $$props) $$invalidate(33, titre_atelier = $$props.titre_atelier);
+    		if ("id_atelier" in $$props) $$invalidate(32, id_atelier = $$props.id_atelier);
+    		if ("url_illustration" in $$props) $$invalidate(33, url_illustration = $$props.url_illustration);
+    		if ("date_atelier" in $$props) $$invalidate(34, date_atelier = $$props.date_atelier);
+    		if ("titre_atelier" in $$props) $$invalidate(35, titre_atelier = $$props.titre_atelier);
     		if ("urlModifInscription" in $$props) urlModifInscription = $$props.urlModifInscription;
     		if ("urlMail" in $$props) urlMail = $$props.urlMail;
     		if ("testModal" in $$props) testModal = $$props.testModal;
@@ -3267,14 +3368,16 @@ var appInscription = (function (exports) {
     		if ("flagVerifDesinscription" in $$props) $$invalidate(9, flagVerifDesinscription = $$props.flagVerifDesinscription);
     		if ("flagComplet" in $$props) flagComplet = $$props.flagComplet;
     		if ("flagSaveValide" in $$props) $$invalidate(10, flagSaveValide = $$props.flagSaveValide);
-    		if ("busyEffacerInscription" in $$props) $$invalidate(11, busyEffacerInscription = $$props.busyEffacerInscription);
-    		if ("confirmeDesinscription" in $$props) $$invalidate(12, confirmeDesinscription = $$props.confirmeDesinscription);
-    		if ("busyEffacerInscrit" in $$props) $$invalidate(13, busyEffacerInscrit = $$props.busyEffacerInscrit);
-    		if ("confirmeDesinscrit" in $$props) $$invalidate(14, confirmeDesinscrit = $$props.confirmeDesinscrit);
-    		if ("confirmeInscription" in $$props) $$invalidate(15, confirmeInscription = $$props.confirmeInscription);
-    		if ("saveInfo" in $$props) $$invalidate(16, saveInfo = $$props.saveInfo);
-    		if ("modal" in $$props) $$invalidate(17, modal = $$props.modal);
-    		if ("emailInscription" in $$props) $$invalidate(18, emailInscription = $$props.emailInscription);
+    		if ("flagEmailVide" in $$props) $$invalidate(11, flagEmailVide = $$props.flagEmailVide);
+    		if ("flagEmailInvalide" in $$props) $$invalidate(12, flagEmailInvalide = $$props.flagEmailInvalide);
+    		if ("busyEffacerInscription" in $$props) $$invalidate(13, busyEffacerInscription = $$props.busyEffacerInscription);
+    		if ("confirmeDesinscription" in $$props) $$invalidate(14, confirmeDesinscription = $$props.confirmeDesinscription);
+    		if ("busyEffacerInscrit" in $$props) $$invalidate(15, busyEffacerInscrit = $$props.busyEffacerInscrit);
+    		if ("confirmeDesinscrit" in $$props) $$invalidate(16, confirmeDesinscrit = $$props.confirmeDesinscrit);
+    		if ("confirmeInscription" in $$props) $$invalidate(17, confirmeInscription = $$props.confirmeInscription);
+    		if ("saveInfo" in $$props) $$invalidate(18, saveInfo = $$props.saveInfo);
+    		if ("modal" in $$props) $$invalidate(19, modal = $$props.modal);
+    		if ("emailInscription" in $$props) $$invalidate(20, emailInscription = $$props.emailInscription);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -3293,6 +3396,8 @@ var appInscription = (function (exports) {
     		flagVerifEffacer,
     		flagVerifDesinscription,
     		flagSaveValide,
+    		flagEmailVide,
+    		flagEmailInvalide,
     		busyEffacerInscription,
     		confirmeDesinscription,
     		busyEffacerInscrit,
@@ -3323,6 +3428,7 @@ var appInscription = (function (exports) {
     		nbInscrits$1,
     		dernierInscrit,
     		saveInfoEmail,
+    		input_handler,
     		input0_input_handler,
     		input1_change_handler,
     		input0_input_handler_1,
@@ -3337,7 +3443,7 @@ var appInscription = (function (exports) {
     class Inscriptions extends SvelteElement {
     	constructor(options) {
     		super();
-    		this.shadowRoot.innerHTML = `<style>hr{box-sizing:content-box;height:0;overflow:visible}button,input{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button{text-transform:none}[type=button],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}[type=checkbox]{box-sizing:border-box;padding:0}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}*,:after,:before{box-sizing:inherit}h2,hr{margin:0}button{background:transparent;padding:0}button:focus{outline:1px dotted;outline:5px auto -webkit-focus-ring-color}ul{margin:0;padding:0}ul{list-style:none}*,:after,:before{border:0 solid #e2e8f0}hr{border-top-width:1px}input::-webkit-input-placeholder{color:#a0aec0}input::-moz-placeholder{color:#a0aec0}input:-ms-input-placeholder{color:#a0aec0}input::-ms-input-placeholder{color:#a0aec0}input::placeholder{color:#a0aec0}button{cursor:pointer}h2{font-size:inherit;font-weight:inherit}button,input{padding:0;line-height:inherit;color:inherit}svg{display:block;vertical-align:middle}@media(min-width:640px){}@media(min-width:768px){}@media(min-width:1024px){}@media(min-width:1280px){}@media not print{}@media print and (-ms-high-contrast:active),print and (-ms-high-contrast:none){}.form-checkbox{-webkit-appearance:none;-moz-appearance:none;appearance:none;-webkit-print-color-adjust:exact;color-adjust:exact;display:inline-block;vertical-align:middle;background-origin:border-box;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;flex-shrink:0;height:1em;width:1em;color:#4299e1;background-color:#fff;border-color:#e2e8f0;border-width:1px;border-radius:.25rem}.form-checkbox:checked{background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 16 16' fill='%23fff' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4a1 1 0 00-1.414-1.414L7 8.586 5.707 7.293z'/%3E%3C/svg%3E");border-color:transparent;background-color:currentColor;background-size:100% 100%;background-position:50%;background-repeat:no-repeat}@media not print{.form-checkbox::-ms-check{border-width:1px;color:transparent;background:inherit;border-color:inherit;border-radius:inherit}}.form-checkbox:focus{outline:none;box-shadow:0 0 0 3px rgba(66,153,225,.5);border-color:#63b3ed}@media not print{}.appearance-none{-webkit-appearance:none;-moz-appearance:none;appearance:none}.bg-black{background-color:#000}.bg-white{background-color:#fff}.bg-orangeLBF{background-color:#ee732e}.focus\\:bg-white:focus{background-color:#fff}.border-orangeLBF{border-color:#ee732e}.border-bleuLBF{border-color:#4bbcc4}.border-vertLBF{border-color:#93c021}.border-lbfbleu-400{border-color:#4bbcc4}.border-lbfvert-400{border-color:#a4c94a}.focus\\:border-lbfbleu-600:focus{border-color:#3ea1aa}.focus\\:border-lbfvert-600:focus{border-color:#6d9d0b}.rounded{border-radius:.25rem}.rounded-lg{border-radius:.5rem}.rounded-r{border-top-right-radius:.25rem}.rounded-r{border-bottom-right-radius:.25rem}.border-2{border-width:2px}.border-b-2{border-bottom-width:2px}.cursor-pointer{cursor:pointer}.block{display:block}.flex{display:-webkit-box;display:flex}.flex-row{-webkit-box-orient:horizontal;flex-direction:row}.flex-col,.flex-row{-webkit-box-direction:normal}.flex-col{-webkit-box-orient:vertical;flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{-webkit-box-align:start;align-items:flex-start}.items-center{-webkit-box-align:center;align-items:center}.self-end{align-self:flex-end}.justify-start{-webkit-box-pack:start;justify-content:flex-start}.justify-end{-webkit-box-pack:end;justify-content:flex-end}.justify-center{-webkit-box-pack:center;justify-content:center}.content-center{align-content:center}.content-end{align-content:flex-end}.font-medium{font-weight:500}.font-semibold{font-weight:600}.font-bold{font-weight:700}.h-10{height:2.5rem}.h-12{height:3rem}.h-full{height:100%}.leading-normal{line-height:1.5}.list-disc{list-style-type:disc}.m-0{margin:0}.my-1{margin-top:.25rem;margin-bottom:.25rem}.mx-1{margin-left:.25rem;margin-right:.25rem}.mx-2{margin-left:.5rem;margin-right:.5rem}.mx-8{margin-left:2rem;margin-right:2rem}.my-auto{margin-top:auto;margin-bottom:auto}.mx-auto{margin-left:auto;margin-right:auto}.mt-1{margin-top:.25rem}.mr-1{margin-right:.25rem}.mb-1{margin-bottom:.25rem}.ml-1{margin-left:.25rem}.mt-2{margin-top:.5rem}.mr-2{margin-right:.5rem}.mt-3{margin-top:.75rem}.mb-4{margin-bottom:1rem}.ml-4{margin-left:1rem}.ml-6{margin-left:1.5rem}.max-h-5\\/6{max-height:83%}.opacity-75{opacity:.75}.focus\\:outline-none:focus{outline:0}.overflow-auto{overflow:auto}.p-0{padding:0}.p-4{padding:1rem}.px-1{padding-left:.25rem;padding-right:.25rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-4{padding-left:1rem;padding-right:1rem}.pb-1{padding-bottom:.25rem}.pr-8{padding-right:2rem}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.top-0{top:0}.left-0{left:0}.fill-current{fill:currentColor}.stroke-current{stroke:currentColor}.text-justify{text-align:justify}.text-black{color:#000}.text-orangeLBF{color:#ee732e}.text-bleuLBF{color:#4bbcc4}.text-vertLBF{color:#93c021}.text-rougeLBF{color:#e02933}.text-lbfbleu-600{color:#3ea1aa}.text-lbfvert-500{color:#93c021}.text-lbfvert-600{color:#6d9d0b}.text-xs{font-size:.75rem}.text-sm{font-size:.875rem}.text-base{font-size:1rem}.text-lg{font-size:1.125rem}.text-xl{font-size:1.25rem}.w-12{width:3rem}.w-20{width:5rem}.w-5\\/6{width:83.333333%}.w-full{width:100%}.z-100{z-index:100}@media(min-width:640px){.sm\\:flex-row{-webkit-box-orient:horizontal;flex-direction:row}.sm\\:flex-row{-webkit-box-direction:normal}.sm\\:h-8{height:2rem}.sm\\:mr-2{margin-right:.5rem}.sm\\:max-w-620px{max-width:620px}.sm\\:text-xs{font-size:.75rem}.sm\\:w-8{width:2rem}.sm\\:w-12{width:3rem}.sm\\:w-20{width:5rem}}@media(min-width:768px){.md\\:h-8{height:2rem}.md\\:text-sm{font-size:.875rem}.md\\:w-8{width:2rem}}@media(min-width:1024px){}</style>`;
+    		this.shadowRoot.innerHTML = `<style>hr{box-sizing:content-box;height:0;overflow:visible}button,input{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button{text-transform:none}[type=button],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}[type=checkbox]{box-sizing:border-box;padding:0}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}*,:after,:before{box-sizing:inherit}h2,hr{margin:0}button{background:transparent;padding:0}button:focus{outline:1px dotted;outline:5px auto -webkit-focus-ring-color}ul{margin:0;padding:0}ul{list-style:none}*,:after,:before{border:0 solid #e2e8f0}hr{border-top-width:1px}input::-webkit-input-placeholder{color:#a0aec0}input::-moz-placeholder{color:#a0aec0}input:-ms-input-placeholder{color:#a0aec0}input::-ms-input-placeholder{color:#a0aec0}input::placeholder{color:#a0aec0}button{cursor:pointer}h2{font-size:inherit;font-weight:inherit}button,input{padding:0;line-height:inherit;color:inherit}svg{display:block;vertical-align:middle}@media(min-width:640px){}@media(min-width:768px){}@media(min-width:1024px){}@media(min-width:1280px){}@media not print{}@media print and (-ms-high-contrast:active),print and (-ms-high-contrast:none){}.form-checkbox{-webkit-appearance:none;-moz-appearance:none;appearance:none;-webkit-print-color-adjust:exact;color-adjust:exact;display:inline-block;vertical-align:middle;background-origin:border-box;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;flex-shrink:0;height:1em;width:1em;color:#4299e1;background-color:#fff;border-color:#e2e8f0;border-width:1px;border-radius:.25rem}.form-checkbox:checked{background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 16 16' fill='%23fff' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4a1 1 0 00-1.414-1.414L7 8.586 5.707 7.293z'/%3E%3C/svg%3E");border-color:transparent;background-color:currentColor;background-size:100% 100%;background-position:50%;background-repeat:no-repeat}@media not print{.form-checkbox::-ms-check{border-width:1px;color:transparent;background:inherit;border-color:inherit;border-radius:inherit}}.form-checkbox:focus{outline:none;box-shadow:0 0 0 3px rgba(66,153,225,.5);border-color:#63b3ed}@media not print{}.appearance-none{-webkit-appearance:none;-moz-appearance:none;appearance:none}.bg-black{background-color:#000}.bg-white{background-color:#fff}.bg-orangeLBF{background-color:#ee732e}.focus\\:bg-white:focus{background-color:#fff}.border-orangeLBF{border-color:#ee732e}.border-bleuLBF{border-color:#4bbcc4}.border-vertLBF{border-color:#93c021}.border-lbfbleu-400{border-color:#4bbcc4}.border-lbfvert-400{border-color:#a4c94a}.focus\\:border-lbfbleu-600:focus{border-color:#3ea1aa}.focus\\:border-lbfvert-600:focus{border-color:#6d9d0b}.rounded{border-radius:.25rem}.rounded-lg{border-radius:.5rem}.rounded-r{border-top-right-radius:.25rem}.rounded-r{border-bottom-right-radius:.25rem}.border-2{border-width:2px}.border-b-2{border-bottom-width:2px}.cursor-pointer{cursor:pointer}.block{display:block}.flex{display:-webkit-box;display:flex}.flex-row{-webkit-box-orient:horizontal;flex-direction:row}.flex-col,.flex-row{-webkit-box-direction:normal}.flex-col{-webkit-box-orient:vertical;flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{-webkit-box-align:start;align-items:flex-start}.items-center{-webkit-box-align:center;align-items:center}.self-end{align-self:flex-end}.justify-start{-webkit-box-pack:start;justify-content:flex-start}.justify-end{-webkit-box-pack:end;justify-content:flex-end}.justify-center{-webkit-box-pack:center;justify-content:center}.content-center{align-content:center}.content-end{align-content:flex-end}.font-medium{font-weight:500}.font-semibold{font-weight:600}.font-bold{font-weight:700}.h-10{height:2.5rem}.h-12{height:3rem}.h-full{height:100%}.leading-normal{line-height:1.5}.list-disc{list-style-type:disc}.m-0{margin:0}.my-1{margin-top:.25rem;margin-bottom:.25rem}.mx-1{margin-left:.25rem;margin-right:.25rem}.mx-2{margin-left:.5rem;margin-right:.5rem}.mx-8{margin-left:2rem;margin-right:2rem}.my-auto{margin-top:auto;margin-bottom:auto}.mx-auto{margin-left:auto;margin-right:auto}.mt-1{margin-top:.25rem}.mr-1{margin-right:.25rem}.mb-1{margin-bottom:.25rem}.ml-1{margin-left:.25rem}.mt-2{margin-top:.5rem}.mr-2{margin-right:.5rem}.mt-3{margin-top:.75rem}.mb-4{margin-bottom:1rem}.ml-4{margin-left:1rem}.ml-6{margin-left:1.5rem}.max-h-5\\/6{max-height:83%}.opacity-75{opacity:.75}.focus\\:outline-none:focus{outline:0}.overflow-auto{overflow:auto}.p-0{padding:0}.p-4{padding:1rem}.px-1{padding-left:.25rem;padding-right:.25rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-4{padding-left:1rem;padding-right:1rem}.pb-1{padding-bottom:.25rem}.pr-8{padding-right:2rem}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.top-0{top:0}.left-0{left:0}.fill-current{fill:currentColor}.stroke-current{stroke:currentColor}.text-justify{text-align:justify}.text-black{color:#000}.text-orangeLBF{color:#ee732e}.text-bleuLBF{color:#4bbcc4}.text-vertLBF{color:#93c021}.text-rougeLBF{color:#e02933}.text-lbfbleu-600{color:#3ea1aa}.text-lbfvert-500{color:#93c021}.text-lbfvert-600{color:#6d9d0b}.text-xs{font-size:.75rem}.text-sm{font-size:.875rem}.text-base{font-size:1rem}.text-lg{font-size:1.125rem}.text-xl{font-size:1.25rem}.w-12{width:3rem}.w-20{width:5rem}.w-5\\/6{width:83.333333%}.w-full{width:100%}.z-100{z-index:100}@media(min-width:640px){.sm\\:flex-row{-webkit-box-orient:horizontal;flex-direction:row}.sm\\:flex-row{-webkit-box-direction:normal}.sm\\:h-8{height:2rem}.sm\\:mr-2{margin-right:.5rem}.sm\\:max-w-620px{max-width:620px}.sm\\:text-xs{font-size:.75rem}.sm\\:w-8{width:2rem}.sm\\:w-12{width:3rem}.sm\\:w-20{width:5rem}}@media(min-width:768px){.md\\:flex-no-wrap{flex-wrap:nowrap}.md\\:h-8{height:2rem}.md\\:text-sm{font-size:.875rem}.md\\:w-8{width:2rem}}@media(min-width:1024px){}</style>`;
 
     		init(
     			this,
@@ -3346,10 +3452,10 @@ var appInscription = (function (exports) {
     			create_fragment$1,
     			safe_not_equal,
     			{
-    				id_atelier: 30,
-    				url_illustration: 31,
-    				date_atelier: 32,
-    				titre_atelier: 33
+    				id_atelier: 32,
+    				url_illustration: 33,
+    				date_atelier: 34,
+    				titre_atelier: 35
     			},
     			[-1, -1]
     		);
@@ -3371,7 +3477,7 @@ var appInscription = (function (exports) {
     	}
 
     	get id_atelier() {
-    		return this.$$.ctx[30];
+    		return this.$$.ctx[32];
     	}
 
     	set id_atelier(id_atelier) {
@@ -3380,7 +3486,7 @@ var appInscription = (function (exports) {
     	}
 
     	get url_illustration() {
-    		return this.$$.ctx[31];
+    		return this.$$.ctx[33];
     	}
 
     	set url_illustration(url_illustration) {
@@ -3389,7 +3495,7 @@ var appInscription = (function (exports) {
     	}
 
     	get date_atelier() {
-    		return this.$$.ctx[32];
+    		return this.$$.ctx[34];
     	}
 
     	set date_atelier(date_atelier) {
@@ -3398,7 +3504,7 @@ var appInscription = (function (exports) {
     	}
 
     	get titre_atelier() {
-    		return this.$$.ctx[33];
+    		return this.$$.ctx[35];
     	}
 
     	set titre_atelier(titre_atelier) {
