@@ -79,6 +79,8 @@ onMount(async () => {
     }
 
 	async function verifInscrits() {
+        console.log("emailInscription", emailInscription)
+        if(emailInscription==="") {return}
         saveInfoEmail()
 		actionEncours = true
         listeInscrits = await gestionInscriptions.getInscrits(emailInscription, id_atelier)
@@ -258,27 +260,34 @@ function saveInfoEmail() {
 			Merci de renseigner votre adresse mail et de cliquer sur vérifier.
 		</div>
         <div class="flex flex-col">
-            <div class="flex flex-row content-center justify-center">
-                <input on:input={flagEmailVerifie = false} class="mt-2 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfvert-600 border-2 border-lbfvert-400 rounded-lg px-4 block appearance-none leading-normal"
-                    type="email" placeholder="adresse email" bind:value={emailInscription} />
-                {#if actionEncours}
-                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current text-lbfvert-500 h-12 w-12 mx-auto mt-2" viewBox="0 0 50 50">
-                        <g fill="none" fill-rule="evenodd" stroke-width="2">
-                            <circle cx="22" cy="22" r="1">
-                                <animate attributeName="r" begin="0s" dur="1.8s" values="1; 20" calcMode="spline" keyTimes="0; 1" keySplines="0.165, 0.84, 0.44, 1" repeatCount="indefinite"/>
-                                <animate attributeName="stroke-opacity" begin="0s" dur="1.8s" values="1; 0" calcMode="spline" keyTimes="0; 1" keySplines="0.3, 0.61, 0.355, 1" repeatCount="indefinite"/>
-                            </circle>
-                            <circle cx="22" cy="22" r="1">
-                                <animate attributeName="r" begin="-0.9s" dur="1.8s" values="1; 20" calcMode="spline" keyTimes="0; 1" keySplines="0.165, 0.84, 0.44, 1" repeatCount="indefinite"/>
-                                <animate attributeName="stroke-opacity" begin="-0.9s" dur="1.8s" values="1; 0" calcMode="spline" keyTimes="0; 1" keySplines="0.3, 0.61, 0.355, 1" repeatCount="indefinite"/>
-                            </circle>
-                        </g>
-                    </svg>
-                {:else if !flagEmailVerifie}
-                <button on:click={verifInscrits} class="w-full sm:w-20 mt-2 mx-1 px-2 h-10 border-2 border-vertLBF rounded text-vertLBF font-semibold" type="button">
-                    Vérifier
-                </button>
-                {/if}
+            <div class="flex flex-row justify-center content-end">
+                <div class="flex flex-col mt-1">
+                    <div class="ml-1 text-xs m-0 p-0 font-medium text-vertLBF">
+                        email
+                    </div>
+                    <input on:input={flagEmailVerifie = false} class="h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfvert-600 border-2 border-lbfvert-400 rounded-lg px-4 block appearance-none leading-normal"
+                        type="email" placeholder="adresse email" bind:value={emailInscription} />
+                </div>
+                <div class="m-0 p-0 mt-1 self-end">
+                    {#if actionEncours}
+                        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current text-lbfvert-500 h-10 w-18 ml-4 " viewBox="0 0 50 50">
+                            <g fill="none" fill-rule="evenodd" stroke-width="2">
+                                <circle cx="22" cy="22" r="1">
+                                    <animate attributeName="r" begin="0s" dur="1.8s" values="1; 20" calcMode="spline" keyTimes="0; 1" keySplines="0.165, 0.84, 0.44, 1" repeatCount="indefinite"/>
+                                    <animate attributeName="stroke-opacity" begin="0s" dur="1.8s" values="1; 0" calcMode="spline" keyTimes="0; 1" keySplines="0.3, 0.61, 0.355, 1" repeatCount="indefinite"/>
+                                </circle>
+                                <circle cx="22" cy="22" r="1">
+                                    <animate attributeName="r" begin="-0.9s" dur="1.8s" values="1; 20" calcMode="spline" keyTimes="0; 1" keySplines="0.165, 0.84, 0.44, 1" repeatCount="indefinite"/>
+                                    <animate attributeName="stroke-opacity" begin="-0.9s" dur="1.8s" values="1; 0" calcMode="spline" keyTimes="0; 1" keySplines="0.3, 0.61, 0.355, 1" repeatCount="indefinite"/>
+                                </circle>
+                            </g>
+                        </svg>
+                    {:else if !flagEmailVerifie}
+                        <button on:click={verifInscrits} class="w-full sm:w-20 mx-1 px-2 h-10 border-2 border-vertLBF rounded text-vertLBF font-semibold" type="button">
+                            Vérifier
+                        </button>
+                    {/if}
+                </div>
             </div>
             <label class="mx-8 pr-8 my-1 text-sm">
                 <input type="checkbox" class="form-checkbox text-lbfvert-600" bind:checked={saveInfo} />
