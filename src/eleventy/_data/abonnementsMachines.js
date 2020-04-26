@@ -26,5 +26,6 @@ async function fetchMachinesAbonnementsData() {
 
 module.exports = async function() {
   let result = await fetchMachinesAbonnementsData();
+  //console.log('result bonnement', result)
   return result.data.machines;
 };

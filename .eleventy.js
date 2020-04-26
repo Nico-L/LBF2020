@@ -46,6 +46,7 @@ module.exports = function(eleventyConfig) {
   //eleventyConfig.addLayoutAlias("default", "layouts/base.njk");
   //eleventyConfig.addLayoutAlias("conf", "layouts/conf.njk");
   eleventyConfig.addLayoutAlias("baseLBF", "layouts/baseLBF.njk");
+  eleventyConfig.addLayoutAlias("baseLBFResaMachines", "layouts/baseLBFResaMachines.njk");
 
   //new slug for apostrophe
   eleventyConfig.addFilter("slug", input => {

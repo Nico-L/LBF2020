@@ -61,27 +61,66 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
+"@fortawesome/fontawesome-common-types@^0.2.28":
+  version "0.2.28"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-0.2.28.tgz#1091bdfe63b3f139441e9cba27aa022bff97d8b2"
+  integrity sha512-gtis2/5yLdfI6n0ia0jH7NJs5i/Z/8M/ZbQL6jXQhCthEOe5Cr5NcQPhgTvFxNOtURE03/ZqUcEskdn2M+QaBg==
+
+"@fortawesome/fontawesome-svg-core@^1.2.28":
+  version "1.2.28"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-svg-core/-/fontawesome-svg-core-1.2.28.tgz#e5b8c8814ef375f01f5d7c132d3c3a2f83a3abf9"
+  integrity sha512-4LeaNHWvrneoU0i8b5RTOJHKx7E+y7jYejplR7uSVB34+mp3Veg7cbKk7NBCLiI4TyoWS1wh9ZdoyLJR8wSAdg==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "^0.2.28"
+
+"@fortawesome/free-regular-svg-icons@^5.13.0":
+  version "5.13.0"
+  resolved "https://registry.yarnpkg.com/@fortawesome/free-regular-svg-icons/-/free-regular-svg-icons-5.13.0.tgz#925a13d8bdda0678f71551828cac80ab47b8150c"
+  integrity sha512-70FAyiS5j+ANYD4dh9NGowTorNDnyvQHHpCM7FpnF7GxtDjBUCKdrFqCPzesEIpNDFNd+La3vex+jDk4nnUfpA==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "^0.2.28"
+
+"@fortawesome/free-solid-svg-icons@^5.13.0":
+  version "5.13.0"
+  resolved "https://registry.yarnpkg.com/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-5.13.0.tgz#44d9118668ad96b4fd5c9434a43efc5903525739"
+  integrity sha512-IHUgDJdomv6YtG4p3zl1B5wWf9ffinHIvebqQOmV3U+3SLw4fC+LUCCgwfETkbTtjy5/Qws2VoVf6z/ETQpFpg==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "^0.2.28"
+
 "@fullcalendar/core@4.3.1":
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/@fullcalendar/core/-/core-4.3.1.tgz#a061c6d2e998d4155439dbc8aefdfe01cdf648d8"
   integrity sha512-Eh+p/wpMkWGu26f8NpfQK9ecQMoZxX/aopv+0+4/CH+Ip0paP6iEc40JYgTz7RFl0bFqV1dvwyGyUZ4+9ZeySA==
 
-"@fullcalendar/daygrid@4.3.0", "@fullcalendar/daygrid@~4.3.0":
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/@fullcalendar/daygrid/-/daygrid-4.3.0.tgz#1b4ab9fdc238dba77921cb7c5bd2d813c834e905"
-  integrity sha512-OrGaRIGbELESOXOCXtoQVY4cOxnxmN7OrjDGbMoVITdoXWuIZ6sFNO84WcBQoRaIbkmqVM0SAU2MENwy+eEwqQ==
-
-"@fullcalendar/interaction@4.3.0":
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/@fullcalendar/interaction/-/interaction-4.3.0.tgz#a52d22e4fa2666d5032c77afde75ecfad95c0f3b"
-  integrity sha512-kaKV+tdgH/oIrwTSMGYFec989L5r+KMYJ9ybwLc8G3LbMVcebo8fAlN9VizmGQAuopKfyvOw8yzJdjfmVCCRYQ==
-
-"@fullcalendar/timegrid@4.3.0":
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/@fullcalendar/timegrid/-/timegrid-4.3.0.tgz#bf003499319e5e66135bb7b8d8ed274b1a62ca91"
-  integrity sha512-9JCSZbzw2Hi+X893l5X9ViZaWjxh+sDy59o6nKx0gYKwSfs/vKpmk73GBQfKyUv8orkjpnTdPFfeLDZqlzBP4Q==
+"@fullcalendar/core@5.0.0-beta.2":
+  version "5.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/core/-/core-5.0.0-beta.2.tgz#30a9cbbbf2d6476568f53cfa1c0746d06daa9660"
+  integrity sha512-9U/kk8Y4ackY1XZ1PHvX8rG1olixoKveStXdDsX3FCtKATR8fA/O+4Pd5qyH7nGcih8TrgreUjZ+dB+DEaomqQ==
   dependencies:
-    "@fullcalendar/daygrid" "~4.3.0"
+    preact "^10.0.5"
+    tslib "^1.9.3"
+
+"@fullcalendar/daygrid@5.0.0-beta.2":
+  version "5.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/daygrid/-/daygrid-5.0.0-beta.2.tgz#fae2a7cba8a6afc23c9d6faaa88150d820e59a73"
+  integrity sha512-Dd2VLsMPWPH1W1HQ+K1iftHVXF1MYOM/lo33FUdFKM8jc0MHnF620TVyOgPojAC26u2hApbURKIY2eY87vFulg==
+  dependencies:
+    tslib "^1.9.3"
+
+"@fullcalendar/interaction@5.0.0-beta.2":
+  version "5.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/interaction/-/interaction-5.0.0-beta.2.tgz#3895d7fd25a76fdcacdf979426fd714437fa5266"
+  integrity sha512-io/0fVAssn2BQxcIqcE3lQuljbe5eBwH8M73+Se93ngTHju0abv0YqKAR4EqQml5+tjCxfjdXgQBLknTOwdD4w==
+  dependencies:
+    tslib "^1.9.3"
+
+"@fullcalendar/timegrid@5.0.0-beta.2":
+  version "5.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/timegrid/-/timegrid-5.0.0-beta.2.tgz#65227b1b56267d1f5f3ef98e19adf6e05d74d52c"
+  integrity sha512-AuEBZkHIJi0zu6dMY7HjUZKf13a9EQRKnDQjOsL+PqomKUZWq2qiujDQ95heqT4rEO8H/riaZCFbBRR1cFePHg==
+  dependencies:
+    "@fullcalendar/daygrid" "5.0.0-beta.2"
+    tslib "^1.9.3"
 
 "@fullhuman/postcss-purgecss@^1.3.0":
   version "1.3.0"
@@ -4450,6 +4489,11 @@ postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.11, postcss@^7.0.14, postcss@^7.0.1
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
+preact@^10.0.5:
+  version "10.4.1"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-10.4.1.tgz#9b3ba020547673a231c6cf16f0fbaef0e8863431"
+  integrity sha512-WKrRpCSwL2t3tpOOGhf2WfTpcmbpxaWtDbdJdKdjd0aEiTkvOmS4NBkG6kzlaAHI9AkQ3iVqbFWM3Ei7mZ4o1Q==
+
 pretty-hrtime@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/pretty-hrtime/-/pretty-hrtime-1.0.3.tgz#b7e3ea42435a4c9b2759d99e0f201eb195802ee1"
@@ -4957,6 +5001,13 @@ rimraf@2, rimraf@^2.2.8:
   integrity sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==
   dependencies:
     glob "^7.1.3"
+
+rollup-plugin-css-only@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-css-only/-/rollup-plugin-css-only-2.0.0.tgz#696a0d0bc8072f3cb67eb830ebb579e3bad7ecf6"
+  integrity sha512-RdzeDgrKHrvixVF001fbK/G1C6wZYSs49lBon4dqeW4awgVhPWaaogXtVnVUBbtIeAF5kxaZQI1tJ+UYL0nswg==
+  dependencies:
+    rollup-pluginutils "^2.3.3"
 
 rollup-plugin-livereload@^1.0.0:
   version "1.0.4"
@@ -5660,6 +5711,11 @@ supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
+svelte-fa@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/svelte-fa/-/svelte-fa-2.1.1.tgz#57935335b8966f416b93bfb7794dac52fa0b777e"
+  integrity sha512-Oj563sJH0eLo6Pd1MsALgx5if9qKHtfCrMY5elMzggu00fP9zM47Vcv2b92g5vc+FNodxKPHhkUFTI8KK8CwGA==
+
 svelte-fullcalendar@0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/svelte-fullcalendar/-/svelte-fullcalendar-0.0.6.tgz#70f398fe3e07ef1129c6e388a43ac461d5d4912f"
@@ -5856,6 +5912,11 @@ trim-newlines@^1.0.0:
   integrity sha512-m6s2OdQe5wgpFMC+pAJ+q9djG82O2jcHPOI6RNg1yy9rCYR+WD6Nbpl32fDpfC56nirdRy+opFa/Vk7HYhqaew==
   dependencies:
     glob "^7.1.2"
+
+tslib@^1.9.3:
+  version "1.11.1"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.11.1.tgz#eb15d128827fbee2841549e171f45ed338ac7e35"
+  integrity sha512-aZW88SY8kQbU7gpV19lN24LtXh/yD4ZZg6qieAJDDg+YBsJcSmLGK9QpnUjAKVG/xefmvJGd1WUmfpT/g6AJGA==
 
 tunnel-agent@^0.6.0:
   version "0.6.0"

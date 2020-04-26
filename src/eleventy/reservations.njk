@@ -9,7 +9,7 @@ layout: baseLBF
   <div class="text-lg text-center mb-2">Sélectionnez la machine à réserver</div>
 <div class="flex flex-col sm:flex-row items-center sm:justify-around sm:items-stretch sm:flex-wrap">
     {%- for machine in lesMachines -%}
-  <a href="/reservation/{{machine.tag | slug}}" class="w-72 sm:w-48 border {% include "components/classCartesMachines.njk" %} rounded mb-2">
+  <a href="/reservations/{{machine.tag | slug}}" class="w-72 sm:w-48 border {% include "components/classCartesMachines.njk" %} rounded mb-2">
     <img src="https://res.cloudinary.com/la-bonne-fabrique/image/upload/ar_1:1,c_fill,q_auto:low,w_192/{{machine.urlImage}}" class="rounded-t sm:rounded-t"/>
     <div class="mx-1 text-center text-xl sm:text-base">{{machine.titre}}</div>
   </a>

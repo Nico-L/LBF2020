@@ -1,5 +1,4 @@
 const fetch = require("node-fetch");
-const axios = require("axios")
 
 const graphqlURL = process.env.HASURA_ENDPOINT;
 
@@ -9,13 +8,14 @@ query listeMachines {
   machines {
     urlImage
     titre
-    taille
     tagMachine
     tag
     lesTarifs
     id
     gravure
-    epaisseur
+    longueur
+    largeur
+    hauteur
     description
     decoupe
     couleur

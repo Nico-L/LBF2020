@@ -81,7 +81,6 @@ onMount(async () => {
     }
 
 	async function verifInscrits() {
-        console.log("emailInscription", emailInscription)
         if(emailInscription==="") {flagEmailVide = true; return;}
         if(/([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/i.exec(emailInscription) === null) {flagEmailInvalide = true; return;}
         saveInfoEmail()

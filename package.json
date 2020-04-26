@@ -9,21 +9,27 @@
     "url": "https://github.com/philhawksworth/eleventail"
   },
   "scripts": {
-    "build": "npm-run-all build:svelte build:css build:html",
+    "build": "npm-run-all build:svelte build:css build:css2 build:html",
     "build:css": "postcss src/eleventy/_includes/css/tailwind.css -o src/eleventy/css/styles.css",
+    "build:css2": "postcss src/svelte/reservationsMachines/addOn.css -o src/eleventy/css/resaMachinesAddOn.css",
     "build:html": "eleventy",
     "build:svelte": "rollup -c",
     "dev:svelte": "rollup -c -w",
-    "watch": "npm-run-all --parallel dev:svelte watch:css watch:html",
+    "watch": "npm-run-all --parallel dev:svelte watch:css watch:css2 watch:html",
     "watch:css": "postcss src/eleventy/_includes/css/tailwind.css -o src/eleventy/css/styles.css --watch",
+    "watch:css2": "postcss src/svelte/reservationsMachines/addOn.css -o src/eleventy/css/resaMachinesAddOn.css --watch",
     "watch:html": "eleventy --serve --port=8181",
     "start": "npm run watch"
   },
   "dependencies": {
     "@11ty/eleventy": "^0.10.0",
-    "@fullcalendar/daygrid": "4.3.0",
-    "@fullcalendar/interaction": "4.3.0",
-    "@fullcalendar/timegrid": "4.3.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.28",
+    "@fortawesome/free-regular-svg-icons": "^5.13.0",
+    "@fortawesome/free-solid-svg-icons": "^5.13.0",
+    "@fullcalendar/core": "5.0.0-beta.2",
+    "@fullcalendar/daygrid": "5.0.0-beta.2",
+    "@fullcalendar/interaction": "5.0.0-beta.2",
+    "@fullcalendar/timegrid": "5.0.0-beta.2",
     "@fullhuman/postcss-purgecss": "^1.3.0",
     "@rollup/plugin-commonjs": "^11.0.0",
     "@rollup/plugin-node-resolve": "^6.0.0",
@@ -44,11 +50,14 @@
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^5.1.2",
     "svelte": "^3.20.1",
+    "svelte-fa": "^2.1.1",
     "svelte-fullcalendar": "0.0.6",
     "svelte-preprocess": "^3.5.0",
     "svelte-preprocess-postcss": "^1.1.1",
     "tailwindcss": "^1.1.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "rollup-plugin-css-only": "^2.0.0"
+  },
   "keywords": []
 }

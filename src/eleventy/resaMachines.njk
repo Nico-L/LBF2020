@@ -1,13 +1,13 @@
 ---
 title: Réservation Machine
-layout: baseLBF
+layout: baseLBFResaMachines
 pagination:
   data: lesMachines
   size: 1
   alias: machine
-permalink: "reservation/{{ machine.tag | slug }}/index.html"
+permalink: "reservations/{{ machine.tag | slug }}/index.html"
 ---
-<h1 class="text-center text-xl sm:text-3xl">Réservation de {{machine.titre}}</h1>
+<h1 class="text-center text-xl sm:text-3xl my-6">Réservation de {{machine.titre}}</h1>
 {% block scripts %}
 <script>
 const titreMachine = "{{machine.titre | safe}}"

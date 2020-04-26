@@ -894,7 +894,7 @@ var appInscription = (function (exports) {
     class ModalPerso extends SvelteElement {
     	constructor(options) {
     		super();
-    		this.shadowRoot.innerHTML = `<style>button{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button{overflow:visible}button{text-transform:none}button{-webkit-appearance:button}button::-moz-focus-inner{border-style:none;padding:0}button:-moz-focusring{outline:1px dotted ButtonText}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}*,:after,:before{box-sizing:inherit}h2{margin:0}button{background:transparent;padding:0}button:focus{outline:1px dotted;outline:5px auto -webkit-focus-ring-color}*,:after,:before{border:0 solid #e2e8f0}button{cursor:pointer}h2{font-size:inherit;font-weight:inherit}button{padding:0;line-height:inherit;color:inherit}svg{display:block;vertical-align:middle}@media(min-width:640px){}@media(min-width:768px){}@media(min-width:1024px){}@media(min-width:1280px){}@media not print{}@media print and (-ms-high-contrast:active),print and (-ms-high-contrast:none){}@media not print{}@media not print{}.bg-black{background-color:#000}.bg-white{background-color:#fff}.border-orangeLBF{border-color:#ee732e}.border-bleuLBF{border-color:#4bbcc4}.rounded{border-radius:.25rem}.border-2{border-width:2px}.border-b-2{border-bottom-width:2px}.cursor-pointer{cursor:pointer}.flex{display:-webkit-box;display:flex}.items-center{-webkit-box-align:center;align-items:center}.justify-end{-webkit-box-pack:end;justify-content:flex-end}.justify-center{-webkit-box-pack:center;justify-content:center}.font-medium{font-weight:500}.font-bold{font-weight:700}.h-8{height:2rem}.h-10{height:2.5rem}.h-full{height:100%}.mx-1{margin-left:.25rem;margin-right:.25rem}.mx-2{margin-left:.5rem;margin-right:.5rem}.mx-auto{margin-left:auto;margin-right:auto}.mt-1{margin-top:.25rem}.mb-1{margin-bottom:.25rem}.mt-3{margin-top:.75rem}.max-w-5\\/6{max-width:83%}.opacity-75{opacity:.75}.overflow-auto{overflow:auto}.p-2{padding:.5rem}.px-1{padding-left:.25rem;padding-right:.25rem}.pb-1{padding-bottom:.25rem}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.top-0{top:0}.left-0{left:0}.fill-current{fill:currentColor}.stroke-current{stroke:currentColor}.text-orangeLBF{color:#ee732e}.text-bleuLBF{color:#4bbcc4}.text-base{font-size:1rem}.text-xl{font-size:1.25rem}.w-8{width:2rem}.w-24{width:6rem}.w-full{width:100%}.z-100{z-index:100}@media(min-width:640px){}@media(min-width:768px){}@media(min-width:1024px){}</style>`;
+    		this.shadowRoot.innerHTML = `<style>button{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button{overflow:visible}button{text-transform:none}button{-webkit-appearance:button}button::-moz-focus-inner{border-style:none;padding:0}button:-moz-focusring{outline:1px dotted ButtonText}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}*,*::before,*::after{box-sizing:inherit}h2{margin:0}button{background:transparent;padding:0}button:focus{outline:1px dotted;outline:5px auto -webkit-focus-ring-color}*,*::before,*::after{border-width:0;border-style:solid;border-color:#e2e8f0}button{cursor:pointer}h2{font-size:inherit;font-weight:inherit}button{padding:0;line-height:inherit;color:inherit}svg{display:block;vertical-align:middle}@media(min-width: 640px){}@media(min-width: 768px){}@media(min-width: 1024px){}@media(min-width: 1280px){}@media not print{}@media print and (-ms-high-contrast: active), print and (-ms-high-contrast: none){}@media not print{}@media not print{}.bg-black{background-color:#000}.bg-white{background-color:#fff}.border-orangeLBF{border-color:#ee732e}.border-bleuLBF{border-color:#4bbcc4}.rounded{border-radius:0.25rem}.border-2{border-width:2px}.border-b-2{border-bottom-width:2px}.cursor-pointer{cursor:pointer}.flex{display:-webkit-box;display:flex}.items-center{-webkit-box-align:center;align-items:center}.justify-end{-webkit-box-pack:end;justify-content:flex-end}.justify-center{-webkit-box-pack:center;justify-content:center}.font-medium{font-weight:500}.font-bold{font-weight:700}.h-8{height:2rem}.h-10{height:2.5rem}.h-full{height:100%}.mx-1{margin-left:0.25rem;margin-right:0.25rem}.mx-2{margin-left:0.5rem;margin-right:0.5rem}.mx-auto{margin-left:auto;margin-right:auto}.mt-1{margin-top:0.25rem}.mb-1{margin-bottom:0.25rem}.mt-3{margin-top:0.75rem}.max-w-5\\/6{max-width:83%}.opacity-75{opacity:0.75}.overflow-auto{overflow:auto}.p-2{padding:0.5rem}.px-1{padding-left:0.25rem;padding-right:0.25rem}.pb-1{padding-bottom:0.25rem}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.top-0{top:0}.left-0{left:0}.fill-current{fill:currentColor}.stroke-current{stroke:currentColor}.text-orangeLBF{color:#ee732e}.text-bleuLBF{color:#4bbcc4}.text-base{font-size:1rem}.text-xl{font-size:1.25rem}.w-8{width:2rem}.w-24{width:6rem}.w-full{width:100%}.z-100{z-index:100}@media(min-width: 640px){}@media(min-width: 768px){}@media(min-width: 1024px){}@media(min-width: 1280px){}</style>`;
     		init(this, { target: this.shadowRoot }, instance, create_fragment, safe_not_equal, { has_bouton_bleu: 0, bouton_bleu_busy: 1 });
 
     		if (options) {
@@ -1094,7 +1094,7 @@ var appInscription = (function (exports) {
 
     /* src/svelte/inscriptions/inscriptions.svelte generated by Svelte v3.20.1 */
 
-    const { console: console_1, window: window_1 } = globals;
+    const { window: window_1 } = globals;
     const file$1 = "src/svelte/inscriptions/inscriptions.svelte";
 
     function get_each_context(ctx, list, i) {
@@ -1113,7 +1113,7 @@ var appInscription = (function (exports) {
     	return child_ctx;
     }
 
-    // (253:0) {#if showModalInscription}
+    // (252:0) {#if showModalInscription}
     function create_if_block_5(ctx) {
     	let div8;
     	let div0;
@@ -1196,38 +1196,38 @@ var appInscription = (function (exports) {
     			t13 = space();
     			if_block3.c();
     			attr_dev(div0, "class", "absolute w-full h-full  bg-black opacity-75 top-0 left-0 cursor-pointer");
-    			add_location(div0, file$1, 254, 1, 9240);
+    			add_location(div0, file$1, 253, 1, 9182);
     			attr_dev(h2, "class", "text-xl w-full pb-1 mb-1 border-b-2 border-vertLBF font-bold");
-    			add_location(h2, file$1, 257, 2, 9502);
+    			add_location(h2, file$1, 256, 2, 9444);
     			attr_dev(hr, "class", "mb-1");
-    			add_location(hr, file$1, 260, 2, 9607);
+    			add_location(hr, file$1, 259, 2, 9549);
     			attr_dev(div1, "class", "mb-1 text-base font-medium text-justify");
-    			add_location(div1, file$1, 261, 2, 9629);
+    			add_location(div1, file$1, 260, 2, 9571);
     			attr_dev(div2, "class", "ml-1 text-xs m-0 p-0 font-medium text-vertLBF");
-    			add_location(div2, file$1, 267, 20, 9959);
+    			add_location(div2, file$1, 266, 20, 9901);
     			attr_dev(input0, "class", "h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfvert-600 border-2 border-lbfvert-400 rounded-lg px-4 block appearance-none leading-normal");
     			attr_dev(input0, "type", "email");
     			attr_dev(input0, "placeholder", "adresse email");
-    			add_location(input0, file$1, 270, 20, 10096);
+    			add_location(input0, file$1, 269, 20, 10038);
     			attr_dev(div3, "class", "flex flex-col mt-1");
-    			add_location(div3, file$1, 266, 16, 9906);
+    			add_location(div3, file$1, 265, 16, 9848);
     			attr_dev(div4, "class", "m-0 p-0 mt-1 self-end");
-    			add_location(div4, file$1, 273, 16, 10497);
+    			add_location(div4, file$1, 272, 16, 10439);
     			attr_dev(div5, "class", "flex flex-row flex-wrap md:flex-no-wrap justify-start content-end");
-    			add_location(div5, file$1, 265, 12, 9810);
+    			add_location(div5, file$1, 264, 12, 9752);
     			attr_dev(input1, "type", "checkbox");
     			attr_dev(input1, "class", "form-checkbox text-lbfvert-600");
-    			add_location(input1, file$1, 305, 16, 12768);
+    			add_location(input1, file$1, 304, 16, 12710);
     			attr_dev(label, "class", "mx-8 pr-8 my-1 text-sm");
-    			add_location(label, file$1, 304, 12, 12713);
+    			add_location(label, file$1, 303, 12, 12655);
     			attr_dev(div6, "class", "flex flex-col");
-    			add_location(div6, file$1, 264, 8, 9770);
+    			add_location(div6, file$1, 263, 8, 9712);
     			attr_dev(div7, "class", "relative overflow-auto max-h-5/6 w-5/6 sm:max-w-620px bg-white flex flex-col p-4 items-start rounded");
     			attr_dev(div7, "role", "dialog");
     			attr_dev(div7, "aria-modal", "true");
-    			add_location(div7, file$1, 256, 1, 9352);
+    			add_location(div7, file$1, 255, 1, 9294);
     			attr_dev(div8, "class", "z-100 fixed w-full h-full top-0 left-0 flex items-center justify-center");
-    			add_location(div8, file$1, 253, 0, 9153);
+    			add_location(div8, file$1, 252, 0, 9095);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div8, anchor);
@@ -1343,14 +1343,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_5.name,
     		type: "if",
-    		source: "(253:0) {#if showModalInscription}",
+    		source: "(252:0) {#if showModalInscription}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (288:48) 
+    // (287:48) 
     function create_if_block_17(ctx) {
     	let button;
     	let dispose;
@@ -1361,7 +1361,7 @@ var appInscription = (function (exports) {
     			button.textContent = "Vérifier";
     			attr_dev(button, "class", "w-full sm:w-20 mx-1 px-2 h-10 border-2 border-vertLBF rounded text-vertLBF font-semibold");
     			attr_dev(button, "type", "button");
-    			add_location(button, file$1, 288, 24, 11950);
+    			add_location(button, file$1, 287, 24, 11892);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, button, anchor);
@@ -1379,14 +1379,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_17.name,
     		type: "if",
-    		source: "(288:48) ",
+    		source: "(287:48) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (275:20) {#if actionEncours}
+    // (274:20) {#if actionEncours}
     function create_if_block_16(ctx) {
     	let svg;
     	let g;
@@ -1415,7 +1415,7 @@ var appInscription = (function (exports) {
     			attr_dev(animate0, "keyTimes", "0; 1");
     			attr_dev(animate0, "keySplines", "0.165, 0.84, 0.44, 1");
     			attr_dev(animate0, "repeatCount", "indefinite");
-    			add_location(animate0, file$1, 278, 36, 10894);
+    			add_location(animate0, file$1, 277, 36, 10836);
     			attr_dev(animate1, "attributeName", "stroke-opacity");
     			attr_dev(animate1, "begin", "0s");
     			attr_dev(animate1, "dur", "1.8s");
@@ -1424,11 +1424,11 @@ var appInscription = (function (exports) {
     			attr_dev(animate1, "keyTimes", "0; 1");
     			attr_dev(animate1, "keySplines", "0.3, 0.61, 0.355, 1");
     			attr_dev(animate1, "repeatCount", "indefinite");
-    			add_location(animate1, file$1, 279, 36, 11089);
+    			add_location(animate1, file$1, 278, 36, 11031);
     			attr_dev(circle0, "cx", "22");
     			attr_dev(circle0, "cy", "22");
     			attr_dev(circle0, "r", "1");
-    			add_location(circle0, file$1, 277, 32, 10827);
+    			add_location(circle0, file$1, 276, 32, 10769);
     			attr_dev(animate2, "attributeName", "r");
     			attr_dev(animate2, "begin", "-0.9s");
     			attr_dev(animate2, "dur", "1.8s");
@@ -1437,7 +1437,7 @@ var appInscription = (function (exports) {
     			attr_dev(animate2, "keyTimes", "0; 1");
     			attr_dev(animate2, "keySplines", "0.165, 0.84, 0.44, 1");
     			attr_dev(animate2, "repeatCount", "indefinite");
-    			add_location(animate2, file$1, 282, 36, 11400);
+    			add_location(animate2, file$1, 281, 36, 11342);
     			attr_dev(animate3, "attributeName", "stroke-opacity");
     			attr_dev(animate3, "begin", "-0.9s");
     			attr_dev(animate3, "dur", "1.8s");
@@ -1446,19 +1446,19 @@ var appInscription = (function (exports) {
     			attr_dev(animate3, "keyTimes", "0; 1");
     			attr_dev(animate3, "keySplines", "0.3, 0.61, 0.355, 1");
     			attr_dev(animate3, "repeatCount", "indefinite");
-    			add_location(animate3, file$1, 283, 36, 11598);
+    			add_location(animate3, file$1, 282, 36, 11540);
     			attr_dev(circle1, "cx", "22");
     			attr_dev(circle1, "cy", "22");
     			attr_dev(circle1, "r", "1");
-    			add_location(circle1, file$1, 281, 32, 11333);
+    			add_location(circle1, file$1, 280, 32, 11275);
     			attr_dev(g, "fill", "none");
     			attr_dev(g, "fill-rule", "evenodd");
     			attr_dev(g, "stroke-width", "2");
-    			add_location(g, file$1, 276, 28, 10742);
+    			add_location(g, file$1, 275, 28, 10684);
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr_dev(svg, "class", "stroke-current text-lbfvert-500 h-10 w-18 ml-4 ");
     			attr_dev(svg, "viewBox", "0 0 50 50");
-    			add_location(svg, file$1, 275, 24, 10597);
+    			add_location(svg, file$1, 274, 24, 10539);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, svg, anchor);
@@ -1480,14 +1480,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_16.name,
     		type: "if",
-    		source: "(275:20) {#if actionEncours}",
+    		source: "(274:20) {#if actionEncours}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (294:16) {#if flagEmailVide}
+    // (293:16) {#if flagEmailVide}
     function create_if_block_15(ctx) {
     	let div;
 
@@ -1496,7 +1496,7 @@ var appInscription = (function (exports) {
     			div = element("div");
     			div.textContent = "Veuillez entrer une adresse email pour démarrer l'inscription.";
     			attr_dev(div, "class", "m-0 p-0 mt-1 self-end text-rougeLBF");
-    			add_location(div, file$1, 294, 20, 12271);
+    			add_location(div, file$1, 293, 20, 12213);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1510,14 +1510,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_15.name,
     		type: "if",
-    		source: "(294:16) {#if flagEmailVide}",
+    		source: "(293:16) {#if flagEmailVide}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (299:16) {#if flagEmailInvalide}
+    // (298:16) {#if flagEmailInvalide}
     function create_if_block_14(ctx) {
     	let div;
 
@@ -1526,7 +1526,7 @@ var appInscription = (function (exports) {
     			div = element("div");
     			div.textContent = "Veuillez entrer une adresse email valide.";
     			attr_dev(div, "class", "m-0 p-0 mt-1 self-end text-rougeLBF");
-    			add_location(div, file$1, 299, 20, 12517);
+    			add_location(div, file$1, 298, 20, 12459);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1540,14 +1540,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_14.name,
     		type: "if",
-    		source: "(299:16) {#if flagEmailInvalide}",
+    		source: "(298:16) {#if flagEmailInvalide}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (322:8) {:else}
+    // (321:8) {:else}
     function create_else_block$1(ctx) {
     	let div0;
     	let t1;
@@ -1611,9 +1611,9 @@ var appInscription = (function (exports) {
     			t6 = space();
     			if (if_block3) if_block3.c();
     			attr_dev(div0, "class", "text-lg font-bold mt-2 text-bleuLBF");
-    			add_location(div0, file$1, 322, 6, 13847);
-    			add_location(div1, file$1, 346, 12, 15785);
-    			add_location(div2, file$1, 379, 12, 18579);
+    			add_location(div0, file$1, 321, 6, 13789);
+    			add_location(div1, file$1, 345, 12, 15727);
+    			add_location(div2, file$1, 378, 12, 18521);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div0, anchor);
@@ -1749,14 +1749,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_else_block$1.name,
     		type: "else",
-    		source: "(322:8) {:else}",
+    		source: "(321:8) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (318:57) 
+    // (317:57) 
     function create_if_block_7(ctx) {
     	let h2;
 
@@ -1765,7 +1765,7 @@ var appInscription = (function (exports) {
     			h2 = element("h2");
     			h2.textContent = "Cet atelier est complet. Nos ateliers sont régulièrement proposés, surveillez cet espace pour le prochain.";
     			attr_dev(h2, "class", "text-base text-bleuLBF w-full mt-2 mx-2 pb-1 mb-1 font-bold");
-    			add_location(h2, file$1, 318, 12, 13611);
+    			add_location(h2, file$1, 317, 12, 13553);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h2, anchor);
@@ -1780,14 +1780,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_7.name,
     		type: "if",
-    		source: "(318:57) ",
+    		source: "(317:57) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (310:8) {#if !flagEmailVerifie}
+    // (309:8) {#if !flagEmailVerifie}
     function create_if_block_6(ctx) {
     	let div;
     	let t0;
@@ -1806,12 +1806,12 @@ var appInscription = (function (exports) {
     			t2 = space();
     			li1 = element("li");
     			li1.textContent = "Si vous avez déjà effectué une inscription à cet atelier, vous pourrez modifier celle-ci ou vous désinscrire.";
-    			add_location(li0, file$1, 313, 20, 13218);
-    			add_location(li1, file$1, 314, 20, 13380);
+    			add_location(li0, file$1, 312, 20, 13160);
+    			add_location(li1, file$1, 313, 20, 13322);
     			attr_dev(ul, "class", "list-disc ml-6");
-    			add_location(ul, file$1, 312, 16, 13170);
+    			add_location(ul, file$1, 311, 16, 13112);
     			attr_dev(div, "class", "text-base text-justify");
-    			add_location(div, file$1, 310, 12, 13057);
+    			add_location(div, file$1, 309, 12, 12999);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1831,14 +1831,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_6.name,
     		type: "if",
-    		source: "(310:8) {#if !flagEmailVerifie}",
+    		source: "(309:8) {#if !flagEmailVerifie}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (338:16) {#if listeInscrits.length > 1}
+    // (337:16) {#if listeInscrits.length > 1}
     function create_if_block_13(ctx) {
     	let div;
     	let svg;
@@ -1852,16 +1852,16 @@ var appInscription = (function (exports) {
     			path = svg_element("path");
     			attr_dev(path, "fill", "currentColor");
     			attr_dev(path, "d", "M268 416h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12zM432 80h-82.41l-34-56.7A48 48 0 00274.41 0H173.59a48 48 0 00-41.16 23.3L98.41 80H16A16 16 0 000 96v16a16 16 0 0016 16h16v336a48 48 0 0048 48h288a48 48 0 0048-48V128h16a16 16 0 0016-16V96a16 16 0 00-16-16zM171.84 50.91A6 6 0 01177 48h94a6 6 0 015.15 2.91L293.61 80H154.39zM368 464H80V128h288zm-212-48h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12z");
-    			add_location(path, file$1, 340, 6, 15203);
+    			add_location(path, file$1, 339, 6, 15145);
     			attr_dev(svg, "class", "mx-auto cursor-pointer mt-3 h-12 w-12 sm:h-8 sm:w-8 stroke-current text-lbfbleu-600");
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr_dev(svg, "aria-hidden", "true");
     			attr_dev(svg, "data-prefix", "far");
     			attr_dev(svg, "data-icon", "trash-alt");
     			attr_dev(svg, "viewBox", "0 0 448 512");
-    			add_location(svg, file$1, 339, 5, 14928);
+    			add_location(svg, file$1, 338, 5, 14870);
     			attr_dev(div, "class", "my-auto sm:w-12 w-20");
-    			add_location(div, file$1, 338, 4, 14888);
+    			add_location(div, file$1, 337, 4, 14830);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div, anchor);
@@ -1893,14 +1893,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_13.name,
     		type: "if",
-    		source: "(338:16) {#if listeInscrits.length > 1}",
+    		source: "(337:16) {#if listeInscrits.length > 1}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (324:3) {#each listeInscrits as inscrit}
+    // (323:3) {#each listeInscrits as inscrit}
     function create_each_block_1(ctx) {
     	let div5;
     	let div4;
@@ -1944,25 +1944,25 @@ var appInscription = (function (exports) {
     			t5 = space();
     			if (if_block) if_block.c();
     			attr_dev(div0, "class", "ml-1 text-xs m-0 p-0 font-medium text-bleuLBF");
-    			add_location(div0, file$1, 327, 6, 14120);
+    			add_location(div0, file$1, 326, 6, 14062);
     			attr_dev(input0, "class", "mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal");
     			attr_dev(input0, "type", "text");
     			attr_dev(input0, "placeholder", "prenom");
-    			add_location(input0, file$1, 328, 6, 14198);
+    			add_location(input0, file$1, 327, 6, 14140);
     			attr_dev(div1, "class", "flex flex-col sm:mr-2");
-    			add_location(div1, file$1, 326, 5, 14078);
+    			add_location(div1, file$1, 325, 5, 14020);
     			attr_dev(div2, "class", "ml-1 text-xs m-0 p-0 font-medium text-bleuLBF");
-    			add_location(div2, file$1, 332, 6, 14501);
+    			add_location(div2, file$1, 331, 6, 14443);
     			attr_dev(input1, "class", "mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal");
     			attr_dev(input1, "type", "text");
     			attr_dev(input1, "placeholder", "nom");
-    			add_location(input1, file$1, 333, 6, 14576);
+    			add_location(input1, file$1, 332, 6, 14518);
     			attr_dev(div3, "class", "flex flex-col sm:mr-2");
-    			add_location(div3, file$1, 331, 5, 14459);
+    			add_location(div3, file$1, 330, 5, 14401);
     			attr_dev(div4, "class", "flex flex-col sm:flex-row flex-wrap ");
-    			add_location(div4, file$1, 325, 4, 14022);
+    			add_location(div4, file$1, 324, 4, 13964);
     			attr_dev(div5, "class", "w-full flex flex-row justify-start mb-4");
-    			add_location(div5, file$1, 324, 3, 13964);
+    			add_location(div5, file$1, 323, 3, 13906);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div5, anchor);
@@ -2022,14 +2022,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(324:3) {#each listeInscrits as inscrit}",
+    		source: "(323:3) {#each listeInscrits as inscrit}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (371:20) {:else}
+    // (370:20) {:else}
     function create_else_block_1(ctx) {
     	let div;
 
@@ -2038,7 +2038,7 @@ var appInscription = (function (exports) {
     			div = element("div");
     			div.textContent = " ";
     			attr_dev(div, "class", "text-sm font-medium text-rougeLBF ");
-    			add_location(div, file$1, 371, 24, 18219);
+    			add_location(div, file$1, 370, 24, 18161);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -2052,14 +2052,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_else_block_1.name,
     		type: "else",
-    		source: "(371:20) {:else}",
+    		source: "(370:20) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (369:20) {#if nouvelInscrit.prenom===""}
+    // (368:20) {#if nouvelInscrit.prenom===""}
     function create_if_block_12(ctx) {
     	let div;
 
@@ -2068,7 +2068,7 @@ var appInscription = (function (exports) {
     			div = element("div");
     			div.textContent = "Au moins le prénom est requis.";
     			attr_dev(div, "class", "text-sm font-medium text-rougeLBF ");
-    			add_location(div, file$1, 369, 24, 18082);
+    			add_location(div, file$1, 368, 24, 18024);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -2082,14 +2082,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_12.name,
     		type: "if",
-    		source: "(369:20) {#if nouvelInscrit.prenom===\\\"\\\"}",
+    		source: "(368:20) {#if nouvelInscrit.prenom===\\\"\\\"}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (348:3) {#each nouveauxInscrits as nouvelInscrit, index ('nI' + index)}
+    // (347:3) {#each nouveauxInscrits as nouvelInscrit, index ('nI' + index)}
     function create_each_block(key_1, ctx) {
     	let div7;
     	let div6;
@@ -2153,39 +2153,39 @@ var appInscription = (function (exports) {
     			if_block.c();
     			t7 = space();
     			attr_dev(div0, "class", "ml-1 text-xs m-0 p-0 font-medium text-bleuLBF");
-    			add_location(div0, file$1, 352, 32, 16141);
+    			add_location(div0, file$1, 351, 32, 16083);
     			attr_dev(input0, "class", "mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal");
     			attr_dev(input0, "type", "text");
     			attr_dev(input0, "placeholder", "prenom");
-    			add_location(input0, file$1, 353, 32, 16245);
+    			add_location(input0, file$1, 352, 32, 16187);
     			attr_dev(div1, "class", "flex flex-col");
-    			add_location(div1, file$1, 351, 28, 16081);
+    			add_location(div1, file$1, 350, 28, 16023);
     			attr_dev(div2, "class", "ml-1 text-xs m-0 p-0 font-medium text-bleuLBF");
-    			add_location(div2, file$1, 357, 32, 16673);
+    			add_location(div2, file$1, 356, 32, 16615);
     			attr_dev(input1, "class", "mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal");
     			attr_dev(input1, "type", "text");
     			attr_dev(input1, "placeholder", "nom");
-    			add_location(input1, file$1, 358, 32, 16774);
+    			add_location(input1, file$1, 357, 32, 16716);
     			attr_dev(div3, "class", "flex flex-col");
-    			add_location(div3, file$1, 356, 28, 16613);
+    			add_location(div3, file$1, 355, 28, 16555);
     			attr_dev(div4, "class", "flex flex-col sm:flex-row");
-    			add_location(div4, file$1, 350, 24, 16013);
+    			add_location(div4, file$1, 349, 24, 15955);
     			attr_dev(path, "fill", "currentColor");
     			attr_dev(path, "d", "M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z");
-    			add_location(path, file$1, 364, 32, 17465);
+    			add_location(path, file$1, 363, 32, 17407);
     			attr_dev(svg, "class", "mx-auto cursor-pointer mt-3 h-12 w-12 md:h-8 md:w-8 stroke-current text-rougeLBF");
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr_dev(svg, "aria-hidden", "true");
     			attr_dev(svg, "data-prefix", "far");
     			attr_dev(svg, "data-icon", "trash-alt");
     			attr_dev(svg, "viewBox", "0 0 448 512");
-    			add_location(svg, file$1, 363, 28, 17187);
+    			add_location(svg, file$1, 362, 28, 17129);
     			attr_dev(div5, "class", "my-auto");
-    			add_location(div5, file$1, 362, 24, 17137);
+    			add_location(div5, file$1, 361, 24, 17079);
     			attr_dev(div6, "class", "flex flex-row justify-end");
-    			add_location(div6, file$1, 349, 20, 15949);
+    			add_location(div6, file$1, 348, 20, 15891);
     			attr_dev(div7, "class", "w-full flex flex-col justify-start");
-    			add_location(div7, file$1, 348, 4, 15880);
+    			add_location(div7, file$1, 347, 4, 15822);
     			this.first = div7;
     		},
     		m: function mount(target, anchor, remount) {
@@ -2260,14 +2260,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(348:3) {#each nouveauxInscrits as nouvelInscrit, index ('nI' + index)}",
+    		source: "(347:3) {#each nouveauxInscrits as nouvelInscrit, index ('nI' + index)}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (377:12) {#if (nbPlaces-nouveauxInscrits.length) === 0}
+    // (376:12) {#if (nbPlaces-nouveauxInscrits.length) === 0}
     function create_if_block_11(ctx) {
     	let div;
 
@@ -2276,7 +2276,7 @@ var appInscription = (function (exports) {
     			div = element("div");
     			div.textContent = "Cet atelier ne peut accepter plus de participants.";
     			attr_dev(div, "class", "text-sm sm:text-xs md:text-sm font-medium text-rougeLBF ");
-    			add_location(div, file$1, 377, 16, 18422);
+    			add_location(div, file$1, 376, 16, 18364);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -2290,14 +2290,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_11.name,
     		type: "if",
-    		source: "(377:12) {#if (nbPlaces-nouveauxInscrits.length) === 0}",
+    		source: "(376:12) {#if (nbPlaces-nouveauxInscrits.length) === 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (381:16) {#if (nbPlaces-nouveauxInscrits.length) > 0}
+    // (380:16) {#if (nbPlaces-nouveauxInscrits.length) > 0}
     function create_if_block_10(ctx) {
     	let button;
     	let dispose;
@@ -2307,7 +2307,7 @@ var appInscription = (function (exports) {
     			button = element("button");
     			button.textContent = "Ajouter un participant";
     			attr_dev(button, "class", "mt-1 mx-1 px-1 border-2 border-vertLBF rounded text-base font-medium text-vertLBF");
-    			add_location(button, file$1, 381, 20, 18666);
+    			add_location(button, file$1, 380, 20, 18608);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, button, anchor);
@@ -2325,14 +2325,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_10.name,
     		type: "if",
-    		source: "(381:16) {#if (nbPlaces-nouveauxInscrits.length) > 0}",
+    		source: "(380:16) {#if (nbPlaces-nouveauxInscrits.length) > 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (386:16) {#if listeInscrits.length > 0}
+    // (385:16) {#if listeInscrits.length > 0}
     function create_if_block_9(ctx) {
     	let button;
     	let dispose;
@@ -2342,7 +2342,7 @@ var appInscription = (function (exports) {
     			button = element("button");
     			button.textContent = "Se désinscrire";
     			attr_dev(button, "class", "mt-1 mx-1 px-1 border-2 border-orangeLBF rounded text-base font-medium text-orangeLBF");
-    			add_location(button, file$1, 386, 20, 18955);
+    			add_location(button, file$1, 385, 20, 18897);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, button, anchor);
@@ -2360,14 +2360,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_9.name,
     		type: "if",
-    		source: "(386:16) {#if listeInscrits.length > 0}",
+    		source: "(385:16) {#if listeInscrits.length > 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (391:16) {#if flagSaveValide}
+    // (390:16) {#if flagSaveValide}
     function create_if_block_8(ctx) {
     	let button;
     	let dispose;
@@ -2377,7 +2377,7 @@ var appInscription = (function (exports) {
     			button = element("button");
     			button.textContent = "Enregistrer";
     			attr_dev(button, "class", "mt-1 mx-1 px-1 border-2 border-bleuLBF rounded text-base font-medium text-bleuLBF");
-    			add_location(button, file$1, 391, 16, 19250);
+    			add_location(button, file$1, 390, 16, 19192);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, button, anchor);
@@ -2395,14 +2395,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_8.name,
     		type: "if",
-    		source: "(391:16) {#if flagSaveValide}",
+    		source: "(390:16) {#if flagSaveValide}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (401:0) {#if flagVerifDesinscription}
+    // (400:0) {#if flagVerifDesinscription}
     function create_if_block_4(ctx) {
     	let mon_modal;
     	let span0;
@@ -2424,14 +2424,14 @@ var appInscription = (function (exports) {
     			span2 = element("span");
     			span2.textContent = "Annuler";
     			attr_dev(span0, "slot", "titre");
-    			add_location(span0, file$1, 402, 8, 19675);
+    			add_location(span0, file$1, 401, 8, 19617);
     			attr_dev(span1, "slot", "boutonBleu");
-    			add_location(span1, file$1, 404, 8, 19775);
+    			add_location(span1, file$1, 403, 8, 19717);
     			attr_dev(span2, "slot", "boutonDefaut");
-    			add_location(span2, file$1, 405, 8, 19824);
+    			add_location(span2, file$1, 404, 8, 19766);
     			set_custom_element_data(mon_modal, "has_bouton_bleu", "true");
     			set_custom_element_data(mon_modal, "bouton_bleu_busy", /*busyEffacerInscription*/ ctx[13]);
-    			add_location(mon_modal, file$1, 401, 4, 19538);
+    			add_location(mon_modal, file$1, 400, 4, 19480);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, mon_modal, anchor);
@@ -2462,14 +2462,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_4.name,
     		type: "if",
-    		source: "(401:0) {#if flagVerifDesinscription}",
+    		source: "(400:0) {#if flagVerifDesinscription}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (409:0) {#if flagVerifEffacer}
+    // (408:0) {#if flagVerifEffacer}
     function create_if_block_3(ctx) {
     	let mon_modal;
     	let span0;
@@ -2496,14 +2496,14 @@ var appInscription = (function (exports) {
     			span2 = element("span");
     			span2.textContent = "Annuler";
     			attr_dev(span0, "slot", "titre");
-    			add_location(span0, file$1, 410, 8, 20044);
+    			add_location(span0, file$1, 409, 8, 19986);
     			attr_dev(span1, "slot", "boutonBleu");
-    			add_location(span1, file$1, 412, 8, 20163);
+    			add_location(span1, file$1, 411, 8, 20105);
     			attr_dev(span2, "slot", "boutonDefaut");
-    			add_location(span2, file$1, 413, 8, 20212);
+    			add_location(span2, file$1, 412, 8, 20154);
     			set_custom_element_data(mon_modal, "has_bouton_bleu", "true");
     			set_custom_element_data(mon_modal, "bouton_bleu_busy", /*busyEffacerInscrit*/ ctx[15]);
-    			add_location(mon_modal, file$1, 409, 4, 19915);
+    			add_location(mon_modal, file$1, 408, 4, 19857);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, mon_modal, anchor);
@@ -2538,14 +2538,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_3.name,
     		type: "if",
-    		source: "(409:0) {#if flagVerifEffacer}",
+    		source: "(408:0) {#if flagVerifEffacer}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (417:0) {#if confirmeDesinscription}
+    // (416:0) {#if confirmeDesinscription}
     function create_if_block_2(ctx) {
     	let mon_modal;
     	let span0;
@@ -2562,10 +2562,10 @@ var appInscription = (function (exports) {
     			span1 = element("span");
     			span1.textContent = "Confirmer";
     			attr_dev(span0, "slot", "titre");
-    			add_location(span0, file$1, 418, 8, 20377);
+    			add_location(span0, file$1, 417, 8, 20319);
     			attr_dev(span1, "slot", "boutonBleu");
-    			add_location(span1, file$1, 420, 8, 20490);
-    			add_location(mon_modal, file$1, 417, 4, 20309);
+    			add_location(span1, file$1, 419, 8, 20432);
+    			add_location(mon_modal, file$1, 416, 4, 20251);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, mon_modal, anchor);
@@ -2590,14 +2590,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(417:0) {#if confirmeDesinscription}",
+    		source: "(416:0) {#if confirmeDesinscription}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (424:0) {#if confirmeDesinscrit}
+    // (423:0) {#if confirmeDesinscrit}
     function create_if_block_1$1(ctx) {
     	let mon_modal;
     	let span0;
@@ -2619,10 +2619,10 @@ var appInscription = (function (exports) {
     			span1 = element("span");
     			span1.textContent = "Confirmer";
     			attr_dev(span0, "slot", "titre");
-    			add_location(span0, file$1, 425, 8, 20651);
+    			add_location(span0, file$1, 424, 8, 20593);
     			attr_dev(span1, "slot", "boutonBleu");
-    			add_location(span1, file$1, 427, 8, 20752);
-    			add_location(mon_modal, file$1, 424, 4, 20583);
+    			add_location(span1, file$1, 426, 8, 20694);
+    			add_location(mon_modal, file$1, 423, 4, 20525);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, mon_modal, anchor);
@@ -2651,14 +2651,14 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block_1$1.name,
     		type: "if",
-    		source: "(424:0) {#if confirmeDesinscrit}",
+    		source: "(423:0) {#if confirmeDesinscrit}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (431:0) {#if confirmeInscription}
+    // (430:0) {#if confirmeInscription}
     function create_if_block$1(ctx) {
     	let mon_modal;
     	let span0;
@@ -2685,13 +2685,13 @@ var appInscription = (function (exports) {
     			span2 = element("span");
     			span2.textContent = "Confirmer";
     			attr_dev(span0, "slot", "titre");
-    			add_location(span0, file$1, 432, 8, 20914);
-    			add_location(br, file$1, 434, 170, 21164);
+    			add_location(span0, file$1, 431, 8, 20856);
+    			add_location(br, file$1, 433, 170, 21106);
     			attr_dev(span1, "class", "text-justify");
-    			add_location(span1, file$1, 433, 8, 20966);
+    			add_location(span1, file$1, 432, 8, 20908);
     			attr_dev(span2, "slot", "boutonBleu");
-    			add_location(span2, file$1, 437, 8, 21458);
-    			add_location(mon_modal, file$1, 431, 4, 20846);
+    			add_location(span2, file$1, 436, 8, 21400);
+    			add_location(mon_modal, file$1, 430, 4, 20788);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, mon_modal, anchor);
@@ -2721,7 +2721,7 @@ var appInscription = (function (exports) {
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(431:0) {#if confirmeInscription}",
+    		source: "(430:0) {#if confirmeInscription}",
     		ctx
     	});
 
@@ -2784,26 +2784,26 @@ var appInscription = (function (exports) {
     			slot = element("slot");
     			this.c = noop;
     			attr_dev(div0, "class", "my-auto");
-    			add_location(div0, file$1, 242, 2, 8160);
+    			add_location(div0, file$1, 241, 2, 8102);
     			attr_dev(div1, "class", "bg-orangeLBF flex flex-row mr-1 text-black text-sm px-1");
-    			add_location(div1, file$1, 241, 1, 8088);
+    			add_location(div1, file$1, 240, 1, 8030);
     			attr_dev(path, "fill", "currentColor");
     			attr_dev(path, "d", "M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z");
-    			add_location(path, file$1, 246, 3, 8474);
+    			add_location(path, file$1, 245, 3, 8416);
     			attr_dev(svg, "class", "fill-current text-black my-auto");
     			attr_dev(svg, "width", "16");
     			attr_dev(svg, "height", "16");
     			attr_dev(svg, "aria-hidden", "true");
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr_dev(svg, "viewBox", "0 0 640 512");
-    			add_location(svg, file$1, 245, 2, 8326);
+    			add_location(svg, file$1, 244, 2, 8268);
     			attr_dev(div2, "class", "text-black text-sm my-auto");
-    			add_location(div2, file$1, 248, 2, 9025);
+    			add_location(div2, file$1, 247, 2, 8967);
     			attr_dev(div3, "class", "bg-orangeLBF flex flex-row content-center rounded-r px-1 cursor-pointer");
-    			add_location(div3, file$1, 244, 1, 8214);
+    			add_location(div3, file$1, 243, 1, 8156);
     			attr_dev(div4, "class", "flex flex-row content-center");
-    			add_location(div4, file$1, 240, 0, 8044);
-    			add_location(slot, file$1, 440, 0, 21522);
+    			add_location(div4, file$1, 239, 0, 7986);
+    			add_location(slot, file$1, 439, 0, 21464);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -3038,8 +3038,6 @@ var appInscription = (function (exports) {
     	}
 
     	async function verifInscrits() {
-    		console.log("emailInscription", emailInscription);
-
     		if (emailInscription === "") {
     			$$invalidate(11, flagEmailVide = true);
     			return;
@@ -3240,7 +3238,7 @@ var appInscription = (function (exports) {
     	const writable_props = ["id_atelier", "url_illustration", "date_atelier", "titre_atelier"];
 
     	Object.keys($$props).forEach(key => {
-    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console_1.warn(`<une-inscription> was created with unknown prop '${key}'`);
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<une-inscription> was created with unknown prop '${key}'`);
     	});
 
     	let { $$slots = {}, $$scope } = $$props;
@@ -3443,7 +3441,7 @@ var appInscription = (function (exports) {
     class Inscriptions extends SvelteElement {
     	constructor(options) {
     		super();
-    		this.shadowRoot.innerHTML = `<style>hr{box-sizing:content-box;height:0;overflow:visible}button,input{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button{text-transform:none}[type=button],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}[type=checkbox]{box-sizing:border-box;padding:0}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}*,:after,:before{box-sizing:inherit}h2,hr{margin:0}button{background:transparent;padding:0}button:focus{outline:1px dotted;outline:5px auto -webkit-focus-ring-color}ul{margin:0;padding:0}ul{list-style:none}*,:after,:before{border:0 solid #e2e8f0}hr{border-top-width:1px}input::-webkit-input-placeholder{color:#a0aec0}input::-moz-placeholder{color:#a0aec0}input:-ms-input-placeholder{color:#a0aec0}input::-ms-input-placeholder{color:#a0aec0}input::placeholder{color:#a0aec0}button{cursor:pointer}h2{font-size:inherit;font-weight:inherit}button,input{padding:0;line-height:inherit;color:inherit}svg{display:block;vertical-align:middle}@media(min-width:640px){}@media(min-width:768px){}@media(min-width:1024px){}@media(min-width:1280px){}@media not print{}@media print and (-ms-high-contrast:active),print and (-ms-high-contrast:none){}.form-checkbox{-webkit-appearance:none;-moz-appearance:none;appearance:none;-webkit-print-color-adjust:exact;color-adjust:exact;display:inline-block;vertical-align:middle;background-origin:border-box;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;flex-shrink:0;height:1em;width:1em;color:#4299e1;background-color:#fff;border-color:#e2e8f0;border-width:1px;border-radius:.25rem}.form-checkbox:checked{background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 16 16' fill='%23fff' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4a1 1 0 00-1.414-1.414L7 8.586 5.707 7.293z'/%3E%3C/svg%3E");border-color:transparent;background-color:currentColor;background-size:100% 100%;background-position:50%;background-repeat:no-repeat}@media not print{.form-checkbox::-ms-check{border-width:1px;color:transparent;background:inherit;border-color:inherit;border-radius:inherit}}.form-checkbox:focus{outline:none;box-shadow:0 0 0 3px rgba(66,153,225,.5);border-color:#63b3ed}@media not print{}.appearance-none{-webkit-appearance:none;-moz-appearance:none;appearance:none}.bg-black{background-color:#000}.bg-white{background-color:#fff}.bg-orangeLBF{background-color:#ee732e}.focus\\:bg-white:focus{background-color:#fff}.border-orangeLBF{border-color:#ee732e}.border-bleuLBF{border-color:#4bbcc4}.border-vertLBF{border-color:#93c021}.border-lbfbleu-400{border-color:#4bbcc4}.border-lbfvert-400{border-color:#a4c94a}.focus\\:border-lbfbleu-600:focus{border-color:#3ea1aa}.focus\\:border-lbfvert-600:focus{border-color:#6d9d0b}.rounded{border-radius:.25rem}.rounded-lg{border-radius:.5rem}.rounded-r{border-top-right-radius:.25rem}.rounded-r{border-bottom-right-radius:.25rem}.border-2{border-width:2px}.border-b-2{border-bottom-width:2px}.cursor-pointer{cursor:pointer}.block{display:block}.flex{display:-webkit-box;display:flex}.flex-row{-webkit-box-orient:horizontal;flex-direction:row}.flex-col,.flex-row{-webkit-box-direction:normal}.flex-col{-webkit-box-orient:vertical;flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{-webkit-box-align:start;align-items:flex-start}.items-center{-webkit-box-align:center;align-items:center}.self-end{align-self:flex-end}.justify-start{-webkit-box-pack:start;justify-content:flex-start}.justify-end{-webkit-box-pack:end;justify-content:flex-end}.justify-center{-webkit-box-pack:center;justify-content:center}.content-center{align-content:center}.content-end{align-content:flex-end}.font-medium{font-weight:500}.font-semibold{font-weight:600}.font-bold{font-weight:700}.h-10{height:2.5rem}.h-12{height:3rem}.h-full{height:100%}.leading-normal{line-height:1.5}.list-disc{list-style-type:disc}.m-0{margin:0}.my-1{margin-top:.25rem;margin-bottom:.25rem}.mx-1{margin-left:.25rem;margin-right:.25rem}.mx-2{margin-left:.5rem;margin-right:.5rem}.mx-8{margin-left:2rem;margin-right:2rem}.my-auto{margin-top:auto;margin-bottom:auto}.mx-auto{margin-left:auto;margin-right:auto}.mt-1{margin-top:.25rem}.mr-1{margin-right:.25rem}.mb-1{margin-bottom:.25rem}.ml-1{margin-left:.25rem}.mt-2{margin-top:.5rem}.mr-2{margin-right:.5rem}.mt-3{margin-top:.75rem}.mb-4{margin-bottom:1rem}.ml-4{margin-left:1rem}.ml-6{margin-left:1.5rem}.max-h-5\\/6{max-height:83%}.opacity-75{opacity:.75}.focus\\:outline-none:focus{outline:0}.overflow-auto{overflow:auto}.p-0{padding:0}.p-4{padding:1rem}.px-1{padding-left:.25rem;padding-right:.25rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-4{padding-left:1rem;padding-right:1rem}.pb-1{padding-bottom:.25rem}.pr-8{padding-right:2rem}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.top-0{top:0}.left-0{left:0}.fill-current{fill:currentColor}.stroke-current{stroke:currentColor}.text-justify{text-align:justify}.text-black{color:#000}.text-orangeLBF{color:#ee732e}.text-bleuLBF{color:#4bbcc4}.text-vertLBF{color:#93c021}.text-rougeLBF{color:#e02933}.text-lbfbleu-600{color:#3ea1aa}.text-lbfvert-500{color:#93c021}.text-lbfvert-600{color:#6d9d0b}.text-xs{font-size:.75rem}.text-sm{font-size:.875rem}.text-base{font-size:1rem}.text-lg{font-size:1.125rem}.text-xl{font-size:1.25rem}.w-12{width:3rem}.w-20{width:5rem}.w-5\\/6{width:83.333333%}.w-full{width:100%}.z-100{z-index:100}@media(min-width:640px){.sm\\:flex-row{-webkit-box-orient:horizontal;flex-direction:row}.sm\\:flex-row{-webkit-box-direction:normal}.sm\\:h-8{height:2rem}.sm\\:mr-2{margin-right:.5rem}.sm\\:max-w-620px{max-width:620px}.sm\\:text-xs{font-size:.75rem}.sm\\:w-8{width:2rem}.sm\\:w-12{width:3rem}.sm\\:w-20{width:5rem}}@media(min-width:768px){.md\\:flex-no-wrap{flex-wrap:nowrap}.md\\:h-8{height:2rem}.md\\:text-sm{font-size:.875rem}.md\\:w-8{width:2rem}}@media(min-width:1024px){}</style>`;
+    		this.shadowRoot.innerHTML = `<style>hr{box-sizing:content-box;height:0;overflow:visible}button,input{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button{text-transform:none}button,[type="button"]{-webkit-appearance:button}button::-moz-focus-inner,[type="button"]::-moz-focus-inner{border-style:none;padding:0}button:-moz-focusring,[type="button"]:-moz-focusring{outline:1px dotted ButtonText}[type="checkbox"]{box-sizing:border-box;padding:0}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}*,*::before,*::after{box-sizing:inherit}h2,hr{margin:0}button{background:transparent;padding:0}button:focus{outline:1px dotted;outline:5px auto -webkit-focus-ring-color}ul{list-style:none;margin:0;padding:0}*,*::before,*::after{border-width:0;border-style:solid;border-color:#e2e8f0}hr{border-top-width:1px}input::-webkit-input-placeholder{color:#a0aec0}input::-moz-placeholder{color:#a0aec0}input:-ms-input-placeholder{color:#a0aec0}input::-ms-input-placeholder{color:#a0aec0}input::placeholder{color:#a0aec0}button{cursor:pointer}h2{font-size:inherit;font-weight:inherit}button,input{padding:0;line-height:inherit;color:inherit}svg{display:block;vertical-align:middle}@media(min-width: 640px){}@media(min-width: 768px){}@media(min-width: 1024px){}@media(min-width: 1280px){}@media not print{}@media print and (-ms-high-contrast: active), print and (-ms-high-contrast: none){}.form-checkbox{-webkit-appearance:none;-moz-appearance:none;appearance:none;-webkit-print-color-adjust:exact;color-adjust:exact;display:inline-block;vertical-align:middle;background-origin:border-box;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;flex-shrink:0;height:1em;width:1em;color:#4299e1;background-color:#fff;border-color:#e2e8f0;border-width:1px;border-radius:0.25rem}.form-checkbox:checked{background-image:url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");border-color:transparent;background-color:currentColor;background-size:100% 100%;background-position:center;background-repeat:no-repeat}@media not print{.form-checkbox::-ms-check{border-width:1px;color:transparent;background:inherit;border-color:inherit;border-radius:inherit}}.form-checkbox:focus{outline:none;box-shadow:0 0 0 3px rgba(66, 153, 225, 0.5);border-color:#63b3ed}@media not print{}.appearance-none{-webkit-appearance:none;-moz-appearance:none;appearance:none}.bg-black{background-color:#000}.bg-white{background-color:#fff}.bg-orangeLBF{background-color:#ee732e}.focus\\:bg-white:focus{background-color:#fff}.border-orangeLBF{border-color:#ee732e}.border-bleuLBF{border-color:#4bbcc4}.border-vertLBF{border-color:#93c021}.border-lbfbleu-400{border-color:#4BBCC4}.border-lbfvert-400{border-color:#a4c94a}.focus\\:border-lbfbleu-600:focus{border-color:#3ea1aa}.focus\\:border-lbfvert-600:focus{border-color:#6d9d0b}.rounded{border-radius:0.25rem}.rounded-lg{border-radius:0.5rem}.rounded-r{border-top-right-radius:0.25rem;border-bottom-right-radius:0.25rem}.border-2{border-width:2px}.border-b-2{border-bottom-width:2px}.cursor-pointer{cursor:pointer}.block{display:block}.flex{display:-webkit-box;display:flex}.flex-row{-webkit-box-orient:horizontal;-webkit-box-direction:normal;flex-direction:row}.flex-col{-webkit-box-orient:vertical;-webkit-box-direction:normal;flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{-webkit-box-align:start;align-items:flex-start}.items-center{-webkit-box-align:center;align-items:center}.self-end{align-self:flex-end}.justify-start{-webkit-box-pack:start;justify-content:flex-start}.justify-end{-webkit-box-pack:end;justify-content:flex-end}.justify-center{-webkit-box-pack:center;justify-content:center}.content-center{align-content:center}.content-end{align-content:flex-end}.font-medium{font-weight:500}.font-semibold{font-weight:600}.font-bold{font-weight:700}.h-10{height:2.5rem}.h-12{height:3rem}.h-full{height:100%}.leading-normal{line-height:1.5}.list-disc{list-style-type:disc}.m-0{margin:0}.my-1{margin-top:0.25rem;margin-bottom:0.25rem}.mx-1{margin-left:0.25rem;margin-right:0.25rem}.mx-2{margin-left:0.5rem;margin-right:0.5rem}.mx-8{margin-left:2rem;margin-right:2rem}.my-auto{margin-top:auto;margin-bottom:auto}.mx-auto{margin-left:auto;margin-right:auto}.mt-1{margin-top:0.25rem}.mr-1{margin-right:0.25rem}.mb-1{margin-bottom:0.25rem}.ml-1{margin-left:0.25rem}.mt-2{margin-top:0.5rem}.mr-2{margin-right:0.5rem}.mt-3{margin-top:0.75rem}.mb-4{margin-bottom:1rem}.ml-4{margin-left:1rem}.ml-6{margin-left:1.5rem}.max-h-5\\/6{max-height:83%}.opacity-75{opacity:0.75}.focus\\:outline-none:focus{outline:0}.overflow-auto{overflow:auto}.p-0{padding:0}.p-4{padding:1rem}.px-1{padding-left:0.25rem;padding-right:0.25rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-4{padding-left:1rem;padding-right:1rem}.pb-1{padding-bottom:0.25rem}.pr-8{padding-right:2rem}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.top-0{top:0}.left-0{left:0}.fill-current{fill:currentColor}.stroke-current{stroke:currentColor}.text-justify{text-align:justify}.text-black{color:#000}.text-orangeLBF{color:#ee732e}.text-bleuLBF{color:#4bbcc4}.text-vertLBF{color:#93c021}.text-rougeLBF{color:#e02933}.text-lbfbleu-600{color:#3ea1aa}.text-lbfvert-500{color:#93C021}.text-lbfvert-600{color:#6d9d0b}.text-xs{font-size:0.75rem}.text-sm{font-size:0.875rem}.text-base{font-size:1rem}.text-lg{font-size:1.125rem}.text-xl{font-size:1.25rem}.w-12{width:3rem}.w-20{width:5rem}.w-5\\/6{width:83.333333%}.w-full{width:100%}.z-100{z-index:100}@media(min-width: 640px){.sm\\:flex-row{-webkit-box-orient:horizontal;-webkit-box-direction:normal;flex-direction:row}.sm\\:h-8{height:2rem}.sm\\:mr-2{margin-right:0.5rem}.sm\\:max-w-620px{max-width:620px}.sm\\:text-xs{font-size:0.75rem}.sm\\:w-8{width:2rem}.sm\\:w-12{width:3rem}.sm\\:w-20{width:5rem}}@media(min-width: 768px){.md\\:flex-no-wrap{flex-wrap:nowrap}.md\\:h-8{height:2rem}.md\\:text-sm{font-size:0.875rem}.md\\:w-8{width:2rem}}@media(min-width: 1024px){}@media(min-width: 1280px){}</style>`;
 
     		init(
     			this,
