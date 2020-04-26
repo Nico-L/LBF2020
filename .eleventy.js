@@ -88,25 +88,16 @@ eleventyConfig.addFilter("dateInscription", function(debut, fin) {
     return 'le ' + leJourSemaine + ' ' + leJour + ' ' + leMois + ' de ' + leDebut.hour + 'h' + minuteDebut + ' à ' + laFin.hour + 'h' + minuteFin;
 });
 
+// titre de la réservation, "de le" -> "du"
+eleventyConfig.addFilter("titreReservation", function(machine) {
+    let titre = "Réservation de " + machine
+    return titre.replace("de le", "du")
+})
+
   // a debug utility
   eleventyConfig.addFilter("dump", obj => {
     return util.inspect(obj);
   });
-
-  // Date helpers
-  /*eleventyConfig.addFilter("readableDate", dateObj => {
-    return DateTime.fromJSDate(dateObj, {
-      zone: "utc"
-    }).toFormat("LLLL d, y");
-  });
-  eleventyConfig.addFilter("htmlDate", dateObj => {
-    return DateTime.fromJSDate(dateObj, {
-      zone: "utc"
-    }).toFormat("y-MM-dd");
-  });
-*/
-  // Grab excerpts and sections from a file
-  //eleventyConfig.addFilter("section", require("./src/utils/section.js"));
 
   // compress and combine js files
   eleventyConfig.addFilter("jsmin", require("./src/utils/minify-js.js"));

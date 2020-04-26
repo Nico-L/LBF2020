@@ -7,14 +7,12 @@ pagination:
   alias: machine
 permalink: "reservations/{{ machine.tag | slug }}/index.html"
 ---
-<h1 class="text-center text-xl sm:text-3xl my-6">Réservation de {{machine.titre}}</h1>
+<h1 class="text-center text-xl sm:text-3xl my-6">{{machine.titre | titreReservation}}</h1>
 {% block scripts %}
 <script>
 const titreMachine = "{{machine.titre | safe}}"
 const idMachine = "{{machine.id}}"
 const urlImageMachine = "{{machine.urlImage}}"
-</script>
-<script>const dispoMachines = [{% for horaires in dispoMachines %}[{% for horaire in horaires%}{"start": {{horaire.start}}, "end": {{horaire.end}}}{% endfor %}], {% endfor %}]
 </script>
 <script src="/js/bundle.js"></script>
 {% endblock %}
