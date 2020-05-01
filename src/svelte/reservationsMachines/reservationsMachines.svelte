@@ -147,7 +147,7 @@ function mailConfirmation(idResa) {
     let dureeString = Math.floor(tempDuree/60) + "h"
     dureeString += tempDuree % 60 === 0 ? "00" : tempDuree % 60
     let arrayMails = [];
-    arrayMails.push(dataReservation.email);
+    arrayMails.push(userInfo.email);
     let envoiMail = {
         machine: titreMachine,
         prenom: dataReservation.prenom,
@@ -169,6 +169,7 @@ function mailConfirmation(idResa) {
         email: arrayMails,
         template: JSON.stringify(envoiMail)
     }
+        console.log('variables mail', variables)
     envoyerMail(variables)
 }
 
@@ -234,6 +235,9 @@ onMount(()=> {
             console.log('retour', retour)
             if (retour.length > 0) {
                 dataReservation = retour[0];
+                userInfo.prenom = dataReservation.prenom
+                userInfo.nom = dataReservation.nom
+                userInfo.email = dataReservation.email
                 dataReservation.dateDebut = new Date(dataReservation.dateDebut)
                 dataReservation.dateFin = new Date(dataReservation.dateFin)
                 flagReservation = true
