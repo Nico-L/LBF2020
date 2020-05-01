@@ -1071,7 +1071,7 @@ var appInscription = (function (exports) {
                 query: `
                 mutation envoiMail($email: [String!]!, $template: String) {
                     sendEmail(
-                    from: "atelierdusappey@gmail.com"
+                    from: "atelier@labonnefabrique.fr"
                     to: $email
                     templateId: "d-3db7863e710b491e89681ccdf840a9f4"
                     dynamic_template_data: $template

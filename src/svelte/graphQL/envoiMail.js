@@ -4,7 +4,7 @@ export async function envoyerMail(variables) {
     const query = `
                 mutation envoiMail($email: [String!]!, $template: String) {
                     sendEmail(
-                    from: "atelierdusappey@gmail.com"
+                    from: "atelier@labonnefabrique.fr"
                     to: $email
                     templateId: "d-08bb9e1b96ac4d56a9210660cac6cd07"
                     dynamic_template_data: $template
