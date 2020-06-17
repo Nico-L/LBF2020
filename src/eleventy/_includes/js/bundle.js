@@ -709,7 +709,7 @@ var app = (function () {
         return r;
     }
 
-    var n,u,i,t,r,o,f,e={},c=[],s=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord/i;function a(n,l){for(var u in l)n[u]=l[u];return n}function v(n){var l=n.parentNode;l&&l.removeChild(n);}function h(n,l,u){var i,t=arguments,r={};for(i in l)"key"!==i&&"ref"!==i&&(r[i]=l[i]);if(arguments.length>3)for(u=[u],i=3;i<arguments.length;i++)u.push(t[i]);if(null!=u&&(r.children=u),"function"==typeof n&&null!=n.defaultProps)for(i in n.defaultProps)void 0===r[i]&&(r[i]=n.defaultProps[i]);return p(n,r,l&&l.key,l&&l.ref,null)}function p(l,u,i,t,r){var o={type:l,props:u,key:i,ref:t,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,constructor:void 0,__v:r};return null==r&&(o.__v=o),n.vnode&&n.vnode(o),o}function y(){return {}}function d(n){return n.children}function m(n,l){this.props=n,this.context=l;}function w(n,l){if(null==l)return n.__?w(n.__,n.__.__k.indexOf(n)+1):null;for(var u;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e)return u.__e;return "function"==typeof n.type?w(n):null}function k(n){var l,u;if(null!=(n=n.__)&&null!=n.__c){for(n.__e=n.__c.base=null,l=0;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e){n.__e=n.__c.base=u.__e;break}return k(n)}}function g(l){(!l.__d&&(l.__d=!0)&&u.push(l)&&!i++||r!==n.debounceRendering)&&((r=n.debounceRendering)||t)(_);}function _(){for(var n;i=u.length;)n=u.sort(function(n,l){return n.__v.__b-l.__v.__b}),u=[],n.some(function(n){var l,u,i,t,r,o,f;n.__d&&(o=(r=(l=n).__v).__e,(f=l.__P)&&(u=[],(i=a({},r)).__v=i,t=A(f,r,i,l.__n,void 0!==f.ownerSVGElement,null,u,null==o?w(r):o),T(u,r),t!=o&&k(r)));});}function b(n,l,u,i,t,r,o,f,s){var a,h,p,y,d,m,k,g=u&&u.__k||c,_=g.length;if(f==e&&(f=null!=r?r[0]:_?w(u,0):null),a=0,l.__k=x(l.__k,function(u){if(null!=u){if(u.__=l,u.__b=l.__b+1,null===(p=g[a])||p&&u.key==p.key&&u.type===p.type)g[a]=void 0;else for(h=0;h<_;h++){if((p=g[h])&&u.key==p.key&&u.type===p.type){g[h]=void 0;break}p=null;}if(y=A(n,u,p=p||e,i,t,r,o,f,s),(h=u.ref)&&p.ref!=h&&(k||(k=[]),p.ref&&k.push(p.ref,null,u),k.push(h,u.__c||y,u)),null!=y){var c;if(null==m&&(m=y),void 0!==u.__d)c=u.__d,u.__d=void 0;else if(r==p||y!=f||null==y.parentNode){n:if(null==f||f.parentNode!==n)n.appendChild(y),c=null;else{for(d=f,h=0;(d=d.nextSibling)&&h<_;h+=2)if(d==y)break n;n.insertBefore(y,f),c=f;}"option"==l.type&&(n.value="");}f=void 0!==c?c:y.nextSibling,"function"==typeof l.type&&(l.__d=f);}else f&&p.__e==f&&f.parentNode!=n&&(f=w(p));}return a++,u}),l.__e=m,null!=r&&"function"!=typeof l.type)for(a=r.length;a--;)null!=r[a]&&v(r[a]);for(a=_;a--;)null!=g[a]&&D(g[a],g[a]);if(k)for(a=0;a<k.length;a++)j(k[a],k[++a],k[++a]);}function x(n,l,u){if(null==u&&(u=[]),null==n||"boolean"==typeof n)l&&u.push(l(null));else if(Array.isArray(n))for(var i=0;i<n.length;i++)x(n[i],l,u);else u.push(l?l("string"==typeof n||"number"==typeof n?p(null,n,null,null,n):null!=n.__e||null!=n.__c?p(n.type,n.props,n.key,null,n.__v):n):n);return u}function P(n,l,u,i,t){var r;for(r in u)"children"===r||"key"===r||r in l||N(n,r,null,u[r],i);for(r in l)t&&"function"!=typeof l[r]||"children"===r||"key"===r||"value"===r||"checked"===r||u[r]===l[r]||N(n,r,l[r],u[r],i);}function C(n,l,u){"-"===l[0]?n.setProperty(l,u):n[l]="number"==typeof u&&!1===s.test(l)?u+"px":null==u?"":u;}function N(n,l,u,i,t){var r,o,f,e,c;if(t?"className"===l&&(l="class"):"class"===l&&(l="className"),"style"===l)if(r=n.style,"string"==typeof u)r.cssText=u;else{if("string"==typeof i&&(r.cssText="",i=null),i)for(e in i)u&&e in u||C(r,e,"");if(u)for(c in u)i&&u[c]===i[c]||C(r,c,u[c]);}else"o"===l[0]&&"n"===l[1]?(o=l!==(l=l.replace(/Capture$/,"")),f=l.toLowerCase(),l=(f in n?f:l).slice(2),u?(i||n.addEventListener(l,z,o),(n.l||(n.l={}))[l]=u):n.removeEventListener(l,z,o)):"list"!==l&&"tagName"!==l&&"form"!==l&&"type"!==l&&"size"!==l&&!t&&l in n?n[l]=null==u?"":u:"function"!=typeof u&&"dangerouslySetInnerHTML"!==l&&(l!==(l=l.replace(/^xlink:?/,""))?null==u||!1===u?n.removeAttributeNS("http://www.w3.org/1999/xlink",l.toLowerCase()):n.setAttributeNS("http://www.w3.org/1999/xlink",l.toLowerCase(),u):null==u||!1===u&&!/^ar/.test(l)?n.removeAttribute(l):n.setAttribute(l,u));}function z(l){this.l[l.type](n.event?n.event(l):l);}function A(l,u,i,t,r,o,f,e,c){var s,v,h,p,y,w,k,g,_,x,P=u.type;if(void 0!==u.constructor)return null;(s=n.__b)&&s(u);try{n:if("function"==typeof P){if(g=u.props,_=(s=P.contextType)&&t[s.__c],x=s?_?_.props.value:s.__:t,i.__c?k=(v=u.__c=i.__c).__=v.__E:("prototype"in P&&P.prototype.render?u.__c=v=new P(g,x):(u.__c=v=new m(g,x),v.constructor=P,v.render=E),_&&_.sub(v),v.props=g,v.state||(v.state={}),v.context=x,v.__n=t,h=v.__d=!0,v.__h=[]),null==v.__s&&(v.__s=v.state),null!=P.getDerivedStateFromProps&&(v.__s==v.state&&(v.__s=a({},v.__s)),a(v.__s,P.getDerivedStateFromProps(g,v.__s))),p=v.props,y=v.state,h)null==P.getDerivedStateFromProps&&null!=v.componentWillMount&&v.componentWillMount(),null!=v.componentDidMount&&v.__h.push(v.componentDidMount);else{if(null==P.getDerivedStateFromProps&&g!==p&&null!=v.componentWillReceiveProps&&v.componentWillReceiveProps(g,x),!v.__e&&null!=v.shouldComponentUpdate&&!1===v.shouldComponentUpdate(g,v.__s,x)||u.__v===i.__v&&!v.__){for(v.props=g,v.state=v.__s,u.__v!==i.__v&&(v.__d=!1),v.__v=u,u.__e=i.__e,u.__k=i.__k,v.__h.length&&f.push(v),s=0;s<u.__k.length;s++)u.__k[s]&&(u.__k[s].__=u);break n}null!=v.componentWillUpdate&&v.componentWillUpdate(g,v.__s,x),null!=v.componentDidUpdate&&v.__h.push(function(){v.componentDidUpdate(p,y,w);});}v.context=x,v.props=g,v.state=v.__s,(s=n.__r)&&s(u),v.__d=!1,v.__v=u,v.__P=l,s=v.render(v.props,v.state,v.context),u.__k=null!=s&&s.type==d&&null==s.key?s.props.children:Array.isArray(s)?s:[s],null!=v.getChildContext&&(t=a(a({},t),v.getChildContext())),h||null==v.getSnapshotBeforeUpdate||(w=v.getSnapshotBeforeUpdate(p,y)),b(l,u,i,t,r,o,f,e,c),v.base=u.__e,v.__h.length&&f.push(v),k&&(v.__E=v.__=null),v.__e=!1;}else null==o&&u.__v===i.__v?(u.__k=i.__k,u.__e=i.__e):u.__e=$(i.__e,u,i,t,r,o,f,c);(s=n.diffed)&&s(u);}catch(l){u.__v=null,n.__e(l,u,i);}return u.__e}function T(l,u){n.__c&&n.__c(u,l),l.some(function(u){try{l=u.__h,u.__h=[],l.some(function(n){n.call(u);});}catch(l){n.__e(l,u.__v);}});}function $(n,l,u,i,t,r,o,f){var s,a,v,h,p,y=u.props,d=l.props;if(t="svg"===l.type||t,null!=r)for(s=0;s<r.length;s++)if(null!=(a=r[s])&&((null===l.type?3===a.nodeType:a.localName===l.type)||n==a)){n=a,r[s]=null;break}if(null==n){if(null===l.type)return document.createTextNode(d);n=t?document.createElementNS("http://www.w3.org/2000/svg",l.type):document.createElement(l.type,d.is&&{is:d.is}),r=null,f=!1;}if(null===l.type)y!==d&&n.data!=d&&(n.data=d);else{if(null!=r&&(r=c.slice.call(n.childNodes)),v=(y=u.props||e).dangerouslySetInnerHTML,h=d.dangerouslySetInnerHTML,!f){if(y===e)for(y={},p=0;p<n.attributes.length;p++)y[n.attributes[p].name]=n.attributes[p].value;(h||v)&&(h&&v&&h.__html==v.__html||(n.innerHTML=h&&h.__html||""));}P(n,d,y,t,f),h?l.__k=[]:(l.__k=l.props.children,b(n,l,u,i,"foreignObject"!==l.type&&t,r,o,e,f)),f||("value"in d&&void 0!==(s=d.value)&&s!==n.value&&N(n,"value",s,y.value,!1),"checked"in d&&void 0!==(s=d.checked)&&s!==n.checked&&N(n,"checked",s,y.checked,!1));}return n}function j(l,u,i){try{"function"==typeof l?l(u):l.current=u;}catch(l){n.__e(l,i);}}function D(l,u,i){var t,r,o;if(n.unmount&&n.unmount(l),(t=l.ref)&&(t.current&&t.current!==l.__e||j(t,null,u)),i||"function"==typeof l.type||(i=null!=(r=l.__e)),l.__e=l.__d=void 0,null!=(t=l.__c)){if(t.componentWillUnmount)try{t.componentWillUnmount();}catch(l){n.__e(l,u);}t.base=t.__P=null;}if(t=l.__k)for(o=0;o<t.length;o++)t[o]&&D(t[o],u,i);null!=r&&v(r);}function E(n,l,u){return this.constructor(n,u)}function H(l,u,i){var t,r,f;n.__&&n.__(l,u),r=(t=i===o)?null:i&&i.__k||u.__k,l=h(d,null,[l]),f=[],A(u,(t?u:i||u).__k=l,r||e,e,void 0!==u.ownerSVGElement,i&&!t?[i]:r?null:c.slice.call(u.childNodes),f,i||e,t),T(f,l);}function M(n){var l={},u={__c:"__cC"+f++,__:n,Consumer:function(n,l){return n.children(l)},Provider:function(n){var i,t=this;return this.getChildContext||(i=[],this.getChildContext=function(){return l[u.__c]=t,l},this.shouldComponentUpdate=function(n){t.props.value!==n.value&&i.some(function(l){l.context=n.value,g(l);});},this.sub=function(n){i.push(n);var l=n.componentWillUnmount;n.componentWillUnmount=function(){i.splice(i.indexOf(n),1),l&&l.call(n);};}),n.children}};return u.Consumer.contextType=u,u.Provider.__=u,u}n={__e:function(n,l){for(var u,i;l=l.__;)if((u=l.__c)&&!u.__)try{if(u.constructor&&null!=u.constructor.getDerivedStateFromError&&(i=!0,u.setState(u.constructor.getDerivedStateFromError(n))),null!=u.componentDidCatch&&(i=!0,u.componentDidCatch(n)),i)return g(u.__E=u)}catch(l){n=l;}throw n}},m.prototype.setState=function(n,l){var u;u=this.__s!==this.state?this.__s:this.__s=a({},this.state),"function"==typeof n&&(n=n(u,this.props)),n&&a(u,n),null!=n&&this.__v&&(l&&this.__h.push(l),g(this));},m.prototype.forceUpdate=function(n){this.__v&&(this.__e=!0,n&&this.__h.push(n),g(this));},m.prototype.render=d,u=[],i=0,t="function"==typeof Promise?Promise.prototype.then.bind(Promise.resolve()):setTimeout,o=e,f=0;//# sourceMappingURL=preact.module.js.map
+    var n,u,i,t,r,o,f,e={},c=[],s=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord/i;function a(n,l){for(var u in l)n[u]=l[u];return n}function v(n){var l=n.parentNode;l&&l.removeChild(n);}function h(n,l,u){var i,t=arguments,r={};for(i in l)"key"!==i&&"ref"!==i&&(r[i]=l[i]);if(arguments.length>3)for(u=[u],i=3;i<arguments.length;i++)u.push(t[i]);if(null!=u&&(r.children=u),"function"==typeof n&&null!=n.defaultProps)for(i in n.defaultProps)void 0===r[i]&&(r[i]=n.defaultProps[i]);return p(n,r,l&&l.key,l&&l.ref,null)}function p(l,u,i,t,r){var o={type:l,props:u,key:i,ref:t,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,constructor:void 0,__v:r};return null==r&&(o.__v=o),n.vnode&&n.vnode(o),o}function y(){return {}}function d(n){return n.children}function m(n,l){this.props=n,this.context=l;}function w(n,l){if(null==l)return n.__?w(n.__,n.__.__k.indexOf(n)+1):null;for(var u;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e)return u.__e;return "function"==typeof n.type?w(n):null}function k(n){var l,u;if(null!=(n=n.__)&&null!=n.__c){for(n.__e=n.__c.base=null,l=0;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e){n.__e=n.__c.base=u.__e;break}return k(n)}}function g(l){(!l.__d&&(l.__d=!0)&&u.push(l)&&!i++||r!==n.debounceRendering)&&((r=n.debounceRendering)||t)(_);}function _(){for(var n;i=u.length;)n=u.sort(function(n,l){return n.__v.__b-l.__v.__b}),u=[],n.some(function(n){var l,u,i,t,r,o,f;n.__d&&(o=(r=(l=n).__v).__e,(f=l.__P)&&(u=[],(i=a({},r)).__v=i,t=A(f,r,i,l.__n,void 0!==f.ownerSVGElement,null,u,null==o?w(r):o),T(u,r),t!=o&&k(r)));});}function b(n,l,u,i,t,r,o,f,s){var a,h,p,y,d,m,k,g=u&&u.__k||c,_=g.length;if(f==e&&(f=null!=r?r[0]:_?w(u,0):null),a=0,l.__k=x(l.__k,function(u){if(null!=u){if(u.__=l,u.__b=l.__b+1,null===(p=g[a])||p&&u.key==p.key&&u.type===p.type)g[a]=void 0;else for(h=0;h<_;h++){if((p=g[h])&&u.key==p.key&&u.type===p.type){g[h]=void 0;break}p=null;}if(y=A(n,u,p=p||e,i,t,r,o,f,s),(h=u.ref)&&p.ref!=h&&(k||(k=[]),p.ref&&k.push(p.ref,null,u),k.push(h,u.__c||y,u)),null!=y){var c;if(null==m&&(m=y),void 0!==u.__d)c=u.__d,u.__d=void 0;else if(r==p||y!=f||null==y.parentNode){n:if(null==f||f.parentNode!==n)n.appendChild(y),c=null;else{for(d=f,h=0;(d=d.nextSibling)&&h<_;h+=2)if(d==y)break n;n.insertBefore(y,f),c=f;}"option"==l.type&&(n.value="");}f=void 0!==c?c:y.nextSibling,"function"==typeof l.type&&(l.__d=f);}else f&&p.__e==f&&f.parentNode!=n&&(f=w(p));}return a++,u}),l.__e=m,null!=r&&"function"!=typeof l.type)for(a=r.length;a--;)null!=r[a]&&v(r[a]);for(a=_;a--;)null!=g[a]&&D(g[a],g[a]);if(k)for(a=0;a<k.length;a++)j(k[a],k[++a],k[++a]);}function x(n,l,u){if(null==u&&(u=[]),null==n||"boolean"==typeof n)l&&u.push(l(null));else if(Array.isArray(n))for(var i=0;i<n.length;i++)x(n[i],l,u);else u.push(l?l("string"==typeof n||"number"==typeof n?p(null,n,null,null,n):null!=n.__e||null!=n.__c?p(n.type,n.props,n.key,null,n.__v):n):n);return u}function P(n,l,u,i,t){var r;for(r in u)"children"===r||"key"===r||r in l||N(n,r,null,u[r],i);for(r in l)t&&"function"!=typeof l[r]||"children"===r||"key"===r||"value"===r||"checked"===r||u[r]===l[r]||N(n,r,l[r],u[r],i);}function C(n,l,u){"-"===l[0]?n.setProperty(l,u):n[l]="number"==typeof u&&!1===s.test(l)?u+"px":null==u?"":u;}function N(n,l,u,i,t){var r,o,f,e,c;if(t?"className"===l&&(l="class"):"class"===l&&(l="className"),"style"===l)if(r=n.style,"string"==typeof u)r.cssText=u;else{if("string"==typeof i&&(r.cssText="",i=null),i)for(e in i)u&&e in u||C(r,e,"");if(u)for(c in u)i&&u[c]===i[c]||C(r,c,u[c]);}else"o"===l[0]&&"n"===l[1]?(o=l!==(l=l.replace(/Capture$/,"")),f=l.toLowerCase(),l=(f in n?f:l).slice(2),u?(i||n.addEventListener(l,z,o),(n.l||(n.l={}))[l]=u):n.removeEventListener(l,z,o)):"list"!==l&&"tagName"!==l&&"form"!==l&&"type"!==l&&"size"!==l&&!t&&l in n?n[l]=null==u?"":u:"function"!=typeof u&&"dangerouslySetInnerHTML"!==l&&(l!==(l=l.replace(/^xlink:?/,""))?null==u||!1===u?n.removeAttributeNS("http://www.w3.org/1999/xlink",l.toLowerCase()):n.setAttributeNS("http://www.w3.org/1999/xlink",l.toLowerCase(),u):null==u||!1===u&&!/^ar/.test(l)?n.removeAttribute(l):n.setAttribute(l,u));}function z(l){this.l[l.type](n.event?n.event(l):l);}function A(l,u,i,t,r,o,f,e,c){var s,v,h,p,y,w,k,g,_,x,P=u.type;if(void 0!==u.constructor)return null;(s=n.__b)&&s(u);try{n:if("function"==typeof P){if(g=u.props,_=(s=P.contextType)&&t[s.__c],x=s?_?_.props.value:s.__:t,i.__c?k=(v=u.__c=i.__c).__=v.__E:("prototype"in P&&P.prototype.render?u.__c=v=new P(g,x):(u.__c=v=new m(g,x),v.constructor=P,v.render=E),_&&_.sub(v),v.props=g,v.state||(v.state={}),v.context=x,v.__n=t,h=v.__d=!0,v.__h=[]),null==v.__s&&(v.__s=v.state),null!=P.getDerivedStateFromProps&&(v.__s==v.state&&(v.__s=a({},v.__s)),a(v.__s,P.getDerivedStateFromProps(g,v.__s))),p=v.props,y=v.state,h)null==P.getDerivedStateFromProps&&null!=v.componentWillMount&&v.componentWillMount(),null!=v.componentDidMount&&v.__h.push(v.componentDidMount);else{if(null==P.getDerivedStateFromProps&&g!==p&&null!=v.componentWillReceiveProps&&v.componentWillReceiveProps(g,x),!v.__e&&null!=v.shouldComponentUpdate&&!1===v.shouldComponentUpdate(g,v.__s,x)||u.__v===i.__v&&!v.__){for(v.props=g,v.state=v.__s,u.__v!==i.__v&&(v.__d=!1),v.__v=u,u.__e=i.__e,u.__k=i.__k,v.__h.length&&f.push(v),s=0;s<u.__k.length;s++)u.__k[s]&&(u.__k[s].__=u);break n}null!=v.componentWillUpdate&&v.componentWillUpdate(g,v.__s,x),null!=v.componentDidUpdate&&v.__h.push(function(){v.componentDidUpdate(p,y,w);});}v.context=x,v.props=g,v.state=v.__s,(s=n.__r)&&s(u),v.__d=!1,v.__v=u,v.__P=l,s=v.render(v.props,v.state,v.context),u.__k=null!=s&&s.type==d&&null==s.key?s.props.children:Array.isArray(s)?s:[s],null!=v.getChildContext&&(t=a(a({},t),v.getChildContext())),h||null==v.getSnapshotBeforeUpdate||(w=v.getSnapshotBeforeUpdate(p,y)),b(l,u,i,t,r,o,f,e,c),v.base=u.__e,v.__h.length&&f.push(v),k&&(v.__E=v.__=null),v.__e=!1;}else null==o&&u.__v===i.__v?(u.__k=i.__k,u.__e=i.__e):u.__e=$(i.__e,u,i,t,r,o,f,c);(s=n.diffed)&&s(u);}catch(l){u.__v=null,n.__e(l,u,i);}return u.__e}function T(l,u){n.__c&&n.__c(u,l),l.some(function(u){try{l=u.__h,u.__h=[],l.some(function(n){n.call(u);});}catch(l){n.__e(l,u.__v);}});}function $(n,l,u,i,t,r,o,f){var s,a,v,h,p,y=u.props,d=l.props;if(t="svg"===l.type||t,null!=r)for(s=0;s<r.length;s++)if(null!=(a=r[s])&&((null===l.type?3===a.nodeType:a.localName===l.type)||n==a)){n=a,r[s]=null;break}if(null==n){if(null===l.type)return document.createTextNode(d);n=t?document.createElementNS("http://www.w3.org/2000/svg",l.type):document.createElement(l.type,d.is&&{is:d.is}),r=null,f=!1;}if(null===l.type)y!==d&&n.data!=d&&(n.data=d);else{if(null!=r&&(r=c.slice.call(n.childNodes)),v=(y=u.props||e).dangerouslySetInnerHTML,h=d.dangerouslySetInnerHTML,!f){if(y===e)for(y={},p=0;p<n.attributes.length;p++)y[n.attributes[p].name]=n.attributes[p].value;(h||v)&&(h&&v&&h.__html==v.__html||(n.innerHTML=h&&h.__html||""));}P(n,d,y,t,f),h?l.__k=[]:(l.__k=l.props.children,b(n,l,u,i,"foreignObject"!==l.type&&t,r,o,e,f)),f||("value"in d&&void 0!==(s=d.value)&&s!==n.value&&N(n,"value",s,y.value,!1),"checked"in d&&void 0!==(s=d.checked)&&s!==n.checked&&N(n,"checked",s,y.checked,!1));}return n}function j(l,u,i){try{"function"==typeof l?l(u):l.current=u;}catch(l){n.__e(l,i);}}function D(l,u,i){var t,r,o;if(n.unmount&&n.unmount(l),(t=l.ref)&&(t.current&&t.current!==l.__e||j(t,null,u)),i||"function"==typeof l.type||(i=null!=(r=l.__e)),l.__e=l.__d=void 0,null!=(t=l.__c)){if(t.componentWillUnmount)try{t.componentWillUnmount();}catch(l){n.__e(l,u);}t.base=t.__P=null;}if(t=l.__k)for(o=0;o<t.length;o++)t[o]&&D(t[o],u,i);null!=r&&v(r);}function E(n,l,u){return this.constructor(n,u)}function H(l,u,i){var t,r,f;n.__&&n.__(l,u),r=(t=i===o)?null:i&&i.__k||u.__k,l=h(d,null,[l]),f=[],A(u,(t?u:i||u).__k=l,r||e,e,void 0!==u.ownerSVGElement,i&&!t?[i]:r?null:c.slice.call(u.childNodes),f,i||e,t),T(f,l);}function M(n){var l={},u={__c:"__cC"+f++,__:n,Consumer:function(n,l){return n.children(l)},Provider:function(n){var i,t=this;return this.getChildContext||(i=[],this.getChildContext=function(){return l[u.__c]=t,l},this.shouldComponentUpdate=function(n){t.props.value!==n.value&&i.some(function(l){l.context=n.value,g(l);});},this.sub=function(n){i.push(n);var l=n.componentWillUnmount;n.componentWillUnmount=function(){i.splice(i.indexOf(n),1),l&&l.call(n);};}),n.children}};return u.Consumer.contextType=u,u.Provider.__=u,u}n={__e:function(n,l){for(var u,i;l=l.__;)if((u=l.__c)&&!u.__)try{if(u.constructor&&null!=u.constructor.getDerivedStateFromError&&(i=!0,u.setState(u.constructor.getDerivedStateFromError(n))),null!=u.componentDidCatch&&(i=!0,u.componentDidCatch(n)),i)return g(u.__E=u)}catch(l){n=l;}throw n}},m.prototype.setState=function(n,l){var u;u=this.__s!==this.state?this.__s:this.__s=a({},this.state),"function"==typeof n&&(n=n(u,this.props)),n&&a(u,n),null!=n&&this.__v&&(l&&this.__h.push(l),g(this));},m.prototype.forceUpdate=function(n){this.__v&&(this.__e=!0,n&&this.__h.push(n),g(this));},m.prototype.render=d,u=[],i=0,t="function"==typeof Promise?Promise.prototype.then.bind(Promise.resolve()):setTimeout,o=e,f=0;
 
     /*!
     FullCalendar Core Package v5.0.0-beta.2
@@ -14826,7 +14826,7 @@ var app = (function () {
     const { console: console_1 } = globals;
     const file$3 = "src/svelte/reservationsMachines/reservationsMachines.svelte";
 
-    // (261:4) <div slot="title" class="text-xl sm:text-2xl font-bold text-center">
+    // (271:4) <div slot="title" class="text-xl sm:text-2xl font-bold text-center">
     function create_title_slot_2(ctx) {
     	let div;
 
@@ -14836,7 +14836,7 @@ var app = (function () {
     			div.textContent = `Réservation de ${titreMachine}`;
     			attr_dev(div, "slot", "title");
     			attr_dev(div, "class", "text-xl sm:text-2xl font-bold text-center");
-    			add_location(div, file$3, 260, 4, 8564);
+    			add_location(div, file$3, 270, 4, 8791);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -14851,61 +14851,92 @@ var app = (function () {
     		block,
     		id: create_title_slot_2.name,
     		type: "slot",
-    		source: "(261:4) <div slot=\\\"title\\\" class=\\\"text-xl sm:text-2xl font-bold text-center\\\">",
+    		source: "(271:4) <div slot=\\\"title\\\" class=\\\"text-xl sm:text-2xl font-bold text-center\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (314:8) <Bouton largeur="w-10" on:actionBouton={fini} >
-    function create_default_slot_8(ctx) {
+    // (324:8) {#if emailIsValid}
+    function create_if_block$3(ctx) {
+    	let current_block_type_index;
+    	let if_block;
+    	let if_block_anchor;
     	let current;
+    	const if_block_creators = [create_if_block_1$2, create_else_block$2];
+    	const if_blocks = [];
 
-    	const fa = new Fa({
-    			props: {
-    				icon: faArrowLeft,
-    				size: "lg",
-    				class: "mx-auto"
-    			},
-    			$$inline: true
-    		});
+    	function select_block_type(ctx, dirty) {
+    		if (!/*flagEffacerResa*/ ctx[8]) return 0;
+    		return 1;
+    	}
+
+    	current_block_type_index = select_block_type(ctx);
+    	if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
 
     	const block = {
     		c: function create() {
-    			create_component(fa.$$.fragment);
+    			if_block.c();
+    			if_block_anchor = empty();
     		},
     		m: function mount(target, anchor) {
-    			mount_component(fa, target, anchor);
+    			if_blocks[current_block_type_index].m(target, anchor);
+    			insert_dev(target, if_block_anchor, anchor);
     			current = true;
     		},
-    		p: noop,
+    		p: function update(ctx, dirty) {
+    			let previous_block_index = current_block_type_index;
+    			current_block_type_index = select_block_type(ctx);
+
+    			if (current_block_type_index === previous_block_index) {
+    				if_blocks[current_block_type_index].p(ctx, dirty);
+    			} else {
+    				group_outros();
+
+    				transition_out(if_blocks[previous_block_index], 1, 1, () => {
+    					if_blocks[previous_block_index] = null;
+    				});
+
+    				check_outros();
+    				if_block = if_blocks[current_block_type_index];
+
+    				if (!if_block) {
+    					if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+    					if_block.c();
+    				}
+
+    				transition_in(if_block, 1);
+    				if_block.m(if_block_anchor.parentNode, if_block_anchor);
+    			}
+    		},
     		i: function intro(local) {
     			if (current) return;
-    			transition_in(fa.$$.fragment, local);
+    			transition_in(if_block);
     			current = true;
     		},
     		o: function outro(local) {
-    			transition_out(fa.$$.fragment, local);
+    			transition_out(if_block);
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			destroy_component(fa, detaching);
+    			if_blocks[current_block_type_index].d(detaching);
+    			if (detaching) detach_dev(if_block_anchor);
     		}
     	};
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_8.name,
-    		type: "slot",
-    		source: "(314:8) <Bouton largeur=\\\"w-10\\\" on:actionBouton={fini} >",
+    		id: create_if_block$3.name,
+    		type: "if",
+    		source: "(324:8) {#if emailIsValid}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (321:8) {:else}
+    // (329:12) {:else}
     function create_else_block$2(ctx) {
     	let current;
 
@@ -14913,13 +14944,13 @@ var app = (function () {
     			props: {
     				largeur: "w-12",
     				couleur: "text-rougeLBF border-rougeLBF",
-    				$$slots: { default: [create_default_slot_7] },
+    				$$slots: { default: [create_default_slot_8] },
     				$$scope: { ctx }
     			},
     			$$inline: true
     		});
 
-    	bouton.$on("actionBouton", /*actionBouton_handler*/ ctx[33]);
+    	bouton.$on("actionBouton", /*actionBouton_handler*/ ctx[35]);
 
     	const block = {
     		c: function create() {
@@ -14932,7 +14963,7 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const bouton_changes = {};
 
-    			if (dirty[1] & /*$$scope*/ 128) {
+    			if (dirty[1] & /*$$scope*/ 512) {
     				bouton_changes.$$scope = { dirty, ctx };
     			}
 
@@ -14956,15 +14987,15 @@ var app = (function () {
     		block,
     		id: create_else_block$2.name,
     		type: "else",
-    		source: "(321:8) {:else}",
+    		source: "(329:12) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (317:8) {#if !flagEffacerResa}
-    function create_if_block$3(ctx) {
+    // (325:12) {#if !flagEffacerResa}
+    function create_if_block_1$2(ctx) {
     	let current;
 
     	const bouton = new Bouton({
@@ -14972,13 +15003,13 @@ var app = (function () {
     				largeur: "w-12",
     				couleur: "text-rougeLBF border-rougeLBF",
     				occupe: /*busySauverReservation*/ ctx[7],
-    				$$slots: { default: [create_default_slot_6] },
+    				$$slots: { default: [create_default_slot_7] },
     				$$scope: { ctx }
     			},
     			$$inline: true
     		});
 
-    	bouton.$on("actionBouton", /*sauverReservation*/ ctx[15]);
+    	bouton.$on("actionBouton", /*sauverReservation*/ ctx[16]);
 
     	const block = {
     		c: function create() {
@@ -14992,7 +15023,7 @@ var app = (function () {
     			const bouton_changes = {};
     			if (dirty[0] & /*busySauverReservation*/ 128) bouton_changes.occupe = /*busySauverReservation*/ ctx[7];
 
-    			if (dirty[1] & /*$$scope*/ 128) {
+    			if (dirty[1] & /*$$scope*/ 512) {
     				bouton_changes.$$scope = { dirty, ctx };
     			}
 
@@ -15014,17 +15045,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$3.name,
+    		id: create_if_block_1$2.name,
     		type: "if",
-    		source: "(317:8) {#if !flagEffacerResa}",
+    		source: "(325:12) {#if !flagEffacerResa}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (322:12) <Bouton largeur="w-12" couleur = "text-rougeLBF border-rougeLBF" on:actionBouton={() => flagConfirmationEffacerResa = true}>
-    function create_default_slot_7(ctx) {
+    // (330:20) <Bouton largeur="w-12" couleur = "text-rougeLBF border-rougeLBF" on:actionBouton={() => flagConfirmationEffacerResa = true}>
+    function create_default_slot_8(ctx) {
     	let current;
 
     	const fa = new Fa({
@@ -15061,17 +15092,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_7.name,
+    		id: create_default_slot_8.name,
     		type: "slot",
-    		source: "(322:12) <Bouton largeur=\\\"w-12\\\" couleur = \\\"text-rougeLBF border-rougeLBF\\\" on:actionBouton={() => flagConfirmationEffacerResa = true}>",
+    		source: "(330:20) <Bouton largeur=\\\"w-12\\\" couleur = \\\"text-rougeLBF border-rougeLBF\\\" on:actionBouton={() => flagConfirmationEffacerResa = true}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (318:8) <Bouton largeur="w-12" couleur = "text-rougeLBF border-rougeLBF" occupe={busySauverReservation} on:actionBouton={sauverReservation}>
-    function create_default_slot_6(ctx) {
+    // (326:16) <Bouton largeur="w-12" couleur = "text-rougeLBF border-rougeLBF" occupe={busySauverReservation} on:actionBouton={sauverReservation}>
+    function create_default_slot_7(ctx) {
     	let current;
 
     	const fa = new Fa({
@@ -15108,107 +15139,140 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_6.name,
+    		id: create_default_slot_7.name,
     		type: "slot",
-    		source: "(318:8) <Bouton largeur=\\\"w-12\\\" couleur = \\\"text-rougeLBF border-rougeLBF\\\" occupe={busySauverReservation} on:actionBouton={sauverReservation}>",
+    		source: "(326:16) <Bouton largeur=\\\"w-12\\\" couleur = \\\"text-rougeLBF border-rougeLBF\\\" occupe={busySauverReservation} on:actionBouton={sauverReservation}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (313:4) <div slot="actions">
+    // (335:8) <Bouton largeur="w-10" on:actionBouton={fini} >
+    function create_default_slot_6(ctx) {
+    	let current;
+
+    	const fa = new Fa({
+    			props: {
+    				icon: faArrowLeft,
+    				size: "lg",
+    				class: "mx-auto"
+    			},
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			create_component(fa.$$.fragment);
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(fa, target, anchor);
+    			current = true;
+    		},
+    		p: noop,
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(fa.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(fa.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(fa, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_6.name,
+    		type: "slot",
+    		source: "(335:8) <Bouton largeur=\\\"w-10\\\" on:actionBouton={fini} >",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (323:4) <div slot="actions">
     function create_actions_slot_2(ctx) {
     	let div;
     	let t;
-    	let current_block_type_index;
-    	let if_block;
     	let current;
+    	let if_block = /*emailIsValid*/ ctx[12] && create_if_block$3(ctx);
 
     	const bouton = new Bouton({
     			props: {
     				largeur: "w-10",
-    				$$slots: { default: [create_default_slot_8] },
+    				$$slots: { default: [create_default_slot_6] },
     				$$scope: { ctx }
     			},
     			$$inline: true
     		});
 
-    	bouton.$on("actionBouton", /*fini*/ ctx[16]);
-    	const if_block_creators = [create_if_block$3, create_else_block$2];
-    	const if_blocks = [];
-
-    	function select_block_type(ctx, dirty) {
-    		if (!/*flagEffacerResa*/ ctx[8]) return 0;
-    		return 1;
-    	}
-
-    	current_block_type_index = select_block_type(ctx);
-    	if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+    	bouton.$on("actionBouton", /*fini*/ ctx[17]);
 
     	const block = {
     		c: function create() {
     			div = element("div");
-    			create_component(bouton.$$.fragment);
+    			if (if_block) if_block.c();
     			t = space();
-    			if_block.c();
+    			create_component(bouton.$$.fragment);
     			attr_dev(div, "slot", "actions");
-    			add_location(div, file$3, 312, 4, 11187);
+    			add_location(div, file$3, 322, 4, 11414);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
-    			mount_component(bouton, div, null);
+    			if (if_block) if_block.m(div, null);
     			append_dev(div, t);
-    			if_blocks[current_block_type_index].m(div, null);
+    			mount_component(bouton, div, null);
     			current = true;
     		},
     		p: function update(ctx, dirty) {
+    			if (/*emailIsValid*/ ctx[12]) {
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
+    					transition_in(if_block, 1);
+    				} else {
+    					if_block = create_if_block$3(ctx);
+    					if_block.c();
+    					transition_in(if_block, 1);
+    					if_block.m(div, t);
+    				}
+    			} else if (if_block) {
+    				group_outros();
+
+    				transition_out(if_block, 1, 1, () => {
+    					if_block = null;
+    				});
+
+    				check_outros();
+    			}
+
     			const bouton_changes = {};
 
-    			if (dirty[1] & /*$$scope*/ 128) {
+    			if (dirty[1] & /*$$scope*/ 512) {
     				bouton_changes.$$scope = { dirty, ctx };
     			}
 
     			bouton.$set(bouton_changes);
-    			let previous_block_index = current_block_type_index;
-    			current_block_type_index = select_block_type(ctx);
-
-    			if (current_block_type_index === previous_block_index) {
-    				if_blocks[current_block_type_index].p(ctx, dirty);
-    			} else {
-    				group_outros();
-
-    				transition_out(if_blocks[previous_block_index], 1, 1, () => {
-    					if_blocks[previous_block_index] = null;
-    				});
-
-    				check_outros();
-    				if_block = if_blocks[current_block_type_index];
-
-    				if (!if_block) {
-    					if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
-    					if_block.c();
-    				}
-
-    				transition_in(if_block, 1);
-    				if_block.m(div, null);
-    			}
     		},
     		i: function intro(local) {
     			if (current) return;
-    			transition_in(bouton.$$.fragment, local);
     			transition_in(if_block);
+    			transition_in(bouton.$$.fragment, local);
     			current = true;
     		},
     		o: function outro(local) {
-    			transition_out(bouton.$$.fragment, local);
     			transition_out(if_block);
+    			transition_out(bouton.$$.fragment, local);
     			current = false;
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
+    			if (if_block) if_block.d();
     			destroy_component(bouton);
-    			if_blocks[current_block_type_index].d();
     		}
     	};
 
@@ -15216,18 +15280,18 @@ var app = (function () {
     		block,
     		id: create_actions_slot_2.name,
     		type: "slot",
-    		source: "(313:4) <div slot=\\\"actions\\\">",
+    		source: "(323:4) <div slot=\\\"actions\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (260:0) <Dialog bind:visible={flagReservation} on:close={fini}>
+    // (270:0) <Dialog bind:visible={flagReservation} on:close={fini}>
     function create_default_slot_5(ctx) {
     	let t0;
     	let h3;
-    	let t1_value = /*dataReservation*/ ctx[1].dateDebut.toLocaleDateString("fr-fr", /*options*/ ctx[12]) + "";
+    	let t1_value = /*dataReservation*/ ctx[1].dateDebut.toLocaleDateString("fr-fr", /*options*/ ctx[13]) + "";
     	let t1;
     	let t2;
     	let t3;
@@ -15305,52 +15369,52 @@ var app = (function () {
     			t18 = text("\n                Enregistrer mes coordonnées pour la prochaine fois (ces informations sont stockées sur votre ordinateur)");
     			t19 = space();
     			attr_dev(h3, "class", "text-lg font-bold text-center text-vertLBF border-b border-vertLBF pb-3 mb-1");
-    			add_location(h3, file$3, 261, 4, 8672);
-    			add_location(div0, file$3, 267, 12, 9080);
+    			add_location(h3, file$3, 271, 4, 8899);
+    			add_location(div0, file$3, 277, 12, 9307);
     			attr_dev(input0, "class", "w-full p-1 text-sm bg-gray-300 text-gray-900 rounded focus:outline-none appearance-none leading-normal");
     			attr_dev(input0, "type", "text");
     			attr_dev(input0, "id", "prenomResa");
-    			add_location(input0, file$3, 269, 16, 9176);
+    			add_location(input0, file$3, 279, 16, 9403);
     			attr_dev(div1, "class", "border border-vertLBF rounded p-1");
-    			add_location(div1, file$3, 268, 12, 9112);
+    			add_location(div1, file$3, 278, 12, 9339);
     			attr_dev(label0, "for", "prenomResa");
     			attr_dev(label0, "class", "w-full md:w-1/2 mx-1 my-1 flex flex-col");
-    			add_location(label0, file$3, 266, 12, 8995);
-    			add_location(div2, file$3, 278, 12, 9569);
+    			add_location(label0, file$3, 276, 12, 9222);
+    			add_location(div2, file$3, 288, 12, 9796);
     			attr_dev(input1, "class", "w-full p-1 text-sm bg-gray-300 text-gray-900 rounded focus:outline-none appearance-none leading-normal");
     			attr_dev(input1, "type", "text");
     			attr_dev(input1, "id", "nomResa");
-    			add_location(input1, file$3, 280, 16, 9662);
+    			add_location(input1, file$3, 290, 16, 9889);
     			attr_dev(div3, "class", "border border-vertLBF rounded p-1");
-    			add_location(div3, file$3, 279, 12, 9598);
+    			add_location(div3, file$3, 289, 12, 9825);
     			attr_dev(label1, "for", "nomResa");
     			attr_dev(label1, "class", "w-full md:w-1/2 mx-1 my-1 flex flex-col");
-    			add_location(label1, file$3, 277, 12, 9487);
+    			add_location(label1, file$3, 287, 12, 9714);
     			attr_dev(div4, "class", "w-full flex flex-row flex-wrap md:flex-no-wrap");
-    			add_location(div4, file$3, 265, 12, 8922);
-    			add_location(div5, file$3, 290, 12, 10070);
+    			add_location(div4, file$3, 275, 12, 9149);
+    			add_location(div5, file$3, 300, 12, 10297);
     			attr_dev(input2, "class", "w-full p-1 text-sm bg-gray-300 text-gray-900 rounded focus:outline-none appearance-none leading-normal");
     			attr_dev(input2, "type", "text");
     			attr_dev(input2, "id", "emailResa");
-    			add_location(input2, file$3, 292, 16, 10174);
+    			add_location(input2, file$3, 302, 16, 10401);
     			attr_dev(div6, "class", "border border-vertLBF rounded p-1");
-    			add_location(div6, file$3, 291, 12, 10110);
+    			add_location(div6, file$3, 301, 12, 10337);
     			attr_dev(label2, "for", "emailResa");
     			attr_dev(label2, "class", "mx-1 my-1 flex flex-col");
-    			add_location(label2, file$3, 289, 8, 10002);
+    			add_location(label2, file$3, 299, 8, 10229);
     			attr_dev(div7, "class", "text-base max-w-320px mx-auto text-justify");
-    			add_location(div7, file$3, 300, 8, 10495);
+    			add_location(div7, file$3, 310, 8, 10722);
     			attr_dev(input3, "type", "checkbox");
     			attr_dev(input3, "class", "form-checkbox text-lbfvert-600 focus:outline-none");
     			attr_dev(input3, "id", "checkSaveInfo");
-    			add_location(input3, file$3, 306, 16, 10880);
+    			add_location(input3, file$3, 316, 16, 11107);
     			attr_dev(label3, "for", "checkSaveInfo");
     			attr_dev(label3, "class", "mx-8 pr-8 my-1 text-sm");
-    			add_location(label3, file$3, 305, 12, 10805);
+    			add_location(label3, file$3, 315, 12, 11032);
     			attr_dev(div8, "class", "mt-2 max-w-320px mx-auto");
-    			add_location(div8, file$3, 304, 8, 10754);
+    			add_location(div8, file$3, 314, 8, 10981);
     			attr_dev(div9, "class", "mt-2 mb-2");
-    			add_location(div9, file$3, 264, 8, 8886);
+    			add_location(div9, file$3, 274, 8, 9113);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, t0, anchor);
@@ -15395,14 +15459,14 @@ var app = (function () {
     			if (remount) run_all(dispose);
 
     			dispose = [
-    				listen_dev(input0, "input", /*input0_input_handler*/ ctx[29]),
-    				listen_dev(input1, "input", /*input1_input_handler*/ ctx[30]),
-    				listen_dev(input2, "input", /*input2_input_handler*/ ctx[31]),
-    				listen_dev(input3, "change", /*input3_change_handler*/ ctx[32])
+    				listen_dev(input0, "input", /*input0_input_handler*/ ctx[31]),
+    				listen_dev(input1, "input", /*input1_input_handler*/ ctx[32]),
+    				listen_dev(input2, "input", /*input2_input_handler*/ ctx[33]),
+    				listen_dev(input3, "change", /*input3_change_handler*/ ctx[34])
     			];
     		},
     		p: function update(ctx, dirty) {
-    			if ( t1_value !== (t1_value = /*dataReservation*/ ctx[1].dateDebut.toLocaleDateString("fr-fr", /*options*/ ctx[12]) + "")) set_data_dev(t1, t1_value);
+    			if ( t1_value !== (t1_value = /*dataReservation*/ ctx[1].dateDebut.toLocaleDateString("fr-fr", /*options*/ ctx[13]) + "")) set_data_dev(t1, t1_value);
     			set_data_dev(t3, /*horaireDebut*/ ctx[3]);
     			set_data_dev(t5, /*horaireFin*/ ctx[4]);
 
@@ -15438,14 +15502,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_5.name,
     		type: "slot",
-    		source: "(260:0) <Dialog bind:visible={flagReservation} on:close={fini}>",
+    		source: "(270:0) <Dialog bind:visible={flagReservation} on:close={fini}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (330:4) <h4 slot="title">
+    // (342:4) <h4 slot="title">
     function create_title_slot_1(ctx) {
     	let h4;
 
@@ -15454,7 +15518,7 @@ var app = (function () {
     			h4 = element("h4");
     			h4.textContent = "Confirmation";
     			attr_dev(h4, "slot", "title");
-    			add_location(h4, file$3, 329, 4, 11952);
+    			add_location(h4, file$3, 341, 4, 12280);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h4, anchor);
@@ -15468,14 +15532,14 @@ var app = (function () {
     		block,
     		id: create_title_slot_1.name,
     		type: "slot",
-    		source: "(330:4) <h4 slot=\\\"title\\\">",
+    		source: "(342:4) <h4 slot=\\\"title\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (333:8) <Bouton on:actionBouton={() => flagConfirmationEffacerResa = false}>
+    // (345:8) <Bouton on:actionBouton={() => flagConfirmationEffacerResa = false}>
     function create_default_slot_4(ctx) {
     	let t;
 
@@ -15495,14 +15559,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_4.name,
     		type: "slot",
-    		source: "(333:8) <Bouton on:actionBouton={() => flagConfirmationEffacerResa = false}>",
+    		source: "(345:8) <Bouton on:actionBouton={() => flagConfirmationEffacerResa = false}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (334:8) <Bouton occupe={busyEffacerResa} on:actionBouton = {effaceReservation} couleur="text-orangeLBF border-orangeLBF">
+    // (346:8) <Bouton occupe={busyEffacerResa} on:actionBouton = {effaceReservation} couleur="text-orangeLBF border-orangeLBF">
     function create_default_slot_3(ctx) {
     	let t;
 
@@ -15522,14 +15586,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_3.name,
     		type: "slot",
-    		source: "(334:8) <Bouton occupe={busyEffacerResa} on:actionBouton = {effaceReservation} couleur=\\\"text-orangeLBF border-orangeLBF\\\">",
+    		source: "(346:8) <Bouton occupe={busyEffacerResa} on:actionBouton = {effaceReservation} couleur=\\\"text-orangeLBF border-orangeLBF\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (332:4) <div slot="actions" class="flex flex-row justify-end items-center">
+    // (344:4) <div slot="actions" class="flex flex-row justify-end items-center">
     function create_actions_slot_1(ctx) {
     	let div;
     	let t;
@@ -15543,7 +15607,7 @@ var app = (function () {
     			$$inline: true
     		});
 
-    	bouton0.$on("actionBouton", /*actionBouton_handler_1*/ ctx[35]);
+    	bouton0.$on("actionBouton", /*actionBouton_handler_1*/ ctx[37]);
 
     	const bouton1 = new Bouton({
     			props: {
@@ -15555,7 +15619,7 @@ var app = (function () {
     			$$inline: true
     		});
 
-    	bouton1.$on("actionBouton", /*effaceReservation*/ ctx[13]);
+    	bouton1.$on("actionBouton", /*effaceReservation*/ ctx[14]);
 
     	const block = {
     		c: function create() {
@@ -15565,7 +15629,7 @@ var app = (function () {
     			create_component(bouton1.$$.fragment);
     			attr_dev(div, "slot", "actions");
     			attr_dev(div, "class", "flex flex-row justify-end items-center");
-    			add_location(div, file$3, 331, 4, 12048);
+    			add_location(div, file$3, 343, 4, 12376);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -15577,7 +15641,7 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const bouton0_changes = {};
 
-    			if (dirty[1] & /*$$scope*/ 128) {
+    			if (dirty[1] & /*$$scope*/ 512) {
     				bouton0_changes.$$scope = { dirty, ctx };
     			}
 
@@ -15585,7 +15649,7 @@ var app = (function () {
     			const bouton1_changes = {};
     			if (dirty[0] & /*busyEffacerResa*/ 512) bouton1_changes.occupe = /*busyEffacerResa*/ ctx[9];
 
-    			if (dirty[1] & /*$$scope*/ 128) {
+    			if (dirty[1] & /*$$scope*/ 512) {
     				bouton1_changes.$$scope = { dirty, ctx };
     			}
 
@@ -15613,14 +15677,14 @@ var app = (function () {
     		block,
     		id: create_actions_slot_1.name,
     		type: "slot",
-    		source: "(332:4) <div slot=\\\"actions\\\" class=\\\"flex flex-row justify-end items-center\\\">",
+    		source: "(344:4) <div slot=\\\"actions\\\" class=\\\"flex flex-row justify-end items-center\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (329:0) <Dialog bind:visible={flagConfirmationEffacerResa} >
+    // (341:0) <Dialog bind:visible={flagConfirmationEffacerResa} >
     function create_default_slot_2(ctx) {
     	let t0;
     	let p;
@@ -15632,7 +15696,7 @@ var app = (function () {
     			p = element("p");
     			p.textContent = "Confirmer la suppression de votre réservation";
     			t2 = space();
-    			add_location(p, file$3, 330, 4, 11991);
+    			add_location(p, file$3, 342, 4, 12319);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, t0, anchor);
@@ -15653,14 +15717,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_2.name,
     		type: "slot",
-    		source: "(329:0) <Dialog bind:visible={flagConfirmationEffacerResa} >",
+    		source: "(341:0) <Dialog bind:visible={flagConfirmationEffacerResa} >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (339:4) <h4 slot="title">
+    // (351:4) <h4 slot="title">
     function create_title_slot(ctx) {
     	let h4;
 
@@ -15669,7 +15733,7 @@ var app = (function () {
     			h4 = element("h4");
     			h4.textContent = "Confirmé";
     			attr_dev(h4, "slot", "title");
-    			add_location(h4, file$3, 338, 4, 12441);
+    			add_location(h4, file$3, 350, 4, 12769);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h4, anchor);
@@ -15683,14 +15747,14 @@ var app = (function () {
     		block,
     		id: create_title_slot.name,
     		type: "slot",
-    		source: "(339:4) <h4 slot=\\\"title\\\">",
+    		source: "(351:4) <h4 slot=\\\"title\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (342:8) <Bouton on:actionBouton={retourSite}>
+    // (354:8) <Bouton on:actionBouton={retourSite}>
     function create_default_slot_1(ctx) {
     	let t;
 
@@ -15710,14 +15774,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_1.name,
     		type: "slot",
-    		source: "(342:8) <Bouton on:actionBouton={retourSite}>",
+    		source: "(354:8) <Bouton on:actionBouton={retourSite}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (341:4) <div slot="actions" class="flex flex-row justify-end items-center">
+    // (353:4) <div slot="actions" class="flex flex-row justify-end items-center">
     function create_actions_slot(ctx) {
     	let div;
     	let current;
@@ -15730,7 +15794,7 @@ var app = (function () {
     			$$inline: true
     		});
 
-    	bouton.$on("actionBouton", /*retourSite*/ ctx[14]);
+    	bouton.$on("actionBouton", /*retourSite*/ ctx[15]);
 
     	const block = {
     		c: function create() {
@@ -15738,7 +15802,7 @@ var app = (function () {
     			create_component(bouton.$$.fragment);
     			attr_dev(div, "slot", "actions");
     			attr_dev(div, "class", "flex flex-row justify-end items-center");
-    			add_location(div, file$3, 340, 4, 12526);
+    			add_location(div, file$3, 352, 4, 12854);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -15748,7 +15812,7 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const bouton_changes = {};
 
-    			if (dirty[1] & /*$$scope*/ 128) {
+    			if (dirty[1] & /*$$scope*/ 512) {
     				bouton_changes.$$scope = { dirty, ctx };
     			}
 
@@ -15773,14 +15837,14 @@ var app = (function () {
     		block,
     		id: create_actions_slot.name,
     		type: "slot",
-    		source: "(341:4) <div slot=\\\"actions\\\" class=\\\"flex flex-row justify-end items-center\\\">",
+    		source: "(353:4) <div slot=\\\"actions\\\" class=\\\"flex flex-row justify-end items-center\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (338:0) <Dialog bind:visible={flagEffaceOK} >
+    // (350:0) <Dialog bind:visible={flagEffaceOK} >
     function create_default_slot(ctx) {
     	let t0;
     	let p;
@@ -15792,7 +15856,7 @@ var app = (function () {
     			p = element("p");
     			p.textContent = "Votre réservation a bien été supprimé.";
     			t2 = space();
-    			add_location(p, file$3, 339, 4, 12476);
+    			add_location(p, file$3, 351, 4, 12804);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, t0, anchor);
@@ -15813,7 +15877,7 @@ var app = (function () {
     		block,
     		id: create_default_slot.name,
     		type: "slot",
-    		source: "(338:0) <Dialog bind:visible={flagEffaceOK} >",
+    		source: "(350:0) <Dialog bind:visible={flagEffaceOK} >",
     		ctx
     	});
 
@@ -15832,7 +15896,7 @@ var app = (function () {
     	let current;
 
     	function dialog0_visible_binding(value) {
-    		/*dialog0_visible_binding*/ ctx[34].call(null, value);
+    		/*dialog0_visible_binding*/ ctx[36].call(null, value);
     	}
 
     	let dialog0_props = {
@@ -15850,10 +15914,10 @@ var app = (function () {
 
     	const dialog0 = new Dialog({ props: dialog0_props, $$inline: true });
     	binding_callbacks.push(() => bind(dialog0, "visible", dialog0_visible_binding));
-    	dialog0.$on("close", /*fini*/ ctx[16]);
+    	dialog0.$on("close", /*fini*/ ctx[17]);
 
     	function dialog1_visible_binding(value) {
-    		/*dialog1_visible_binding*/ ctx[36].call(null, value);
+    		/*dialog1_visible_binding*/ ctx[38].call(null, value);
     	}
 
     	let dialog1_props = {
@@ -15873,7 +15937,7 @@ var app = (function () {
     	binding_callbacks.push(() => bind(dialog1, "visible", dialog1_visible_binding));
 
     	function dialog2_visible_binding(value) {
-    		/*dialog2_visible_binding*/ ctx[37].call(null, value);
+    		/*dialog2_visible_binding*/ ctx[39].call(null, value);
     	}
 
     	let dialog2_props = {
@@ -15902,8 +15966,8 @@ var app = (function () {
     			create_component(dialog1.$$.fragment);
     			t2 = space();
     			create_component(dialog2.$$.fragment);
-    			add_location(div, file$3, 256, 4, 8429);
-    			add_location(main, file$3, 255, 0, 8417);
+    			add_location(div, file$3, 266, 4, 8656);
+    			add_location(main, file$3, 265, 0, 8644);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -15911,7 +15975,7 @@ var app = (function () {
     		m: function mount(target, anchor) {
     			insert_dev(target, main, anchor);
     			append_dev(main, div);
-    			/*div_binding*/ ctx[28](div);
+    			/*div_binding*/ ctx[30](div);
     			insert_dev(target, t0, anchor);
     			mount_component(dialog0, target, anchor);
     			insert_dev(target, t1, anchor);
@@ -15923,7 +15987,7 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const dialog0_changes = {};
 
-    			if (dirty[0] & /*busySauverReservation, flagEffacerResa, flagConfirmationEffacerResa, saveInfo, userInfo, horaireFin, horaireDebut, dataReservation*/ 1530 | dirty[1] & /*$$scope*/ 128) {
+    			if (dirty[0] & /*busySauverReservation, flagEffacerResa, flagConfirmationEffacerResa, emailIsValid, saveInfo, userInfo, horaireFin, horaireDebut, dataReservation*/ 5626 | dirty[1] & /*$$scope*/ 512) {
     				dialog0_changes.$$scope = { dirty, ctx };
     			}
 
@@ -15936,7 +16000,7 @@ var app = (function () {
     			dialog0.$set(dialog0_changes);
     			const dialog1_changes = {};
 
-    			if (dirty[0] & /*busyEffacerResa, flagConfirmationEffacerResa*/ 1536 | dirty[1] & /*$$scope*/ 128) {
+    			if (dirty[0] & /*busyEffacerResa, flagConfirmationEffacerResa*/ 1536 | dirty[1] & /*$$scope*/ 512) {
     				dialog1_changes.$$scope = { dirty, ctx };
     			}
 
@@ -15949,7 +16013,7 @@ var app = (function () {
     			dialog1.$set(dialog1_changes);
     			const dialog2_changes = {};
 
-    			if (dirty[1] & /*$$scope*/ 128) {
+    			if (dirty[1] & /*$$scope*/ 512) {
     				dialog2_changes.$$scope = { dirty, ctx };
     			}
 
@@ -15976,7 +16040,7 @@ var app = (function () {
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(main);
-    			/*div_binding*/ ctx[28](null);
+    			/*div_binding*/ ctx[30](null);
     			if (detaching) detach_dev(t0);
     			destroy_component(dialog0, detaching);
     			if (detaching) detach_dev(t1);
@@ -16026,6 +16090,15 @@ var app = (function () {
     		day: "numeric"
     	};
 
+    	const optionsAvecHeures = {
+    		weekday: "long",
+    		year: "numeric",
+    		month: "long",
+    		day: "numeric",
+    		hour: "numeric",
+    		minute: "2-digit"
+    	};
+
     	let saveInfo = false;
 
     	if (localStorage["userInfo"]) {
@@ -16041,10 +16114,11 @@ var app = (function () {
     	let flagConfirmationEffacerResa = false;
     	let flagEffaceOK = false;
     	let extracted;
+    	let emailIsValid = userInfo.email !== "";
 
     	listePlagesHoraires().then(retour => {
     		const retourPlage = retour[0].plages;
-    		$$invalidate(18, businessHours = []);
+    		$$invalidate(19, businessHours = []);
 
     		for (let i = 0; i < 7; i++) {
     			for (let j = 0; j < nbPlagesJour; j++) {
@@ -16058,18 +16132,10 @@ var app = (function () {
     			}
     		}
 
-    		$$invalidate(18, businessHours);
+    		$$invalidate(19, businessHours);
     	});
 
     	function effaceReservation() {
-    		if (saveInfo) {
-    			localStorage.setItem("userInfo", JSON.stringify(userInfo));
-    		}
-
-    		if (!saveInfo && localStorage["userInfo"]) {
-    			localStorage.removeItem("userInfo");
-    		}
-
     		$$invalidate(9, busyEffacerResa = true);
 
     		effacerReservation({ id: extracted[1] }).then(retour => {
@@ -16086,14 +16152,6 @@ var app = (function () {
     	}
 
     	function sauverReservation() {
-    		if (saveInfo) {
-    			localStorage.setItem("userInfo", JSON.stringify(userInfo));
-    		}
-
-    		if (!saveInfo && localStorage["userInfo"]) {
-    			localStorage.removeItem("userInfo");
-    		}
-
     		$$invalidate(7, busySauverReservation = true);
     		let variables = { ...userInfo, ...dataReservation };
     		variables.idMachine = idMachine;
@@ -16106,7 +16164,8 @@ var app = (function () {
     	}
 
     	function mailConfirmation(idResa) {
-    		let tempDuree = (dataReservation.dateFin - dataReservation.dateFin) / 1000 / 60;
+    		let tempDuree = (dataReservation.dateFin - dataReservation.dateDebut) / 1000 / 60;
+    		console.log("tempsDuree", tempDuree);
     		let dureeString = Math.floor(tempDuree / 60) + "h";
     		dureeString += tempDuree % 60 === 0 ? "00" : tempDuree % 60;
     		let arrayMails = [];
@@ -16116,7 +16175,7 @@ var app = (function () {
     			machine: titreMachine,
     			prenom: dataReservation.prenom,
     			duration: dureeString,
-    			jour: dataReservation.dateDebut.toLocaleDateString("fr-fr", options).replace(":", "h"),
+    			jour: dataReservation.dateDebut.toLocaleDateString("fr-fr", optionsAvecHeures).replace(":", "h"),
     			urlDelete: urlEffacerResa.origin + urlEffacerResa.pathname + "?idReservation=" + idResa,
     			altMachine: titreMachine,
     			urlImageMail: "https://res.cloudinary.com/la-bonne-fabrique/image/upload/ar_1.5,w_200,c_fill/" + urlImageMachine
@@ -16132,7 +16191,7 @@ var app = (function () {
     	}
 
     	onMount(() => {
-    		$$invalidate(17, calendar = new Calendar(calendarEl,
+    		$$invalidate(18, calendar = new Calendar(calendarEl,
     		{
     				selectable: true,
     				editable: false,
@@ -16214,6 +16273,15 @@ var app = (function () {
     	});
 
     	function fini() {
+    		if (saveInfo) {
+    			localStorage.setItem("userInfo", JSON.stringify(userInfo));
+    		}
+
+    		if (!saveInfo && localStorage["userInfo"]) {
+    			localStorage.removeItem("userInfo");
+    			$$invalidate(6, userInfo = { nom: "", prenom: "", email: "" });
+    		}
+
     		$$invalidate(2, flagReservation = false);
     	}
 
@@ -16305,6 +16373,7 @@ var app = (function () {
     		minutesDebut,
     		minutesFin,
     		options,
+    		optionsAvecHeures,
     		saveInfo,
     		userInfo,
     		busySauverReservation,
@@ -16313,6 +16382,7 @@ var app = (function () {
     		flagConfirmationEffacerResa,
     		flagEffaceOK,
     		extracted,
+    		emailIsValid,
     		effaceReservation,
     		retourSite,
     		sauverReservation,
@@ -16322,9 +16392,9 @@ var app = (function () {
 
     	$$self.$inject_state = $$props => {
     		if ("calendarEl" in $$props) $$invalidate(0, calendarEl = $$props.calendarEl);
-    		if ("calendar" in $$props) $$invalidate(17, calendar = $$props.calendar);
+    		if ("calendar" in $$props) $$invalidate(18, calendar = $$props.calendar);
     		if ("flagBH" in $$props) flagBH = $$props.flagBH;
-    		if ("businessHours" in $$props) $$invalidate(18, businessHours = $$props.businessHours);
+    		if ("businessHours" in $$props) $$invalidate(19, businessHours = $$props.businessHours);
     		if ("nbPlagesJour" in $$props) nbPlagesJour = $$props.nbPlagesJour;
     		if ("dataReservation" in $$props) $$invalidate(1, dataReservation = $$props.dataReservation);
     		if ("flagReservation" in $$props) $$invalidate(2, flagReservation = $$props.flagReservation);
@@ -16332,8 +16402,8 @@ var app = (function () {
     		if ("jourDebutCalendrier" in $$props) jourDebutCalendrier = $$props.jourDebutCalendrier;
     		if ("horaireDebut" in $$props) $$invalidate(3, horaireDebut = $$props.horaireDebut);
     		if ("horaireFin" in $$props) $$invalidate(4, horaireFin = $$props.horaireFin);
-    		if ("minutesDebut" in $$props) $$invalidate(19, minutesDebut = $$props.minutesDebut);
-    		if ("minutesFin" in $$props) $$invalidate(20, minutesFin = $$props.minutesFin);
+    		if ("minutesDebut" in $$props) $$invalidate(20, minutesDebut = $$props.minutesDebut);
+    		if ("minutesFin" in $$props) $$invalidate(21, minutesFin = $$props.minutesFin);
     		if ("saveInfo" in $$props) $$invalidate(5, saveInfo = $$props.saveInfo);
     		if ("userInfo" in $$props) $$invalidate(6, userInfo = $$props.userInfo);
     		if ("busySauverReservation" in $$props) $$invalidate(7, busySauverReservation = $$props.busySauverReservation);
@@ -16342,6 +16412,7 @@ var app = (function () {
     		if ("flagConfirmationEffacerResa" in $$props) $$invalidate(10, flagConfirmationEffacerResa = $$props.flagConfirmationEffacerResa);
     		if ("flagEffaceOK" in $$props) $$invalidate(11, flagEffaceOK = $$props.flagEffaceOK);
     		if ("extracted" in $$props) extracted = $$props.extracted;
+    		if ("emailIsValid" in $$props) $$invalidate(12, emailIsValid = $$props.emailIsValid);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -16349,7 +16420,7 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty[0] & /*calendar, businessHours*/ 393216) {
+    		if ($$self.$$.dirty[0] & /*calendar, businessHours*/ 786432) {
     			 {
     				if (calendar) {
     					calendar.setOption("businessHours", businessHours);
@@ -16359,15 +16430,15 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty[0] & /*dataReservation, minutesDebut, minutesFin*/ 1572866) {
+    		if ($$self.$$.dirty[0] & /*dataReservation, minutesDebut, minutesFin*/ 3145730) {
     			 {
-    				$$invalidate(19, minutesDebut = dataReservation.dateDebut.getMinutes() === 0
+    				$$invalidate(20, minutesDebut = dataReservation.dateDebut.getMinutes() === 0
     				? "00"
     				: dataReservation.dateDebut.getMinutes());
 
     				$$invalidate(3, horaireDebut = dataReservation.dateDebut.getHours() + "h" + minutesDebut);
 
-    				$$invalidate(20, minutesFin = dataReservation.dateFin.getMinutes() === 0
+    				$$invalidate(21, minutesFin = dataReservation.dateFin.getMinutes() === 0
     				? "00"
     				: dataReservation.dateFin.getMinutes());
 
@@ -16375,7 +16446,7 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty[0] & /*busySauverReservation, calendar*/ 131200) {
+    		if ($$self.$$.dirty[0] & /*busySauverReservation, calendar*/ 262272) {
     			 {
     				if (!busySauverReservation) {
     					listeReservations({ idMachine }).then(liste => {
@@ -16398,6 +16469,12 @@ var app = (function () {
     				}
     			}
     		}
+
+    		if ($$self.$$.dirty[0] & /*userInfo*/ 64) {
+    			 {
+    				$$invalidate(12, emailIsValid = (/([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/i).exec(userInfo.email) !== null);
+    			}
+    		}
     	};
 
     	return [
@@ -16413,6 +16490,7 @@ var app = (function () {
     		busyEffacerResa,
     		flagConfirmationEffacerResa,
     		flagEffaceOK,
+    		emailIsValid,
     		options,
     		effaceReservation,
     		retourSite,
@@ -16428,6 +16506,7 @@ var app = (function () {
     		nbPlagesJour,
     		laVue,
     		jourDebutCalendrier,
+    		optionsAvecHeures,
     		mailConfirmation,
     		div_binding,
     		input0_input_handler,

@@ -34,6 +34,15 @@ const options = {
     month: "long",
     day: "numeric"
     };
+const optionsAvecHeures =
+    {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit"
+    };
 let saveInfo=false;
 if (localStorage["userInfo"]) {
     var userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -48,6 +57,7 @@ let busyEffacerResa = false;
 let flagConfirmationEffacerResa = false;
 let flagEffaceOK = false;
 let extracted;
+let emailIsValid = userInfo.email!==""
 
 $: {
     if (calendar) {
@@ -101,13 +111,11 @@ $: {
     }
 }
 
+$: {
+    emailIsValid = /([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/i.exec(userInfo.email)!==null
+}
+
 function effaceReservation () {
-    if (saveInfo) {
-      localStorage.setItem("userInfo", JSON.stringify(userInfo));
-    }
-    if (!saveInfo && localStorage["userInfo"]) {
-      localStorage.removeItem("userInfo");
-    }
     busyEffacerResa = true
     effacerReservation({id: extracted[1]}).then((retour)=>{
         busyEffacerResa = false;
@@ -123,12 +131,6 @@ function retourSite() {
 }
 
 function sauverReservation() {
-    if (saveInfo) {
-      localStorage.setItem("userInfo", JSON.stringify(userInfo));
-    }
-    if (!saveInfo && localStorage["userInfo"]) {
-      localStorage.removeItem("userInfo");
-    }
     busySauverReservation = true
     let variables = {
         ...userInfo,
@@ -143,7 +145,8 @@ function sauverReservation() {
 }
 
 function mailConfirmation(idResa) {
-    let tempDuree = (dataReservation.dateFin - dataReservation.dateFin)/1000/60
+    let tempDuree = (dataReservation.dateFin - dataReservation.dateDebut)/1000/60
+    console.log('tempsDuree', tempDuree)
     let dureeString = Math.floor(tempDuree/60) + "h"
     dureeString += tempDuree % 60 === 0 ? "00" : tempDuree % 60
     let arrayMails = [];
@@ -153,7 +156,7 @@ function mailConfirmation(idResa) {
         prenom: dataReservation.prenom,
         duration: dureeString,
         jour: dataReservation.dateDebut
-            .toLocaleDateString("fr-fr", options)
+            .toLocaleDateString("fr-fr", optionsAvecHeures)
             .replace(":", "h"),
         urlDelete:
             urlEffacerResa.origin +
@@ -248,6 +251,13 @@ onMount(()=> {
 })
 
 function fini() {
+    if (saveInfo) {
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
+    }
+    if (!saveInfo && localStorage["userInfo"]) {
+      localStorage.removeItem("userInfo");
+      userInfo = { nom: "", prenom: "", email: "" };
+    }
     flagReservation = false;
 }
 </script>
@@ -311,18 +321,20 @@ function fini() {
         
     </div>
     <div slot="actions">
+        {#if emailIsValid}
+            {#if !flagEffacerResa}
+                <Bouton largeur="w-12" couleur = "text-rougeLBF border-rougeLBF" occupe={busySauverReservation} on:actionBouton={sauverReservation}>
+                    <Fa icon={faSave} size="lg" class="mx-auto" />
+                </Bouton>
+            {:else}
+                    <Bouton largeur="w-12" couleur = "text-rougeLBF border-rougeLBF" on:actionBouton={() => flagConfirmationEffacerResa = true}>
+                    <Fa icon={faTrashAlt} size="lg" class="mx-auto" />
+                </Bouton>
+            {/if}
+        {/if}
         <Bouton largeur="w-10" on:actionBouton={fini} >
             <Fa icon={faArrowLeft} size="lg"  class="mx-auto" />
         </Bouton>
-        {#if !flagEffacerResa}
-        <Bouton largeur="w-12" couleur = "text-rougeLBF border-rougeLBF" occupe={busySauverReservation} on:actionBouton={sauverReservation}>
-            <Fa icon={faSave} size="lg" class="mx-auto" />
-        </Bouton>
-        {:else}
-            <Bouton largeur="w-12" couleur = "text-rougeLBF border-rougeLBF" on:actionBouton={() => flagConfirmationEffacerResa = true}>
-            <Fa icon={faTrashAlt} size="lg" class="mx-auto" />
-        </Bouton>
-        {/if}
     </div>
 </Dialog>
 <!-- confirmation effacer -->

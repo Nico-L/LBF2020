@@ -723,6 +723,11 @@ tranformation icon menu sur mobile
           transform: scale(0);
 }
 
+.listeMachines ul {
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
 /* import css svelte*/
 
 /*@tailwind components;*/

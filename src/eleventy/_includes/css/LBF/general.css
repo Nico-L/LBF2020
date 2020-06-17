@@ -89,3 +89,7 @@ tranformation icon menu sur mobile
 #menu-toggle:checked + label > #nav-icon > div {
   transform: scale(0);
 }
+
+.listeMachines ul {
+    @apply list-disc list-inside;
+}
