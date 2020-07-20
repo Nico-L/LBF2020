@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 
-const graphqlURL = process.env.HASURA_ENDPOINT;
+/* const graphqlURL = process.env.HASURA_ENDPOINT;
 
 const query = `
 query listeMachines {
@@ -22,15 +22,14 @@ query listeMachines {
   }
 }
 `;
-
+*/
 async function fetchMachinesData() {
-  const leFetch = await fetch(graphqlURL, {
-    method: "POST",
+  const leFetch = await fetch("https://cms.labonnefabrique.fr/machines", {
+    method: "get",
     headers: {
       "Content-Type": "application/json"
     },
     cache: "no-store",
-    body: JSON.stringify({ query })
   });
 
   return leFetch.json();
@@ -38,6 +37,6 @@ async function fetchMachinesData() {
 
 module.exports = async function() {
   let result = await fetchMachinesData();
-  //console.log("retour",result.errors[0].extensions)
-  return result.data.machines;
+  //console.log("retour",result)
+  return result;
 };

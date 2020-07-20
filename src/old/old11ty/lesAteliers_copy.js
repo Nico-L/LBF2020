@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 
-/*const graphqlURL = process.env.HASURA_ENDPOINT;
+const graphqlURL = process.env.HASURA_ENDPOINT;
 
 const query = `
 query lesAteliers {
@@ -43,22 +43,4 @@ module.exports = async function() {
   let result = await fetchData();
   //console.log("retour",result.errors[0].extensions)
   return result.data.ateliers;
-};*/
-
-async function fetchAteliersData() {
-  const leFetch = await fetch("https://cms.labonnefabrique.fr/ateliers?token=blueberryfields&_sort=date:ASC", {
-    method: "get",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    cache: "no-store",
-  });
-
-  return leFetch.json();
-}
-
-module.exports = async function() {
-  let result = await fetchAteliersData();
-  //console.log("retour",result)
-  return result;
 };

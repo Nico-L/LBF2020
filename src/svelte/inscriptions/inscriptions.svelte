@@ -35,6 +35,7 @@
     var confirmeDesinscrit = false
     var confirmeInscription = false
     let saveInfo = false;
+    let idInscrit = ""
     let modal;
     if (localStorage["emailInscription"]) {
         var emailInscription = JSON.parse(localStorage.getItem("emailInscription"));
@@ -44,6 +45,7 @@
     }
 	/*functions*/
     import * as gestionInscriptions from '../utils/graphqlInscrits.js'
+    import * as strapiInscriptions from '../utils/strapiInscrits.js'
     import { envoiMail } from '../utils/graphqlEmails.js'
 
 //récupération nb inscrits au montage
@@ -67,42 +69,73 @@ onMount(async () => {
 
     // appels graphql
     async function nbInscrits() {
-        nbPlaces = await gestionInscriptions.nbInscrits(id_atelier)
-        flagComplet = false
-        if (nbPlaces === 0) {
-            placesRestantes = "Complet"
-            flagComplet = true
-            nouveauxInscrits = []
-        } else if (nbPlaces === 1) {
-            placesRestantes = "Dernière place"
-        } else {
-            placesRestantes = nbPlaces + " places restantes"
-        }
+        console.log('bobby ?', strapiInscriptions.nbInscrits(id_atelier))
+        strapiInscriptions.nbInscrits(id_atelier).then((retourNbPlaces) => {
+            nbPlaces = retourNbPlaces
+            console.log('bob')
+            flagComplet = false
+            if (nbPlaces === 0) {
+                placesRestantes = "Complet"
+                flagComplet = true
+                nouveauxInscrits = []
+            } else if (nbPlaces === 1) {
+                placesRestantes = "Dernière place"
+            } else {
+                placesRestantes = nbPlaces + " places restantes"
+            }
+        })
+        //nbPlaces = await strapiInscriptions.nbInscrits(id_atelier)
     }
 
 	async function verifInscrits() {
         if(emailInscription==="") {flagEmailVide = true; return;}
         if(/([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/i.exec(emailInscription) === null) {flagEmailInvalide = true; return;}
         saveInfoEmail()
-		actionEncours = true
-        listeInscrits = await gestionInscriptions.getInscrits(emailInscription, id_atelier)
-        if (listeInscrits.length > 0) {nouveauxInscrits = []} else { nouveauxInscrits = [{nom: "", prenom: ""}]}
-		actionEncours = false
-		flagEmailVerifie = true
+        actionEncours = true
+        strapiInscriptions.findOneInscrit(id_atelier, emailInscription)
+            .then((retour)=>{
+                const verifInscrits = JSON.parse(retour)[0]
+                if (verifInscrits) {idInscrit = verifInscrits.id} else {idInscrit = "pasInscrit"}
+                if (verifInscrits && verifInscrits.lesInscrits) {
+                    listeInscrits = verifInscrits.lesInscrits
+                }
+                if (listeInscrits.length > 0) {nouveauxInscrits = []} else { nouveauxInscrits = [{prenom: ""}]}
+                actionEncours = false
+                flagEmailVerifie = true
+            })
 	}
 
 	async function insertInscrits() {
         saveInfoEmail()
-        var insertInscriptions = []
+        var insertInscriptions = {"email": emailInscription, "idAtelier": id_atelier, "lesInscrits": []}
         var listeInscriptionsEmail = []
+        listeInscrits.forEach((inscription) => {
+			if (!(inscription.prenom === "" && inscription.nom === "")) {
+                insertInscriptions.lesInscrits.push({"prenom": inscription.prenom})
+                listeInscriptionsEmail.push({"prenom": inscription.prenom})
+            }
+        })
 		nouveauxInscrits.forEach((inscription) => {
 			if (!(inscription.prenom === "" && inscription.nom === "")) {
-                insertInscriptions.push({"email": emailInscription, "prenom": inscription.prenom, "nom": inscription.nom, "atelier": id_atelier})
-                listeInscriptionsEmail.push({"prenom": inscription.prenom, "nom": inscription.nom})
+                insertInscriptions.lesInscrits.push({"prenom": inscription.prenom})
+                listeInscriptionsEmail.push({"prenom": inscription.prenom})
             }
-		})
-        var insertInscrits = await gestionInscriptions.ajoutInscrits(insertInscriptions)
-        var arrayMails = []
+        })
+        if (idInscrit==="pasInscrit") {
+            strapiInscriptions.ajoutInscrits(insertInscriptions).then((retour) => {
+                nbInscrits()
+                close()
+                confirmeInscription = true
+            })
+        } else {
+            strapiInscriptions.modifInscription(idInscrit.toString(),insertInscriptions).then((retour) => {
+                nbInscrits()
+                close()
+                confirmeInscription = true
+            })
+        }
+        
+        /* var arrayMails = []
         arrayMails.push(emailInscription)
         var infoMail = {
             subject: "Confirmation de votre inscription",
@@ -114,26 +147,30 @@ onMount(async () => {
             altMachine: "Illustration Atelier",
             urlImageMail: "https://res.cloudinary.com/la-bonne-fabrique/image/upload/ar_1.5,w_auto,c_fill/" + url_illustration
         };
-        envoiMail(arrayMails, infoMail)
-        nbInscrits()
-        close()
-        confirmeInscription = true
+        envoiMail(arrayMails, infoMail)*/
+
 	}
 
 	async function effacerInscription() {
-        saveInfoEmail()
-        busyEffacerInscription = true
-        var effacerInscription = await gestionInscriptions.effacerInscription(emailInscription, id_atelier)
-        nbInscrits()
-        busyEffacerInscription = false
-        close()
-        close()
-        confirmeDesinscription = true
+        if (idInscrit!=="pasInscrit") {
+            saveInfoEmail()
+            busyEffacerInscription = true
+            console.log('va effacer ', idInscrit)
+            strapiInscriptions.effacerInscription(idInscrit.toString())
+                .then((retour) => {
+                    nbInscrits()
+                    busyEffacerInscription = false
+                    close()
+                    close()
+                    confirmeDesinscription = true
+                }).catch((error) => console.log('erreur effacer inscription\n', error))
+        }
     }
     
     async function effacerInscrit() {
         saveInfoEmail()
         busyEffacerInscrit = true
+        console.log("id desincrit", desinscrit.id)
         var effacerInscritById = await gestionInscriptions.effacerInscritById(desinscrit.id)
         nbInscrits()
         busyEffacerInscrit = false
@@ -154,7 +191,7 @@ onMount(async () => {
 	}
 
 	function ajoutInscrit() {
-		if ((nbPlaces - nouveauxInscrits.length)>0) nouveauxInscrits.push({nom: "", prenom: ""})
+		if ((nbPlaces - nouveauxInscrits.length)>0) nouveauxInscrits.push({prenom: ""})
 		nouveauxInscrits = nouveauxInscrits
 	}
 
@@ -165,7 +202,10 @@ onMount(async () => {
     
     function validationSave() {
         var estValide = true
-        if (nouveauxInscrits.length === 0) {estValide = false}
+        //if (nouveauxInscrits.length === 0) {estValide = false}
+        listeInscrits.forEach((inscrit) => {
+            if (inscrit.prenom === "") {estValide = false}
+        })
         nouveauxInscrits.forEach((inscrit) => {
             if (inscrit.prenom === "") {estValide = false}
         })
@@ -325,14 +365,14 @@ function saveInfoEmail() {
 				<div class="flex flex-col sm:flex-row flex-wrap ">
 					<div class="flex flex-col sm:mr-2">
 						<div class="ml-1 text-xs m-0 p-0 font-medium text-bleuLBF">Prénom</div>
-						<input class="mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal"
+						<input on:input={validationSave} class="mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal"
 							type="text" placeholder="prenom" bind:value={inscrit.prenom}/>
 					</div>
-					<div class="flex flex-col sm:mr-2">
+					<!-- <div class="flex flex-col sm:mr-2">
 						<div class="ml-1 text-xs m-0 p-0 font-medium text-bleuLBF">Nom</div>
 						<input class="mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal"
 							type="text" placeholder="nom" bind:value={inscrit.nom}/>
-					</div>
+					</div> -->
 				</div>
                 {#if listeInscrits.length > 1}
 				<div class="my-auto sm:w-12 w-20">
@@ -353,11 +393,12 @@ function saveInfoEmail() {
                                 <input on:input={validationSave} class="mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal"
                                     type="text" placeholder="prenom" bind:value={nouvelInscrit.prenom}/>
                             </div>
-                            <div class="flex flex-col">
+                            <!--
+                                <div class="flex flex-col">
                                 <div class="ml-1 text-xs m-0 p-0 font-medium text-bleuLBF">Nom</div>
                                 <input class="mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal"
                                     type="text" placeholder="nom" bind:value={nouvelInscrit.nom}/>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="my-auto">
                             <svg on:click={soustraitInscrit(index)} class="mx-auto cursor-pointer mt-3 h-12 w-12 md:h-8 md:w-8 stroke-current text-rougeLBF" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" data-prefix="far" data-icon="trash-alt" viewBox="0 0 448 512">
@@ -366,13 +407,14 @@ function saveInfoEmail() {
                         </div>
                     </div>
                     {#if nouvelInscrit.prenom===""}
-                        <div class="text-sm font-medium text-rougeLBF ">Au moins le prénom est requis.</div>
+                        <div class="text-sm font-medium text-rougeLBF ">Le prénom est requis.</div>
                     {:else}
                         <div class="text-sm font-medium text-rougeLBF ">&nbsp;</div>
                     {/if}
 				</div>
 			{/each}
             </div>
+            {nbPlaces}
             {#if (nbPlaces-nouveauxInscrits.length) === 0}
                 <div class="text-sm sm:text-xs md:text-sm font-medium text-rougeLBF ">Cet atelier ne peut accepter plus de participants.</div>
             {/if}

@@ -33,10 +33,7 @@ export default [{
     // some cases you'll need additional configuration —
     // consult the documentation for details:
     // https://github.com/rollup/plugins/tree/master/packages/commonjs
-    resolve({
-      browser: false,
-      dedupe: importee => importee === "svelte" || importee.startsWith("svelte/")
-    }),
+    resolve(),
     commonjs({include: ["node_modules/**"]}),
     // In dev mode, call `npm run start` once
     // the bundle has been generated
@@ -51,6 +48,7 @@ export default [{
     production && terser()
   ],
   watch: {
+    usePolling: true,
     clearScreen: false
   }
 },
@@ -82,9 +80,7 @@ export default [{
     // some cases you'll need additional configuration —
     // consult the documentation for details:
     // https://github.com/rollup/plugins/tree/master/packages/commonjs
-    resolve({
-      browser: false
-    }),
+    resolve(),
     commonjs({include: ["node_modules/**"]}),
     // In dev mode, call `npm run start` once
     // the bundle has been generated
@@ -99,6 +95,7 @@ export default [{
     production && terser()
   ],
   watch: {
+    usePolling: true,
     clearScreen: false
   }
 }];

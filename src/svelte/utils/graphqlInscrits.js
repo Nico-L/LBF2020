@@ -115,6 +115,6 @@ export async function nbInscrits(idAtelier) {
         var inscrits = resultat.data.inscritsAteliers_aggregate.aggregate.count
         var nbPlaces = resultat.data.ateliers[0].nbParticipants
         return nbPlaces-inscrits
-  })
+  }).catch((error) => console.log('erreur', error))
   return query
 }

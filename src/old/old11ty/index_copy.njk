@@ -8,7 +8,7 @@ layout: baseLBF
     <div class="h-14 ml-16 flex flex-row content-center">
         <h1 class="text-lg font-bold mx-auto my-auto pl-2">{{atelier.titre}}</h1>
     </div>
-    <div class="relative h-180px" style="background-image: url(https://cms.labonnefabrique.fr{{atelier.illustration[0].formats.small.url}})">
+    <div class="relative h-180px" style="background-image: url(https://res.cloudinary.com/la-bonne-fabrique/image/upload/ar_16:9,c_fill/w_340,c_scale/{{atelier.urlImage}})">
         {% if atelier.surInscription %}
         <div class="absolute -bottom-2 left-0">
             <une-inscription id_atelier="{{atelier.id}}" url_illustration="{{atelier.urlImage}}" titre_atelier="{{atelier.titre}}" date_atelier="{{atelier.dateDebut | dateInscription(atelier.dateFin)}}"/>
@@ -16,8 +16,8 @@ layout: baseLBF
         {% endif %}
     </div>
     <div class="absolute top-0 left-0 bg-orangeLBF min-h-16 h-16 w-16 rounded-br mb-4">
-        <div class="text-black text-3xl font-bold my-0 p-0 text-center mx-auto">{{atelier.date | getJour}}</div>
-        <div class="text-black text-base font-bold my-0 p-0 text-center -mt-2 mx-auto">{{atelier.date | getMoisShort}}</div>
+        <div class="text-black text-3xl font-bold my-0 p-0 text-center mx-auto">{{atelier.dateDebut | getJour}}</div>
+        <div class="text-black text-base font-bold my-0 p-0 text-center -mt-2 mx-auto">{{atelier.dateDebut | getMoisShort}}</div>
     </div>
     <div class="mb-20">
         <div class="text-base text-justify mx-2 mt-2 mb-1 pb-2">
@@ -34,20 +34,18 @@ layout: baseLBF
                 <svg  class="mx-auto fill-current text-gray-800" width="30" height="30" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
                 <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/>
                 </svg>
-                <div class="mx-auto text-sm text-gray-800">{{atelier.debut | getHoraire}} - {{atelier.fin | getHoraire}}</div>
+                <div class="mx-auto text-sm text-gray-800">{{atelier.dateDebut | getHoraire}} - {{atelier.dateFin | getHoraire}}</div>
             </div>
-            {% if atelier.lesTarifs|length %}
             <div class="mx-1">
                 <svg  class="mx-auto fill-current text-gray-800" width="30" height="30" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
                 <path fill="currentColor" d="M310.706 413.765c-1.314-6.63-7.835-10.872-14.424-9.369-10.692 2.439-27.422 5.413-45.426 5.413-56.763 0-101.929-34.79-121.461-85.449h113.689a12 12 0 0011.708-9.369l6.373-28.36c1.686-7.502-4.019-14.631-11.708-14.631H115.22c-1.21-14.328-1.414-28.287.137-42.245H261.95a12 12 0 0011.723-9.434l6.512-29.755c1.638-7.484-4.061-14.566-11.723-14.566H130.184c20.633-44.991 62.69-75.03 117.619-75.03 14.486 0 28.564 2.25 37.851 4.145 6.216 1.268 12.347-2.498 14.002-8.623l11.991-44.368c1.822-6.741-2.465-13.616-9.326-14.917C290.217 34.912 270.71 32 249.635 32 152.451 32 74.03 92.252 45.075 176H12c-6.627 0-12 5.373-12 12v29.755c0 6.627 5.373 12 12 12h21.569c-1.009 13.607-1.181 29.287-.181 42.245H12c-6.627 0-12 5.373-12 12v28.36c0 6.627 5.373 12 12 12h30.114C67.139 414.692 145.264 480 249.635 480c26.301 0 48.562-4.544 61.101-7.788 6.167-1.595 10.027-7.708 8.788-13.957l-8.818-44.49z"/>
                 </svg>
                 <div class="mx-auto text-sm text-gray-800">
-                {% for tarif in atelier.lesTarifs %}
-                    {% if loop.last %} {{tarif.tarif}} € - {{tarif.description}} {% else %} {{tarif.tarif}} € - {{tarif.description}} <br /> {% endif %}
+                {% for tarif in atelier.tarifs %}
+                    {% if loop.last %} {{tarif[1]}} € - {{tarif[0]}} {% else %} {{tarif[1]}} € - {{tarif[0]}} <br /> {% endif %}
                 {% endfor %}
                 </div>
             </div>
-            {%endif%}
         </div>
     </div>
 </div>
