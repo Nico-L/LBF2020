@@ -59,10 +59,15 @@ module.exports = function(eleventyConfig) {
   });
 
   //récupération de l'horaire dans la fiche de l'atelier
-eleventyConfig.addFilter("getHoraire", function(value) {
+eleventyConfig.addFilter("getHoraire_old", function(value) {
     var d = DateTime.fromISO(value).setZone("Europe/Paris");
     var minute = d.minute == 0 ? '00': d.minute;
     return d.hour + "h" + minute;
+});
+
+eleventyConfig.addFilter("getHoraire", function(value) {
+    var d = value.split(':');
+    return d[0] + "h" + d[1];
 });
 
   //récupération du jour dans la fiche de l'atelier

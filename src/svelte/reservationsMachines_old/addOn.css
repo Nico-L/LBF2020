@@ -1,0 +1,38 @@
+/* adaptation FC LBF */
+.fc-day-today {
+  @apply bg-vertLBFT;
+}
+
+.fc-timegrid-event .fc-event-main {
+    @apply text-gray-900;
+}
+
+.event-titre-atelier {
+    @apply text-gray-900 text-base font-semibold truncate;
+}
+
+.event-img-atelier {
+    @apply rounded-sm mx-auto;
+}
+
+.fc-button-primary {
+    @apply bg-vertLBF text-gray-900;
+}
+
+.fc-non-business {
+    @apply bg-gray-900;
+}
+
+.fc-toolbar-title {
+    @apply text-base text-center font-medium;
+}
+
+@screen lg {
+  .fc-toolbar-title {
+    @apply text-2xl;
+  }
+}
+
+.fc-button-primary {
+    @apply text-base border;
+}
