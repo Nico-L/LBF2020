@@ -55,3 +55,8 @@ export function dateInscription(debut, fin) {
     var minuteFin = laFin.getMinutes() == 0 ? '00': laFin.getMinutes();
     return 'le ' + leJourSemaine + ' ' + leJour + ' ' + leMois + ' de ' + leDebut.getHours() + 'h' + minuteDebut + ' à ' + laFin.getHours() + 'h' + minuteFin;
 }
+
+export function horaireFr(horaire) {
+    let h = horaire.split(":")
+    return h[0] + 'h' + h[1]
+}
