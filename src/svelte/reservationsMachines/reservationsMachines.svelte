@@ -1,27 +1,28 @@
 <script>
 import {onMount} from 'svelte';
 import Datepicker from '../components/calendar/Datepicker.svelte'
-import { getJourSemaine, horaireFr, dateFr} from '../utils/dateFr.js'
+import { getJourSemaine, horaireFr, dateFr, dateFormatFr} from '../utils/dateFr.js'
 import RadioBouton from '../components/radioButtons.svelte'
 import Checkbox from '../components/Checkbox.svelte'
 import Fa from 'svelte-fa'
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
-
+import Bouton from '../components/bouton.svelte'
 import {tableCouleursLBF} from '../utils/couleursLBF.js'
 /* import requêtes */
 import {userData} from '../apollo/user.js'
-import {listePlagesHoraires, listeReservationsByDate,} from '../apollo/reservations.js'
+import {listePlagesHoraires, listeReservationsByDate, reserver} from '../apollo/reservations.js'
 
-
-var userInfo = { nom: "", prenom: "", email: "" };
 var mailValide = false
 var donneesUtilisateur = {}
+var estInscrit = false
 var estAbonne = false
-var nouvelleReservation = {machine:"", creneaux:[]}
+var nouvelleReservation = {machine:"", debut: "", fin: "", userId:"", estValide: false}
+var choixMachine = ""
 var plagesReservations = []
 var afficheCalendar = false
-const  dateFormat = "#{l} #{j} #{F} #{Y}"
+const dateFormat = "#{l} #{j} #{F} #{Y}"
 const aujourdhui = new Date()
+const aujourdhuiIso = (new Date()).toISOString().slice(0,10)
 var dateFinCalendrier = new Date()
 var dateChoisie = new Date()
 var dateChoisiePourRequete = dateChoisie
@@ -29,10 +30,19 @@ var listeReservations = []
 var listeReservationsFiltreMachine = []
 var creneauxDuJour = []
 var choixHoraire = {debut: "", fin: "", choixOK: false, duree: 0}
-var intervalCreneau = 1
-
+var intervalCreneau = 0.5
+let regexMail
 const tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+
 dateFinCalendrier.setMonth(dateFinCalendrier.getMonth()+24)
+
+let saveInfo=false;
+if (localStorage["userInfo"]) {
+    var userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    saveInfo = true;
+  } else {
+    var userInfo = { nom: "", prenom: "", email: "" };
+  }
 
 onMount(() => {
     /* if (localStorage["userInfo"]) {
@@ -52,139 +62,184 @@ onMount(() => {
 })
 
 $: {
-    var extracted = /([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/i.exec(userInfo.email)
-    mailValide = extracted!==null
-    if (extracted!==null) {
-        userData(userInfo.email).then((retour) => {donneesUtilisateur=retour})
+    regexMail = /([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/i.exec(userInfo.email)
+    mailValide = regexMail!==null
+    if (mailValide) {
+        userData(userInfo.email).then((retour) => {
+            donneesUtilisateur = retour
+            if (retour && retour.id) {estInscrit = true} else {estInscrit=false}
+        })
     }
 }
 
+/*
+recup liste des resa et construction des creneaux
+*/
 $: {
-    let zeDate = new Date(dateChoisie - tzoffset)
+    let zeDate = new Date(dateChoisie-tzoffset)
     dateChoisiePourRequete = zeDate.toISOString().slice(0,10)
     listeReservationsByDate(dateChoisiePourRequete).then((retour)=> {
         listeReservations = retour
     })
-    constructionCreneaux(zeDate);
+    constructionCreneaux(zeDate.toISOString());
 }
 
 /*
-recupération des créneaux déjà réservé
+recupération des créneaux déjà réservé filtré par machine
 */
 $: {
     listeReservationsFiltreMachine = listeReservations.filter((resa) => {
-        return resa.machine.tag === nouvelleReservation.machine
+        return Number(resa.machine.id) === Number(choixMachine.id)
         })
-    let zeDate = new Date(dateChoisie - tzoffset)
-    constructionCreneaux(zeDate);
+    let zeDate = new Date(dateChoisie)
+    constructionCreneaux(zeDate.toISOString());
+}
+
+$: {
+    if (choixMachine.abonnement) {intervalCreneau = 1} else {intervalCreneau = 0.5}
 }
 
 /*
 Gestion de la sélection des créneaux horaires
 */
 $: {
-    creneauxDuJour.forEach((lesCreneaux)=> {
-        let listeChecked = []
-        let indexMinReserve = 0 // max de l'index du créneau réservé inférieur au premier choix
-        let indexMaxReserve = 1000 // min de l'index du créneau réservé supérieur au premier choix
-        let flagDisabled = false
-        lesCreneaux.creneaux.forEach((leCreneau, index) => {
+    let plage = -1
+    let listeChecked = []
+    let indexMinReserve = 0 // max de l'index du créneau réservé inférieur au premier choix
+    let indexMaxReserve = 1000 // min de l'index du créneau réservé supérieur au premier choix
+    creneauxDuJour.forEach((lesCreneaux, indexPlage)=> {
+        lesCreneaux.forEach((leCreneau, index) => {
             if (leCreneau.checked) {
                 listeChecked.push({"debut": leCreneau.debut, "fin": leCreneau.fin, "index": index})
+                plage = indexPlage
             }
+        })
+        lesCreneaux.forEach((leCreneau, index) => {
             if (listeChecked.length > 0 && leCreneau.estReserve) {
                 if (index < listeChecked[0].index && index > indexMinReserve) indexMinReserve = index
                 if (index > listeChecked[0].index && index < indexMaxReserve) indexMaxReserve = index
             }
+            if (indexPlage===plage) {leCreneau.plageOK = true}
         })
-        if (listeChecked.length > 0) {
-            lesCreneaux.creneaux.forEach((leCreneau, index) => {
-                if (leCreneau.estReserve) {
-                    if (index < listeChecked[0].index && index > indexMinReserve) indexMinReserve = index
-                    if (index > listeChecked[0].index && index < indexMaxReserve) indexMaxReserve = index
-                }
-            })
-        }
         if (listeChecked.length === 0) {
-            flagDisabled = false
             choixHoraire.debut = ""
             choixHoraire.fin = ""
             choixHoraire.choixOK = false
+            plage = -1
         } else {
             choixHoraire.debut = listeChecked[0].debut
             choixHoraire.fin = listeChecked[listeChecked.length-1].fin
             verifChoix()
-            lesCreneaux.creneaux.forEach((leCreneau, index) => {
+            lesCreneaux.forEach((leCreneau, index) => {
                 if (index < indexMinReserve || index > indexMaxReserve) {
-                    flagDisabled = true
                     leCreneau.disabled = true
                 } else {
                     if (!leCreneau.checked && !leCreneau.estReserve) leCreneau.disabled = false
                 }
             })
         }
-        let premier = true
-        lesCreneaux.creneaux.forEach((leCreneau, index) => {
-            if (leCreneau.checked) {
-                leCreneau.class="text-bleuLBF"
-            } else {
-                if (!leCreneau.estReserve && !flagDisabled) {leCreneau.disabled = false}
-                leCreneau.class="text-gray-800"
-            }
-        })
     })
+    if (choixHoraire.debut !== "") {
+        creneauxDuJour.forEach((lesCreneaux)=> {
+            lesCreneaux.forEach((leCreneau) => {
+                if (!leCreneau.plageOK) leCreneau.disabled = true
+            })
+        })
+    } else {
+        creneauxDuJour.forEach((lesCreneaux)=> {
+            lesCreneaux.forEach((leCreneau) => {
+                leCreneau.plageOK = false
+                if (!leCreneau.estReserve) {
+                    leCreneau.disabled = false
+                }
+            })
+        })
+    }
+}
+
+$: {
+    if (choixMachine.id!=="" && donneesUtilisateur.id!=="" && choixHoraire.choixOK) {
+        nouvelleReservation.estValide = true
+    } else {
+        nouvelleReservation.estValide = false
+    }
+}
+
+$: {
+    if (saveInfo && userInfo.email !== "") {
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
+    }
+    if (!saveInfo && localStorage["userInfo"]) {
+      localStorage.removeItem("userInfo");
+      userInfo = { nom: "", prenom: "", email: "" };
+      mailValide = false
+    }
 }
 
 function constructionCreneaux(date) {
     let zeDate = new Date(date)
+    const minutesActuelles = (new Date()).getHours() * 60 + (new Date()).getMinutes()
+    creneauxDuJour=[]
+    let estTropTard = false
     if (plagesReservations[zeDate.getDay()]) {
         plagesReservations[zeDate.getDay()].forEach((plage, index)=> {
             let horaireDebutSplit = plage.debut.split(':')
             let horaireFinSplit = plage.fin.split(':')
-            let lesCreneaux = horaireFinSplit[0] - horaireDebutSplit[0] + (Number(horaireFinSplit[1]) -Number(horaireDebutSplit[1]))/60
-            creneauxDuJour[index]={"creneaux": []}
+            let minutesFin = horaireFinSplit[0] * 60 + horaireFinSplit[1] * 1
+
+            if (dateChoisiePourRequete === aujourdhuiIso && minutesActuelles >= minutesFin) {
+                estTropTard = true
+            }
+            let lesCreneaux = horaireFinSplit[0] - horaireDebutSplit[0] - 0.5 + (Number(horaireFinSplit[1]) - Number(horaireDebutSplit[1]))/60
+            creneauxDuJour[index]=[]
             let estReserve = false
+            let nbMinutesDebutCreneau = 0
             for (let j = 0; j <= lesCreneaux; j += 0.5) {
                 let h = []
                 let label = ""
                 if (j===0) {
                     estReserve = verifReserve(plage.debut)
                     h = plage.debut.split(':')
+                    nbMinutesDebutCreneau = h[0] * 60 + h[1] * 1
                     if (h[1]==="30") {
                         h[0] = Number(h[0]) + 1
                         h[1] = "00"
                     } else {h[1]="30"}
                     label = horaireFr(plage.debut) + "-" + horaireFr(h.join(':'))
-                    creneauxDuJour[index].creneaux.push({
-                        "debut": plage.debut,
-                        "fin": h.join(':'),
-                        "label": label,
-                        "checked": false,
-                        "disabled": estReserve,
-                        "estReserve": estReserve,
-                        "class":"text-gray-800"
-                    })
+                        creneauxDuJour[index].push({
+                            "debut": plage.debut,
+                            "fin": h.join(':'),
+                            "label": label,
+                            "checked": false,
+                            "disabled": estReserve,
+                            "estReserve": estReserve,
+                            "plageOK": false,
+                            "estTropTard": dateChoisiePourRequete === aujourdhuiIso && minutesActuelles >= nbMinutesDebutCreneau
+                        })
                 } else {
-                    h = creneauxDuJour[index].creneaux[2*j-1].fin.split(':')
+                    estReserve = verifReserve(creneauxDuJour[index][2*j-1].fin)
+                    h = creneauxDuJour[index][2*j-1].fin.split(':')
+                    nbMinutesDebutCreneau = h[0] * 60 + h[1] * 1
                     if (h[1]==="30") {
                         h[0] = Number(h[0]) + 1
                         h[1] = "00"
                     } else {h[1]="30"}
-                    label = horaireFr(creneauxDuJour[index].creneaux[2*j-1].fin) + "-" + horaireFr(h.join(':'))
-                    estReserve = verifReserve(h.join(':'))
-                    creneauxDuJour[index].creneaux.push({
-                        "debut": creneauxDuJour[index].creneaux[2*j-1].fin,
+                    label = horaireFr(creneauxDuJour[index][2*j-1].fin) + "-" + horaireFr(h.join(':'))
+                    creneauxDuJour[index].push({
+                        "debut": creneauxDuJour[index][2*j-1].fin,
                         "fin": h.join(':'),
                         "label": label,
                         "checked": false,
                         "disabled": estReserve,
                         "estReserve": estReserve,
-                        "class": "text-gray-800"
+                        "plageOK": false,
+                        "estTropTard": dateChoisiePourRequete === aujourdhuiIso && minutesActuelles >= nbMinutesDebutCreneau
                     })
                 }
             }
         })
     }
+    if (estTropTard) creneauxDuJour = []
 }
 
 function creneauDispo(date) {
@@ -202,17 +257,30 @@ function verifReserve(heure) {
     let heureSplit = heure.split(':')
     let retour = false
     listeReservationsFiltreMachine.forEach((resa) => {
-        let heureDebutSplit = resa.heureDebut.split(":")
-        let heureFinSplit = resa.heureFin.split(":")
+        let heureDebutSplit = resa.heuredebut.split(":")
+        let heureFinSplit = resa.heurefin.split(":")
         let dureeReservation = 60 * (Number(heureFinSplit[0]) - Number(heureDebutSplit[0])) + Number(heureFinSplit[1]) - Number(heureDebutSplit[1])
         let dureeToCheck = 60 * (Number(heureSplit[0]) - Number(heureDebutSplit[0])) + Number(heureSplit[1]) - Number(heureDebutSplit[1])      
         if (dureeToCheck >= 0 && dureeToCheck < dureeReservation) {retour = true}
     })
     return retour
 }
+
+function enregistrerReservation() {
+    const variables = {
+        nom: userInfo.nom,
+        prenom: userInfo.prenom,
+        heureDebut: choixHoraire.debut,
+        heureFin: choixHoraire.fin,
+        date: dateChoisiePourRequete,
+        user: donneesUtilisateur.id.toString(),
+        machine: choixMachine.id.toString()
+    }
+    reserver(variables).then((retour) => console.log('retour resa', retour))
+}
 </script>
 
-<div class="mt-2 mb-2">
+<div class="mt-2 mb-2 mx-4">
     <div class="w-full flex flex-row flex-wrap justify-between">
         <label for="prenomResa" class="w-1/2 px-1 py-1 flex flex-col">
             <div>Prénom :</div>
@@ -250,6 +318,13 @@ function verifReserve(heure) {
             </div>
         </label>
     </div>
+    <div class="mt-1 mx-4">
+        <label for="checkSaveInfo" class="mx-8 pr-8 my-1 text-sm">
+            <input type="checkbox" class="form-checkbox text-lbfvert-600 focus:outline-none" bind:checked={saveInfo} id="checkSaveInfo"/>
+            Enregistrer mes coordonnées pour la prochaine fois (ces informations sont stockées sur votre ordinateur)
+        </label>
+    </div>
+    {#if estInscrit}
     <div>
     <div class="h5 mt-4 mb-1">Machine :</div>
         <div>Votre statut :</div>
@@ -290,22 +365,21 @@ function verifReserve(heure) {
         <div class="text-base mt-2">Vous pouvez réserver les machines suivantes :</div>
         <div class="flex">
             {#if donneesUtilisateur.cnc}
-                <RadioBouton label="cnc" cbClasses={tableCouleursLBF['jaune'].classText} name="machineReservation" value="cnc" bind:selected={nouvelleReservation.machine}/>
+                <RadioBouton label="cnc" cbClasses={tableCouleursLBF['jaune'].classText} name="machineReservation" value={lesMachines['cnc']} bind:selected={choixMachine}/>
             {/if}
             {#if donneesUtilisateur.laser}
-                <RadioBouton label="laser" cbClasses={tableCouleursLBF['orange'].classText} name="machineReservation" value="laser" bind:selected={nouvelleReservation.machine}/>
+                <RadioBouton label="laser" cbClasses={tableCouleursLBF['orange'].classText} name="machineReservation" value={lesMachines['laser']} bind:selected={choixMachine}/>
             {/if}   
             {#if donneesUtilisateur.estAbonne }
                 {#if donneesUtilisateur.scie_toupie}
-                    <RadioBouton label="Scie-Toupie"  cbClasses={tableCouleursLBF['bleu'].classText} name="machineReservation" value="scie" bind:selected={nouvelleReservation.machine}/>
+                    <RadioBouton label="Scie-Toupie"  cbClasses={tableCouleursLBF['bleu'].classText} name="machineReservation" value={lesMachines['scie']} bind:selected={choixMachine}/>
                 {/if}       
                 {#if donneesUtilisateur.rabo_degau}
-                    <RadioBouton label="Rabo-Degau" cbClasses={tableCouleursLBF['vert'].classText} name="machineReservation" value="rabo" bind:selected={nouvelleReservation.machine}/>
+                    <RadioBouton label="Rabo-Degau" cbClasses={tableCouleursLBF['vert'].classText} name="machineReservation" value={lesMachines['rabo']} bind:selected={choixMachine}/>
                 {/if}  
             {/if}
-            <RadioBouton label="Imprimante 3D" cbClasses={tableCouleursLBF['rouge'].classText} name="machineReservation" value="3D" bind:selected={nouvelleReservation.machine}/>
+            <RadioBouton label="Imprimante 3D" cbClasses={tableCouleursLBF['rouge'].classText} name="machineReservation" value={lesMachines['imprimante3D']} bind:selected={choixMachine}/>
         </div>
-        <div>machine : {nouvelleReservation.machine}</div>
     </div>
     <div>
         <div class="h5 mt-4 mb-1">Date :</div>
@@ -326,30 +400,57 @@ function verifReserve(heure) {
                 </div>
                 <div class="flex-auto mb-4">
                     <div class="h6 text-center lg:text-left mb-1">Prochaines disponibilités</div>
-                    <div class="flex flex-row flex-wrap">
-                        {#each creneauxDuJour as plage, i}
-                            {#each plage.creneaux as creneau, j}
-                                <div class="px-2 py-1 mr-2 mb-2 border border-gray-400">
-                                    <Checkbox label={creneau.label} bind:checked={creneau.checked} cbClasses={creneau.class} bind:disabled={creneau.disabled} />
-                                </div>
-                            {/each}
+                    {#if creneauxDuJour.length > 0}
+                        <div class="text-justify">
+                            Cliquez sur le nombre de créneaux correspondant à votre réservation. 
+                        </div>
+                    {/if}
+                    <div class="flex flex-col">
+                        {#each creneauxDuJour as plage}
+                            <div class="flex flex-row flex-wrap justify-center">
+                                {#each plage as creneau}
+                                    <div class="px-2 py-1 mr-2 mb-2 border border-gray-400">
+                                        <Checkbox label={creneau.label} bind:checked={creneau.checked} cbClasses={creneau.checked?"text-bleuLBF":"text-gray-800"} bind:disabled={creneau.disabled} />
+                                    </div>
+                                {/each}
+                            </div>
                         {:else}
-                            <div>Aucun créneau à cette date</div>
+                            <div>Aucun créneau n'est proposé à cette date et cet horaire, merci de modifier votre choix.</div>
                         {/each}       
                     </div>
-                    <div class="text-justify">
-                        Cliquez sur l'heure de <span class="text-vertLBF font-medium">début</span> et de <span class="text-bleuLBF font-medium">fin</span> de la réservation que vous souhaitez effectuer. 
-                    </div>
                     <div class="text-rougeLBF font-medium">
-                        {#if !choixHoraire.choixOK}
-                            Une heure minimum requis pour les machines à bois.
+                        {#if !choixHoraire.choixOK && choixHoraire.debut!==""}
+                            Une heure minimum pour les machines à bois.
                         {:else}
                             &nbsp;
                         {/if}
                     </div>
-                    <div class="text-justify">{choixHoraire.debut} & {choixHoraire.fin}</div>
                 </div>
             </div>
         {/if}
     </div>
+    {#if nouvelleReservation.estValide}
+        <div>
+            <div class="text-justify mb-1">Le détail de votre réservation : </div>
+            <div class="flex flex-wrap">
+                <div class="flex-auto mx-1 mb-1 px-2 py-1 border"><span class="font-medium">Machine :</span> {choixMachine.nom}</div>
+                <div class="flex-shrink-0 flex-auto mx-1 mb-1 px-2 py-1 border"><span class="font-medium">Réservée </span> {dateFormatFr(dateChoisie)}</div>
+                <div class="flex-auto mx-1 mb-1 px-2 py-1 border"><span class="font-medium">de </span> {horaireFr(choixHoraire.debut)}<span class="font-medium">&nbsp; à </span>{horaireFr(choixHoraire.fin)}</div>
+            </div>
+        </div>
+        <div class="mt-4">
+            <Bouton on:actionBouton={enregistrerReservation}>
+                Valider
+            </Bouton>
+        </div>
+    {/if}
+    {:else if mailValide}
+    <div class="text-justify my-4 mx-4 p-2 border border-bleuLBF rounded">
+        Vous n'êtes pas enregistré dans notre base. Pour être enregistré, il faut avoir participé à nos initiations machines. 
+    </div>
+    {:else}
+        <div class="text-justify my-4 mx-4 p-2 border border-bleuLBF rounded">
+            Merci d'entrer l'adresse mail avec laquelle vous avez été enregistré (normalement lors d'une de nos initiations).
+        </div>
+    {/if}
 </div>

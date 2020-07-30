@@ -56,6 +56,13 @@ export function dateInscription(debut, fin) {
     return 'le ' + leJourSemaine + ' ' + leJour + ' ' + leMois + ' de ' + leDebut.getHours() + 'h' + minuteDebut + ' à ' + laFin.getHours() + 'h' + minuteFin;
 }
 
+export function dateFormatFr(date)  {
+    const leJour = (new Date(date)).getDate();
+    const leJourSemaine = dateFr.jours[(new Date(date)).getDay()][0];
+    const leMois = dateFr.mois[(new Date(date)).getMonth()][0]
+    return 'le ' + leJourSemaine + ' ' + leJour + ' ' + leMois
+}
+
 export function horaireFr(horaire) {
     let h = horaire.split(":")
     return h[0] + 'h' + h[1]
