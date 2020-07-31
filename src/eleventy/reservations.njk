@@ -11,7 +11,7 @@ layout: baseLBF
 const titreMachine = "{{machine.titre | safe}}"
 var lesMachines = []; 
 
-{%- for machine in lesMachines -%}lesMachines["{{machine.tag}}"]={"id": {{machine.id}}, "nom": "{{machine.nom}}", "abonnement": {{machine.Abonnement}}};{%- endfor -%}
+{%- for machine in lesMachines -%}lesMachines.push({"id": {{machine.id}}, "nom": "{{machine.nom}}", "tag": "{{machine.tag}}", "abonnement": {{machine.Abonnement}}});{%- endfor -%}
 const urlImageMachine = "{{machine.urlImage}}"
 </script>
 <script src="/js/bundle.js"></script>

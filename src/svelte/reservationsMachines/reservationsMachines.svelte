@@ -10,13 +10,14 @@ import Bouton from '../components/bouton.svelte'
 import {tableCouleursLBF} from '../utils/couleursLBF.js'
 /* import requêtes */
 import {userData} from '../apollo/user.js'
-import {listePlagesHoraires, listeReservationsByDate, reserver} from '../apollo/reservations.js'
+import {listePlagesHoraires, listeReservationsByDate, reserver, getResaByUuid} from '../apollo/reservations.js'
 
 var mailValide = false
 var donneesUtilisateur = {}
 var estInscrit = false
 var estAbonne = false
-var nouvelleReservation = {machine:"", debut: "", fin: "", userId:"", estValide: false}
+var resaEstValide = false
+let detailChoixMachine = {"id": "", "nom": "", abonnement: false}
 var choixMachine = ""
 var plagesReservations = []
 var afficheCalendar = false
@@ -44,11 +45,30 @@ if (localStorage["userInfo"]) {
     var userInfo = { nom: "", prenom: "", email: "" };
   }
 
+  // 
+  // recuperation url
+  //
+  const urlEffacerResa = window.location;
+  let detailResaModif
+  var estModification = false
+
 onMount(() => {
     /* if (localStorage["userInfo"]) {
         userInfo = JSON.parse(localStorage.getItem("userInfo"));
         saveInfo = true;
     } */
+    let extracted = /\?idReservation=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/i.exec(urlEffacerResa.search)
+    if (extracted!==null) {
+        estModification = true
+        getResaByUuid(extracted[1]).then((retour) => {
+            console.log('retour by uuid', retour)
+            detailResaModif = retour
+            dateChoisie = new Date(retour.date)
+            choixMachine = retour.machine.id
+            //setChecked()
+        })
+    }
+
     listePlagesHoraires().then((retour) => {
         plagesReservations[0] = retour.dimanche
         plagesReservations[1] = retour.lundi
@@ -81,6 +101,7 @@ $: {
     listeReservationsByDate(dateChoisiePourRequete).then((retour)=> {
         listeReservations = retour
     })
+    console.log('resa by date')
     constructionCreneaux(zeDate.toISOString());
 }
 
@@ -89,9 +110,10 @@ recupération des créneaux déjà réservé filtré par machine
 */
 $: {
     listeReservationsFiltreMachine = listeReservations.filter((resa) => {
-        return Number(resa.machine.id) === Number(choixMachine.id)
+        return Number(resa.machine.id) === Number(choixMachine)
         })
     let zeDate = new Date(dateChoisie)
+    console.log('filtre machine')
     constructionCreneaux(zeDate.toISOString());
 }
 
@@ -102,7 +124,7 @@ $: {
 /*
 Gestion de la sélection des créneaux horaires
 */
-$: {
+$: {console.log('gstion creneaux', creneauxDuJour)
     let plage = -1
     let listeChecked = []
     let indexMinReserve = 0 // max de l'index du créneau réservé inférieur au premier choix
@@ -159,9 +181,9 @@ $: {
 
 $: {
     if (choixMachine.id!=="" && donneesUtilisateur.id!=="" && choixHoraire.choixOK) {
-        nouvelleReservation.estValide = true
+        resaEstValide = true
     } else {
-        nouvelleReservation.estValide = false
+        resaEstValide = false
     }
 }
 
@@ -176,7 +198,22 @@ $: {
     }
 }
 
+$: {
+    let idMachine = choixMachine
+    detailChoixMachine = {}
+    lesMachines.forEach((machine) => {
+       if (Number(machine.id) === Number(idMachine)) {
+           detailChoixMachine = machine
+       }
+    })
+}
+
+$:console.log('choixHoraire', choixHoraire)
+
+$: console.log('dateChoisie', dateChoisie)
+
 function constructionCreneaux(date) {
+    console.log('construction creneau ?')
     let zeDate = new Date(date)
     const minutesActuelles = (new Date()).getHours() * 60 + (new Date()).getMinutes()
     creneauxDuJour=[]
@@ -193,12 +230,16 @@ function constructionCreneaux(date) {
             let lesCreneaux = horaireFinSplit[0] - horaireDebutSplit[0] - 0.5 + (Number(horaireFinSplit[1]) - Number(horaireDebutSplit[1]))/60
             creneauxDuJour[index]=[]
             let estReserve = false
+            let resaEnCours = false
+            let resaChecked = false
             let nbMinutesDebutCreneau = 0
             for (let j = 0; j <= lesCreneaux; j += 0.5) {
                 let h = []
                 let label = ""
                 if (j===0) {
                     estReserve = verifReserve(plage.debut)
+                    resaEnCours = verifResaEnCours(plage.debut)
+                    if (resaEnCours) {estReserve = false}
                     h = plage.debut.split(':')
                     nbMinutesDebutCreneau = h[0] * 60 + h[1] * 1
                     if (h[1]==="30") {
@@ -210,14 +251,15 @@ function constructionCreneaux(date) {
                             "debut": plage.debut,
                             "fin": h.join(':'),
                             "label": label,
-                            "checked": false,
+                            "checked": resaEnCours,
                             "disabled": estReserve,
                             "estReserve": estReserve,
-                            "plageOK": false,
-                            "estTropTard": dateChoisiePourRequete === aujourdhuiIso && minutesActuelles >= nbMinutesDebutCreneau
+                            "plageOK": false
                         })
                 } else {
                     estReserve = verifReserve(creneauxDuJour[index][2*j-1].fin)
+                    resaEnCours = verifResaEnCours(creneauxDuJour[index][2*j-1].fin)
+                    if (resaEnCours) {estReserve = false}
                     h = creneauxDuJour[index][2*j-1].fin.split(':')
                     nbMinutesDebutCreneau = h[0] * 60 + h[1] * 1
                     if (h[1]==="30") {
@@ -229,11 +271,10 @@ function constructionCreneaux(date) {
                         "debut": creneauxDuJour[index][2*j-1].fin,
                         "fin": h.join(':'),
                         "label": label,
-                        "checked": false,
+                        "checked": resaEnCours,
                         "disabled": estReserve,
                         "estReserve": estReserve,
-                        "plageOK": false,
-                        "estTropTard": dateChoisiePourRequete === aujourdhuiIso && minutesActuelles >= nbMinutesDebutCreneau
+                        "plageOK": false
                     })
                 }
             }
@@ -263,6 +304,8 @@ function verifReserve(heure) {
         let dureeToCheck = 60 * (Number(heureSplit[0]) - Number(heureDebutSplit[0])) + Number(heureSplit[1]) - Number(heureDebutSplit[1])      
         if (dureeToCheck >= 0 && dureeToCheck < dureeReservation) {retour = true}
     })
+    let maintenant = (Number(heureSplit[0])-(new Date()).getHours()) * 60 + Number(heureSplit[1]) - Number((new Date()).getMinutes())
+    if (dateChoisiePourRequete === aujourdhuiIso && maintenant < 0) {retour = true}
     return retour
 }
 
@@ -278,6 +321,33 @@ function enregistrerReservation() {
     }
     reserver(variables).then((retour) => console.log('retour resa', retour))
 }
+
+function getIdMachine(tag) {
+    let retour = ""
+    lesMachines.forEach((machine) => {
+        if (tag === machine.tag) {
+            retour = machine.id
+        }
+    })
+    return retour
+}
+
+function verifResaEnCours(creneau) {
+    console.log('buh ?', detailResaModif, creneau)
+    if (detailResaModif) {
+        let debutResaSplit = detailResaModif.heuredebut.split(':')
+        let finResaSplit = detailResaModif.heurefin.split(':')
+        let minutesCreneau = creneau.split(':')
+        let retour = false
+        let dureeDebut = (Number(minutesCreneau[0]) - Number(debutResaSplit[0])) * 60 + Number(minutesCreneau[1]) - Number(debutResaSplit[1])
+        let dureeFin = (Number(minutesCreneau[0]) - Number(finResaSplit[0])) * 60 + Number(minutesCreneau[1]) - Number(finResaSplit[1])
+        if (dureeDebut >= 0 && dureeFin < 0 && dateChoisiePourRequete === detailResaModif.date) {
+            retour = true
+        }
+    return retour
+    }
+}
+
 </script>
 
 <div class="mt-2 mb-2 mx-4">
@@ -365,21 +435,22 @@ function enregistrerReservation() {
         <div class="text-base mt-2">Vous pouvez réserver les machines suivantes :</div>
         <div class="flex">
             {#if donneesUtilisateur.cnc}
-                <RadioBouton label="cnc" cbClasses={tableCouleursLBF['jaune'].classText} name="machineReservation" value={lesMachines['cnc']} bind:selected={choixMachine}/>
+                <RadioBouton label="cnc" cbClasses={tableCouleursLBF['jaune'].classText} name="machineReservation" value={getIdMachine('cnc')} bind:selected={choixMachine}/>
             {/if}
             {#if donneesUtilisateur.laser}
-                <RadioBouton label="laser" cbClasses={tableCouleursLBF['orange'].classText} name="machineReservation" value={lesMachines['laser']} bind:selected={choixMachine}/>
+                <RadioBouton label="laser" cbClasses={tableCouleursLBF['orange'].classText} name="machineReservation" value={getIdMachine('laser')} bind:selected={choixMachine}/>
             {/if}   
             {#if donneesUtilisateur.estAbonne }
                 {#if donneesUtilisateur.scie_toupie}
-                    <RadioBouton label="Scie-Toupie"  cbClasses={tableCouleursLBF['bleu'].classText} name="machineReservation" value={lesMachines['scie']} bind:selected={choixMachine}/>
+                    <RadioBouton label="Scie-Toupie"  cbClasses={tableCouleursLBF['bleu'].classText} name="machineReservation" value={getIdMachine('scie')} bind:selected={choixMachine}/>
                 {/if}       
                 {#if donneesUtilisateur.rabo_degau}
-                    <RadioBouton label="Rabo-Degau" cbClasses={tableCouleursLBF['vert'].classText} name="machineReservation" value={lesMachines['rabo']} bind:selected={choixMachine}/>
+                    <RadioBouton label="Rabo-Degau" cbClasses={tableCouleursLBF['vert'].classText} name="machineReservation" value={getIdMachine('rabo')} bind:selected={choixMachine}/>
                 {/if}  
             {/if}
-            <RadioBouton label="Imprimante 3D" cbClasses={tableCouleursLBF['rouge'].classText} name="machineReservation" value={lesMachines['imprimante3D']} bind:selected={choixMachine}/>
+            <RadioBouton label="Imprimante 3D" cbClasses={tableCouleursLBF['rouge'].classText} name="machineReservation" value={getIdMachine('imprimante3D')} bind:selected={choixMachine}/>
         </div>
+        <div>Machine : {choixMachine}</div>
     </div>
     <div>
         <div class="h5 mt-4 mb-1">Date :</div>
@@ -429,11 +500,11 @@ function enregistrerReservation() {
             </div>
         {/if}
     </div>
-    {#if nouvelleReservation.estValide}
+    {#if resaEstValide}
         <div>
             <div class="text-justify mb-1">Le détail de votre réservation : </div>
             <div class="flex flex-wrap">
-                <div class="flex-auto mx-1 mb-1 px-2 py-1 border"><span class="font-medium">Machine :</span> {choixMachine.nom}</div>
+                <div class="flex-auto mx-1 mb-1 px-2 py-1 border"><span class="font-medium">Machine :</span> {detailChoixMachine.nom}</div>
                 <div class="flex-shrink-0 flex-auto mx-1 mb-1 px-2 py-1 border"><span class="font-medium">Réservée </span> {dateFormatFr(dateChoisie)}</div>
                 <div class="flex-auto mx-1 mb-1 px-2 py-1 border"><span class="font-medium">de </span> {horaireFr(choixHoraire.debut)}<span class="font-medium">&nbsp; à </span>{horaireFr(choixHoraire.fin)}</div>
             </div>

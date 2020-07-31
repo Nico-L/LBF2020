@@ -51,3 +51,19 @@ export async function reserver(variables) {
         return resultats.reservation.reservationUuid
     })
 }
+
+export async function getResaByUuid (uuid) {
+    const query =
+        `query resa($uuid: String!) {
+        reservationByUuid(uuid: $uuid) {
+                reservationByUuid
+            }
+        }`
+    const variables = {
+        uuid: uuid
+    }
+    return requeteGraphQL(query, variables)
+        .then((resultats)=> {
+            return JSON.parse(resultats.reservationByUuid.reservationByUuid)
+        })
+}
