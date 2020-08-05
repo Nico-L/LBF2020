@@ -44,9 +44,9 @@
         var emailInscription = "";
     }
 	/*functions*/
-    import * as gestionInscriptions from '../utils/graphqlInscrits.js'
+    //import * as gestionInscriptions from '../utils/graphqlInscrits.js'
     import * as strapiInscriptions from '../utils/strapiInscrits.js'
-    import { envoiMail } from '../utils/graphqlEmails.js'
+    //import { envoiMail } from '../utils/graphqlEmails.js'
 
 //récupération nb inscrits au montage
 onMount(async () => {
@@ -171,7 +171,7 @@ onMount(async () => {
         saveInfoEmail()
         busyEffacerInscrit = true
         console.log("id desincrit", desinscrit.id)
-        var effacerInscritById = await gestionInscriptions.effacerInscritById(desinscrit.id)
+        //var effacerInscritById = await gestionInscriptions.effacerInscritById(desinscrit.id)
         nbInscrits()
         busyEffacerInscrit = false
         close()

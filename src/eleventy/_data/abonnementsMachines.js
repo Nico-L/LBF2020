@@ -1,5 +1,5 @@
 const fetch = require("node-fetch");
-
+/*
 const graphqlURL = process.env.HASURA_ENDPOINT;
 
 const query = `
@@ -29,3 +29,4 @@ module.exports = async function() {
   //console.log('result bonnement', result)
   return result.data.machines;
 };
+*/

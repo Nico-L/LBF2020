@@ -7,23 +7,26 @@ import Checkbox from '../components/Checkbox.svelte'
 import Fa from 'svelte-fa'
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import Bouton from '../components/bouton.svelte'
+import Modal from "../components/ModalComp.svelte";
 import {tableCouleursLBF} from '../utils/couleursLBF.js'
 /* import requêtes */
 import {userData} from '../apollo/user.js'
-import {listePlagesHoraires, listeReservationsByDate, reserver, getResaByUuid} from '../apollo/reservations.js'
+import {listePlagesHoraires, listeReservationsByDate, reserver, getResaByUuid, effacerResa, modifierResa} from '../apollo/reservations.js'
+import {envoyerMailResa} from '../apollo/email.js'
 
 var mailValide = false
 var donneesUtilisateur = {}
 var estInscrit = false
 var estAbonne = false
 var resaEstValide = false
-let detailChoixMachine = {"id": "", "nom": "", abonnement: false}
+let detailChoixMachine
 var choixMachine = ""
 var plagesReservations = []
 var afficheCalendar = false
 const dateFormat = "#{l} #{j} #{F} #{Y}"
 const aujourdhui = new Date()
 const aujourdhuiIso = (new Date()).toISOString().slice(0,10)
+var dateDebutCalendrier = new Date()
 var dateFinCalendrier = new Date()
 var dateChoisie = new Date()
 var dateChoisiePourRequete = dateChoisie
@@ -34,6 +37,27 @@ var choixHoraire = {debut: "", fin: "", choixOK: false, duree: 0}
 var intervalCreneau = 0.5
 let regexMail
 const tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+let flagVerifEffacer = false
+let busyEffacerResa = false
+let flagEffacerConfirme = false
+let flagVerifModif = false
+let flagModifConfirmee = false
+let busyModifResa = false
+let saveEnCours = false
+let flagSaveEffectue = false
+let adresseRedirect = ""
+let flagResaNotFound = false
+let flagTropTardPourModifResa = false
+let calculCout = 0
+const optionsAvecHeures =
+    {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit"
+    };
 
 dateFinCalendrier.setMonth(dateFinCalendrier.getMonth()+24)
 
@@ -61,10 +85,20 @@ onMount(() => {
     if (extracted!==null) {
         estModification = true
         getResaByUuid(extracted[1]).then((retour) => {
-            console.log('retour by uuid', retour)
-            detailResaModif = retour
-            dateChoisie = new Date(retour.date)
-            choixMachine = retour.machine.id
+            if (retour!== null) {
+                detailResaModif = retour
+                dateChoisie = new Date(retour.date)
+                choixMachine = retour.machine.id
+                let datePourVerif = dateChoisie
+                let tempsDebutResa = detailResaModif.heuredebut.split(':')
+                datePourVerif.setHours(tempsDebutResa[0])
+                datePourVerif.setMinutes(tempsDebutResa[1])
+                if (datePourVerif < aujourdhui) {
+                    flagTropTardPourModifResa = true
+                }
+            } else {
+                flagResaNotFound = true
+            }
             //setChecked()
         })
     }
@@ -101,7 +135,6 @@ $: {
     listeReservationsByDate(dateChoisiePourRequete).then((retour)=> {
         listeReservations = retour
     })
-    console.log('resa by date')
     constructionCreneaux(zeDate.toISOString());
 }
 
@@ -113,18 +146,17 @@ $: {
         return Number(resa.machine.id) === Number(choixMachine)
         })
     let zeDate = new Date(dateChoisie)
-    console.log('filtre machine')
     constructionCreneaux(zeDate.toISOString());
 }
 
 $: {
-    if (choixMachine.abonnement) {intervalCreneau = 1} else {intervalCreneau = 0.5}
+    if (detailChoixMachine.abonnement) {intervalCreneau = 1} else {intervalCreneau = 0.5}
 }
 
 /*
 Gestion de la sélection des créneaux horaires
 */
-$: {console.log('gstion creneaux', creneauxDuJour)
+$: {
     let plage = -1
     let listeChecked = []
     let indexMinReserve = 0 // max de l'index du créneau réservé inférieur au premier choix
@@ -151,7 +183,7 @@ $: {console.log('gstion creneaux', creneauxDuJour)
         } else {
             choixHoraire.debut = listeChecked[0].debut
             choixHoraire.fin = listeChecked[listeChecked.length-1].fin
-            verifChoix()
+            //verifChoix()
             lesCreneaux.forEach((leCreneau, index) => {
                 if (index < indexMinReserve || index > indexMaxReserve) {
                     leCreneau.disabled = true
@@ -180,7 +212,7 @@ $: {console.log('gstion creneaux', creneauxDuJour)
 }
 
 $: {
-    if (choixMachine.id!=="" && donneesUtilisateur.id!=="" && choixHoraire.choixOK) {
+    if (choixMachine!=="" && donneesUtilisateur.id!=="" && choixHoraire.choixOK) {
         resaEstValide = true
     } else {
         resaEstValide = false
@@ -208,12 +240,22 @@ $: {
     })
 }
 
-$:console.log('choixHoraire', choixHoraire)
+/*$: {
+    let heureDebut = choixHoraire.debut.split(':')
+    let heureFin = choixHoraire.fin.split(':')
+    let duree = 60 * (Number(heureFin[0]) - Number(heureDebut[0])) + Number(heureFin[1]) - Number(heureDebut[1])
+    calculCout = Math.floor(Number(detailChoixMachine.tarifHoraire) * Number(duree) / 60)
+}*/
 
-$: console.log('dateChoisie', dateChoisie)
+$: {
+    let heureDebut = choixHoraire.debut.split(':')
+    let heureFin = choixHoraire.fin.split(':')
+    choixHoraire.duree = 60 * (Number(heureFin[0]) - Number(heureDebut[0])) + Number(heureFin[1]) - Number(heureDebut[1])
+    calculCout = Number(detailChoixMachine.tarifHoraire) * Number(choixHoraire.duree) / 60
+    if (choixHoraire.duree >= (intervalCreneau * 60)) {choixHoraire.choixOK = true} else {choixHoraire.choixOK = false}
+}
 
 function constructionCreneaux(date) {
-    console.log('construction creneau ?')
     let zeDate = new Date(date)
     const minutesActuelles = (new Date()).getHours() * 60 + (new Date()).getMinutes()
     creneauxDuJour=[]
@@ -280,7 +322,12 @@ function constructionCreneaux(date) {
             }
         })
     }
-    if (estTropTard) creneauxDuJour = []
+    if (estTropTard) {
+        let demain = new Date()
+        demain.setDate(demain.getDate() + 1);
+        dateChoisie = demain
+        dateDebutCalendrier = demain
+    }
 }
 
 function creneauDispo(date) {
@@ -310,6 +357,7 @@ function verifReserve(heure) {
 }
 
 function enregistrerReservation() {
+    saveEnCours = true
     const variables = {
         nom: userInfo.nom,
         prenom: userInfo.prenom,
@@ -317,9 +365,43 @@ function enregistrerReservation() {
         heureFin: choixHoraire.fin,
         date: dateChoisiePourRequete,
         user: donneesUtilisateur.id.toString(),
-        machine: choixMachine.id.toString()
+        machine: choixMachine.toString()
     }
-    reserver(variables).then((retour) => console.log('retour resa', retour))
+    reserver(variables).then((retourIdResa) => 
+        {
+            saveEnCours = false
+            flagSaveEffectue = true
+            adresseRedirect = "./?idReservation=" + retourIdResa
+            mailConfirmation(retourIdResa)
+        }
+    )
+}
+
+function modifierReservation() {
+    busyModifResa = true
+    const variables = {
+        idReservation: detailResaModif.id.toString(),
+        nom: userInfo.nom,
+        prenom: userInfo.prenom,
+        heureDebut: choixHoraire.debut,
+        heureFin: choixHoraire.fin,
+        date: dateChoisiePourRequete,
+        user: donneesUtilisateur.id.toString(),
+        machine: choixMachine.toString()
+    }
+    modifierResa(variables).then((retour) => {
+        busyModifResa = false
+        flagVerifModif = false
+        flagModifConfirmee = true
+    })
+}
+
+function effacerReservation() {
+    busyEffacerResa = true
+    effacerResa(detailResaModif.id.toString()).then((retour) => {
+        busyEffacerResa = false
+        flagEffacerConfirme = true
+    })
 }
 
 function getIdMachine(tag) {
@@ -333,7 +415,6 @@ function getIdMachine(tag) {
 }
 
 function verifResaEnCours(creneau) {
-    console.log('buh ?', detailResaModif, creneau)
     if (detailResaModif) {
         let debutResaSplit = detailResaModif.heuredebut.split(':')
         let finResaSplit = detailResaModif.heurefin.split(':')
@@ -346,6 +427,71 @@ function verifResaEnCours(creneau) {
         }
     return retour
     }
+}
+
+function close() {
+    flagVerifEffacer = false
+    flagModifConfirmee = false
+}
+
+function verifEffacer() {
+    flagVerifEffacer = true
+}
+
+function retourAccueil() {
+    window.location.replace(urlEffacerResa.origin)
+}
+
+function retourResa() {
+    let url = urlEffacerResa.origin + urlEffacerResa.pathname
+    window.location.replace(url)
+}
+
+function retourPageModif() {
+    if (adresseRedirect==="") {
+        window.location.reload(true);
+    } else {
+        window.location.replace(adresseRedirect)
+    }
+}
+
+function mailConfirmation(idResa) {
+    let tempDuree = choixHoraire.duree
+    console.log('tempsDuree', tempDuree)
+    let dureeString = ""
+    if (Math.floor(tempDuree / 60) === 0) {
+        dureeString = "une demi heure"
+    } else {
+        dureeString =  Math.floor(tempDuree / 60) + "h"
+        dureeString += tempDuree % 60 === 0 ? "00" : tempDuree % 60
+    }
+    let arrayMails = [];
+    arrayMails.push(userInfo.email);
+    let dateDebutResa = new Date(dateChoisie)
+    let tempsDebutResa = choixHoraire.debut.split(':')
+    dateDebutResa.setHours(tempsDebutResa[0])
+    dateDebutResa.setMilliseconds(tempsDebutResa[1])
+    let envoiMail = {
+        machine: detailChoixMachine.nom,
+        prenom: userInfo.prenom,
+        duration: dureeString,
+        jour: dateDebutResa
+            .toLocaleDateString("fr-fr", optionsAvecHeures)
+            .replace(":", "h"),
+        urlDelete:
+            urlEffacerResa.origin +
+            urlEffacerResa.pathname +
+            "?idReservation=" +
+            idResa,
+        altMachine: detailChoixMachine.nom,
+        urlImageMail: detailChoixMachine.urlImage
+    };
+    let variables = {
+        email: arrayMails,
+        template: JSON.stringify(envoiMail)
+    }
+        console.log('variables mail', variables)
+    envoyerMailResa(variables)
 }
 
 </script>
@@ -450,56 +596,58 @@ function verifResaEnCours(creneau) {
             {/if}
             <RadioBouton label="Imprimante 3D" cbClasses={tableCouleursLBF['rouge'].classText} name="machineReservation" value={getIdMachine('imprimante3D')} bind:selected={choixMachine}/>
         </div>
-        <div>Machine : {choixMachine}</div>
     </div>
-    <div>
-        <div class="h5 mt-4 mb-1">Date :</div>
-        {#if afficheCalendar}
-            <div class="flex flex-wrap items-center">
-                <div class="flex-auto mb-4">
-                    <div class="mx-auto text-center">
-                        <Datepicker 
-                            start={aujourdhui}
-                            end={dateFinCalendrier}
-                            bind:selected={dateChoisie}
-                            daysOfWeek={dateFr.jours}
-                            monthsOfYear={dateFr.mois}
-                            format={dateFormat}
-                            selectableCallback={creneauDispo}
-                        />
-                    </div>
-                </div>
-                <div class="flex-auto mb-4">
-                    <div class="h6 text-center lg:text-left mb-1">Prochaines disponibilités</div>
-                    {#if creneauxDuJour.length > 0}
-                        <div class="text-justify">
-                            Cliquez sur le nombre de créneaux correspondant à votre réservation. 
+    {#if choixMachine!=""}
+        <div>
+            <div class="h5 mt-4 mb-1">Date :</div>
+            {#if afficheCalendar}
+                <div class="flex flex-wrap items-center">
+                    <div class="flex-auto mb-4">
+                        <div class="mx-auto text-center">
+                            <Datepicker 
+                                start={dateDebutCalendrier}
+                                end={dateFinCalendrier}
+                                bind:selected={dateChoisie}
+                                daysOfWeek={dateFr.jours}
+                                monthsOfYear={dateFr.mois}
+                                format={dateFormat}
+                                selectableCallback={creneauDispo}
+                            />
                         </div>
-                    {/if}
-                    <div class="flex flex-col">
-                        {#each creneauxDuJour as plage}
-                            <div class="flex flex-row flex-wrap justify-center">
-                                {#each plage as creneau}
-                                    <div class="px-2 py-1 mr-2 mb-2 border border-gray-400">
-                                        <Checkbox label={creneau.label} bind:checked={creneau.checked} cbClasses={creneau.checked?"text-bleuLBF":"text-gray-800"} bind:disabled={creneau.disabled} />
-                                    </div>
-                                {/each}
-                            </div>
-                        {:else}
-                            <div>Aucun créneau n'est proposé à cette date et cet horaire, merci de modifier votre choix.</div>
-                        {/each}       
                     </div>
-                    <div class="text-rougeLBF font-medium">
-                        {#if !choixHoraire.choixOK && choixHoraire.debut!==""}
-                            Une heure minimum pour les machines à bois.
-                        {:else}
-                            &nbsp;
+                    <div class="flex-auto mb-4">
+                        <div class="h6 text-center lg:text-left mb-1">Prochaines disponibilités</div>
+                        {#if creneauxDuJour.length > 0}
+                            <div class="text-justify">
+                                Cliquez sur le nombre de créneaux correspondant à votre réservation. 
+                            </div>
                         {/if}
+                        <div class="flex flex-col">
+                            {#each creneauxDuJour as plage}
+                                <div class="flex flex-row flex-wrap justify-center">
+                                    {#each plage as creneau}
+                                        <div class="px-2 py-1 mr-2 mb-2 border border-gray-400">
+                                            <Checkbox label={creneau.label} bind:checked={creneau.checked} cbClasses={creneau.checked?"text-bleuLBF":"text-gray-800"} bind:disabled={creneau.disabled} />
+                                        </div>
+                                    {/each}
+                                </div>
+                            {:else}
+                                <div>Aucun créneau n'est proposé à cette date et cet horaire, merci de modifier votre choix.</div>
+                            {/each}       
+                        </div>
+                        <div class="text-rougeLBF font-medium">
+                            {#if !choixHoraire.choixOK && choixHoraire.debut!==""}
+                                Une heure minimum pour les machines à bois.
+                            {:else}
+                                &nbsp;
+                            {/if}
+                        </div>
                     </div>
                 </div>
-            </div>
-        {/if}
-    </div>
+            {/if}
+        </div>
+    {/if}
+
     {#if resaEstValide}
         <div>
             <div class="text-justify mb-1">Le détail de votre réservation : </div>
@@ -507,13 +655,46 @@ function verifResaEnCours(creneau) {
                 <div class="flex-auto mx-1 mb-1 px-2 py-1 border"><span class="font-medium">Machine :</span> {detailChoixMachine.nom}</div>
                 <div class="flex-shrink-0 flex-auto mx-1 mb-1 px-2 py-1 border"><span class="font-medium">Réservée </span> {dateFormatFr(dateChoisie)}</div>
                 <div class="flex-auto mx-1 mb-1 px-2 py-1 border"><span class="font-medium">de </span> {horaireFr(choixHoraire.debut)}<span class="font-medium">&nbsp; à </span>{horaireFr(choixHoraire.fin)}</div>
+                <div class="flex-auto mx-1 mb-1 px-2 py-1 border"><span class="font-medium">Coût :</span>
+                    {#if detailChoixMachine.abonnement}
+                        Compris dans l'abonnement
+                    {:else}
+                        {calculCout}&nbsp;€
+                    {/if}
+                </div>
             </div>
         </div>
-        <div class="mt-4">
-            <Bouton on:actionBouton={enregistrerReservation}>
-                Valider
-            </Bouton>
-        </div>
+        {#if estModification}
+            <div class="flex mt-4">
+                <button on:click={() => {flagVerifModif = true}} class="mt-1 mx-1 px-1 border-2 border-bleuLBF rounded text-base font-medium text-bleuLBF">
+                    Modifer
+                </button>
+                <button on:click={verifEffacer} class="mt-1 mx-1 px-1 border-2 border-orangeLBF rounded text-base font-medium text-orangeLBF">
+                    Effacer
+                </button>
+            </div>
+        {:else}
+            <div class="mt-4">
+            {#if saveEnCours}
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current text-lbfbleu-500 h-10 w-18 ml-4 " viewBox="0 0 50 50">
+                    <g fill="none" fill-rule="evenodd" stroke-width="2">
+                        <circle cx="22" cy="22" r="1">
+                            <animate attributeName="r" begin="0s" dur="1.8s" values="1; 20" calcMode="spline" keyTimes="0; 1" keySplines="0.165, 0.84, 0.44, 1" repeatCount="indefinite"/>
+                            <animate attributeName="stroke-opacity" begin="0s" dur="1.8s" values="1; 0" calcMode="spline" keyTimes="0; 1" keySplines="0.3, 0.61, 0.355, 1" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="22" cy="22" r="1">
+                            <animate attributeName="r" begin="-0.9s" dur="1.8s" values="1; 20" calcMode="spline" keyTimes="0; 1" keySplines="0.165, 0.84, 0.44, 1" repeatCount="indefinite"/>
+                            <animate attributeName="stroke-opacity" begin="-0.9s" dur="1.8s" values="1; 0" calcMode="spline" keyTimes="0; 1" keySplines="0.3, 0.61, 0.355, 1" repeatCount="indefinite"/>
+                        </circle>
+                    </g>
+                </svg>
+                {:else}
+                    <button on:click={enregistrerReservation} class="mt-1 mx-1 px-1 border-2 border-bleuLBF rounded text-base font-medium text-bleuLBF">
+                        Sauver
+                    </button>
+                {/if}
+            </div>
+        {/if}
     {/if}
     {:else if mailValide}
     <div class="text-justify my-4 mx-4 p-2 border border-bleuLBF rounded">
@@ -525,3 +706,54 @@ function verifResaEnCours(creneau) {
         </div>
     {/if}
 </div>
+{#if flagVerifEffacer}
+    <Modal has_bouton_bleu="true" bouton_bleu_busy={busyEffacerResa} on:close={close} on:boutonBleu={effacerReservation}>
+        <span slot="titre">Confirmation</span>
+            Supprimer votre réservation ?
+        <span slot="boutonBleu">Confirmer</span>
+        <span slot="boutonDefaut">Annuler</span>
+    </Modal>
+{/if}
+{#if flagEffacerConfirme}
+    <Modal on:close={retourAccueil}>
+        <span slot="titre">Opération confirmée</span>
+            Votre réservation a bien été supprimée. Vous allez être redirigé vers l'accueil.
+        <span slot="boutonDefaut">Fermer</span>
+    </Modal>
+{/if}
+{#if flagVerifModif}
+    <Modal has_bouton_bleu="true" bouton_bleu_busy={busyModifResa} on:close={close} on:boutonBleu={modifierReservation}>
+        <span slot="titre">Confirmation</span>
+            Modifier votre réservation ?
+        <span slot="boutonBleu">Confirmer</span>
+        <span slot="boutonDefaut">Annuler</span>
+    </Modal>
+{/if}
+{#if flagModifConfirmee}
+    <Modal on:close={close}>
+        <span slot="titre">Opération confirmée</span>
+            Votre réservation a bien été modifiée.
+        <span slot="boutonDefaut">Fermer</span>
+    </Modal>
+{/if}
+{#if flagSaveEffectue}
+    <Modal on:close={retourPageModif}>
+        <span slot="titre">Opération confirmée</span>
+            Votre réservation a bien été enregistrée. Vous pouvez la modifier sur la page suivante.
+        <span slot="boutonDefaut">Fermer</span>
+    </Modal>
+{/if}
+{#if flagResaNotFound}
+    <Modal on:close={retourAccueil}>
+        <span slot="titre">Réservation inconnue</span>
+            Votre numéro de réservation n'a pas été trouvée dans notre base. Vous allez être redirigé vers l'accueil.
+        <span slot="boutonDefaut">Fermer</span>
+    </Modal>
+{/if}
+{#if flagTropTardPourModifResa}
+    <Modal on:close={retourResa}>
+        <span slot="titre">Modification impossible</span>
+            Vous ne pouvez plus modifier cette réservation.
+        <span slot="boutonDefaut">Fermer</span>
+    </Modal>
+{/if}

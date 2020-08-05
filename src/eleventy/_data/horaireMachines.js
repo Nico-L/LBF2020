@@ -1,5 +1,5 @@
 const fetch = require("node-fetch");
-
+/*
 const graphqlURL = process.env.HASURA_ENDPOINT;
 
 const query = `
@@ -28,3 +28,4 @@ module.exports = async function() {
   let result = await fetchMachinesAbonnementsData();
   return result.data.machines;
 };
+*/

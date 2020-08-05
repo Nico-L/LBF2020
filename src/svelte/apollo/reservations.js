@@ -67,3 +67,52 @@ export async function getResaByUuid (uuid) {
             return JSON.parse(resultats.reservationByUuid.reservationByUuid)
         })
 }
+
+export async function effacerResa (idResa) {
+    const query = `
+        mutation effaceResa($idReservation: String!) {
+            effaceReservation(idReservation: $idReservation) {
+                reservation
+            }
+            }
+        `
+        const variables = {
+        idReservation: idResa
+    }
+    return requeteGraphQL(query, variables)
+        .then((resultats)=> {
+            return JSON.parse(resultats.effaceReservation.reservation)
+        })
+}
+
+export async function modifierResa(variables) {
+    const query = `
+        mutation modifResa(
+                $idReservation: String!,
+                $heureDebut: String,
+                $heureFin: String,
+                $nom: String,
+                $prenom: String,
+                $machine: String,
+                $user: String,
+                $date: String,
+                $uuid: String) {
+            ModifReservation(
+                idReservation: $idReservation,
+                heureDebut: $heureDebut,
+                heureFin: $heureFin,
+                nom: $nom,
+                prenom: $prenom,
+                machine: $machine,
+                user: $user,
+                date: $date,
+                uuid: $uuid) {
+                estReserve
+            }
+            }
+        `
+    return requeteGraphQL(query, variables)
+        .then((resultats)=> {
+            return JSON.parse(resultats.ModifReservation.estReserve)
+        })
+}
