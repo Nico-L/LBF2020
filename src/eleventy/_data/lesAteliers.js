@@ -1,52 +1,10 @@
 const fetch = require("node-fetch");
+const maintenant = (new Date()).toISOString()
 
-/*const graphqlURL = process.env.HASURA_ENDPOINT;
-
-const query = `
-query lesAteliers {
-  __typename
-  ateliers(where: {espaceBF: {espace: {_eq: "Latelier"}}}, order_by: {dateDebut: asc}) {
-    id
-    titre
-    dateFin
-    dateDebut
-    description
-    espace
-    nbParticipants
-    surInscription
-    tarifs
-    urlImage
-    inscritsAteliers {
-      id
-      email
-      nom
-      prenom
-    }
-  }
-}
-`;
-
-async function fetchData() {
-  const leFetch = await fetch(graphqlURL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    cache: "no-store",
-    body: JSON.stringify({ query })
-  });
-
-  return leFetch.json();
-}
-
-module.exports = async function() {
-  let result = await fetchData();
-  //console.log("retour",result.errors[0].extensions)
-  return result.data.ateliers;
-};*/
+adresseFetch = "https://cms.labonnefabrique.fr/ateliers?date_gte=" + maintenant + "_sort=date:ASC"
 
 async function fetchAteliersData() {
-  const leFetch = await fetch("https://cms.labonnefabrique.fr/ateliers?token=blueberryfields&_sort=date:ASC", {
+  const leFetch = await fetch(adresseFetch, {
     method: "get",
     headers: {
       "Content-Type": "application/json"
@@ -59,6 +17,5 @@ async function fetchAteliersData() {
 
 module.exports = async function() {
   let result = await fetchAteliersData();
-  //console.log("retour",result)
   return result;
 };

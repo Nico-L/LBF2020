@@ -180,5 +180,4 @@ module.exports = {
     display: ["responsive", "disabled"],
     maxWidth: ["responsive"]
   },
-  plugins: [require("@tailwindcss/custom-forms")]
 };

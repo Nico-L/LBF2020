@@ -78,13 +78,5 @@
 </div>
 
 <style>
-/* purgecss start ignore */
-@import "tailwindcss/base";
-/* purgecss end ignore */
-
-/* purgecss start ignore */
-@import "tailwindcss/components";
-/* purgecss end ignore */
-
-@import "tailwindcss/utilities";
+@import "./css/styles.css";
 </style>

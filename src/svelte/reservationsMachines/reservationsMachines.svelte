@@ -12,7 +12,7 @@ import {tableCouleursLBF} from '../utils/couleursLBF.js'
 /* import requêtes */
 import {userData} from '../apollo/user.js'
 import {listePlagesHoraires, listeReservationsByDate, reserver, getResaByUuid, effacerResa, modifierResa} from '../apollo/reservations.js'
-import {envoyerMailResa} from '../apollo/email.js'
+import {envoyerMail} from '../apollo/email.js'
 
 var mailValide = false
 var donneesUtilisateur = {}
@@ -77,10 +77,6 @@ if (localStorage["userInfo"]) {
   var estModification = false
 
 onMount(() => {
-    /* if (localStorage["userInfo"]) {
-        userInfo = JSON.parse(localStorage.getItem("userInfo"));
-        saveInfo = true;
-    } */
     let extracted = /\?idReservation=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/i.exec(urlEffacerResa.search)
     if (extracted!==null) {
         estModification = true
@@ -488,10 +484,11 @@ function mailConfirmation(idResa) {
     };
     let variables = {
         email: arrayMails,
-        template: JSON.stringify(envoiMail)
+        template: JSON.stringify(envoiMail),
+        templateId: "d-08bb9e1b96ac4d56a9210660cac6cd07"
     }
-        console.log('variables mail', variables)
-    envoyerMailResa(variables)
+
+    envoyerMail(variables)
 }
 
 </script>

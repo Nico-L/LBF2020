@@ -1,12 +1,15 @@
-<svelte:options tag="une-inscription"/>
+<svelte:options tag="inscription-atelier"/>
 
 <script>
     import { onMount, tick  } from "svelte";
     import Modal from "../components/ModalPerso.svelte";
+    import { dateFormatFr } from '../utils/dateFr.js'
 
     export let id_atelier = 'nope';
     export let url_illustration = 'logoLBFSeul_a1t4af.png';
     export let date_atelier = '';
+    export let heure_debut = '';
+    export let heure_fin = '';
     export let titre_atelier = 'Un titre Atelier';
 
     // récupération adresse pour vérifier si arrivée d'un lien de désinscription
@@ -34,45 +37,78 @@
     var busyEffacerInscrit = false
     var confirmeDesinscrit = false
     var confirmeInscription = false
-    let saveInfo = false;
+    let saveInfo = true;
     let idInscrit = ""
     let modal;
-    if (localStorage["emailInscription"]) {
+    let uuidInscription;
+    let insertInscriptions;
+    var listeInscriptionsEmail = [];
+    var emailInscription = "";
+    var userInfo = { nom: "", prenom: "", email: "" };
+
+    /* if (localStorage["emailInscription"]) {
         var emailInscription = JSON.parse(localStorage.getItem("emailInscription"));
         saveInfo = true;
     } else {
         var emailInscription = "";
-    }
-	/*functions*/
-    //import * as gestionInscriptions from '../utils/graphqlInscrits.js'
-    import * as strapiInscriptions from '../utils/strapiInscrits.js'
-    //import { envoiMail } from '../utils/graphqlEmails.js'
+    } */
 
-//récupération nb inscrits au montage
-onMount(async () => {
-    var extracted = /\?idInscription=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})&email=([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/i.exec(urlModifInscription)
-    await tick()
-    if (extracted!==null) {
-    var idAtelierModif = extracted[1]
-    var emailModif = extracted [2]
-    if (idAtelierModif === id_atelier) {
-        emailInscription = emailModif
-        if (localStorage["emailInscription"]) {
+	/*import functions*/
+    import * as graphqlInscriptions from '../apollo/inscriptionsAteliers.js'
+    import { envoyerMail } from '../apollo/email.js'
+
+    //récupération nb inscrits au montage
+    onMount(async () => {
+        if (localStorage["userInfo"]) {
+            userInfo = JSON.parse(localStorage.getItem("userInfo"));
+            emailInscription = userInfo.email
             saveInfo = true;
+            console.log('id atelier', id_atelier)
+        } else {
+            saveInfo = false
         }
-        afficheModal()
-        verifInscrits()
+        var extracted = /\?uuidInscription=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})&email=([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/i.exec(urlModifInscription)
+        await tick()
+        if (extracted!==null) {
+        var uuidAtelierModif = extracted[1]
+        var emailModif = extracted[2]
+        graphqlInscriptions.findOneInscrit(id_atelier, emailModif).then((inscrit) => {     
+            if (JSON.parse(inscrit)[0] && JSON.parse(inscrit)[0].uuid === uuidAtelierModif) {
+                emailInscription = emailModif
+                if (localStorage["emailInscription"]) {
+                    saveInfo = true;
+                }
+                const verifInscrit = JSON.parse(inscrit)[0]
+                if (verifInscrit) {idInscrit = verifInscrit.id} else {idInscrit = "pasInscrit"}
+                if (verifInscrit && verifInscrit.lesInscrits) {
+                    listeInscrits = verifInscrit.lesInscrits
+                }
+                if (listeInscrits.length > 0) {nouveauxInscrits = []} else { nouveauxInscrits = [{prenom: ""}]}
+                actionEncours = false
+                flagEmailVerifie = true
+                afficheModal()
+                //verifInscrits()
+            }
+        })
+        }
+        nbInscrits()
+    });
+
+    $: {
+        if (saveInfo && emailInscription !== "") {
+            userInfo.email = emailInscription
+            localStorage.setItem("userInfo", JSON.stringify(userInfo));
+        }
+        if (!saveInfo && localStorage["userInfo"]) {
+            localStorage.removeItem("userInfo");
+            userInfo = { nom: "", prenom: "", email: "" };
+        }
     }
-    }
-    nbInscrits()
-});
 
     // appels graphql
-    async function nbInscrits() {
-        console.log('bobby ?', strapiInscriptions.nbInscrits(id_atelier))
-        strapiInscriptions.nbInscrits(id_atelier).then((retourNbPlaces) => {
+    function nbInscrits() {
+        graphqlInscriptions.nbInscrits(id_atelier).then((retourNbPlaces) => {
             nbPlaces = retourNbPlaces
-            console.log('bob')
             flagComplet = false
             if (nbPlaces === 0) {
                 placesRestantes = "Complet"
@@ -84,15 +120,15 @@ onMount(async () => {
                 placesRestantes = nbPlaces + " places restantes"
             }
         })
-        //nbPlaces = await strapiInscriptions.nbInscrits(id_atelier)
     }
 
-	async function verifInscrits() {
+	function verifInscrits() {
         if(emailInscription==="") {flagEmailVide = true; return;}
         if(/([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/i.exec(emailInscription) === null) {flagEmailInvalide = true; return;}
-        saveInfoEmail()
+        // saveInfoEmail()
+        console.log('info user & atelier', id_atelier, emailInscription)
         actionEncours = true
-        strapiInscriptions.findOneInscrit(id_atelier, emailInscription)
+        graphqlInscriptions.findOneInscrit(id_atelier, emailInscription)
             .then((retour)=>{
                 const verifInscrits = JSON.parse(retour)[0]
                 if (verifInscrits) {idInscrit = verifInscrits.id} else {idInscrit = "pasInscrit"}
@@ -105,58 +141,69 @@ onMount(async () => {
             })
 	}
 
-	async function insertInscrits() {
-        saveInfoEmail()
-        var insertInscriptions = {"email": emailInscription, "idAtelier": id_atelier, "lesInscrits": []}
-        var listeInscriptionsEmail = []
-        listeInscrits.forEach((inscription) => {
-			if (!(inscription.prenom === "" && inscription.nom === "")) {
-                insertInscriptions.lesInscrits.push({"prenom": inscription.prenom})
-                listeInscriptionsEmail.push({"prenom": inscription.prenom})
-            }
-        })
-		nouveauxInscrits.forEach((inscription) => {
-			if (!(inscription.prenom === "" && inscription.nom === "")) {
-                insertInscriptions.lesInscrits.push({"prenom": inscription.prenom})
-                listeInscriptionsEmail.push({"prenom": inscription.prenom})
-            }
-        })
-        if (idInscrit==="pasInscrit") {
-            strapiInscriptions.ajoutInscrits(insertInscriptions).then((retour) => {
-                nbInscrits()
-                close()
-                confirmeInscription = true
-            })
-        } else {
-            strapiInscriptions.modifInscription(idInscrit.toString(),insertInscriptions).then((retour) => {
-                nbInscrits()
-                close()
-                confirmeInscription = true
-            })
+function insertInscrits() {
+    // saveInfoEmail()
+    var insertInscriptions = {"email": emailInscription, "idAtelier": id_atelier, "lesInscrits": []}
+    var listeInscriptionsEmail = []
+    listeInscrits.forEach((inscription) => {
+        if (!(inscription.prenom === "" && inscription.nom === "")) {
+            insertInscriptions.lesInscrits.push({"prenom": inscription.prenom})
+            listeInscriptionsEmail.push({"prenom": inscription.prenom})
         }
-        
-        /* var arrayMails = []
+    })
+    nouveauxInscrits.forEach((inscription) => {
+        if (!(inscription.prenom === "" && inscription.nom === "")) {
+            insertInscriptions.lesInscrits.push({"prenom": inscription.prenom})
+            listeInscriptionsEmail.push({"prenom": inscription.prenom})
+        }
+    })
+    if (idInscrit==="pasInscrit") {
+        graphqlInscriptions.ajoutInscrits(insertInscriptions).then((retour) => {
+            nbInscrits()
+            close()
+            confirmeInscription = true
+            envoiMail(retour)
+        })
+    } else {
+        graphqlInscriptions.modifInscription(idInscrit.toString(),insertInscriptions).then((retour) => {
+            nbInscrits()
+            close()
+            confirmeInscription = true
+            envoiMail(retour)
+        })
+    }
+}
+
+    function envoiMail(uuid) {
+        let heureDebutSplit = heure_debut.split(':')
+        let heureFinSplit = heure_fin.split(':')
+        let infoHoraires = dateFormatFr(date_atelier) + ' de ' + heureDebutSplit[0] + "h" + heureDebutSplit[1] + " à " + heureFinSplit[0] + "h" + heureFinSplit[1]
+
+        var arrayMails = []
         arrayMails.push(emailInscription)
         var infoMail = {
             subject: "Confirmation de votre inscription",
             titreAtelier: titre_atelier,
-            date: date_atelier,
+            date: infoHoraires,
             participants: listeInscriptionsEmail,
-            urlDesinscription: urlMail + "?idInscription=" + id_atelier +
+            urlDesinscription: urlMail + "?uuidInscription=" + uuid +
                 "&email=" + emailInscription,
             altMachine: "Illustration Atelier",
-            urlImageMail: "https://res.cloudinary.com/la-bonne-fabrique/image/upload/ar_1.5,w_auto,c_fill/" + url_illustration
+            urlImageMail: url_illustration
         };
-        envoiMail(arrayMails, infoMail)*/
+        let variables = {
+            email: arrayMails,
+            template: JSON.stringify(infoMail),
+            templateId: "d-3db7863e710b491e89681ccdf840a9f4"
+        }
+        envoyerMail(variables)
+    }
 
-	}
-
-	async function effacerInscription() {
+	function effacerInscription() {
         if (idInscrit!=="pasInscrit") {
-            saveInfoEmail()
+            // saveInfoEmail()
             busyEffacerInscription = true
-            console.log('va effacer ', idInscrit)
-            strapiInscriptions.effacerInscription(idInscrit.toString())
+            graphqlInscriptions.effacerInscription(idInscrit.toString())
                 .then((retour) => {
                     nbInscrits()
                     busyEffacerInscription = false
@@ -167,10 +214,9 @@ onMount(async () => {
         }
     }
     
-    async function effacerInscrit() {
-        saveInfoEmail()
+    function effacerInscrit() {
+        // saveInfoEmail()
         busyEffacerInscrit = true
-        console.log("id desincrit", desinscrit.id)
         //var effacerInscritById = await gestionInscriptions.effacerInscritById(desinscrit.id)
         nbInscrits()
         busyEffacerInscrit = false
@@ -184,6 +230,12 @@ onMount(async () => {
         flagVerifEffacer = true
         desinscrit = inscrit
         desinscrit.id = id
+    }
+
+    function retirerInscrit(index) {
+        listeInscrits.splice(index, 1)
+        listeInscrits = listeInscrits
+        validationSave()
     }
 
 	function dernierInscrit(index) {
@@ -223,9 +275,13 @@ function saveInfoEmail() {
 }
 //modal
 	function afficheModal() {
+        verifInscrits()
         showModalInscription = true
-        //testModal = true
 	}
+
+    function retourAccueil() {
+        window.location.replace(window.location.origin)
+    }
 
 	function close() {
         if (confirmeInscription) {
@@ -360,28 +416,23 @@ function saveInfoEmail() {
             </h2>
         {:else}
 		    <div class="text-lg font-bold mt-2 text-bleuLBF">Liste des inscriptions</div>
-			{#each listeInscrits as inscrit}
-			<div class="w-full flex flex-row justify-start mb-4">
-				<div class="flex flex-col sm:flex-row flex-wrap ">
-					<div class="flex flex-col sm:mr-2">
-						<div class="ml-1 text-xs m-0 p-0 font-medium text-bleuLBF">Prénom</div>
-						<input on:input={validationSave} class="mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal"
-							type="text" placeholder="prenom" bind:value={inscrit.prenom}/>
-					</div>
-					<!-- <div class="flex flex-col sm:mr-2">
-						<div class="ml-1 text-xs m-0 p-0 font-medium text-bleuLBF">Nom</div>
-						<input class="mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal"
-							type="text" placeholder="nom" bind:value={inscrit.nom}/>
-					</div> -->
-				</div>
-                {#if listeInscrits.length > 1}
-				<div class="my-auto sm:w-12 w-20">
-					<svg on:click={confirmerEffaceInscrit(inscrit.id, inscrit)} class="mx-auto cursor-pointer mt-3 h-12 w-12 sm:h-8 sm:w-8 stroke-current text-lbfbleu-600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" data-prefix="far" data-icon="trash-alt" viewBox="0 0 448 512">
-						<path fill="currentColor" d="M268 416h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12zM432 80h-82.41l-34-56.7A48 48 0 00274.41 0H173.59a48 48 0 00-41.16 23.3L98.41 80H16A16 16 0 000 96v16a16 16 0 0016 16h16v336a48 48 0 0048 48h288a48 48 0 0048-48V128h16a16 16 0 0016-16V96a16 16 0 00-16-16zM171.84 50.91A6 6 0 01177 48h94a6 6 0 015.15 2.91L293.61 80H154.39zM368 464H80V128h288zm-212-48h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12z"/>
-					</svg>
-				</div>
-                {/if}
-			</div>
+			{#each listeInscrits as inscrit, index}
+                <div class="w-full flex flex-row justify-start mb-4">
+                    <div class="flex flex-col sm:flex-row flex-wrap ">
+                        <div class="flex flex-col sm:mr-2">
+                            <div class="ml-1 text-xs m-0 p-0 font-medium text-bleuLBF">Prénom</div>
+                            <input on:input={validationSave} class="mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal"
+                                type="text" placeholder="prenom" bind:value={inscrit.prenom}/>
+                        </div>
+                    </div>
+                    {#if listeInscrits.length > 1}
+                        <div class="my-auto sm:w-12 w-20">
+                            <svg on:click={() => retirerInscrit(index)} class="mx-auto cursor-pointer mt-3 h-12 w-12 sm:h-8 sm:w-8 stroke-current text-lbfbleu-600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" data-prefix="far" data-icon="trash-alt" viewBox="0 0 448 512">
+                                <path fill="currentColor" d="M268 416h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12zM432 80h-82.41l-34-56.7A48 48 0 00274.41 0H173.59a48 48 0 00-41.16 23.3L98.41 80H16A16 16 0 000 96v16a16 16 0 0016 16h16v336a48 48 0 0048 48h288a48 48 0 0048-48V128h16a16 16 0 0016-16V96a16 16 0 00-16-16zM171.84 50.91A6 6 0 01177 48h94a6 6 0 015.15 2.91L293.61 80H154.39zM368 464H80V128h288zm-212-48h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12z"/>
+                            </svg>
+                        </div>
+                    {/if}
+                </div>
 			{/each}
             <div bind:this={modal}>
 			{#each nouveauxInscrits as nouvelInscrit, index ('nI' + index)}
@@ -393,12 +444,6 @@ function saveInfoEmail() {
                                 <input on:input={validationSave} class="mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal"
                                     type="text" placeholder="prenom" bind:value={nouvelInscrit.prenom}/>
                             </div>
-                            <!--
-                                <div class="flex flex-col">
-                                <div class="ml-1 text-xs m-0 p-0 font-medium text-bleuLBF">Nom</div>
-                                <input class="mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal"
-                                    type="text" placeholder="nom" bind:value={nouvelInscrit.nom}/>
-                            </div> -->
                         </div>
                         <div class="my-auto">
                             <svg on:click={soustraitInscrit(index)} class="mx-auto cursor-pointer mt-3 h-12 w-12 md:h-8 md:w-8 stroke-current text-rougeLBF" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" data-prefix="far" data-icon="trash-alt" viewBox="0 0 448 512">
@@ -414,7 +459,6 @@ function saveInfoEmail() {
 				</div>
 			{/each}
             </div>
-            {nbPlaces}
             {#if (nbPlaces-nouveauxInscrits.length) === 0}
                 <div class="text-sm sm:text-xs md:text-sm font-medium text-rougeLBF ">Cet atelier ne peut accepter plus de participants.</div>
             {/if}
@@ -456,10 +500,10 @@ function saveInfoEmail() {
     </mon-modal>
 {/if}
 {#if confirmeDesinscription}
-    <mon-modal on:close={close} on:boutonBleu={effacerInscrit}>
+    <mon-modal on:close={retourAccueil} on:boutonBleu={retourAccueil}>
         <span slot="titre">Votre desinscription</span>
             Votre désinscription a bien été enregistrée. 
-        <span slot="boutonBleu">Confirmer</span>
+        <span slot="boutonBleu">OK</span>
     </mon-modal>
 {/if}
 {#if confirmeDesinscrit}
@@ -483,13 +527,5 @@ function saveInfoEmail() {
 </slot>
 
 <style>
-/* purgecss start ignore */
-@import "tailwindcss/base";
-/* purgecss end ignore */
-
-/* purgecss start ignore */
-@import "tailwindcss/components";
-/* purgecss end ignore */
-
-@import "tailwindcss/utilities";
+@import "./css/styles.css";
 </style>

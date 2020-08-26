@@ -1,21 +1,3 @@
-/*async function getToken() {
-    return fetch("https://graphql.labonnefabrique.fr/apollo", {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-        query: `query login {
-                siteLogin {
-                    loginToken
-                }
-                }`
-        })
-    }).then(retour => retour.json())
-    .then(resultat => {
-        console.log('retour token', resultat)
-        return resultat.data.siteLogin.loginToken
-    }).catch((error)=>console.log('erreur getToken', error))
-} */
-
 export function nbInscrits(idAtelier) {
     return fetch("https://graphql.labonnefabrique.fr/apollo", {
             method: "POST",
@@ -69,11 +51,11 @@ export function ajoutInscrits(inscription) {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            query: `query ajoutInscrit($inscription: String!) {
+            query: `mutation ajoutInscrit($inscription: String!) {
                 ajoutInscription(
                     inscription: $inscription
                 ) {
-                    idInscription
+                    uuid
                 }
                 }`,
         variables: {
@@ -81,7 +63,7 @@ export function ajoutInscrits(inscription) {
         }
         })
     }).then(retour => retour.json())
-    .then((resultat) => {return resultat.data.ajoutInscription.idInscription})
+    .then((resultat) => {return resultat.data.ajoutInscription.uuid})
     .catch((error) => console.log('erreur', error))
 }
 
@@ -91,7 +73,7 @@ export function effacerInscription(idInscription) {
         headers:  { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             query: `
-                query effaceInscrit($idInscription: String!) {
+                mutation effaceInscrit($idInscription: String!) {
                     effaceInscription(idInscription: $idInscription) {
                         inscription
                     }
@@ -102,7 +84,7 @@ export function effacerInscription(idInscription) {
             }
         })
     }).then(retour => retour.json())
-    .then((resultat)=> {console.log('retour effaceInscription',resultat); return resultat.data.effaceInscription.inscription})
+    .then((resultat)=> {return resultat.data.effaceInscription.inscription})
     .catch((error) => console.log('erreur', error))
 }
 
@@ -112,12 +94,12 @@ export function modifInscription(idInscrit, inscription) {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            query: `query modifInscrit($idInscription: String!, $inscription: String!) {
+            query: `mutation modifInscrit($idInscription: String!, $inscription: String!) {
                 modifInscription(
                     idInscription: $idInscription
                     inscription: $inscription
                 ) {
-                    idInscription
+                    uuid
                 }
                 }`,
         variables: {
@@ -126,6 +108,6 @@ export function modifInscription(idInscrit, inscription) {
         }
         })
     }).then(retour => retour.json())
-    .then((resultat) => {console.log('retour modifInscription',resultat); return resultat.data.ajoutInscription.inscription})
+    .then((resultat) => {return resultat.data.modifInscription.uuid})
     .catch((error) => console.log('erreur', error))
 }

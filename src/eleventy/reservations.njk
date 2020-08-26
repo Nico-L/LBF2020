@@ -8,7 +8,6 @@ layout: baseLBF
   </h1>
 {% block scripts %}
 <script>
-//const titreMachine = "{{machine.titre | safe}}"
 var lesMachines = []; 
 
 {%- for machine in lesMachines -%}
@@ -21,7 +20,6 @@ var lesMachines = [];
     "urlImage": "{{machine.illustration[0].formats.thumbnail.url}}"
     });
 {%- endfor -%}
-//const urlImageMachine = "{{machine.urlImage}}"
 </script>
-<script src="/js/bundle.js"></script>
+<script src="/js/reservationsMachines.js"></script>
 {% endblock %}
