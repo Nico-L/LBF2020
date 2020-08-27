@@ -7,7 +7,7 @@ Ce site réunit les informations sur les machines et les ateliers proposés par 
 
 - [Eleventy](https://11ty.dev) un générateur de sites statiques
 - [Eleventail](https://github.com/philhawksworth/eleventail) pour le template orchestrant l'utilisation de
-- - [Tailwindcss](https://tailwindcss.com) pour le css
-- - [PurgeCSS](https://www.purgecss.com/) pour la minimisation du fichier css
+    - [Tailwindcss](https://tailwindcss.com) pour le css
+    - [PurgeCSS](https://www.purgecss.com/) pour la minimisation du fichier css
 
 Déployé chez Netlify
