@@ -9,5 +9,6 @@ Ce site réunit les informations sur les machines et les ateliers proposés par 
 - [Eleventail](https://github.com/philhawksworth/eleventail) pour le template orchestrant l'utilisation de
     - [Tailwindcss](https://tailwindcss.com) pour le css
     - [PurgeCSS](https://www.purgecss.com/) pour la minimisation du fichier css
+- [Svelte](https://svelte.dev/) pour la partie dynamique javascript
 
 Déployé chez Netlify
