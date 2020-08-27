@@ -5,7 +5,6 @@
 /dist
 /src/site/css
 /src/eleventy/_includes/js
-/old
 yarn.lock
 
 # secrets

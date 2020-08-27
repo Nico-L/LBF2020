@@ -22,11 +22,11 @@ layout: baseLBF
                     {% endfor %}.</p>
       <p>Nos abonnements :</p>
       <div class="flex flex-row justify-around mx-auto text-center mt-2 font-bold">
-        {% for tarif in abonnementsMachines[0].lesTarifs.abonnement %}
-        <div class="mx-3 border-2 border-lbfvert-200 rounded shadow-md bg-white px-1 py-1">
-         <div class="font-bold mt-1">{{tarif.tarification}}</div>
-         <div class="font-normal my-1">{{tarif.tarif}} €</div>
-        </div>
+        {% for abonnement in abonnements.Tarifs %}
+            <div class="mx-3 border-2 border-lbfvert-200 rounded shadow-md bg-white px-1 py-1">
+                <div class="font-bold mt-1">{{abonnement.duree}}</div>
+                <div class="font-normal my-1">{{abonnement.tarif}} €</div>
+            </div>
         {% endfor %}
         </div>
 
@@ -44,18 +44,15 @@ layout: baseLBF
       </div>
     <div class="hidden md:flex md:flex-col md:w-1/2 md:ml-4">
       <p>Le coût des machines est fonction de la durée d'occupation.</p>
-          {% for machine in horaireMachines %}
-          <div class="flex flex-col mt-4">
-          <div class="font-bold text-center text-lg"> {{machine.titre}} </div>
-          <div class="flex flex-row flex-wrap justify-center">
-          {% for tarif in machine.lesTarifs.horaire %}
-            <div class="flex-shrink-0 border-2 border-lbfbleu-200 m-1 p-1 shadow-md rounded text-center flex flex-col">
-            <div class="font-bold">{{tarif.tarification}}</div>
-            <div>{{tarif.tarif}} € </div>
-            </div>
-          {% endfor %}
-          </div>
-          </div>
+          {% for machine in lesMachines %}
+            {% if not machine.Abonnement %}
+                <div class="flex flex-row">
+                    <div class="font-medium"> {{machine.nom}} :&nbsp;</div>
+                    <div class="">
+                        {{machine.tarifHoraire}}&nbsp;€/h
+                    </div>
+                </div>
+            {% endif %}
           {% endfor %}
     </div>
     </div>
