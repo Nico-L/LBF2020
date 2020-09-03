@@ -581,7 +581,7 @@ function mailConfirmation(idResa) {
             </div>
             
             <div class="text-base mt-2">Vous pouvez réserver les machines suivantes :</div>
-            <div class="flex">
+            <div class="flex flex-wrap">
                 {#if donneesUtilisateur.cnc}
                     <RadioBouton label="cnc" cbClasses={tableCouleursLBF['jaune'].classText} name="machineReservation" value={getIdMachine('cnc')} bind:selected={choixMachine}/>
                 {/if}
@@ -717,7 +717,7 @@ function mailConfirmation(idResa) {
         </div>
     {:else}
         <div class="text-justify my-4 mx-4 p-2 border border-bleuLBF rounded">
-            Merci d'entrer l'adresse mail avec laquelle vous avez été enregistré (normalement lors d'une de nos initiations).
+            Merci d'entrer l'adresse mail avec laquelle vous avez été enregistré dans notre base (normalement lors d'une de nos initiations).
         </div>
     {/if}
 </div>
