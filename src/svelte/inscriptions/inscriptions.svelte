@@ -110,7 +110,7 @@
         graphqlInscriptions.nbInscrits(id_atelier).then((retourNbPlaces) => {
             nbPlaces = retourNbPlaces
             flagComplet = false
-            if (nbPlaces <= 0) {
+            if (nbPlaces < 1) {
                 placesRestantes = "Complet"
                 flagComplet = true
                 nouveauxInscrits = []
