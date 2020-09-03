@@ -67,3 +67,11 @@ export function horaireFr(horaire) {
     let h = horaire.split(":")
     return h[0] + 'h' + h[1]
 }
+
+export function dateMoisAnnee(date){
+    const laDate = new Date(date);
+    const leJour = (new Date(date)).getDate();
+    const leMois = dateFr.mois[laDate.getMonth()][0];
+    const lAnnee = laDate.getFullYear();
+    return  'le ' + leJour + ' ' + leMois + ' ' + lAnnee
+}
