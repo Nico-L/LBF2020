@@ -124,9 +124,9 @@ eleventyConfig.addFilter("titreReservation", function(machine) {
   eleventyConfig.addPassthroughCopy({
     "src/eleventy/css": "css"
   });
-  eleventyConfig.addPassthroughCopy({
+  /*eleventyConfig.addPassthroughCopy({
     "src/eleventy/_includes/js/*": "js"
-  });
+  });*/
 
   return {
     dir: {

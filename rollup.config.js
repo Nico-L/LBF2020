@@ -44,8 +44,8 @@ export default [{
     production && terser()
   ],
   watch: {
-    usePolling: true,
-    clearScreen: false
+    //usePolling: true,
+    //clearScreen: false
   }
 },
 {
@@ -101,8 +101,8 @@ export default [{
     production && terser()
   ],
   watch: {
-    usePolling: true,
-    clearScreen: false
+    //usePolling: true,
+    //clearScreen: false
   }
 }];
 
