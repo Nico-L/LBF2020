@@ -143,7 +143,7 @@
 function insertInscrits() {
     // saveInfoEmail()
     var insertInscriptions = {"email": emailInscription, "idAtelier": id_atelier, "lesInscrits": []}
-    var listeInscriptionsEmail = []
+    listeInscriptionsEmail = []
     listeInscrits.forEach((inscription) => {
         if (!(inscription.prenom === "" && inscription.nom === "")) {
             insertInscriptions.lesInscrits.push({"prenom": inscription.prenom, "nom": inscription.nom})
@@ -156,6 +156,7 @@ function insertInscrits() {
             listeInscriptionsEmail.push({"prenom": inscription.prenom, "nom": inscription.nom})
         }
     })
+    console.log('liste participant pour email', listeInscriptionsEmail)
     if (idInscrit==="pasInscrit") {
         graphqlInscriptions.ajoutInscrits(insertInscriptions).then((retour) => {
             nbInscrits()
@@ -174,10 +175,10 @@ function insertInscrits() {
 }
 
     function envoiMail(uuid) {
+        console.log('pouf mail', listeInscriptionsEmail)
         let heureDebutSplit = heure_debut.split(':')
         let heureFinSplit = heure_fin.split(':')
         let infoHoraires = dateFormatFr(date_atelier) + ' de ' + heureDebutSplit[0] + "h" + heureDebutSplit[1] + " à " + heureFinSplit[0] + "h" + heureFinSplit[1]
-
         var arrayMails = []
         arrayMails.push(emailInscription)
         var infoMail = {
@@ -190,6 +191,7 @@ function insertInscrits() {
             altMachine: "Illustration Atelier",
             urlImageMail: url_illustration
         };
+        console.log('infoMail', infoMail)
         let variables = {
             email: arrayMails,
             template: JSON.stringify(infoMail),
@@ -469,7 +471,7 @@ function saveInfoEmail() {
 			{/each}
             </div>
             {#if (nbPlaces-nouveauxInscrits.length) === 0}
-                <div class="text-sm sm:text-xs md:text-sm font-medium text-rougeLBF ">Cet atelier ne peut accepter plus de participants.</div>
+                <div class="text-sm sm:text-xs md:text-sm font-medium text-rougeLBF ">Cet atelier ne peut accepter de participant supplémentaire.</div>
             {/if}
             <div>
                 {#if (nbPlaces-nouveauxInscrits.length) > 0}
