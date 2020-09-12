@@ -82,7 +82,7 @@
                 if (verifInscrit && verifInscrit.lesInscrits) {
                     listeInscrits = verifInscrit.lesInscrits
                 }
-                if (listeInscrits.length > 0) {nouveauxInscrits = []} else { nouveauxInscrits = [{prenom: ""}]}
+                if (listeInscrits.length > 0) {nouveauxInscrits = []} else { nouveauxInscrits = [{"prenom": "", "nom": ""}]}
                 actionEncours = false
                 flagEmailVerifie = true
                 afficheModal()
@@ -134,7 +134,7 @@
                 if (verifInscrits && verifInscrits.lesInscrits) {
                     listeInscrits = verifInscrits.lesInscrits
                 }
-                if (listeInscrits.length > 0) {nouveauxInscrits = []} else { nouveauxInscrits = [{prenom: ""}]}
+                if (listeInscrits.length > 0) {nouveauxInscrits = []} else { nouveauxInscrits = [{"prenom": "", "nom": ""}]}
                 actionEncours = false
                 flagEmailVerifie = true
             })
@@ -146,14 +146,14 @@ function insertInscrits() {
     var listeInscriptionsEmail = []
     listeInscrits.forEach((inscription) => {
         if (!(inscription.prenom === "" && inscription.nom === "")) {
-            insertInscriptions.lesInscrits.push({"prenom": inscription.prenom})
-            listeInscriptionsEmail.push({"prenom": inscription.prenom})
+            insertInscriptions.lesInscrits.push({"prenom": inscription.prenom, "nom": inscription.nom})
+            listeInscriptionsEmail.push({"prenom": inscription.prenom, "nom": inscription.nom})
         }
     })
     nouveauxInscrits.forEach((inscription) => {
         if (!(inscription.prenom === "" && inscription.nom === "")) {
-            insertInscriptions.lesInscrits.push({"prenom": inscription.prenom})
-            listeInscriptionsEmail.push({"prenom": inscription.prenom})
+            insertInscriptions.lesInscrits.push({"prenom": inscription.prenom, "nom": inscription.nom})
+            listeInscriptionsEmail.push({"prenom": inscription.prenom, "nom": inscription.nom})
         }
     })
     if (idInscrit==="pasInscrit") {
@@ -242,7 +242,7 @@ function insertInscrits() {
 	}
 
 	function ajoutInscrit() {
-		if ((nbPlaces - nouveauxInscrits.length)>0) nouveauxInscrits.push({prenom: ""})
+		if ((nbPlaces - nouveauxInscrits.length)>0) nouveauxInscrits.push({"prenom": "", nom: ""})
 		nouveauxInscrits = nouveauxInscrits
 	}
 
@@ -419,6 +419,11 @@ function saveInfoEmail() {
                 <div class="w-full flex flex-row justify-start mb-4">
                     <div class="flex flex-col sm:flex-row flex-wrap ">
                         <div class="flex flex-col sm:mr-2">
+                            <div class="ml-1 text-xs m-0 p-0 font-medium text-bleuLBF">Nom</div>
+                            <input on:input={validationSave} class="mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal"
+                                type="text" placeholder="nom" bind:value={inscrit.nom}/>
+                        </div>
+                        <div class="flex flex-col sm:mr-2">
                             <div class="ml-1 text-xs m-0 p-0 font-medium text-bleuLBF">Prénom</div>
                             <input on:input={validationSave} class="mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal"
                                 type="text" placeholder="prenom" bind:value={inscrit.prenom}/>
@@ -438,6 +443,11 @@ function saveInfoEmail() {
 				<div class="w-full flex flex-col justify-start">
                     <div class="flex flex-row justify-end">
                         <div class="flex flex-col sm:flex-row">
+                            <div class="flex flex-col sm:mr-2">
+                                <div class="ml-1 text-xs m-0 p-0 font-medium text-bleuLBF">Nom</div>
+                                <input on:input={validationSave} class="mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal"
+                                    type="text" placeholder="nom" bind:value={nouvelInscrit.nom}/>
+                            </div>
                             <div class="flex flex-col">
                                 <div class="ml-1 text-xs m-0 p-0 font-medium text-bleuLBF">Prénom</div>
                                 <input on:input={validationSave} class="mr-2 px-1 h-10 bg-white focus:outline-none focus:bg-white focus:border-lbfbleu-600 border-2 border-lbfbleu-400 rounded-lg block appearance-none leading-normal"
