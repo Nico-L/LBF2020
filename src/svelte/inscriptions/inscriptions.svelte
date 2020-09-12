@@ -63,7 +63,6 @@
             userInfo = JSON.parse(localStorage.getItem("userInfo"));
             emailInscription = userInfo.email
             saveInfo = true;
-            console.log('id atelier', id_atelier)
         } else {
             saveInfo = false
         }
@@ -410,7 +409,7 @@ function saveInfoEmail() {
                     <li> Si vous avez déjà effectué une inscription à cet atelier, vous pourrez modifier celle-ci ou vous désinscrire.</li>
                 </ul>
             </div>
-		{:else if nbPlaces === 0 && listeInscrits.length === 0}
+		{:else if nbPlaces < 1 && listeInscrits.length === 0}
             <h2 class="text-base text-bleuLBF w-full mt-2 mx-2 pb-1 mb-1 font-bold">
                 Cet atelier est complet. Nos ateliers sont régulièrement proposés, surveillez cet espace pour le prochain.
             </h2>
