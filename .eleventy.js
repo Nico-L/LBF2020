@@ -1,4 +1,5 @@
 const { DateTime } = require("luxon");
+const fetch = require("node-fetch");
 //const util = require("util");
 const slugify = require("slugify");
 const mois = [
@@ -40,6 +41,8 @@ const jours = [
     "vendredi",
     "samedi"
 ]
+
+const tokenSite = process.env.TOKEN_SITE
 
 module.exports = function(eleventyConfig) {
   // Layout aliases for convenience
@@ -107,6 +110,25 @@ eleventyConfig.addFilter("titreReservation", function(machine) {
 
   // compress and combine js files
   eleventyConfig.addFilter("jsmin", require("./src/utils/minify-js.js"));
+
+  eleventyConfig.addNunjucksAsyncFilter("imgProxy", function(url, options, callback) {
+    const variables = {
+        url: url,
+        ...options
+    }
+    const urlQuery = "https://cms.labonnefabrique.fr/imgproxy?token=" + tokenSite
+    const entetes = {"content-type": "application/json"}
+    var options = { 
+        method: 'POST',
+        headers: entetes,
+        mode: 'cors',
+        cache: 'default',
+        body: JSON.stringify(variables)
+    }
+    fetch(urlQuery, options)
+        .then((leJSON)=> {return leJSON.json()})
+        .then((retour)=> {callback(null, retour.imgProxyUrl); })
+  })
 
   // minify the html output when running in prod
   if (process.env.NODE_ENV == "production") {

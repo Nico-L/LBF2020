@@ -8,7 +8,9 @@ layout: indexLBF
     <div class="h-14 ml-16 flex flex-row content-center">
         <h1 class="text-lg font-bold mx-auto my-auto pl-2">{{atelier.titre}}</h1>
     </div>
-    <div class="relative h-180px" style="background-image: url(https://cms.labonnefabrique.fr{{atelier.illustration[0].formats.small.url}})">
+    <div 
+        class="relative h-180px" 
+        style="background-image: url({{atelier.urlImage | imgProxy({resizing_type: 'fill', width: '338', height: '180', gravity: 'sm'})}})">
         {% if atelier.surInscription %}
         <div class="absolute -bottom-2 left-0">
             <inscription-atelier 
