@@ -21,6 +21,7 @@ module.exports = {
         '4/6': '66%',
         '5/6': '83%',
         '320px': '320px',
+        '500px': '500px',
         '620px': '620px'
     },
     maxHeight: {
@@ -35,6 +36,7 @@ module.exports = {
       fondLBF: "#FCFCFC",
       orangeLBF: "#ee732e",
       bleuLBF: "#4bbcc4",
+      bleuLBFT: "#4bbcc455",
       vertLBF: "#93c021",
       vertLBFT: "#93c02155",
       rougeLBF: "#e02933",

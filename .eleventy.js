@@ -46,9 +46,8 @@ const tokenSite = process.env.TOKEN_SITE
 
 module.exports = function(eleventyConfig) {
   // Layout aliases for convenience
-  //eleventyConfig.addLayoutAlias("default", "layouts/base.njk");
-  //eleventyConfig.addLayoutAlias("conf", "layouts/conf.njk");
   eleventyConfig.addLayoutAlias("baseLBF", "layouts/baseLBF.njk");
+  eleventyConfig.addLayoutAlias("auth", "layouts/auth.njk");
   eleventyConfig.addLayoutAlias("indexLBF", "layouts/indexLBF.njk");
   eleventyConfig.addLayoutAlias("baseLBFResaMachines", "layouts/baseLBFResaMachines.njk");
 
@@ -146,9 +145,9 @@ eleventyConfig.addFilter("titreReservation", function(machine) {
   eleventyConfig.addPassthroughCopy({
     "src/eleventy/css": "css"
   });
-  /*eleventyConfig.addPassthroughCopy({
+  eleventyConfig.addPassthroughCopy({
     "src/eleventy/_includes/js/*": "js"
-  });*/
+  });
 
   return {
     dir: {

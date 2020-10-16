@@ -6,11 +6,11 @@ import {terser} from "rollup-plugin-terser";
 const production = !process.env.ROLLUP_WATCH;
 
 export default [{
-  input: "src/svelte/reservationsMachines/main.js",
+  input: "src/svelte/apps/reservationsMachines/main.js",
   output: {
     sourcemap: true,
     format: "iife",
-    name: "app",
+    name: "appReservationsMachines",
     file: "./dist/js/reservationsMachines.js"
   },
   plugins: [
@@ -49,7 +49,179 @@ export default [{
   }
 },
 {
-  input: "src/svelte/inscriptions/main.js",
+  input: "src/svelte/apps/enregistrement/main.js",
+  output: {
+    sourcemap: true,
+    format: "iife",
+    name: "appEnregistrement",
+    file: "./dist/js/enregistrement.js"
+  },
+  plugins: [
+    //css({ output: 'src/eleventy/css/reservationsMachines.css' }),
+    svelte({
+      // enable run-time checks when not in production
+      dev: !production,
+      // we'll extract any component CSS out into
+      // a separate file — better for performance
+      /*css: css => {
+        css.write("src/eleventy/css/resaMachinesAddOn.css");
+      } */
+    }),
+    // If you have external dependencies installed from
+    // npm, you'll most likely need these plugins. In
+    // some cases you'll need additional configuration —
+    // consult the documentation for details:
+    // https://github.com/rollup/plugins/tree/master/packages/commonjs
+    resolve(),
+    commonjs({include: ["node_modules/**"]}),
+    // In dev mode, call `npm run start` once
+    // the bundle has been generated
+    //!production && serve(),
+
+    // Watch the `public` directory and refresh the
+    // browser on changes when not in production
+    //!production && livereload("public"),
+
+    // If we're building for production (npm run build
+    // instead of npm run dev), minify
+    production && terser()
+  ],
+  watch: {
+    //usePolling: true,
+    //clearScreen: false
+  }
+},
+{
+  input: "src/svelte/apps/oubliMDP/main.js",
+  output: {
+    sourcemap: true,
+    format: "iife",
+    name: "appOubliMDP",
+    file: "./dist/js/oubliMDP.js"
+  },
+  plugins: [
+    //css({ output: 'src/eleventy/css/reservationsMachines.css' }),
+    svelte({
+      // enable run-time checks when not in production
+      dev: !production,
+      // we'll extract any component CSS out into
+      // a separate file — better for performance
+      /*css: css => {
+        css.write("src/eleventy/css/resaMachinesAddOn.css");
+      } */
+    }),
+    // If you have external dependencies installed from
+    // npm, you'll most likely need these plugins. In
+    // some cases you'll need additional configuration —
+    // consult the documentation for details:
+    // https://github.com/rollup/plugins/tree/master/packages/commonjs
+    resolve(),
+    commonjs({include: ["node_modules/**"]}),
+    // In dev mode, call `npm run start` once
+    // the bundle has been generated
+    //!production && serve(),
+
+    // Watch the `public` directory and refresh the
+    // browser on changes when not in production
+    //!production && livereload("public"),
+
+    // If we're building for production (npm run build
+    // instead of npm run dev), minify
+    production && terser()
+  ],
+  watch: {
+    //usePolling: true,
+    //clearScreen: false
+  }
+},
+{
+  input: "src/svelte/apps/resetMDP/main.js",
+  output: {
+    sourcemap: true,
+    format: "iife",
+    name: "appOubliMDP",
+    file: "./dist/js/resetMDP.js"
+  },
+  plugins: [
+    //css({ output: 'src/eleventy/css/reservationsMachines.css' }),
+    svelte({
+      // enable run-time checks when not in production
+      dev: !production,
+      // we'll extract any component CSS out into
+      // a separate file — better for performance
+      /*css: css => {
+        css.write("src/eleventy/css/resaMachinesAddOn.css");
+      } */
+    }),
+    // If you have external dependencies installed from
+    // npm, you'll most likely need these plugins. In
+    // some cases you'll need additional configuration —
+    // consult the documentation for details:
+    // https://github.com/rollup/plugins/tree/master/packages/commonjs
+    resolve(),
+    commonjs({include: ["node_modules/**"]}),
+    // In dev mode, call `npm run start` once
+    // the bundle has been generated
+    //!production && serve(),
+
+    // Watch the `public` directory and refresh the
+    // browser on changes when not in production
+    //!production && livereload("public"),
+
+    // If we're building for production (npm run build
+    // instead of npm run dev), minify
+    production && terser()
+  ],
+  watch: {
+    //usePolling: true,
+    //clearScreen: false
+  }
+},
+{
+  input: "src/svelte/apps/login/main.js",
+  output: {
+    sourcemap: true,
+    format: "iife",
+    name: "appOubliMDP",
+    file: "./dist/js/login.js"
+  },
+  plugins: [
+    //css({ output: 'src/eleventy/css/reservationsMachines.css' }),
+    svelte({
+      // enable run-time checks when not in production
+      dev: !production,
+      // we'll extract any component CSS out into
+      // a separate file — better for performance
+      /*css: css => {
+        css.write("src/eleventy/css/resaMachinesAddOn.css");
+      } */
+    }),
+    // If you have external dependencies installed from
+    // npm, you'll most likely need these plugins. In
+    // some cases you'll need additional configuration —
+    // consult the documentation for details:
+    // https://github.com/rollup/plugins/tree/master/packages/commonjs
+    resolve(),
+    commonjs({include: ["node_modules/**"]}),
+    // In dev mode, call `npm run start` once
+    // the bundle has been generated
+    //!production && serve(),
+
+    // Watch the `public` directory and refresh the
+    // browser on changes when not in production
+    //!production && livereload("public"),
+
+    // If we're building for production (npm run build
+    // instead of npm run dev), minify
+    production && terser()
+  ],
+  watch: {
+    //usePolling: true,
+    //clearScreen: false
+  }
+},
+{
+  input: "src/svelte/apps/inscriptions/main.js",
   output: {
     sourcemap: true,
     format: "iife",
@@ -86,7 +258,11 @@ export default [{
     // some cases you'll need additional configuration —
     // consult the documentation for details:
     // https://github.com/rollup/plugins/tree/master/packages/commonjs
-    resolve(),
+    resolve({
+            browser: true,
+            preferBuiltins: false,
+			dedupe: ['svelte']
+		}),
     commonjs({include: ["node_modules/**"]}),
     // In dev mode, call `npm run start` once
     // the bundle has been generated

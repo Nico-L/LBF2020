@@ -1,18 +1,18 @@
 <script>
 import {onMount} from 'svelte';
-import Datepicker from '../components/calendar/Datepicker.svelte'
-import { getJourSemaine, horaireFr, dateFr, dateFormatFr, dateMoisAnnee} from '../utils/dateFr.js'
-import RadioBouton from '../components/radioButtons.svelte'
-import Checkbox from '../components/Checkbox.svelte'
+import Datepicker from '../../components/calendar/Datepicker.svelte'
+import { getJourSemaine, horaireFr, dateFr, dateFormatFr, dateMoisAnnee} from '../../utils/dateFr.js'
+import RadioBouton from '../../components/radioButtons.svelte'
+import Checkbox from '../../components/Checkbox.svelte'
 import Fa from 'svelte-fa'
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
-import Bouton from '../components/bouton.svelte'
-import Modal from "../components/ModalComp.svelte";
-import {tableCouleursLBF} from '../utils/couleursLBF.js'
+import Bouton from '../../components/bouton.svelte'
+import Modal from "../../components/ModalComp.svelte";
+import {tableCouleursLBF} from '../../utils/couleursLBF.js'
 /* import requêtes */
-import {userData} from '../apollo/user.js'
-import {listePlagesHoraires, listeReservationsByDate, reserver, getResaByUuid, effacerResa, modifierResa} from '../apollo/reservations.js'
-import {envoyerMail} from '../apollo/email.js'
+import {userData} from '../../apollo/user.js'
+import {listePlagesHoraires, listeReservationsByDate, reserver, getResaByUuid, effacerResa, modifierResa} from '../../apollo/reservations.js'
+import {envoyerMail} from '../../apollo/email.js'
 
 var mailValide = false
 var donneesUtilisateur = {}

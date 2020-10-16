@@ -1,0 +1,235 @@
+<svg xmlns="http://www.w3.org/2000/svg" height="82" width="82" xml:space="preserve" y="0" x="0" id="Calque_1" version="1.1">
+  <style id="style1374" type="text/css">
+    .st1{fill:#93c021}.st2{fill:#4bbcc4}.st3{fill:#ee732e}.st4{fill:#5c5c5c}.st5{fill:#fcc62d}.st7{fill:#e73737}.st8{fill:#5e4b99}
+  </style>
+  <path id="polygon1386" d="M16.5 417.5h-.9v11.7h5.3v-.7h-4.4z"/>
+  <path id="path1388" d="M25 425.7h3.6l1 3.5h.9l-3.3-11.8h-.7l-2.2 7.6v.1l-1.1 4.1h.8zm.2-.7l1.6-5.6 1.6 5.6z"/>
+  <path id="path1390" d="M44.3 426.1c0-1-.3-1.8-.8-2.3-.2-.2-.4-.3-.6-.4.2-.1.4-.3.6-.4.5-.5.8-1.3.8-2.3 0-2.1-1.1-3.1-3.2-3.1h-2.4v11.8h2.4c2.2-.2 3.2-1.2 3.2-3.3m-4.8-3.1v-4.8h1.6c1.7 0 2.4.6 2.4 2.4 0 1.7-.7 2.4-2.4 2.4zm4 3.1c0 1.7-.6 2.4-2.4 2.4h-1.6v-4.8h1.6c1.7 0 2.4.7 2.4 2.4"/>
+  <path id="path1392" d="M53.2 420.6c0-2.1-1.1-3.2-3.1-3.2s-3.1 1.1-3.1 3.2v5.4c0 1.2.3 2 1 2.6.5.4 1.2.6 2.1.6.9 0 1.6-.2 2.1-.6.7-.5 1-1.4 1-2.6zm-.9 0v5.4c0 1.7-.7 2.4-2.3 2.4-1.5 0-2.3-.8-2.3-2.4v-5.4c0-1.6.7-2.4 2.3-2.4 1.6 0 2.3.7 2.3 2.4"/>
+  <path id="polygon1394" d="M56.5 417.5h-.7v11.7h.8v-9.5l4.8 9.5h.7v-11.7h-.9v9.5l-4.7-9.5z"/>
+  <path id="polygon1396" d="M65.4 417.5h-.7v11.7h.9v-9.5l4.7 9.5h.7v-11.7h-.8v9.5l-4.7-9.5z"/>
+  <path id="polygon1398" d="M73.7 417.5v11.7H79v-.7h-4.5v-4.8h3.8v-.7h-3.8v-4.8H79v-.7z"/>
+  <path id="polygon1400" d="M16.8 434.4h5.6v-1h-6.6v18.1h1V443h5.6v-1.1h-5.6z"/>
+  <path id="path1402" d="M26.7 433.4h-.8l-2.7 11.7v.1l-1.4 6.3h1.1l1.2-5.5h4.6l1.2 5.4v.1H31zm1.6 11.6h-4.1l2-8.8z"/>
+  <path id="path1404" d="M38.5 441.7c.6-.8 1-2 1-3.5 0-3.2-1.3-4.8-4.1-4.8h-3.1v18.1h3.1c2.7 0 4.1-1.6 4.1-4.8 0-1.6-.3-2.8-1-3.6-.2-.3-.5-.5-.8-.7.3-.1.5-.4.8-.7m-3.1.2h-2v-7.5h2c2.2 0 3 1.1 3 3.7 0 2.8-.9 3.8-3 3.8m3 4.8c0 2.7-.8 3.7-3 3.7h-2V443h2c2.2 0 3 1 3 3.7"/>
+  <path id="path1406" d="M47.9 441.9c.7-.8 1-2 1-3.6 0-3.5-1.2-4.9-4-4.9h-3.8v18.1h1v-8.4h2.3c2.1 0 3.2 1.2 3.2 3.3v5.1h1.1v-5.1c0-1.4-.4-2.4-1.2-3.2-.2-.2-.5-.4-.7-.6.4-.2.9-.4 1.1-.7m0-3.7c0 2.6-1.1 3.8-3.5 3.8h-2.3v-7.6H45c2.2 0 2.9 1 2.9 3.8"/>
+  <path id="rect1408" d="M50.4 433.4h1v18.1h-1z"/>
+  <path id="path1410" d="M60.9 446.6v-8.4c0-3.1-1.3-4.8-3.9-4.8-2.6 0-3.9 1.6-3.9 4.8v8.4c0 3.2 1.4 4.9 3.9 4.9.9 0 1.6-.2 2.2-.6l1.2 1.5h1.4l-1.8-2.2c.6-.9.9-2.1.9-3.6m-1-8.4v8.4c0 1.2-.2 2.1-.6 2.7l-.7-.8h-1.3l1.3 1.5c-.4.3-.9.4-1.5.4-1.9 0-2.9-1.3-2.9-3.9v-8.4c0-2.5.9-3.7 2.9-3.7 1.9 0 2.8 1.2 2.8 3.8"/>
+  <path id="path1412" d="M69.1 447c0 2.4-.9 3.5-2.9 3.5s-2.9-1-2.9-3.5v-13.6h-1V447c0 2.9 1.4 4.5 3.9 4.5 2.6 0 3.9-1.6 3.9-4.5v-13.6h-1z"/>
+  <path id="polygon1414" d="M78.6 450.5H73V443h4.8v-1.1H73v-7.5h5.6v-1H72v18.1h6.6z"/>
+  <path id="polygon1416" class="st1" d="M34.5 369.7l-.2 2.6-2.6 1.1-2.4-1.4.1-2.5 2.6-1.2z"/>
+  <path id="polygon1418" class="st2" d="M42.1 365.9l-.1 2.5-2.6 1.2-2.5-1.4.1-2.6 2.6-1.1z"/>
+  <path id="polygon1420" class="st3" d="M49.8 362l-.1 2.6-2.6 1.1-2.5-1.3.1-2.6 2.6-1.2z"/>
+  <path id="polygon1422" class="st4" d="M57.3 365.9l-.1 2.5-2.6 1.2-2.5-1.4.1-2.6 2.7-1.1z"/>
+  <path id="polygon1424" class="st2" d="M65.1 369.7l-.1 2.6-2.6 1.2-2.5-1.4.1-2.6 2.6-1.1z"/>
+  <path id="polygon1426" class="st3" d="M65.1 377.5l-.1 2.6-2.6 1.1-2.5-1.4.1-2.5 2.6-1.2z"/>
+  <path id="polygon1428" class="st5" d="M65.1 385l-.1 2.5-2.6 1.2-2.5-1.4.1-2.6 2.6-1.1z"/>
+  <path id="polygon1430" class="st4" d="M57.4 388.9l-.1 2.5-2.6 1.2-2.5-1.4.1-2.6 2.6-1.1z"/>
+  <path id="polygon1432" class="st4" d="M49.7 392.7l-.1 2.5-2.6 1.2-2.5-1.4.1-2.6 2.7-1.1z"/>
+  <path id="polygon1434" class="st2" d="M42.1 388.9l-.1 2.5-2.6 1.2-2.5-1.4.1-2.6 2.6-1.1z"/>
+  <path id="polygon1436" class="st3" d="M34.5 385l-.2 2.5-2.6 1.2-2.4-1.4.1-2.6 2.6-1.1z"/>
+  <path id="polygon1438" class="st5" d="M34.5 377.4l-.2 2.5-2.6 1.2-2.4-1.4.1-2.5L32 376z"/>
+  <path id="polygon1440" class="st4" d="M26.1 366.3l-.1 1.8-1.9.8-1.8-1 .1-1.8 1.9-.8z"/>
+  <path id="polygon1442" class="st3" d="M33.7 362.4l-.1 1.8-1.8.9-1.8-1 .1-1.8 1.8-.9z"/>
+  <path id="polygon1444" class="st4" d="M41.4 358.6l-.1 1.8-1.9.8-1.7-.9v-1.9l1.9-.8z"/>
+  <path id="polygon1446" class="st1" d="M49 354.7v1.8l-1.9.8-1.8-1 .1-1.8 1.9-.8z"/>
+  <path id="polygon1448" class="st5" d="M56.6 358.5l-.1 1.8-1.8.9-1.8-1 .1-1.9 1.8-.8z"/>
+  <path id="polygon1450" class="st4" d="M64.3 362.4v1.8l-1.9.9-1.8-1 .1-1.8 1.9-.9z"/>
+  <path id="polygon1452" class="st3" d="M72 366.2l-.1 1.8-1.8.8-1.8-.9.1-1.9 1.8-.8z"/>
+  <path id="polygon1454" class="st1" d="M72 373.9l-.1 1.8-1.8.8-1.8-1 .1-1.8 1.8-.8z"/>
+  <path id="polygon1456" class="st4" d="M72 381.5l-.1 1.8-1.8.8-1.8-1 .1-1.8 1.8-.8z"/>
+  <path id="polygon1458" class="st2" d="M72 389.1l-.1 1.9-1.8.8-1.8-1 .1-1.8 1.8-.9z"/>
+  <path id="polygon1460" class="st4" d="M64.3 393v1.8l-1.9.9-1.8-1 .1-1.9 1.9-.8z"/>
+  <path id="polygon1462" class="st3" d="M56.6 396.9l-.1 1.8-1.8.8-1.8-.9.1-1.9 1.8-.8z"/>
+  <path id="polygon1464" class="st4" d="M49.2 400.7l-.1 1.8-1.9.8-1.8-1 .1-1.8 1.9-.8z"/>
+  <path id="polygon1466" class="st5" d="M41.4 396.9l-.1 1.8-1.9.8-1.7-.9v-1.9l1.9-.8z"/>
+  <path id="polygon1468" class="st1" d="M33.7 393l-.1 1.8-1.8.9-1.8-1 .1-1.9 1.8-.8z"/>
+  <path id="polygon1470" class="st2" d="M26.1 389.2L26 391l-1.9.8-1.8-1 .1-1.8 1.9-.8z"/>
+  <path id="polygon1472" class="st4" d="M26.1 381.6l-.1 1.8-1.9.8-1.8-1 .1-1.8 1.9-.8z"/>
+  <path id="polygon1474" class="st3" d="M26.1 373.9l-.1 1.8-1.9.9-1.8-1 .1-1.9 1.9-.8z"/>
+  <path id="polygon1476" class="st3" d="M17.5 362.7v1l-1 .4-.9-.5v-1l1-.4z"/>
+  <path id="polygon1478" class="st4" d="M25.2 359v1l-1 .4-1-.5.1-1 .9-.4z"/>
+  <path id="polygon1480" class="st2" d="M32.9 355.1l-.1.9-1 .5-.9-.6v-.9l1-.5z"/>
+  <path id="polygon1482" class="st3" d="M40.5 351.3v.9l-1 .5-1-.6.1-.9 1-.5z"/>
+  <path id="polygon1484" class="st4" d="M48.2 347.4l-.1 1-1 .4-.9-.5v-1l1-.4z"/>
+  <path id="polygon1486" class="st3" d="M55.7 351.3v.9l-1 .5-1-.6.1-.9 1-.5z"/>
+  <path id="polygon1488" class="st2" d="M63.5 355.1l-.1 1-1 .5-.9-.6v-.9l1-.5z"/>
+  <path id="polygon1490" class="st1" d="M71.1 358.9v1l-1 .4-1-.5.1-1 1-.4z"/>
+  <path id="polygon1492" class="st2" d="M78.8 362.8l-.1 1-1 .4-.9-.5v-1l1-.4z"/>
+  <path id="polygon1494" class="st5" d="M78.8 370.4l-.1 1-1 .4-.9-.5v-1l1-.4z"/>
+  <path id="polygon1496" class="st4" d="M78.8 378l-.1 1-1 .5-.9-.6v-.9l1-.5z"/>
+  <path id="polygon1498" class="st1" d="M78.8 385.7l-.1.9-1 .5-.9-.5v-1l1-.5z"/>
+  <path id="polygon1500" class="st4" d="M78.8 393.4l-.1.9-1 .5-.9-.6v-.9l1-.5z"/>
+  <path id="polygon1502" class="st3" d="M71.1 397.2v1l-1 .4-1-.5.1-1 1-.4z"/>
+  <path id="polygon1504" class="st1" d="M63.5 401l-.1 1-1 .5-.9-.6v-.9l1-.5z"/>
+  <path id="polygon1506" class="st4" d="M55.8 404.8v1l-1 .5-1-.6.1-.9 1-.5z"/>
+  <path id="polygon1508" class="st3" d="M48.2 408.7l-.1.9-1 .5-.9-.5v-1l1-.5z"/>
+  <path id="polygon1510" class="st4" d="M17.5 370.5v.9l-1 .5-.9-.6v-.9l1-.5z"/>
+  <path id="polygon1512" class="st2" d="M17.5 378v1l-1 .5-.9-.6v-.9l1-.5z"/>
+  <path id="polygon1514" class="st3" d="M17.5 385.7v.9l-1 .5-.9-.5v-1l1-.5z"/>
+  <path id="polygon1516" class="st5" d="M17.5 393.4v1l-1 .4-.9-.5v-1l1-.4z"/>
+  <path id="polygon1518" class="st3" d="M25.2 397.3v1l-1 .4-1-.5.1-1 .9-.4z"/>
+  <path id="polygon1520" class="st2" d="M32.9 401.1l-.1.9-1 .5-.9-.6v-.9l1-.5z"/>
+  <path id="polygon1522" class="st4" d="M40.5 404.8v1l-1 .5-1-.6.1-.9 1-.5z"/>
+  <path id="polygon1524" class="st4" d="M49.5 369.7v2.3l-2.3 1.2-2.4-1.2v-2.3l2.3-1.2z"/>
+  <path id="polygon1526" class="st4" d="M57.2 373.6v2.3l-2.4 1.2-2.3-1.2v-2.3l2.3-1.2z"/>
+  <path id="polygon1528" class="st4" d="M57.2 381.1v2.4l-2.4 1.1-2.3-1.1v-2.4l2.3-1.1z"/>
+  <path id="polygon1530" class="st4" d="M41.8 381.1l.1 2.4-2.4 1.1-2.3-1.1v-2.4l2.3-1.1z"/>
+  <path id="polygon1532" class="st4" d="M41.8 373.6l.1 2.3-2.4 1.2-2.3-1.2v-2.3l2.3-1.2z"/>
+  <path id="polygon1534" class="st4" d="M49.5 384.9v2.4l-2.3 1.1-2.4-1.1V385l2.3-1.2z"/>
+  <path id="polygon1536" class="st5" d="M51 369.3v3.8l-3.7 1.8-3.8-1.8v-3.7l3.7-1.9z"/>
+  <path id="polygon1538" class="st1" d="M58.5 373.1v3.7l-3.7 1.9-3.8-1.9v-3.7l3.7-1.9z"/>
+  <path id="polygon1540" class="st2" d="M58.5 380.5v3.7l-3.7 1.9-3.8-1.8v-3.7l3.7-1.9z"/>
+  <path id="polygon1542" class="st4" d="M43.5 380.5v3.7l-3.7 1.9-3.7-1.8-.1-3.7 3.8-1.9z"/>
+  <path id="polygon1544" class="st4" d="M43.5 373.1v3.7l-3.7 1.9-3.7-1.9-.1-3.7 3.8-1.9z"/>
+  <path id="polygon1546" class="st3" d="M51 384.4v3.7l-3.7 1.9-3.8-1.9v-3.7l3.7-1.9z"/>
+  <path id="polygon1548" d="M185.5 348.5h-1.6v21.3h9.5v-1.4h-7.9z"/>
+  <path id="path1550" d="M200.8 363.4h6.5l1.8 6.4h1.6l-6-21.3h-1.2l-3.9 13.7v.1l-2.1 7.5h1.6zm.4-1.4l2.8-10.1 2.9 10.1z"/>
+  <path id="path1552" d="M236 364.1c0-1.9-.5-3.3-1.4-4.2-.3-.3-.7-.6-1.1-.8.4-.2.8-.5 1.1-.8.9-.9 1.4-2.4 1.4-4.2 0-3.8-1.9-5.7-5.9-5.7h-4.4v21.3h4.4c3.9.1 5.9-1.8 5.9-5.6m-8.8-5.7v-8.6h2.8c3.1 0 4.3 1.2 4.3 4.3 0 3.1-1.2 4.3-4.3 4.3zm7.2 5.7c0 3.1-1.2 4.3-4.3 4.3h-2.8v-8.7h2.8c3.1.1 4.3 1.3 4.3 4.4"/>
+  <path id="path1554" d="M252 354.2c0-3.7-2-5.7-5.7-5.7s-5.7 2-5.7 5.7v9.8c0 2.1.6 3.7 1.9 4.7.9.7 2.2 1.1 3.8 1.1 1.6 0 2.9-.4 3.8-1.1 1.3-1 1.9-2.5 1.9-4.7zm-1.6 0v9.8c0 3-1.3 4.4-4.1 4.4s-4.1-1.4-4.1-4.4v-9.8c0-3 1.3-4.4 4.1-4.4 2.9 0 4.1 1.3 4.1 4.4"/>
+  <path id="polygon1556" d="M258 348.5h-1.3v21.3h1.6v-17.3l8.6 17.3h1.3v-21.3h-1.6v17.3l-8.5-17.2z"/>
+  <path id="polygon1558" d="M274.2 348.5h-1.3v21.3h1.6v-17.3l8.6 17.3h1.3v-21.3h-1.6v17.3l-8.5-17.2z"/>
+  <path id="polygon1560" d="M289.1 348.5v21.3h9.7v-1.4h-8.1v-8.6h6.9v-1.4h-6.9v-8.6h8.1v-1.3z"/>
+  <path id="polygon1562" d="M186 379.2h10.1v-1.8h-12v32.8h1.9v-15.5h10.1v-1.9H186z"/>
+  <path id="path1564" d="M204 377.4h-1.5l-4.9 21.2v.2l-2.6 11.5h1.9l2.2-9.9h8.3l2.2 9.8v.1h1.9l-7.5-32.7zm2.9 21h-7.4l3.7-15.9z"/>
+  <path id="path1566" d="M225.4 392.4c1.1-1.4 1.7-3.6 1.7-6.4 0-5.8-2.4-8.7-7.4-8.7h-5.5v32.8h5.5c5 0 7.4-2.8 7.4-8.7 0-2.8-.6-5-1.7-6.5-.4-.5-.9-.9-1.5-1.3.5-.2 1-.6 1.5-1.2m-5.7.4h-3.6v-13.6h3.6c3.9 0 5.4 1.9 5.4 6.8.1 4.8-1.5 6.8-5.4 6.8m5.5 8.7c0 4.9-1.5 6.8-5.4 6.8h-3.6v-13.6h3.6c3.9 0 5.4 1.9 5.4 6.8"/>
+  <path id="path1568" d="M242.5 392.7c1.2-1.4 1.8-3.6 1.8-6.6 0-6.2-2.1-8.8-7.2-8.8h-7v32.8h1.9V395h4.1c3.7 0 5.9 2.2 5.9 6v9.2h1.9V401c0-2.5-.7-4.4-2.2-5.9-.4-.4-.9-.8-1.3-1 .7-.4 1.6-.9 2.1-1.4m-.1-6.6c0 4.7-2 6.9-6.3 6.9H232v-13.8h5.1c4 0 5.3 1.8 5.3 6.9"/>
+  <path id="rect1570" d="M247 377.4h1.9v32.8H247z"/>
+  <path id="path1572" d="M266.1 401.2V386c0-5.6-2.4-8.6-7.1-8.6-4.7 0-7.1 2.9-7.1 8.6v15.2c0 5.9 2.5 8.9 7.1 8.9 1.6 0 2.9-.4 4-1.1l2.2 2.6h2.5l-3.3-3.9c1.1-1.5 1.7-3.7 1.7-6.5m-1.9-15.2v15.2c0 2.2-.3 3.8-1 5l-1.2-1.4h-2.4l2.3 2.8c-.8.5-1.7.7-2.8.7-3.5 0-5.2-2.3-5.2-7.1V386c0-4.6 1.7-6.7 5.2-6.7 3.5-.1 5.1 2 5.1 6.7"/>
+  <path id="path1574" d="M280.8 402c0 4.3-1.6 6.3-5.2 6.3-3.7 0-5.3-1.9-5.3-6.3v-24.7h-1.9V402c0 5.3 2.5 8.1 7.1 8.1s7.1-2.8 7.1-8.1v-24.7h-1.9V402z"/>
+  <path id="polygon1576" d="M298.2 408.3H288v-13.6h8.7v-1.9H288v-13.6h10.2v-1.8h-12.1v32.8h12.1z"/>
+  <path id="polygon1578" class="st1" d="M122.2 371.1l-.1 2.5-2.6 1.2-2.5-1.4.1-2.5 2.6-1.2z"/>
+  <path id="polygon1580" class="st2" d="M129.9 367.3l-.2 2.5-2.6 1.2-2.5-1.4.2-2.6 2.6-1.1z"/>
+  <path id="polygon1582" class="st3" d="M137.5 363.4l-.1 2.6-2.6 1.1-2.5-1.4.1-2.5 2.6-1.2z"/>
+  <path id="polygon1584" class="st4" d="M145.1 367.3l-.1 2.5-2.6 1.2-2.5-1.4.1-2.6 2.6-1.1z"/>
+  <path id="polygon1586" class="st2" d="M152.8 371.1l-.1 2.6-2.6 1.1-2.5-1.3.1-2.6 2.6-1.2z"/>
+  <path id="polygon1588" class="st3" d="M152.8 378.9l-.1 2.6-2.6 1.1-2.5-1.4.1-2.5 2.6-1.2z"/>
+  <path id="polygon1590" class="st5" d="M152.8 386.3l-.1 2.6-2.6 1.2-2.5-1.4.1-2.6 2.6-1.1z"/>
+  <path id="polygon1592" class="st4" d="M145.2 390.3l-.1 2.5-2.6 1.2-2.5-1.4.1-2.6 2.6-1.1z"/>
+  <path id="polygon1594" class="st4" d="M137.5 394.1l-.1 2.5-2.6 1.2-2.5-1.4.1-2.6 2.6-1.1z"/>
+  <path id="polygon1596" class="st2" d="M129.9 390.3l-.2 2.5-2.6 1.2-2.5-1.4.2-2.6 2.6-1.1z"/>
+  <path id="polygon1598" class="st3" d="M122.2 386.3l-.1 2.6-2.6 1.2-2.5-1.4.1-2.6 2.6-1.1z"/>
+  <path id="polygon1600" class="st5" d="M122.2 378.8l-.1 2.5-2.6 1.2-2.5-1.4.1-2.5 2.6-1.2z"/>
+  <path id="polygon1602" class="st4" d="M113.8 367.7l-.1 1.8-1.8.8-1.8-1 .1-1.8 1.8-.8z"/>
+  <path id="polygon1604" class="st3" d="M121.5 363.8l-.1 1.8-1.9.9-1.8-1 .1-1.9 1.9-.8z"/>
+  <path id="polygon1606" class="st4" d="M129.1 360l-.1 1.8-1.8.8-1.8-1 .1-1.8 1.8-.8z"/>
+  <path id="polygon1608" class="st1" d="M136.8 356.1l-.1 1.8-1.9.8-1.8-1 .1-1.8 1.9-.8z"/>
+  <path id="polygon1610" class="st5" d="M144.3 359.9v1.8l-1.9.9-1.8-1 .1-1.9 1.9-.8z"/>
+  <path id="polygon1612" class="st4" d="M152.1 363.8l-.1 1.8-1.9.9-1.7-1v-1.9l1.9-.8z"/>
+  <path id="polygon1614" class="st3" d="M159.7 367.6v1.8l-1.9.8-1.8-1 .1-1.8 1.9-.8z"/>
+  <path id="polygon1616" class="st1" d="M159.7 375.3v1.8l-1.9.8-1.8-1 .1-1.8 1.9-.8z"/>
+  <path id="polygon1618" class="st4" d="M159.7 382.9v1.8l-1.9.8-1.8-1 .1-1.8 1.9-.8z"/>
+  <path id="polygon1620" class="st2" d="M159.7 390.5v1.9l-1.9.8-1.8-1 .1-1.8 1.9-.9z"/>
+  <path id="polygon1622" class="st4" d="M152.1 394.4l-.1 1.8-1.9.8-1.7-1v-1.8l1.9-.8z"/>
+  <path id="polygon1624" class="st3" d="M144.3 398.3v1.8l-1.9.8-1.8-1 .1-1.8 1.9-.8z"/>
+  <path id="polygon1626" class="st4" d="M136.9 402.1l-.1 1.8-1.8.8-1.8-1 .1-1.8 1.8-.8z"/>
+  <path id="polygon1628" class="st5" d="M129.1 398.3l-.1 1.8-1.8.8-1.8-1 .1-1.8 1.8-.8z"/>
+  <path id="polygon1630" class="st1" d="M121.5 394.4l-.1 1.8-1.9.8-1.8-1 .1-1.8 1.9-.8z"/>
+  <path id="polygon1632" class="st2" d="M113.8 390.6l-.1 1.8-1.8.8-1.8-1 .1-1.8 1.8-.8z"/>
+  <path id="polygon1634" class="st4" d="M113.8 383l-.1 1.8-1.8.8-1.8-1 .1-1.8 1.8-.8z"/>
+  <path id="polygon1636" class="st3" d="M113.8 375.3l-.1 1.8-1.8.9-1.8-1 .1-1.9 1.8-.8z"/>
+  <path id="polygon1638" class="st3" d="M105.3 364.1l-.1 1-1 .4-.9-.5v-1l1-.4z"/>
+  <path id="polygon1640" class="st4" d="M112.9 360.4v.9l-1 .5-1-.5.1-1 1-.5z"/>
+  <path id="polygon1642" class="st2" d="M120.6 356.5l-.1.9-.9.5-1-.6v-.9l1-.5z"/>
+  <path id="polygon1644" class="st3" d="M128.2 352.6v1l-1 .5-.9-.6v-.9l1-.5z"/>
+  <path id="polygon1646" class="st4" d="M135.9 348.8v1l-1 .4-1-.5.1-1 1-.4z"/>
+  <path id="polygon1648" class="st3" d="M143.5 352.6l-.1 1-1 .5-.9-.6v-.9l1-.5z"/>
+  <path id="polygon1650" class="st2" d="M151.2 356.5v1l-1 .5-1-.6.1-.9 1-.5z"/>
+  <path id="polygon1652" class="st1" d="M158.9 360.3l-.1 1-1 .4-.9-.5v-1l1-.4z"/>
+  <path id="polygon1654" class="st2" d="M166.5 364.2v1l-1 .4-1-.5.1-1 1-.4z"/>
+  <path id="polygon1656" class="st5" d="M166.5 371.8v1l-1 .4-1-.5.1-1 1-.4z"/>
+  <path id="polygon1658" class="st4" d="M166.5 379.4v1l-1 .5-1-.6.1-1 1-.4z"/>
+  <path id="polygon1660" class="st1" d="M166.5 387.1v.9l-1 .5-1-.6.1-.9 1-.5z"/>
+  <path id="polygon1662" class="st4" d="M166.5 394.7v1l-1 .5-1-.6.1-.9 1-.5z"/>
+  <path id="polygon1664" class="st3" d="M158.9 398.6l-.1 1-1 .4-.9-.5v-1l1-.4z"/>
+  <path id="polygon1666" class="st1" d="M151.2 402.4v1l-1 .4-1-.5.1-1 1-.4z"/>
+  <path id="polygon1668" class="st4" d="M143.6 406.2l-.1 1-1 .4-.9-.5v-1l1-.4z"/>
+  <path id="polygon1670" class="st3" d="M135.9 410.1v.9l-1 .5-1-.6.1-.9 1-.5z"/>
+  <path id="polygon1672" class="st4" d="M105.3 371.9l-.1.9-1 .5-.9-.6v-.9l1-.5z"/>
+  <path id="polygon1674" class="st2" d="M105.3 379.4l-.1 1-1 .5-.9-.6v-1l1-.4z"/>
+  <path id="polygon1676" class="st3" d="M105.3 387.1l-.1.9-1 .5-.9-.6v-.9l1-.5z"/>
+  <path id="polygon1678" class="st5" d="M105.3 394.8l-.1.9-1 .5-.9-.5v-1l1-.5z"/>
+  <path id="polygon1680" class="st3" d="M112.9 398.7v.9l-1 .5-1-.5.1-1 1-.5z"/>
+  <path id="polygon1682" class="st2" d="M120.6 402.4l-.1 1-.9.5-1-.6v-.9l1-.5z"/>
+  <path id="polygon1684" class="st4" d="M128.2 406.2v1l-1 .4-.9-.5v-1l1-.4z"/>
+  <path id="polygon1686" class="st4" d="M137.2 371.1v2.3l-2.3 1.2-2.3-1.2-.1-2.3 2.4-1.2z"/>
+  <path id="polygon1688" class="st4" d="M144.9 375v2.3l-2.3 1.2-2.4-1.2V375l2.3-1.2z"/>
+  <path id="polygon1690" class="st4" d="M144.9 382.5v2.3l-2.3 1.2-2.4-1.1v-2.4l2.3-1.1z"/>
+  <path id="polygon1692" class="st4" d="M129.6 382.5v2.3l-2.3 1.2-2.4-1.1v-2.4l2.3-1.1z"/>
+  <path id="polygon1694" class="st4" d="M129.6 375v2.3l-2.3 1.2-2.4-1.2V375l2.3-1.2z"/>
+  <path id="polygon1696" class="st4" d="M137.2 386.3v2.4l-2.3 1.1-2.3-1.1-.1-2.3 2.4-1.2z"/>
+  <path id="polygon1698" class="st5" d="M138.7 370.7v3.8l-3.7 1.8-3.7-1.8v-3.7l3.7-1.9z"/>
+  <path id="polygon1700" class="st1" d="M146.2 374.5v3.7l-3.7 1.9-3.7-1.9-.1-3.7 3.8-1.9z"/>
+  <path id="polygon1702" class="st2" d="M146.2 381.9v3.7l-3.7 1.9-3.7-1.8-.1-3.7 3.8-1.9z"/>
+  <path id="polygon1704" class="st4" d="M131.2 381.9l.1 3.7-3.8 1.9-3.7-1.8V382l3.7-1.9z"/>
+  <path id="polygon1706" class="st4" d="M131.2 374.5l.1 3.7-3.8 1.9-3.7-1.9v-3.7l3.7-1.9z"/>
+  <path id="polygon1708" class="st3" d="M138.7 385.8v3.7l-3.7 1.9-3.7-1.9v-3.7l3.7-1.9z"/>
+  <g transform="translate(-16.91 -78.635)" id="g2050">
+    <path id="polygon1772" class="st1" transform="translate(1.21 71.135)" d="M40.1 40.4l-3.3 1.5-3.3-1.8.2-3.3 3.4-1.5 3.2 1.8z"/>
+    <path id="polygon1774" class="st2" transform="translate(1.21 71.135)" d="M50 35.5L46.7 37l-3.3-1.8.2-3.3 3.4-1.5 3.2 1.8z"/>
+    <path id="polygon1776" class="st3" transform="translate(1.21 71.135)" d="M59.9 30.5L56.6 32l-3.2-1.8.1-3.3 3.4-1.5 3.2 1.8z"/>
+    <path id="polygon1778" class="st7" transform="translate(1.21 71.135)" d="M69.7 35.5L66.4 37l-3.2-1.8.1-3.3 3.4-1.5 3.2 1.8z"/>
+    <path id="polygon1780" class="st2" transform="translate(1.21 71.135)" d="M79.8 40.5L76.4 42l-3.2-1.8.1-3.3 3.4-1.5 3.2 1.8z"/>
+    <path id="polygon1782" class="st3" transform="translate(1.21 71.135)" d="M79.8 50.5L76.4 52l-3.2-1.8.1-3.3 3.4-1.5 3.2 1.8z"/>
+    <path id="polygon1784" class="st5" transform="translate(1.21 71.135)" d="M79.8 60.2l-3.4 1.5-3.2-1.8.1-3.3 3.4-1.5 3.2 1.8z"/>
+    <path id="polygon1786" class="st7" transform="translate(1.21 71.135)" d="M69.9 65.2l-3.4 1.5-3.2-1.8.1-3.3 3.4-1.5 3.2 1.8z"/>
+    <path id="polygon1788" class="st8" transform="translate(1.21 71.135)" d="M59.9 70.1l-3.4 1.5-3.2-1.8.2-3.3 3.3-1.5 3.3 1.8z"/>
+    <path id="polygon1790" class="st2" transform="translate(1.21 71.135)" d="M50 65.2l-3.3 1.5-3.3-1.8.2-3.3 3.4-1.5 3.2 1.8z"/>
+    <path id="polygon1792" class="st3" transform="translate(1.21 71.135)" d="M40.1 60.2l-3.3 1.5-3.3-1.8.2-3.3 3.4-1.5 3.2 1.8z"/>
+    <path id="polygon1794" class="st5" transform="translate(1.21 71.135)" d="M40.1 50.4l-3.3 1.5-3.3-1.8.2-3.3 3.4-1.5 3.2 1.8z"/>
+    <path id="polygon1796" class="st8" transform="translate(1.21 71.135)" d="M29.3 35l-2.4 1.1-2.3-1.3.1-2.3 2.4-1.1 2.3 1.3z"/>
+    <path id="polygon1798" class="st3" transform="translate(1.21 71.135)" d="M39.2 30.1l-2.4 1-2.3-1.3.1-2.3 2.4-1.1 2.3 1.3z"/>
+    <path id="polygon1800" class="st8" transform="translate(1.21 71.135)" d="M49.1 25.1l-2.4 1.1-2.3-1.3.1-2.4 2.4-1 2.3 1.2z"/>
+    <path id="polygon1802" class="st1" transform="translate(1.21 71.135)" d="M59 20l-2.4 1.1-2.3-1.3.1-2.3 2.4-1.1 2.3 1.3z"/>
+    <path id="polygon1804" class="st5" transform="translate(1.21 71.135)" d="M68.8 25l-2.4 1.1-2.3-1.3.1-2.4 2.4-1 2.3 1.2z"/>
+    <path id="polygon1806" class="st8" transform="translate(1.21 71.135)" d="M78.8 30.1l-2.4 1-2.3-1.3.1-2.3 2.4-1.1 2.4 1.3z"/>
+    <path id="polygon1808" class="st3" transform="translate(1.21 71.135)" d="M88.8 34.9L86.3 36 84 34.7l.1-2.3 2.5-1.1 2.3 1.3z"/>
+    <path id="polygon1810" class="st1" transform="translate(1.21 71.135)" d="M88.8 44.9L86.3 46 84 44.7l.1-2.4 2.5-1.1 2.3 1.3z"/>
+    <path id="polygon1812" class="st8" transform="translate(1.21 71.135)" d="M88.8 54.7l-2.5 1.1-2.3-1.3.1-2.4 2.5-1 2.3 1.2z"/>
+    <path id="polygon1814" class="st2" transform="translate(1.21 71.135)" d="M88.8 64.6l-2.5 1.1-2.3-1.3.1-2.3 2.5-1.1 2.3 1.3z"/>
+    <path id="polygon1816" class="st8" transform="translate(1.21 71.135)" d="M78.8 69.6l-2.4 1.1-2.3-1.3.1-2.3 2.4-1.1 2.4 1.3z"/>
+    <path id="polygon1818" class="st3" transform="translate(1.21 71.135)" d="M68.8 74.7l-2.4 1-2.3-1.2.1-2.4 2.4-1.1 2.3 1.3z"/>
+    <path id="polygon1820" class="st7" transform="translate(1.21 71.135)" d="M59.2 79.5l-2.4 1.1-2.3-1.3.1-2.3 2.4-1.1 2.3 1.3z"/>
+    <path id="polygon1822" class="st5" transform="translate(1.21 71.135)" d="M49.1 74.7l-2.4 1-2.3-1.2.1-2.4 2.4-1.1 2.3 1.3z"/>
+    <path id="polygon1824" class="st1" transform="translate(1.21 71.135)" d="M39.2 69.6l-2.4 1.1-2.3-1.3.1-2.3L37 66l2.3 1.3z"/>
+    <path id="polygon1826" class="st2" transform="translate(1.21 71.135)" d="M29.3 64.7l-2.4 1-2.3-1.2.1-2.4 2.4-1.1 2.3 1.3z"/>
+    <path id="polygon1828" class="st7" transform="translate(1.21 71.135)" d="M29.3 54.8l-2.4 1.1-2.3-1.3.1-2.3 2.4-1.1 2.3 1.3z"/>
+    <path id="polygon1830" class="st3" transform="translate(1.21 71.135)" d="M29.3 44.9L26.9 46l-2.3-1.3.1-2.3 2.4-1.1 2.3 1.3z"/>
+    <path id="polygon1832" class="st3" transform="translate(1.21 71.135)" d="M18.3 29.4l-1.3.5-1.2-.7.1-1.2 1.3-.6 1.2.7z"/>
+    <path id="polygon1834" class="st7" transform="translate(1.21 71.135)" d="M28.2 24.5l-1.3.6-1.2-.7.1-1.3 1.3-.5 1.2.6z"/>
+    <path id="polygon1836" class="st2" transform="translate(1.21 71.135)" d="M38.1 19.4l-1.2.6-1.3-.7.1-1.2 1.3-.6 1.2.7z"/>
+    <path id="polygon1838" class="st3" transform="translate(1.21 71.135)" d="M48 14.5l-1.2.6-1.3-.7.1-1.3 1.3-.5 1.2.6z"/>
+    <path id="polygon1840" class="st7" transform="translate(1.21 71.135)" d="M58 9.5l-1.3.6-1.3-.7.1-1.2 1.3-.6 1.2.7z"/>
+    <path id="polygon1842" class="st3" transform="translate(1.21 71.135)" d="M67.7 14.5l-1.2.6-1.3-.7.1-1.3 1.3-.5 1.2.6z"/>
+    <path id="polygon1844" class="st2" transform="translate(1.21 71.135)" d="M77.8 19.5l-1.3.6-1.2-.7v-1.2l1.3-.6 1.2.7z"/>
+    <path id="polygon1846" class="st1" transform="translate(1.21 71.135)" d="M87.7 24.4l-1.3.6-1.2-.7V23l1.3-.5 1.2.6z"/>
+    <path id="polygon1848" class="st2" transform="translate(1.21 71.135)" d="M97.6 29.4l-1.3.6-1.2-.7v-1.2l1.3-.6 1.2.7z"/>
+    <path id="polygon1850" class="st5" transform="translate(1.21 71.135)" d="M97.6 39.3l-1.3.6-1.2-.7v-1.3l1.3-.5 1.2.6z"/>
+    <path id="polygon1852" class="st7" transform="translate(1.21 71.135)" d="M97.6 49.2l-1.3.5-1.2-.6v-1.3l1.3-.6 1.2.7z"/>
+    <path id="polygon1854" class="st1" transform="translate(1.21 71.135)" d="M97.6 59l-1.3.6-1.2-.7v-1.2l1.3-.6 1.2.7z"/>
+    <path id="polygon1856" class="st7" transform="translate(1.21 71.135)" d="M97.6 69l-1.3.6-1.2-.7v-1.3l1.3-.6 1.2.7z"/>
+    <path id="polygon1858" class="st3" transform="translate(1.21 71.135)" d="M87.7 74l-1.3.5-1.2-.7v-1.2l1.3-.6 1.2.7z"/>
+    <path id="polygon1860" class="st1" transform="translate(1.21 71.135)" d="M77.8 78.9l-1.3.6-1.2-.7v-1.2l1.3-.6 1.2.7z"/>
+    <path id="polygon1862" class="st7" transform="translate(1.21 71.135)" d="M67.9 83.8l-1.3.6-1.3-.7.1-1.2 1.3-.6 1.2.7z"/>
+    <path id="polygon1864" class="st3" transform="translate(1.21 71.135)" d="M58 88.8l-1.3.6-1.3-.7.1-1.3 1.3-.5 1.2.6z"/>
+    <path id="polygon1866" class="st7" transform="translate(1.21 71.135)" d="M18.3 39.4l-1.3.5-1.2-.7.1-1.2 1.3-.6 1.2.7z"/>
+    <path id="polygon1868" class="st2" transform="translate(1.21 71.135)" d="M18.3 49.2l-1.3.5-1.2-.6.1-1.3 1.3-.6 1.2.7z"/>
+    <path id="polygon1870" class="st3" transform="translate(1.21 71.135)" d="M18.3 59l-1.3.6-1.2-.7.1-1.2 1.3-.6 1.2.7z"/>
+    <path id="polygon1872" class="st5" transform="translate(1.21 71.135)" d="M18.3 69l-1.3.6-1.2-.7.1-1.2 1.3-.6 1.2.7z"/>
+    <path id="polygon1874" class="st3" transform="translate(1.21 71.135)" d="M28.2 74.1l-1.3.5-1.2-.6.1-1.3 1.3-.6 1.2.7z"/>
+    <path id="polygon1876" class="st2" transform="translate(1.21 71.135)" d="M38.1 78.9l-1.2.6-1.3-.7.1-1.2L37 77l1.2.7z"/>
+    <path id="polygon1878" class="st8" transform="translate(1.21 71.135)" d="M48 83.8l-1.2.6-1.3-.7.1-1.2 1.3-.6 1.2.7z"/>
+    <path id="polygon1880" class="st7" transform="translate(1.21 71.135)" d="M59.7 40.1l-3 1.5-3-1.4v-3.1l3-1.5 3 1.5z"/>
+    <path id="polygon1882" class="st7" transform="translate(1.21 71.135)" d="M69.7 45.1l-3 1.6-3.1-1.5v-3l3-1.6 3 1.5z"/>
+    <path id="polygon1884" class="st7" transform="translate(1.21 71.135)" d="M69.7 54.9l-3 1.5-3.1-1.4v-3.1l3-1.5 3 1.5z"/>
+    <path id="polygon1886" class="st7" transform="translate(1.21 71.135)" d="M49.8 54.9l-3 1.5-3-1.4v-3.1l3-1.5 3 1.5z"/>
+    <path id="polygon1888" class="st7" transform="translate(1.21 71.135)" d="M49.8 45.1l-3 1.6-3-1.5v-3l3-1.6 3 1.5z"/>
+    <path id="polygon1890" class="st7" transform="translate(1.21 71.135)" d="M59.7 59.8l-3 1.6-3-1.5v-3l3-1.6 3 1.5z"/>
+    <path id="polygon1892" class="st5" transform="translate(1.21 71.135)" d="M61.7 41.5l-4.8 2.4-4.9-2.4v-4.8l4.8-2.4 4.8 2.3z"/>
+    <path id="polygon1894" class="st1" transform="translate(1.21 71.135)" d="M71.4 46.3l-4.8 2.4-4.9-2.3v-4.9l4.8-2.4 4.8 2.4z"/>
+    <path id="polygon1896" class="st2" transform="translate(1.21 71.135)" d="M71.4 55.9l-4.8 2.5-4.9-2.4v-4.8l4.8-2.5 4.8 2.4z"/>
+    <path id="polygon1898" class="st7" transform="translate(1.21 71.135)" d="M52 55.9l-4.8 2.5-4.8-2.4-.1-4.8 4.8-2.5 4.9 2.4z"/>
+    <path id="polygon1900" class="st8" transform="translate(1.21 71.135)" d="M52 46.3l-4.8 2.4-4.8-2.3-.1-4.9 4.8-2.4 4.9 2.4z"/>
+    <path id="polygon1902" class="st3" transform="translate(1.21 71.135)" d="M61.7 60.9l-4.8 2.5L52 61v-4.8l4.8-2.5 4.8 2.4z"/>
+  </g>
+</svg>
