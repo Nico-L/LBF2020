@@ -11,7 +11,7 @@ module.exports = {
     require("postcss-import"),
     require("tailwindcss"),
     require("autoprefixer"),
-    //purgecss,
+    purgecss,
     require("cssnano"),
     ...(process.env.NODE_ENV === "production"
       ? [require("cssnano")]
