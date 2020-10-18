@@ -11,6 +11,20 @@
     var erreur = "text-gray-900"
     var message = "Entrez votre adresse email et votre mot de passe pour vous identifier"
     var urlModifInscription = window.location.search
+    var urlRetour = window.location.origin
+    console.log('indexof', window.location.search.replace('?', '').indexOf('?'))
+    if (window.location.search.replace('?', '').indexOf('?') >= 0 || window.location.search.slice(window.location.search.length -1) === "/") {
+        urlRetour += window.location.search.replace('?', '')
+    } else {
+        urlRetour += "/" + window.location.search
+    }
+    
+    console.log('urlRetour', urlRetour)
+    /*if (urlModifInscription==="?reservations") {
+        urlRetour += "/reservations"
+    } else {
+        urlRetour += urlModifInscription
+    }*/
 
     function login() {
         if (email==="" || mdp==="") {
@@ -36,7 +50,7 @@
                     if (retour2.jwt && retour2.user) {
                         succes = true
                         localStorage.setItem('userStrapi', JSON.stringify(retour2))
-                        window.location.replace(window.location.origin + urlModifInscription)
+                        window.location.replace(urlRetour)
                     } else {
                         if (retour2.data[0].messages[0].id==="Auth.form.error.invalid") {
                             message = "Email ou mot de passe invalide. Veuillez vérifier."
@@ -71,10 +85,8 @@
             return fetch(url, options)
                 .then((leJSON) => {return leJSON.json()})
                 .then((retourJWT)=> {
-                    console.log('retour JWT', retourJWT)
                     if (retourJWT.message !== "Error: Invalid token.") {
-                        
-                        window.location.replace(window.location.origin)
+                        window.location.replace(urlRetour)
                     } else {
                         localStorage.removeItem('userStrapi')
                     }

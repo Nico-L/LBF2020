@@ -75,16 +75,17 @@
         if (extracted!==null) {
             var uuidAtelierModif = extracted[1]
             var emailModif = extracted[2]
+            if (userInfo.user.email !== emailModif) {window.location.replace(window.location.origin)}
             if (userInfo && userInfo.jwt) {
-               trouverInscritByUuid(id_atelier, emailModif.toLowerCase(), uuidAtelierModif, userInfo.jwt, urlModifInscription).then((inscrits) => {
-                    if (inscrits.length > 0) {
-                        emailInscription = emailModif
-                        listeInscrits = inscrits
-                        actionEnCours = false
-                        flagEmailVerifie = true
-                        afficheModal()
-                    }
-                }) 
+                    trouverInscritByUuid(id_atelier, emailModif.toLowerCase(), uuidAtelierModif, userInfo.jwt, urlModifInscription).then((inscrits) => {
+                        if (inscrits.length > 0) {
+                            emailInscription = emailModif
+                            listeInscrits = inscrits
+                            actionEnCours = false
+                            flagEmailVerifie = true
+                            afficheModal()
+                        } else {window.location.replace(window.location.origin)}
+                    })
             } else {
                 window.location.replace(window.location.origin + '/login/' + urlModifInscription)
             }

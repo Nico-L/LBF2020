@@ -13,11 +13,12 @@ import {tableCouleursLBF} from '../../utils/couleursLBF.js'
 import {userData} from '../../apollo/user.js'
 import {listePlagesHoraires, listeReservationsByDate, reserver, getResaByUuid, effacerResa, modifierResa} from '../../apollo/reservations.js'
 import {envoyerMail} from '../../apollo/email.js'
+import {verifJWT} from '../../strapi/verifJWT.js'
 
 var mailValide = false
 var donneesUtilisateur = {}
 var estInscrit = false
-var estAbonne = false
+//var estAbonne = false
 var resaEstValide = false
 let detailChoixMachine
 var choixMachine = ""
@@ -59,9 +60,11 @@ const optionsAvecHeures =
     minute: "2-digit"
     };
 let flagRecupUserData = false;
+let flagVerifStorage = false
 
 dateFinCalendrier.setMonth(dateFinCalendrier.getMonth()+24)
 
+/*
 let saveInfo=false;
 if (localStorage["userInfo"]) {
     var userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -69,13 +72,26 @@ if (localStorage["userInfo"]) {
   } else {
     var userInfo = { nom: "", prenom: "", email: "" };
   }
-
+*/
   // 
   // recuperation url
   //
   const urlEffacerResa = window.location;
   let detailResaModif
   var estModification = false
+
+if (localStorage.getItem("userStrapi")!==null) {
+    flagVerifStorage = true
+    donneesUtilisateur = JSON.parse(localStorage.getItem("userStrapi"))
+    const aujourdhui = new Date()
+    const dateAbonnement = new Date(donneesUtilisateur.user.abonnementMachine)
+    donneesUtilisateur.user.abonnementValide = aujourdhui < dateAbonnement
+    verifJWT(donneesUtilisateur.jwt, urlEffacerResa.pathname + urlEffacerResa.search).then((token) => {
+        flagVerifStorage = false
+    })
+} else {
+    window.location.replace(window.location.origin + '/login/?' + urlEffacerResa.pathname + urlEffacerResa.search)
+}
 
 onMount(() => {
     let extracted = /\?idReservation=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/i.exec(urlEffacerResa.search)
@@ -111,7 +127,7 @@ onMount(() => {
         afficheCalendar = true
     })
 })
-
+/*
 $: {
     regexMail = /([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/i.exec(userInfo.email)
     mailValide = regexMail!==null
@@ -126,7 +142,7 @@ $: {
         })
     }
 }
-
+*/
 /*
 recup liste des resa et construction des creneaux
 */
@@ -213,13 +229,13 @@ $: {
 }
 
 $: {
-    if (choixMachine!=="" && donneesUtilisateur.id!=="" && choixHoraire.choixOK) {
+    if (choixMachine!=="" && donneesUtilisateur.user.id!=="" && choixHoraire.choixOK) {
         resaEstValide = true
     } else {
         resaEstValide = false
     }
 }
-
+/*
 $: {
     if (saveInfo && userInfo.email !== "") {
       localStorage.setItem("userInfo", JSON.stringify(userInfo));
@@ -230,7 +246,7 @@ $: {
       mailValide = false
     }
 }
-
+*/
 $: {
     let idMachine = choixMachine
     detailChoixMachine = {}
@@ -360,12 +376,10 @@ function verifReserve(heure) {
 function enregistrerReservation() {
     saveEnCours = true
     const variables = {
-        nom: userInfo.nom,
-        prenom: userInfo.prenom,
         heureDebut: choixHoraire.debut,
         heureFin: choixHoraire.fin,
         date: dateChoisiePourRequete,
-        user: donneesUtilisateur.id.toString(),
+        user: donneesUtilisateur.user.id.toString(),
         machine: choixMachine.toString()
     }
     reserver(variables).then((retourIdResa) => 
@@ -382,12 +396,10 @@ function modifierReservation() {
     busyModifResa = true
     const variables = {
         idReservation: detailResaModif.id.toString(),
-        nom: userInfo.nom,
-        prenom: userInfo.prenom,
         heureDebut: choixHoraire.debut,
         heureFin: choixHoraire.fin,
         date: dateChoisiePourRequete,
-        user: donneesUtilisateur.id.toString(),
+        user: donneesUtilisateur.user.id.toString(),
         machine: choixMachine.toString()
     }
     modifierResa(variables).then((retour) => {
@@ -467,14 +479,13 @@ function mailConfirmation(idResa) {
         dureeString += tempDuree % 60 === 0 ? "00" : tempDuree % 60
     }
     let arrayMails = [];
-    arrayMails.push(userInfo.email);
+    arrayMails.push(donneesUtilisateur.user.email);
     let dateDebutResa = new Date(dateChoisie)
     let tempsDebutResa = choixHoraire.debut.split(':')
     dateDebutResa.setHours(tempsDebutResa[0])
     dateDebutResa.setMilliseconds(tempsDebutResa[1])
     let envoiMail = {
         machine: detailChoixMachine.nom,
-        prenom: userInfo.prenom,
         duration: dureeString,
         jour: dateDebutResa
             .toLocaleDateString("fr-fr", optionsAvecHeures)
@@ -499,7 +510,7 @@ function mailConfirmation(idResa) {
 </script>
 
 <div class="mt-2 mb-2 mx-4">
-    <div class="w-full flex flex-row flex-wrap justify-between">
+    <!-- <div class="w-full flex flex-row flex-wrap justify-between">
         <label for="prenomResa" class="w-1/2 px-1 py-1 flex flex-col">
             <div>Prénom :</div>
             <div class="border border-vertLBF rounded p-1">
@@ -541,164 +552,165 @@ function mailConfirmation(idResa) {
             <input type="checkbox" class="form-checkbox text-lbfvert-600 focus:outline-none" bind:checked={saveInfo} id="checkSaveInfo"/>
             Enregistrer mes coordonnées pour la prochaine fois (ces informations sont stockées sur votre ordinateur)
         </label>
-    </div>
-    {#if estInscrit}
-        <div>
-            <div class="h5 mt-4 mb-1">Machine :</div>
-            <div>Votre statut :</div>
-            <div class="overflow-x-auto">
-                <table class="table-auto border-collapse border-2 border-gray-500 mx-auto">
-                    <thead>
-                        <tr>
-                        <th class="px-2 py-1 border border-gray-400 text-gray-800">&nbsp;</th>
-                        <th class="px-2 py-1 border border-gray-400 text-gray-800">CNC</th>
-                        <th class="px-2 py-1 border border-gray-400 text-gray-800">Laser</th>
-                        <th class="px-2 py-1 border border-gray-400 text-gray-800">Scie/Toupie</th>
-                        <th class="px-2 py-1 border border-gray-400 text-gray-800">Rabot/dégau</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                        <td class="border px-2 py-1">Initiation</td>
-                        <td class="border px-2 py-1">{#if donneesUtilisateur.cnc}<Fa icon={faCheck} size="lg" class="mx-auto text-vertLBF" />{:else}&nbsp;{/if}</td>
-                        <td class="border px-2 py-1">{#if donneesUtilisateur.laser}<Fa icon={faCheck} size="lg" class="mx-auto text-vertLBF" />{:else}&nbsp;{/if}</td>
-                        <td class="border px-2 py-1">{#if donneesUtilisateur.scie_toupie}<Fa icon={faCheck} size="lg" class="mx-auto text-vertLBF" />{:else}&nbsp;{/if}</td>
-                        <td class="border px-2 py-1">{#if donneesUtilisateur.rabo_degau}<Fa icon={faCheck} size="lg" class="mx-auto text-vertLBF" />{:else}&nbsp;{/if}</td>
-                        </tr>
-                        <tr class="bg-gray-100">
-                        <td class="border px-2 py-1">Abonnement valide</td>
-                        <td class="border px-2 py-1">&nbsp;</td>
-                        <td class="border px-2 py-1">&nbsp;</td>
-                        {#if donneesUtilisateur.estAbonne}
-                            <td class="border px-2 py-1 text-vertLBF text-center" colspan="2">{dateMoisAnnee(donneesUtilisateur.abonnement)}</td>
+    </div> -->
+    {#if !flagVerifStorage}
+    <div>
+        <div class="h5 mt-4 mb-1">Machine :</div>
+        <div>Votre statut :</div>
+        <div class="overflow-x-auto">
+            <table class="table-auto border-collapse border-2 border-gray-500 mx-auto">
+                <thead>
+                    <tr>
+                    <th class="px-2 py-1 border border-gray-400 text-gray-800">&nbsp;</th>
+                    <th class="px-2 py-1 border border-gray-400 text-gray-800">CNC</th>
+                    <th class="px-2 py-1 border border-gray-400 text-gray-800">Laser</th>
+                    <th class="px-2 py-1 border border-gray-400 text-gray-800">Scie/Toupie</th>
+                    <th class="px-2 py-1 border border-gray-400 text-gray-800">Rabot/dégau</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <td class="border px-2 py-1">Initiation</td>
+                    <td class="border px-2 py-1">{#if donneesUtilisateur.user.cnc}<Fa icon={faCheck} size="lg" class="mx-auto text-vertLBF" />{:else}&nbsp;{/if}</td>
+                    <td class="border px-2 py-1">{#if donneesUtilisateur.user.laser}<Fa icon={faCheck} size="lg" class="mx-auto text-vertLBF" />{:else}&nbsp;{/if}</td>
+                    <td class="border px-2 py-1">{#if donneesUtilisateur.user.scie_toupie}<Fa icon={faCheck} size="lg" class="mx-auto text-vertLBF" />{:else}&nbsp;{/if}</td>
+                    <td class="border px-2 py-1">{#if donneesUtilisateur.user.rabo_degau}<Fa icon={faCheck} size="lg" class="mx-auto text-vertLBF" />{:else}&nbsp;{/if}</td>
+                    </tr>
+                    <tr class="bg-gray-100">
+                    <td class="border px-2 py-1">Abonnement valide</td>
+                    <td class="border px-2 py-1">&nbsp;</td>
+                    <td class="border px-2 py-1">&nbsp;</td>
+                    {#if donneesUtilisateur.user.abonnementValide}
+                        <td class="border px-2 py-1 text-vertLBF text-center" colspan="2">{dateMoisAnnee(donneesUtilisateur.user.abonnementMachine)}</td>
 
-                        {:else}
-                            <td class="border px-2 py-1 text-rougeLBF text-center" colspan="2">abonnement à renouveler</td>
-                        {/if}
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="text-base mt-2">Vous pouvez réserver les machines suivantes :</div>
-            <div class="flex flex-wrap">
-                {#if donneesUtilisateur.cnc}
-                    <RadioBouton label="cnc" cbClasses={tableCouleursLBF['jaune'].classText} name="machineReservation" value={getIdMachine('cnc')} bind:selected={choixMachine}/>
-                {/if}
-                {#if donneesUtilisateur.laser}
-                    <RadioBouton label="laser" cbClasses={tableCouleursLBF['orange'].classText} name="machineReservation" value={getIdMachine('laser')} bind:selected={choixMachine}/>
-                {/if}   
-                {#if donneesUtilisateur.estAbonne }
-                    {#if donneesUtilisateur.scie_toupie}
-                        <RadioBouton label="Scie-Toupie"  cbClasses={tableCouleursLBF['bleu'].classText} name="machineReservation" value={getIdMachine('scie')} bind:selected={choixMachine}/>
-                    {/if}       
-                    {#if donneesUtilisateur.rabo_degau}
-                        <RadioBouton label="Rabo-Degau" cbClasses={tableCouleursLBF['vert'].classText} name="machineReservation" value={getIdMachine('rabo')} bind:selected={choixMachine}/>
-                    {/if}  
-                {/if}
-                <RadioBouton label="Imprimante 3D" cbClasses={tableCouleursLBF['rouge'].classText} name="machineReservation" value={getIdMachine('imprimante3D')} bind:selected={choixMachine}/>
-            </div>
-        </div>
-        {#if choixMachine!=""}
-            <div>
-                <div class="h5 mt-4 mb-1">Date :</div>
-                {#if afficheCalendar}
-                    <div class="flex flex-wrap items-center">
-                        <div class="flex-auto mb-4">
-                            <div class="mx-auto text-center">
-                                <Datepicker 
-                                    start={dateDebutCalendrier}
-                                    end={dateFinCalendrier}
-                                    bind:selected={dateChoisie}
-                                    daysOfWeek={dateFr.jours}
-                                    monthsOfYear={dateFr.mois}
-                                    format={dateFormat}
-                                    selectableCallback={creneauDispo}
-                                />
-                            </div>
-                        </div>
-                        <div class="flex-auto mb-4">
-                            <div class="h6 text-center lg:text-left mb-1">Prochaines disponibilités</div>
-                            {#if creneauxDuJour.length > 0}
-                                <div class="text-justify">
-                                    Cliquez sur le nombre de créneaux correspondant à votre réservation. 
-                                </div>
-                            {/if}
-                            <div class="flex flex-col">
-                                {#each creneauxDuJour as plage}
-                                    <div class="flex flex-row flex-wrap justify-center">
-                                        {#each plage as creneau}
-                                            <div class="px-2 py-1 mr-2 mb-2 border border-gray-400">
-                                                <Checkbox label={creneau.label} bind:checked={creneau.checked} cbClasses={creneau.checked?"text-bleuLBF":"text-gray-800"} bind:disabled={creneau.disabled} />
-                                            </div>
-                                        {/each}
-                                    </div>
-                                {:else}
-                                    <div>Aucun créneau n'est proposé à cette date et cet horaire, merci de modifier votre choix.</div>
-                                {/each}       
-                            </div>
-                            <div class="text-rougeLBF font-medium">
-                                {#if !choixHoraire.choixOK && choixHoraire.debut!==""}
-                                    Une heure minimum pour les machines à bois.
-                                {:else}
-                                    &nbsp;
-                                {/if}
-                            </div>
-                        </div>
-                    </div>
-                {/if}
-            </div>
-        {/if}
-    
-        {#if resaEstValide}
-            <div>
-                <div class="text-justify mb-1">Le détail de votre réservation : </div>
-                <div class="flex flex-wrap">
-                    <div class="flex-auto mx-1 mb-1 px-2 py-1 border"><span class="font-medium">Machine :</span> {detailChoixMachine.nom}</div>
-                    <div class="flex-shrink-0 flex-auto mx-1 mb-1 px-2 py-1 border"><span class="font-medium">Réservée </span> {dateFormatFr(dateChoisie)}</div>
-                    <div class="flex-auto mx-1 mb-1 px-2 py-1 border"><span class="font-medium">de </span> {horaireFr(choixHoraire.debut)}<span class="font-medium">&nbsp; à </span>{horaireFr(choixHoraire.fin)}</div>
-                    <div class="flex-auto mx-1 mb-1 px-2 py-1 border"><span class="font-medium">Coût :</span>
-                        {#if detailChoixMachine.abonnement}
-                            Compris dans l'abonnement
-                        {:else}
-                            {calculCout}&nbsp;€
-                        {/if}
-                    </div>
-                </div>
-            </div>
-            {#if estModification}
-                <div class="flex mt-4">
-                    <button on:click={() => {flagVerifModif = true}} class="mt-1 mx-1 px-1 border-2 border-bleuLBF rounded text-base font-medium text-bleuLBF">
-                        Modifer
-                    </button>
-                    <button on:click={verifEffacer} class="mt-1 mx-1 px-1 border-2 border-orangeLBF rounded text-base font-medium text-orangeLBF">
-                        Effacer
-                    </button>
-                </div>
-            {:else}
-                <div class="mt-4">
-                {#if saveEnCours}
-                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current text-lbfbleu-500 h-10 w-18 ml-4 " viewBox="0 0 50 50">
-                        <g fill="none" fill-rule="evenodd" stroke-width="2">
-                            <circle cx="22" cy="22" r="1">
-                                <animate attributeName="r" begin="0s" dur="1.8s" values="1; 20" calcMode="spline" keyTimes="0; 1" keySplines="0.165, 0.84, 0.44, 1" repeatCount="indefinite"/>
-                                <animate attributeName="stroke-opacity" begin="0s" dur="1.8s" values="1; 0" calcMode="spline" keyTimes="0; 1" keySplines="0.3, 0.61, 0.355, 1" repeatCount="indefinite"/>
-                            </circle>
-                            <circle cx="22" cy="22" r="1">
-                                <animate attributeName="r" begin="-0.9s" dur="1.8s" values="1; 20" calcMode="spline" keyTimes="0; 1" keySplines="0.165, 0.84, 0.44, 1" repeatCount="indefinite"/>
-                                <animate attributeName="stroke-opacity" begin="-0.9s" dur="1.8s" values="1; 0" calcMode="spline" keyTimes="0; 1" keySplines="0.3, 0.61, 0.355, 1" repeatCount="indefinite"/>
-                            </circle>
-                        </g>
-                    </svg>
                     {:else}
-                        <button on:click={enregistrerReservation} class="mt-1 mx-1 px-1 border-2 border-bleuLBF rounded text-base font-medium text-bleuLBF">
-                            Sauver
-                        </button>
+                        <td class="border px-2 py-1 text-rougeLBF text-center" colspan="2">abonnement à renouveler</td>
                     {/if}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="text-base mt-2">Vous pouvez réserver les machines suivantes :</div>
+        <div class="flex flex-wrap">
+            {#if donneesUtilisateur.user.cnc}
+                <RadioBouton label="cnc" cbClasses={tableCouleursLBF['jaune'].classText} name="machineReservation" value={getIdMachine('cnc')} bind:selected={choixMachine}/>
+            {/if}
+            {#if donneesUtilisateur.user.laser}
+                <RadioBouton label="laser" cbClasses={tableCouleursLBF['orange'].classText} name="machineReservation" value={getIdMachine('laser')} bind:selected={choixMachine}/>
+            {/if}   
+            {#if donneesUtilisateur.user.abonnementValide }
+                {#if donneesUtilisateur.user.scie_toupie}
+                    <RadioBouton label="Scie-Toupie"  cbClasses={tableCouleursLBF['bleu'].classText} name="machineReservation" value={getIdMachine('scie')} bind:selected={choixMachine}/>
+                {/if}       
+                {#if donneesUtilisateur.user.rabo_degau}
+                    <RadioBouton label="Rabo-Degau" cbClasses={tableCouleursLBF['vert'].classText} name="machineReservation" value={getIdMachine('rabo')} bind:selected={choixMachine}/>
+                {/if}  
+            {/if}
+            <RadioBouton label="Imprimante 3D" cbClasses={tableCouleursLBF['rouge'].classText} name="machineReservation" value={getIdMachine('imprimante3D')} bind:selected={choixMachine}/>
+        </div>
+    </div>
+    {#if choixMachine!=""}
+        <div>
+            <div class="h5 mt-4 mb-1">Date :</div>
+            {#if afficheCalendar}
+                <div class="flex flex-wrap items-center">
+                    <div class="flex-auto mb-4">
+                        <div class="mx-auto text-center">
+                            <Datepicker 
+                                start={dateDebutCalendrier}
+                                end={dateFinCalendrier}
+                                bind:selected={dateChoisie}
+                                daysOfWeek={dateFr.jours}
+                                monthsOfYear={dateFr.mois}
+                                format={dateFormat}
+                                selectableCallback={creneauDispo}
+                            />
+                        </div>
+                    </div>
+                    <div class="flex-auto mb-4">
+                        <div class="h6 text-center lg:text-left mb-1">Prochaines disponibilités</div>
+                        {#if creneauxDuJour.length > 0}
+                            <div class="text-justify">
+                                Cliquez sur le nombre de créneaux correspondant à votre réservation. 
+                            </div>
+                        {/if}
+                        <div class="flex flex-col">
+                            {#each creneauxDuJour as plage}
+                                <div class="flex flex-row flex-wrap justify-center">
+                                    {#each plage as creneau}
+                                        <div class="px-2 py-1 mr-2 mb-2 border border-gray-400">
+                                            <Checkbox label={creneau.label} bind:checked={creneau.checked} cbClasses={creneau.checked?"text-bleuLBF":"text-gray-800"} bind:disabled={creneau.disabled} />
+                                        </div>
+                                    {/each}
+                                </div>
+                            {:else}
+                                <div>Aucun créneau n'est proposé à cette date et cet horaire, merci de modifier votre choix.</div>
+                            {/each}       
+                        </div>
+                        <div class="text-rougeLBF font-medium">
+                            {#if !choixHoraire.choixOK && choixHoraire.debut!==""}
+                                Une heure minimum pour les machines à bois.
+                            {:else}
+                                &nbsp;
+                            {/if}
+                        </div>
+                    </div>
                 </div>
             {/if}
+        </div>
+    {/if}
+
+    {#if resaEstValide}
+        <div>
+            <div class="text-justify mb-1">Le détail de votre réservation : </div>
+            <div class="flex flex-wrap">
+                <div class="flex-auto mx-1 mb-1 px-2 py-1 border"><span class="font-medium">Machine :</span> {detailChoixMachine.nom}</div>
+                <div class="flex-shrink-0 flex-auto mx-1 mb-1 px-2 py-1 border"><span class="font-medium">Réservée </span> {dateFormatFr(dateChoisie)}</div>
+                <div class="flex-auto mx-1 mb-1 px-2 py-1 border"><span class="font-medium">de </span> {horaireFr(choixHoraire.debut)}<span class="font-medium">&nbsp; à </span>{horaireFr(choixHoraire.fin)}</div>
+                <div class="flex-auto mx-1 mb-1 px-2 py-1 border"><span class="font-medium">Coût :</span>
+                    {#if detailChoixMachine.abonnement}
+                        Compris dans l'abonnement
+                    {:else}
+                        {calculCout}&nbsp;€
+                    {/if}
+                </div>
+            </div>
+        </div>
+        {#if estModification}
+            <div class="flex mt-4">
+                <button on:click={() => {flagVerifModif = true}} class="mt-1 mx-1 px-1 border-2 border-bleuLBF rounded text-base font-medium text-bleuLBF">
+                    Modifer
+                </button>
+                <button on:click={verifEffacer} class="mt-1 mx-1 px-1 border-2 border-orangeLBF rounded text-base font-medium text-orangeLBF">
+                    Effacer
+                </button>
+            </div>
+        {:else}
+            <div class="mt-4">
+            {#if saveEnCours}
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current text-lbfbleu-500 h-10 w-18 ml-4 " viewBox="0 0 50 50">
+                    <g fill="none" fill-rule="evenodd" stroke-width="2">
+                        <circle cx="22" cy="22" r="1">
+                            <animate attributeName="r" begin="0s" dur="1.8s" values="1; 20" calcMode="spline" keyTimes="0; 1" keySplines="0.165, 0.84, 0.44, 1" repeatCount="indefinite"/>
+                            <animate attributeName="stroke-opacity" begin="0s" dur="1.8s" values="1; 0" calcMode="spline" keyTimes="0; 1" keySplines="0.3, 0.61, 0.355, 1" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="22" cy="22" r="1">
+                            <animate attributeName="r" begin="-0.9s" dur="1.8s" values="1; 20" calcMode="spline" keyTimes="0; 1" keySplines="0.165, 0.84, 0.44, 1" repeatCount="indefinite"/>
+                            <animate attributeName="stroke-opacity" begin="-0.9s" dur="1.8s" values="1; 0" calcMode="spline" keyTimes="0; 1" keySplines="0.3, 0.61, 0.355, 1" repeatCount="indefinite"/>
+                        </circle>
+                    </g>
+                </svg>
+                {:else}
+                    <button on:click={enregistrerReservation} class="mt-1 mx-1 px-1 border-2 border-bleuLBF rounded text-base font-medium text-bleuLBF">
+                        Sauver
+                    </button>
+                {/if}
+            </div>
         {/if}
-    {:else if flagRecupUserData}
+    {/if}
+    {/if}
+    <!--{:else if flagRecupUserData}
         <div class="border border-gray-300 shadow rounded-md p-4 max-w-sm w-full mx-auto">
             <div class="animate-pulse flex space-x-4">
                 <div class="rounded-full bg-gray-400 h-12 w-12"></div>
@@ -719,7 +731,7 @@ function mailConfirmation(idResa) {
         <div class="text-justify my-4 mx-4 p-2 border border-bleuLBF rounded">
             Merci d'entrer l'adresse mail avec laquelle vous avez été enregistré dans notre base (normalement lors d'une de nos initiations).
         </div>
-    {/if}
+    {/if}-->
 </div>
 {#if flagVerifEffacer}
     <Modal has_bouton_bleu="true" bouton_bleu_busy={busyEffacerResa} on:close={close} on:boutonBleu={effacerReservation}>
