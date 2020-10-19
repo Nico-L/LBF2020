@@ -10,10 +10,13 @@ import Bouton from '../../components/bouton.svelte'
 import Modal from "../../components/ModalComp.svelte";
 import {tableCouleursLBF} from '../../utils/couleursLBF.js'
 /* import requêtes */
-import {userData} from '../../apollo/user.js'
-import {listePlagesHoraires, listeReservationsByDate, reserver, getResaByUuid, effacerResa, modifierResa} from '../../apollo/reservations.js'
-import {envoyerMail} from '../../apollo/email.js'
+//import {userData} from '../../apollo/user.js'
+//import {envoyerMail} from '../../apollo/email.js'
 import {verifJWT} from '../../strapi/verifJWT.js'
+import {listePlagesHoraires, listeReservationsByDate, reserver, getResaByUuid, effacerResa, modifierResa} from '../../strapi/reservationsMachines.js'
+import {envoyerEmail} from '../../strapi/email.js'
+import {imgProxyUrl} from '../../strapi/imgProxy.js'
+import { v4 as uuidv4 } from 'uuid';
 
 var mailValide = false
 var donneesUtilisateur = {}
@@ -59,11 +62,17 @@ const optionsAvecHeures =
     hour: "numeric",
     minute: "2-digit"
     };
-let flagRecupUserData = false;
+const optionsImg = {
+        'resizing_type': 'fill',
+        'width': 290,
+        'height': 190,
+        'gravity': 'ce'
+    }
+//let flagRecupUserData = false;
 let flagVerifStorage = false
+var tempResaEnCours = {}
 
 dateFinCalendrier.setMonth(dateFinCalendrier.getMonth()+24)
-
 /*
 let saveInfo=false;
 if (localStorage["userInfo"]) {
@@ -76,7 +85,7 @@ if (localStorage["userInfo"]) {
   // 
   // recuperation url
   //
-  const urlEffacerResa = window.location;
+  const urlEditResa = window.location;
   let detailResaModif
   var estModification = false
 
@@ -86,24 +95,26 @@ if (localStorage.getItem("userStrapi")!==null) {
     const aujourdhui = new Date()
     const dateAbonnement = new Date(donneesUtilisateur.user.abonnementMachine)
     donneesUtilisateur.user.abonnementValide = aujourdhui < dateAbonnement
-    verifJWT(donneesUtilisateur.jwt, urlEffacerResa.pathname + urlEffacerResa.search).then((token) => {
+    verifJWT(donneesUtilisateur.jwt, urlEditResa.pathname + urlEditResa.search).then((token) => {
         flagVerifStorage = false
     })
 } else {
-    window.location.replace(window.location.origin + '/login/?' + urlEffacerResa.pathname + urlEffacerResa.search)
+    window.location.replace(window.location.origin + '/login/?' + urlEditResa.pathname + urlEditResa.search)
 }
 
 onMount(() => {
-    let extracted = /\?idReservation=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/i.exec(urlEffacerResa.search)
+    let extracted = /\?uuidReservation=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/i.exec(urlEditResa.search)
     if (extracted!==null) {
         estModification = true
-        getResaByUuid(extracted[1]).then((retour) => {
-            if (retour!== null) {
-                detailResaModif = retour
-                dateChoisie = new Date(retour.date)
-                choixMachine = retour.machine.id
+        getResaByUuid(donneesUtilisateur.jwt,extracted[1]).then((retour) => {
+            if (retour.length > 0) {
+                const resa = retour[0]
+                Object.assign(tempResaEnCours, resa)
+                detailResaModif = resa
+                dateChoisie = new Date(resa.date)
+                choixMachine = resa.machine.id
                 let datePourVerif = dateChoisie
-                let tempsDebutResa = detailResaModif.heuredebut.split(':')
+                let tempsDebutResa = resa.heuredebut.split(':')
                 datePourVerif.setHours(tempsDebutResa[0])
                 datePourVerif.setMinutes(tempsDebutResa[1])
                 if (datePourVerif < aujourdhui) {
@@ -116,7 +127,7 @@ onMount(() => {
         })
     }
 
-    listePlagesHoraires().then((retour) => {
+    listePlagesHoraires(donneesUtilisateur.jwt).then((retour) => {
         plagesReservations[0] = retour.dimanche
         plagesReservations[1] = retour.lundi
         plagesReservations[2] = retour.mardi
@@ -149,7 +160,7 @@ recup liste des resa et construction des creneaux
 $: {
     let zeDate = new Date(dateChoisie-tzoffset)
     dateChoisiePourRequete = zeDate.toISOString().slice(0,10)
-    listeReservationsByDate(dateChoisiePourRequete).then((retour)=> {
+    listeReservationsByDate(donneesUtilisateur.jwt,dateChoisiePourRequete).then((retour)=> {
         listeReservations = retour
     })
     constructionCreneaux(zeDate.toISOString());
@@ -272,6 +283,22 @@ $: {
     if (choixHoraire.duree >= (intervalCreneau * 60)) {choixHoraire.choixOK = true} else {choixHoraire.choixOK = false}
 }
 
+function resetChoixHoraire()
+ {
+    choixHoraire = {debut: "", fin: "", choixOK: false, duree: 0}
+     if (detailResaModif) {
+        detailResaModif.heuredebut = ""
+        detailResaModif.heurefin = ""
+        if (choixMachine === tempResaEnCours.machine.id) {
+            detailResaModif.heuredebut = tempResaEnCours.heuredebut
+            detailResaModif.heurefin = tempResaEnCours.heurefin
+            choixHoraire = {debut: tempResaEnCours.heuredebut, fin: tempResaEnCours.heurefin, choixOK: false, duree: 0}
+        }
+        let zeDate = new Date(dateChoisie)
+        constructionCreneaux(zeDate.toISOString());
+     }
+ }
+
 function constructionCreneaux(date) {
     let zeDate = new Date(date)
     const minutesActuelles = (new Date()).getHours() * 60 + (new Date()).getMinutes()
@@ -306,15 +333,15 @@ function constructionCreneaux(date) {
                         h[1] = "00"
                     } else {h[1]="30"}
                     label = horaireFr(plage.debut) + "-" + horaireFr(h.join(':'))
-                        creneauxDuJour[index].push({
-                            "debut": plage.debut,
-                            "fin": h.join(':'),
-                            "label": label,
-                            "checked": resaEnCours,
-                            "disabled": estReserve,
-                            "estReserve": estReserve,
-                            "plageOK": false
-                        })
+                    creneauxDuJour[index].push({
+                        "debut": plage.debut,
+                        "fin": h.join(':'),
+                        "label": label,
+                        "checked": resaEnCours,
+                        "disabled": estReserve,
+                        "estReserve": estReserve,
+                        "plageOK": false
+                    })
                 } else {
                     estReserve = verifReserve(creneauxDuJour[index][2*j-1].fin)
                     resaEnCours = verifResaEnCours(creneauxDuJour[index][2*j-1].fin)
@@ -376,18 +403,19 @@ function verifReserve(heure) {
 function enregistrerReservation() {
     saveEnCours = true
     const variables = {
-        heureDebut: choixHoraire.debut,
-        heureFin: choixHoraire.fin,
+        heuredebut: choixHoraire.debut,
+        heurefin: choixHoraire.fin,
         date: dateChoisiePourRequete,
         user: donneesUtilisateur.user.id.toString(),
-        machine: choixMachine.toString()
+        machine: choixMachine.toString(),
+        uuid: uuidv4()
     }
-    reserver(variables).then((retourIdResa) => 
+    reserver(donneesUtilisateur.jwt,variables).then((retourIdResa) => 
         {
             saveEnCours = false
             flagSaveEffectue = true
-            adresseRedirect = "./?idReservation=" + retourIdResa
-            mailConfirmation(retourIdResa)
+            adresseRedirect = "./?uuidReservation=" + retourIdResa.uuid
+            mailConfirmation(retourIdResa.uuid)
         }
     )
 }
@@ -396,13 +424,14 @@ function modifierReservation() {
     busyModifResa = true
     const variables = {
         idReservation: detailResaModif.id.toString(),
-        heureDebut: choixHoraire.debut,
-        heureFin: choixHoraire.fin,
+        heuredebut: choixHoraire.debut,
+        heurefin: choixHoraire.fin,
         date: dateChoisiePourRequete,
         user: donneesUtilisateur.user.id.toString(),
         machine: choixMachine.toString()
     }
-    modifierResa(variables).then((retour) => {
+    console.log('variabels modif', variables)
+    modifierResa(donneesUtilisateur.jwt, detailResaModif.id.toString(), variables).then((retour) => {
         busyModifResa = false
         flagVerifModif = false
         flagModifConfirmee = true
@@ -411,7 +440,7 @@ function modifierReservation() {
 
 function effacerReservation() {
     busyEffacerResa = true
-    effacerResa(detailResaModif.id.toString()).then((retour) => {
+    effacerResa(donneesUtilisateur.jwt, detailResaModif.id.toString()).then((retour) => {
         busyEffacerResa = false
         flagEffacerConfirme = true
     })
@@ -452,11 +481,11 @@ function verifEffacer() {
 }
 
 function retourAccueil() {
-    window.location.replace(urlEffacerResa.origin)
+    window.location.replace(urlEditResa.origin)
 }
 
 function retourResa() {
-    let url = urlEffacerResa.origin + urlEffacerResa.pathname
+    let url = urlEditResa.origin + urlEditResa.pathname
     window.location.replace(url)
 }
 
@@ -468,7 +497,7 @@ function retourPageModif() {
     }
 }
 
-function mailConfirmation(idResa) {
+function mailConfirmation(uuidResa) {
     let tempDuree = choixHoraire.duree
     console.log('tempsDuree', tempDuree)
     let dureeString = ""
@@ -484,27 +513,31 @@ function mailConfirmation(idResa) {
     let tempsDebutResa = choixHoraire.debut.split(':')
     dateDebutResa.setHours(tempsDebutResa[0])
     dateDebutResa.setMilliseconds(tempsDebutResa[1])
-    let envoiMail = {
-        machine: detailChoixMachine.nom,
-        duration: dureeString,
-        jour: dateDebutResa
-            .toLocaleDateString("fr-fr", optionsAvecHeures)
-            .replace(":", "h"),
-        urlDelete:
-            urlEffacerResa.origin +
-            urlEffacerResa.pathname +
-            "?idReservation=" +
-            idResa,
-        altMachine: detailChoixMachine.nom,
-        urlImageMail: detailChoixMachine.urlImage
-    };
-    let variables = {
-        email: arrayMails,
-        template: JSON.stringify(envoiMail),
-        templateId: "d-08bb9e1b96ac4d56a9210660cac6cd07"
-    }
+    imgProxyUrl("https://cms.labonnefabrique.fr" + detailChoixMachine.urlImage, optionsImg).then((urlImage) => {
+        let envoiMail = {
+            machine: detailChoixMachine.nom,
+            duration: dureeString,
+            jour: dateDebutResa
+                .toLocaleDateString("fr-fr", optionsAvecHeures)
+                .replace(":", "h"),
+            urlDelete:
+                urlEditResa.origin +
+                urlEditResa.pathname +
+                "?uuidReservation=" +
+                uuidResa,
+            altMachine: detailChoixMachine.nom,
+            urlImageMail: urlImage.imgProxyUrl
+        };
+        let variables = {
+            from: "atelier@labonnefabrique.fr",
+            to: arrayMails,
+            replyTo: "atelier@labonnefabrique.fr",
+            dynamicTemplateData: envoiMail,
+            templateId: "d-08bb9e1b96ac4d56a9210660cac6cd07"
+        }
 
-    envoyerMail(variables)
+        envoyerEmail(variables)
+    })
 }
 
 </script>
@@ -594,20 +627,49 @@ function mailConfirmation(idResa) {
         <div class="text-base mt-2">Vous pouvez réserver les machines suivantes :</div>
         <div class="flex flex-wrap">
             {#if donneesUtilisateur.user.cnc}
-                <RadioBouton label="cnc" cbClasses={tableCouleursLBF['jaune'].classText} name="machineReservation" value={getIdMachine('cnc')} bind:selected={choixMachine}/>
+                <RadioBouton
+                    label="cnc"
+                    cbClasses={tableCouleursLBF['jaune'].classText}
+                    name="machineReservation" value={getIdMachine('cnc')}
+                    bind:selected={choixMachine}
+                    on:click={resetChoixHoraire}/>
             {/if}
             {#if donneesUtilisateur.user.laser}
-                <RadioBouton label="laser" cbClasses={tableCouleursLBF['orange'].classText} name="machineReservation" value={getIdMachine('laser')} bind:selected={choixMachine}/>
+                <RadioBouton
+                    label="laser"
+                    cbClasses={tableCouleursLBF['orange'].classText}
+                    name="machineReservation"
+                    value={getIdMachine('laser')}
+                    bind:selected={choixMachine}
+                    on:click={resetChoixHoraire}/>
             {/if}   
             {#if donneesUtilisateur.user.abonnementValide }
                 {#if donneesUtilisateur.user.scie_toupie}
-                    <RadioBouton label="Scie-Toupie"  cbClasses={tableCouleursLBF['bleu'].classText} name="machineReservation" value={getIdMachine('scie')} bind:selected={choixMachine}/>
+                    <RadioBouton
+                        label="Scie-Toupie"
+                        cbClasses={tableCouleursLBF['bleu'].classText}
+                        name="machineReservation"
+                        value={getIdMachine('scie')}
+                        bind:selected={choixMachine}
+                        on:click={resetChoixHoraire}/>
                 {/if}       
                 {#if donneesUtilisateur.user.rabo_degau}
-                    <RadioBouton label="Rabo-Degau" cbClasses={tableCouleursLBF['vert'].classText} name="machineReservation" value={getIdMachine('rabo')} bind:selected={choixMachine}/>
+                    <RadioBouton
+                    label="Rabo-Degau"
+                    cbClasses={tableCouleursLBF['vert'].classText}
+                    name="machineReservation"
+                    value={getIdMachine('rabo')}
+                    bind:selected={choixMachine}
+                    on:click={resetChoixHoraire}/>
                 {/if}  
             {/if}
-            <RadioBouton label="Imprimante 3D" cbClasses={tableCouleursLBF['rouge'].classText} name="machineReservation" value={getIdMachine('imprimante3D')} bind:selected={choixMachine}/>
+            <RadioBouton
+                label="Imprimante 3D"
+                cbClasses={tableCouleursLBF['rouge'].classText}
+                name="machineReservation"
+                value={getIdMachine('imprimante3D')}
+                bind:selected={choixMachine}
+                on:click={resetChoixHoraire}/>
         </div>
     </div>
     {#if choixMachine!=""}
@@ -757,7 +819,7 @@ function mailConfirmation(idResa) {
     </Modal>
 {/if}
 {#if flagModifConfirmee}
-    <Modal on:close={close}>
+    <Modal on:close={retourPageModif}>
         <span slot="titre">Opération confirmée</span>
             Votre réservation a bien été modifiée.
         <span slot="boutonDefaut">Fermer</span>

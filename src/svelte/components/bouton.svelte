@@ -4,11 +4,11 @@ import { get_current_component } from "svelte/internal"
 import Fa from 'svelte-fa'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 const component = get_current_component()
-    const svelteDispatch = createEventDispatcher()
-    const dispatch = (name, detail) => {
-        svelteDispatch(name, detail)
-        component.dispatchEvent && component.dispatchEvent(new CustomEvent(name, { detail }))
-    }
+const svelteDispatch = createEventDispatcher()
+const dispatch = (name, detail) => {
+    svelteDispatch(name, detail)
+    component.dispatchEvent && component.dispatchEvent(new CustomEvent(name, { detail }))
+}
 const actionBouton = () => {
     document.getElementById('leBouton').blur()
     dispatch("actionBouton")

@@ -1,7 +1,10 @@
 const fetch = require("node-fetch");
+const tokenSite = process.env.TOKEN_SITE
+
+const adresseFetch = "https://cms.labonnefabrique.fr/machines?token="+tokenSite
 
 async function fetchMachinesData() {
-  const leFetch = await fetch("https://cms.labonnefabrique.fr/machines", {
+  const leFetch = await fetch(adresseFetch, {
     method: "get",
     headers: {
       "Content-Type": "application/json"

@@ -70,22 +70,24 @@
         } else {
             userInfo = null
         }
-        var extracted = /\?uuidInscription=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})&email=([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/i.exec(urlModifInscription)
+        var extracted = /\?uuidInscription=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})&email=([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)&idAtelier=([0-9]+)/i.exec(urlModifInscription)
         await tick()
         if (extracted!==null) {
-            var uuidAtelierModif = extracted[1]
-            var emailModif = extracted[2]
+            const uuidAtelierModif = extracted[1]
+            const emailModif = extracted[2]
+            const idAtelierUrl = extracted[3]
             if (userInfo.user.email !== emailModif) {window.location.replace(window.location.origin)}
-            if (userInfo && userInfo.jwt) {
-                    trouverInscritByUuid(id_atelier, emailModif.toLowerCase(), uuidAtelierModif, userInfo.jwt, urlModifInscription).then((inscrits) => {
+            if (userInfo.jwt) {
+                trouverInscritByUuid(id_atelier, emailModif.toLowerCase(), uuidAtelierModif, userInfo.jwt, urlModifInscription)
+                    .then((inscrits) => {
                         if (inscrits.length > 0) {
                             emailInscription = emailModif
                             listeInscrits = inscrits
                             actionEnCours = false
                             flagEmailVerifie = true
                             afficheModal()
-                        } else {window.location.replace(window.location.origin)}
-                    })
+                        } else if (id_atelier === idAtelierUrl) { window.location.replace(window.location.origin)}
+                })
             } else {
                 window.location.replace(window.location.origin + '/login/' + urlModifInscription)
             }
@@ -188,7 +190,8 @@ function insertInscrits() {
                 date: infoHoraires,
                 participants: listeInscriptionsPourEmail,
                 urlDesinscription: urlMail + "?uuidInscription=" + uuid +
-                    "&email=" + emailInscription,
+                    "&email=" + emailInscription +
+                    "&idAtelier=" + id_atelier,
                 altMachine: "Illustration Atelier",
                 urlImageMail: urlImage.imgProxyUrl
             };

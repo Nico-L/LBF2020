@@ -1,6 +1,5 @@
 <script>
     import { createEventDispatcher } from "svelte";
-    const dispatch = createEventDispatcher();
     import Fa from 'svelte-fa'
     import { faCircle, faDotCircle } from '@fortawesome/free-regular-svg-icons'
 
@@ -10,10 +9,16 @@
     export let value = "";
     export let mettreApres = false;
     export let cbClasses = "";
+    const dispatch = createEventDispatcher();
+
+    function modif() {
+        selected=value
+        dispatch("click")
+    }
 </script>
 
-<div on:click={()=> {selected=value}} class="cursor-pointer mx-2">
-    <label class={"flex flex-row items-center " + cbClasses}>
+<div on:click={modif} class="cursor-pointer mx-2">
+    <label class={"flex flex-row items-center " + cbClasses} for={name}>
         {#if mettreApres}
                 <input
                     aria-label={label}
@@ -21,12 +26,14 @@
                     type="radio"
                     role="radio"
                     {name}
-                    selected={selected === value} />
+                    id={name}
+                    selected={selected === value}
+                     />
             <div >
                 {#if selected === value}
-                    <Fa icon={faDotCircle} size="lg" />
+                    <Fa icon={faDotCircle} size="lg"/>
                 {:else}
-                    <Fa icon={faCircle} size="lg" />
+                    <Fa icon={faCircle} size="lg"/>
                 {/if}
             </div>
             <div class="ml-2 text-base font-medium">
