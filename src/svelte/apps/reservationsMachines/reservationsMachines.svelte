@@ -10,8 +10,6 @@ import Bouton from '../../components/bouton.svelte'
 import Modal from "../../components/ModalComp.svelte";
 import {tableCouleursLBF} from '../../utils/couleursLBF.js'
 /* import requêtes */
-//import {userData} from '../../apollo/user.js'
-//import {envoyerMail} from '../../apollo/email.js'
 import {verifJWT} from '../../strapi/verifJWT.js'
 import {listePlagesHoraires, listeReservationsByDate, reserver, getResaByUuid, effacerResa, modifierResa} from '../../strapi/reservationsMachines.js'
 import {envoyerEmail} from '../../strapi/email.js'
@@ -73,15 +71,7 @@ let flagVerifStorage = false
 var tempResaEnCours = {}
 
 dateFinCalendrier.setMonth(dateFinCalendrier.getMonth()+24)
-/*
-let saveInfo=false;
-if (localStorage["userInfo"]) {
-    var userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    saveInfo = true;
-  } else {
-    var userInfo = { nom: "", prenom: "", email: "" };
-  }
-*/
+
   // 
   // recuperation url
   //
@@ -138,22 +128,7 @@ onMount(() => {
         afficheCalendar = true
     })
 })
-/*
-$: {
-    regexMail = /([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/i.exec(userInfo.email)
-    mailValide = regexMail!==null
-    if (mailValide) {
-        flagRecupUserData = true
-        console.log('pop recupe userData')
-        userData(userInfo.email).then((retour) => {
-            console.log('pop fin recupUSerData')
-            flagRecupUserData = false
-            donneesUtilisateur = retour
-            if (retour && retour.id) {estInscrit = true} else {estInscrit=false}
-        })
-    }
-}
-*/
+
 /*
 recup liste des resa et construction des creneaux
 */
@@ -246,18 +221,7 @@ $: {
         resaEstValide = false
     }
 }
-/*
-$: {
-    if (saveInfo && userInfo.email !== "") {
-      localStorage.setItem("userInfo", JSON.stringify(userInfo));
-    }
-    if (!saveInfo && localStorage["userInfo"]) {
-      localStorage.removeItem("userInfo");
-      userInfo = { nom: "", prenom: "", email: "" };
-      mailValide = false
-    }
-}
-*/
+
 $: {
     let idMachine = choixMachine
     detailChoixMachine = {}
@@ -267,13 +231,6 @@ $: {
        }
     })
 }
-
-/*$: {
-    let heureDebut = choixHoraire.debut.split(':')
-    let heureFin = choixHoraire.fin.split(':')
-    let duree = 60 * (Number(heureFin[0]) - Number(heureDebut[0])) + Number(heureFin[1]) - Number(heureDebut[1])
-    calculCout = Math.floor(Number(detailChoixMachine.tarifHoraire) * Number(duree) / 60)
-}*/
 
 $: {
     let heureDebut = choixHoraire.debut.split(':')
@@ -543,49 +500,6 @@ function mailConfirmation(uuidResa) {
 </script>
 
 <div class="mt-2 mb-2 mx-4">
-    <!-- <div class="w-full flex flex-row flex-wrap justify-between">
-        <label for="prenomResa" class="w-1/2 px-1 py-1 flex flex-col">
-            <div>Prénom :</div>
-            <div class="border border-vertLBF rounded p-1">
-                <input 
-                    bind:value={userInfo.prenom}
-                    class="w-full p-1 text-sm bg-gray-300 text-gray-900 rounded focus:outline-none appearance-none leading-normal"
-                    type="text"
-                    id="prenomResa"
-                    />
-            </div>
-        </label>
-        <label for="nomResa" class="w-1/2 px-1 py-1 flex flex-col">
-            <div>Nom :</div>
-            <div class="border border-vertLBF rounded p-1">
-                <input 
-                    bind:value={userInfo.nom}
-                    class="w-full p-1 text-sm bg-gray-300 text-gray-900 rounded focus:outline-none appearance-none leading-normal"
-                    type="text"
-                    id="nomResa"
-                    />
-            </div>
-        </label>
-    </div>
-    <div>
-        <label for="emailResa" class="mx-1 my-1 flex flex-col">
-            <div>Email (requis) :</div>
-            <div class="border border-vertLBF rounded p-1">
-                <input 
-                    bind:value={userInfo.email}
-                    class="w-full p-1 text-sm bg-gray-300 text-gray-900 rounded focus:outline-none appearance-none leading-normal"
-                    type="text"
-                    id="emailResa"
-                    />
-            </div>
-        </label>
-    </div>
-    <div class="mt-1 mx-4">
-        <label for="checkSaveInfo" class="mx-8 pr-8 my-1 text-sm">
-            <input type="checkbox" class="form-checkbox text-lbfvert-600 focus:outline-none" bind:checked={saveInfo} id="checkSaveInfo"/>
-            Enregistrer mes coordonnées pour la prochaine fois (ces informations sont stockées sur votre ordinateur)
-        </label>
-    </div> -->
     {#if !flagVerifStorage}
     <div>
         <div class="h5 mt-4 mb-1">Machine :</div>

@@ -97,19 +97,6 @@
 
     // appels strapi
     function nbInscrits() {
-        /*graphqlInscriptions.nbInscrits(id_atelier).then((retourNbPlaces) => {
-            nbPlaces = retourNbPlaces
-            flagComplet = false
-            if (nbPlaces < 1) {
-                placesRestantes = "Complet"
-                flagComplet = true
-                nouveauxInscrits = []
-            } else if (nbPlaces === 1) {
-                placesRestantes = "Dernière place"
-            } else {
-                placesRestantes = nbPlaces + " places restantes"
-            }
-        }) */
         nombreInscrits(id_atelier).then((numInscrits) => {
             nbPlaces = nb_participants - numInscrits
             flagComplet = false
@@ -237,12 +224,6 @@ function insertInscrits() {
         desinscrit.id = id
     }
 
-    /*function retirerInscrit(index) {
-        listeInscrits.splice(index, 1)
-        listeInscrits = listeInscrits
-        validationSave()
-    } */
-
     function retirerInscrit(id, index) {
         deleteInscrit(id, userInfo.jwt).then((retour) => {
             listeInscrits.splice(index, 1)
@@ -268,7 +249,6 @@ function insertInscrits() {
     
     function validationSave() {
         var estValide = true
-        //if (nouveauxInscrits.length === 0) {estValide = false}
         listeInscrits.forEach((inscrit) => {
             if (inscrit.prenom === "") {estValide = false}
         })
@@ -277,16 +257,7 @@ function insertInscrits() {
         })
         flagSaveValide = estValide
     }
-// sauvegarde mail en local
-/*function saveInfoEmail() {
-    //verification si on doit poser une cookie ou l'enlever
-    if (saveInfo) {
-        localStorage.setItem("emailInscription", JSON.stringify(emailInscription));
-    }
-    if (!saveInfo && localStorage["emailInscription"]) {
-        localStorage.removeItem("emailInscription");
-    }
-} */
+
 //modal
 	function afficheModal() {
         verifInscrits()
