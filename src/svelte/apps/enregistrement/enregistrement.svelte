@@ -11,7 +11,7 @@
     var succes = false
     var connu = false
     var erreur = "text-gray-900"
-    var message = "Renseignez votre adresse email et entrez un mot de passe."
+    var message = "Merci de renseigner les informations suivantes."
 
     function demandeLien() {
         if (email==="") {
