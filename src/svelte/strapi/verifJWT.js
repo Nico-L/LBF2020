@@ -13,7 +13,6 @@ export function verifJWT (jwt, redirect="") {
     return fetch(url, options)
         .then((leJSON) => {return leJSON.json()})
         .then((retourJWT)=> {
-            console.log('retourJWT', retourJWT)
             if (retourJWT.message === "Error: Invalid token.") {
                 localStorage.removeItem('userStrapi')
                 window.location.replace(window.location.origin + '/login/?' + redirect)
