@@ -16,7 +16,5 @@ async function fetchMachinesData() {
 }
 
 module.exports = async function() {
-  //let result = await fetchMachinesData();
-  //console.log("retour",result)
   return fetchMachinesData();
 };

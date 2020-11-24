@@ -57,7 +57,7 @@
                             return
                         }
                         if (retour2.data[0].messages[0].id==="Auth.form.error.code.provide") {
-                            message="Ce mot de passe a déjà été utilisé. Cliquer si dessous pour envoyer un nouveau code de réinitialisation."
+                            message="Ce code a déjà été utilisé. Cliquer si dessous pour envoyer un nouveau code de réinitialisation."
                             codeUsed = true
                             erreur="text-orangeLBF"
                             return

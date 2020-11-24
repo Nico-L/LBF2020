@@ -53,6 +53,53 @@ export default [{
   }
 },
 {
+  input: "src/svelte/apps/dashboard/main.js",
+  output: {
+    sourcemap: true,
+    format: "iife",
+    name: "appReservationsMachines",
+    file: "./dist/js/dashboard.js"
+  },
+  plugins: [
+    //css({ output: 'src/eleventy/css/reservationsMachines.css' }),
+    svelte({
+      // enable run-time checks when not in production
+      dev: !production,
+      // we'll extract any component CSS out into
+      // a separate file — better for performance
+      /*css: css => {
+        css.write("src/eleventy/css/resaMachinesAddOn.css");
+      } */
+    }),
+    // If you have external dependencies installed from
+    // npm, you'll most likely need these plugins. In
+    // some cases you'll need additional configuration —
+    // consult the documentation for details:
+    // https://github.com/rollup/plugins/tree/master/packages/commonjs
+    resolve({
+            browser: true,
+            preferBuiltins: false,
+			dedupe: ['svelte']
+		}),
+    commonjs({include: ["node_modules/**"]}),
+    // In dev mode, call `npm run start` once
+    // the bundle has been generated
+    //!production && serve(),
+
+    // Watch the `public` directory and refresh the
+    // browser on changes when not in production
+    //!production && livereload("public"),
+
+    // If we're building for production (npm run build
+    // instead of npm run dev), minify
+    production && terser()
+  ],
+  watch: {
+    //usePolling: true,
+    //clearScreen: false
+  }
+},
+{
   input: "src/svelte/apps/enregistrement/main.js",
   output: {
     sourcemap: true,

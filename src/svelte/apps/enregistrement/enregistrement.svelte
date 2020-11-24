@@ -84,7 +84,7 @@
                             message = "Merci de renseigner votre mot de passe"
                             erreur = "text-rougeLBF"
                         } else if (retour2.message[0] && retour2.message[0].messages[0].id === "Auth.form.error.email.taken") {
-                            message = "Un compte avec cet email a déjà été créé. Vous pouvez réinitialiser votre mot de passe en cliquant sur le bouton ci-dessous"
+                            message = "Un compte avec cet email a déjà été créé. Vous pouvez réinitialiser le mot de passe en cliquant sur le bouton ci-dessous"
                             connu = true
                         } else if (retour2.message[0] && retour2.message[0].messages[0].id === "Auth.form.error.username.taken") {
                             message = "Ce nom d'utilisateur est déjà pris, merci de le modifier"

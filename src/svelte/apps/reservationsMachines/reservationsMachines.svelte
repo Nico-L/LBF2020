@@ -6,7 +6,7 @@ import RadioBouton from '../../components/radioButtons.svelte'
 import Checkbox from '../../components/Checkbox.svelte'
 import Fa from 'svelte-fa'
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
-import Bouton from '../../components/bouton.svelte'
+//import Bouton from '../../components/bouton.svelte'
 import Modal from "../../components/ModalComp.svelte";
 import {tableCouleursLBF} from '../../utils/couleursLBF.js'
 /* import requêtes */
@@ -82,6 +82,9 @@ dateFinCalendrier.setMonth(dateFinCalendrier.getMonth()+24)
 if (localStorage.getItem("userStrapi")!==null) {
     flagVerifStorage = true
     donneesUtilisateur = JSON.parse(localStorage.getItem("userStrapi"))
+    if (donneesUtilisateur.user.doitEtreEfface) {
+        window.location.replace(window.location.origin + '/dashboard')
+    }
     const aujourdhui = new Date()
     const dateAbonnement = new Date(donneesUtilisateur.user.abonnementMachine)
     donneesUtilisateur.user.abonnementValide = aujourdhui < dateAbonnement
@@ -93,8 +96,12 @@ if (localStorage.getItem("userStrapi")!==null) {
 }
 
 onMount(() => {
-    let extracted = /\?uuidReservation=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/i.exec(urlEditResa.search)
+    const extracted = /\?uuidReservation=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(&redirect=(.*))?/i.exec(urlEditResa.search)
     if (extracted!==null) {
+        console.log("test", extracted)
+        if (extracted[3]) {
+            adresseRedirect = "../" + extracted[3]
+        }
         estModification = true
         getResaByUuid(donneesUtilisateur.jwt,extracted[1]).then((retour) => {
             if (retour.length > 0) {
@@ -365,13 +372,16 @@ function enregistrerReservation() {
         date: dateChoisiePourRequete,
         user: donneesUtilisateur.user.id.toString(),
         machine: choixMachine.toString(),
+        dureeReservation: choixHoraire.duree/60,
         uuid: uuidv4()
     }
     reserver(donneesUtilisateur.jwt,variables).then((retourIdResa) => 
         {
             saveEnCours = false
             flagSaveEffectue = true
-            adresseRedirect = "./?uuidReservation=" + retourIdResa.uuid
+            if (adresseRedirect==="") {
+                adresseRedirect = "./?uuidReservation=" + retourIdResa.uuid
+            }
             mailConfirmation(retourIdResa.uuid)
         }
     )
@@ -385,6 +395,7 @@ function modifierReservation() {
         heurefin: choixHoraire.fin,
         date: dateChoisiePourRequete,
         user: donneesUtilisateur.user.id.toString(),
+        dureeReservation: choixHoraire.duree/60,
         machine: choixMachine.toString()
     }
     console.log('variabels modif', variables)
@@ -718,9 +729,9 @@ function mailConfirmation(uuidResa) {
     </Modal>
 {/if}
 {#if flagEffacerConfirme}
-    <Modal on:close={retourAccueil}>
+    <Modal on:close={retourPageModif}>
         <span slot="titre">Opération confirmée</span>
-            Votre réservation a bien été supprimée. Vous allez être redirigé vers l'accueil.
+            Votre réservation a bien été supprimée.
         <span slot="boutonDefaut">Fermer</span>
     </Modal>
 {/if}
@@ -742,7 +753,7 @@ function mailConfirmation(uuidResa) {
 {#if flagSaveEffectue}
     <Modal on:close={retourPageModif}>
         <span slot="titre">Opération confirmée</span>
-            Votre réservation a bien été enregistrée. Vous pouvez la modifier sur la page suivante.
+            Votre réservation a bien été enregistrée.
         <span slot="boutonDefaut">Fermer</span>
     </Modal>
 {/if}

@@ -6,7 +6,8 @@
 
 	import { createEventDispatcher, onDestroy } from "svelte";
 	const dispatch = createEventDispatcher();
-	const close = () => dispatch("close");
+    const close = () => dispatch("close");
+    const retour = () => dispatch("retour");
 	let modal;
 	const handle_keydown = e => {
 	  if (e.key === "Escape") {
@@ -70,7 +71,7 @@
 	<div class="w-full flex flex-row justify-end mt-4 mb-2 h-12 text-lg">
 	<slot name="message"></slot>
 	<slot name="boutonFonction" class="mx-1 border"></slot>
-	<button on:click={close} class="bg-orangeLBF mx-2 px-4 rounded">Fermer</button>
+	<button on:click={retour} class="bg-orangeLBF mx-2 px-4 rounded">Fermer bob</button>
 	</div>
 </div>
 </div>

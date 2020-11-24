@@ -1,0 +1,24 @@
+---
+title: Tableau de bord
+layout: baseLBF
+---
+
+<div class="mt-2 mx-1 text-justify">
+    {% block scripts %}
+    <script>
+        const title = "{{title}}"
+        var lesMachines = []; 
+
+        {%- for machine in lesMachines -%}
+            lesMachines[{{machine.id}}] = {
+            "nom": "{{machine.nom}}", 
+            "tag": "{{machine.tag}}", 
+            "couleur": "{{machine.couleur}}", 
+            "urlImage": "{{machine.urlImage}}",
+            "duree": 0
+            };
+        {%- endfor -%}
+    </script>
+    <script src="/js/dashboard.js"></script>
+    {% endblock %}
+</div>

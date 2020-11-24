@@ -20,6 +20,7 @@ module.exports = {
         '3/6': '50%',
         '4/6': '66%',
         '5/6': '83%',
+        '3xl': '48rem',
         '320px': '320px',
         '500px': '500px',
         '620px': '620px'
@@ -41,6 +42,7 @@ module.exports = {
       vertLBFT: "#93c02155",
       rougeLBF: "#e02933",
       jauneLBF: "#fcc62d",
+      violetLBF: "#5E4B99",
       lbforange: {
         50: "#FFF4E3",
         100: "#FFE1B9",

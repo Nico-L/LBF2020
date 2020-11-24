@@ -19,6 +19,7 @@
 
     const close = () => dispatch("close");
     const boutonBleu = () => dispatch("boutonBleu")
+    const retour = () => dispatch("retour")
 
 	let modal;
 	const handle_keydown = e => {
@@ -50,7 +51,7 @@
             </h2>
             <div class="mx-2"><slot>Le corps de la fenêtre</slot> </div>
             <div class="flex justify-end mt-3 mx-2">
-                <button on:click={close} class="mx-1 px-1 border-2 border-orangeLBF rounded text-base font-medium text-orangeLBF">
+                <button on:click={retour} class="mx-1 px-1 border-2 border-orangeLBF rounded text-base font-medium text-orangeLBF">
                     <slot name="boutonDefaut">Fermer</slot>
                 </button>
                 {#if has_bouton_bleu}

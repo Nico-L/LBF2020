@@ -1,8 +1,12 @@
 {%- for machine in lesMachines -%}
     {% set regExp = r/^four.*/g %}
-    <div class="w-320px border rounded-lg {% include "components/classCartesMachines.njk" %}">
+    <div class="w-320px border rounded-lg mb-4 {% include "components/classCartesMachines.njk" %}">
         <div class="bg-gray-100 rounded-t-lg">
-            <img src="https://cms.labonnefabrique.fr{{machine.illustration[0].formats.small.url}}" class="rounded-t-lg" width="318"/>
+            <img 
+                src="{{machine.urlImage | imgProxy({resizing_type: 'fill', width: '318', height: '180', gravity: 'ce'})}}"
+                class="rounded-t-lg"
+                width="318"
+                height="180"/>
             <div class="text-xl p-1 text-center font-bold capitalize mt-1 align-middle">{{machine.nom}}</div>
             <div class="text-base text-justify p-1 align-top rounded-br-lg listeMachines">{{machine.resume | safe}}</div>
         </div>

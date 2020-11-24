@@ -47,13 +47,14 @@
     let insertInscriptions;
     var listeInscriptionsEmail = [];
     var emailInscription = "";
-    var userInfo = null
+    var donneesUtilisateur = null
     const optionsImg = {
         'resizing_type': 'fill',
         'width': 290,
         'height': 190,
         'gravity': 'ce'
     }
+    var adresseRedirect = ""
 
 	/*import functions*/
     import { nombreInscrits, trouverInscrit, trouverInscritByUuid, saveInscrits, deleteInscrit } from '../../strapi/inscriptionAteliers.js'
@@ -64,21 +65,25 @@
     //récupération nb inscrits au montage & recup uuid pour affichage inscription
     onMount(async () => {
         if (localStorage["userStrapi"]) {
-            userInfo = JSON.parse(localStorage.getItem("userStrapi")); 
-            verifJWT(userInfo.jwt, urlModifInscription)
-            emailInscription = userInfo.user.email
+            donneesUtilisateur = JSON.parse(localStorage.getItem("userStrapi")); 
+            verifJWT(donneesUtilisateur.jwt, urlModifInscription)
+            emailInscription = donneesUtilisateur.user.email
         } else {
-            userInfo = null
+            donneesUtilisateur = null
         }
-        var extracted = /\?uuidInscription=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})&email=([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)&idAtelier=([0-9]+)/i.exec(urlModifInscription)
+        var extracted = /\?uuidInscription=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})&email=([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)&idAtelier=([0-9]+)(&redirect=(.*))?/i.exec(urlModifInscription)
         await tick()
         if (extracted!==null) {
+            console.log('extracted', extracted)
             const uuidAtelierModif = extracted[1]
             const emailModif = extracted[2]
             const idAtelierUrl = extracted[3]
-            if (userInfo.user.email !== emailModif) {window.location.replace(window.location.origin)}
-            if (userInfo.jwt) {
-                trouverInscritByUuid(id_atelier, emailModif.toLowerCase(), uuidAtelierModif, userInfo.jwt, urlModifInscription)
+            if (extracted[5]) {
+                adresseRedirect = "../" + extracted[5]
+            }
+            if (donneesUtilisateur.user.email !== emailModif) {window.location.replace(window.location.origin)}
+            if (donneesUtilisateur.jwt) {
+                trouverInscritByUuid(id_atelier, emailModif.toLowerCase(), uuidAtelierModif, donneesUtilisateur.jwt, urlModifInscription)
                     .then((inscrits) => {
                         if (inscrits.length > 0) {
                             emailInscription = emailModif
@@ -117,7 +122,7 @@
         if(/([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/i.exec(emailInscription) === null) {flagEmailInvalide = true; return;}
         // saveInfoEmail()
         actionEnCours = true
-        trouverInscrit(id_atelier, emailInscription.toLowerCase(), userInfo.jwt).then((retour) => {
+        trouverInscrit(id_atelier, emailInscription.toLowerCase(), donneesUtilisateur.jwt).then((retour) => {
             if (retour.length === 0) {
                 nouveauxInscrits = [{"prenom": "", "nom": ""}]
             } else {
@@ -142,13 +147,13 @@ function insertInscrits() {
                 "atelier": id_atelier,
                 "nom": inscription.nom.charAt(0).toUpperCase() + inscription.nom.slice(1), 
                 "prenom": inscription.prenom.charAt(0).toUpperCase() + inscription.prenom.slice(1),
-                "user": userInfo.user.id,
+                "user": donneesUtilisateur.user.id,
                 "uuid": uuidInscription
                 })
         }
     })
     if (tableInscriptions.length > 0 ) {
-        saveInscrits(tableInscriptions, userInfo.jwt).then((retour) => { nbInscrits()
+        saveInscrits(tableInscriptions, donneesUtilisateur.jwt).then((retour) => { nbInscrits()
             close()
             confirmeInscription = true
             envoiMail(uuidInscription)
@@ -197,7 +202,7 @@ function insertInscrits() {
         busyEffacerInscription = true
         var listePromises = []
         listeInscrits.forEach((inscrit) => {
-            listePromises.push(deleteInscrit(inscrit.id, userInfo.jwt))
+            listePromises.push(deleteInscrit(inscrit.id, donneesUtilisateur.jwt))
         })
         Promise.all(listePromises).then((retour) => {
             nbInscrits()
@@ -225,7 +230,7 @@ function insertInscrits() {
     }
 
     function retirerInscrit(id, index) {
-        deleteInscrit(id, userInfo.jwt).then((retour) => {
+        deleteInscrit(id, donneesUtilisateur.jwt).then((retour) => {
             listeInscrits.splice(index, 1)
             listeInscrits = listeInscrits
             validationSave()
@@ -260,9 +265,12 @@ function insertInscrits() {
 
 //modal
 	function afficheModal() {
+        if (donneesUtilisateur.user.doitEtreEfface) {
+                window.location.replace(window.location.origin + '/dashboard')
+            }
         verifInscrits()
-        if (userInfo !== null) {
-            verifJWT(userInfo.jwt).then((retour) => {
+        if (donneesUtilisateur !== null) {
+            verifJWT(donneesUtilisateur.jwt).then((retour) => {
                 showModalInscription = true
             })
         } else {
@@ -270,8 +278,12 @@ function insertInscrits() {
         }
 	}
 
-    function retourAccueil() {
-        window.location.replace(window.location.origin)
+    function redirect() {
+        if (adresseRedirect==="") {
+            window.location.replace(window.location.origin)
+        } else {
+            window.location.replace(adresseRedirect)
+        }
     }
 
 	function close() {
@@ -453,7 +465,7 @@ function insertInscrits() {
     </mon-modal>
 {/if}
 {#if confirmeDesinscription}
-    <mon-modal on:close={retourAccueil} on:boutonBleu={retourAccueil}>
+    <mon-modal on:close={redirect} on:retour={redirect} on:boutonBleu={redirect}>
         <span slot="titre">Votre desinscription</span>
             Votre désinscription a bien été enregistrée. 
         <span slot="boutonBleu">OK</span>
@@ -467,13 +479,12 @@ function insertInscrits() {
     </mon-modal>
 {/if}
 {#if confirmeInscription}
-    <mon-modal on:close={close} on:boutonBleu={effacerInscrit}>
+    <mon-modal on:close={close} on:retour={redirect}>
         <span slot="titre">Votre inscription</span>
         <span class="text-justify">
             Votre inscription a bien été enregistrée. Vous allez recevoir un mail de confirmation qui contient un lien vous permettant éventuellement de vous désinscrire.<br />
             Si vous ne l'avez pas reçu dans les prochaines minutes, il y a pu avoir un problème de notre serveur ou une erreur dans l'adresse enregistrée. Cela ne compromet pas votre inscription, mais nous serons dans l'impossibilité de vous contacter si besoin.
         </span>
-        <span slot="boutonBleu">Confirmer</span>
     </mon-modal>
 {/if}
 <slot>
