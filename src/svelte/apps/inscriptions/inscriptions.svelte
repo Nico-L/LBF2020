@@ -74,7 +74,6 @@
         var extracted = /\?uuidInscription=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})&email=([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)&idAtelier=([0-9]+)(&redirect=(.*))?/i.exec(urlModifInscription)
         await tick()
         if (extracted!==null) {
-            console.log('extracted', extracted)
             const uuidAtelierModif = extracted[1]
             const emailModif = extracted[2]
             const idAtelierUrl = extracted[3]
