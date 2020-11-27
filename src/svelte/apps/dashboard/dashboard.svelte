@@ -158,6 +158,7 @@ function recupDernieresInscriptions(id, token) {
 
 function recupResaMachine(id, token) {
     resaMachines(id, token).then((retour) => {
+        console.log('retour resaMachine', retour)
         const maintenant = new Date()
         flagResaMachineOK = true
         lesMachines.forEach((machine) => {
@@ -262,7 +263,7 @@ function compteAEffacer() {
         {#if !doitEtreEfface}
             <div class="lg:grid lg:grid-cols-2 gap-2 lg:grid-flow-col-dense">
                 {#if !flagRecupAtelier}
-                    <div class="mx-auto md:w-full lg:col-span-auto border-2 border-lbforange-400 p-2 rounded flex flex-col my-1">
+                    <div class="mx-auto w-5/6 md:w-full lg:col-span-auto border-2 border-lbforange-400 p-2 rounded flex flex-col my-1">
                         <div class="text-lg text-lbforange-800 font-bold ">Vos ateliers à venir</div>
                         {#if dernieresInscriptions.length > 0}
                             {#each dernieresInscriptions as inscription}
@@ -293,7 +294,7 @@ function compteAEffacer() {
                 {:else}
                     <div  class="mb-1 text-sm">Récupération des données en cours...</div>
                 {/if}
-                <div class="mx-auto md:w-full lg:col-span-auto border-2 border-lbfvert-400 p-2 rounded flex flex-col my-1">
+                <div class="mx-auto  w-5/6 md:w-full lg:col-span-auto border-2 border-lbfvert-400 p-2 rounded flex flex-col my-1">
                     <div class="text-lg text-lbfvert-600 font-bold ">Prochaines réservations machine</div>
                     {#if flagResaMachineOK}
                         {#if prochainesResaMachines.length > 0}
@@ -317,20 +318,20 @@ function compteAEffacer() {
                         <div  class="mb-1 text-sm">Récupération des données en cours...</div>
                     {/if}
                 </div>
-                {#if dureeTotalUtilisationMachinesString > 0}
-                <div class="w-4/6 mx-auto lg:w-full lg:row-span-2 border-2 border-lbfbleu-400 p-2 rounded flex flex-col my-1">
-                    <div class="text-lg text-lbfbleu-600 font-bold ">Utilisation des machines</div>
-                    {#if flagResaMachineOK}
-                        <div class="mb-1 text-sm">Durée totale d'utilisation des machines : {dureeTotalUtilisationMachinesString}</div>
-                        <canvas bind:this={canvasElement}></canvas>
-                    {:else}
-                        <div  class="mb-1 text-sm">Récupération des données en cours...</div>
-                    {/if}
-                </div>
+                {#if dureeTotalUtilisationMachines > 0}
+                    <div class="w-4/6 mx-auto lg:w-full lg:row-span-2 border-2 border-lbfbleu-400 p-2 rounded flex flex-col my-1">
+                        <div class="text-lg text-lbfbleu-600 font-bold ">Utilisation des machines</div>
+                        {#if flagResaMachineOK}
+                            <div class="mb-1 text-sm">Durée totale d'utilisation des machines : {dureeTotalUtilisationMachinesString}</div>
+                            <canvas bind:this={canvasElement}></canvas>
+                        {:else}
+                            <div  class="mb-1 text-sm">Récupération des données en cours...</div>
+                        {/if}
+                    </div>
                 {/if}
             </div>
         {/if}
-        <div class="mx-auto md:w-full border-2 border-lbfrouge-400 p-2 rounded flex flex-col my-1">
+        <div class="mx-auto w-5/6 md:w-full border-2 border-lbfrouge-400 p-2 rounded flex flex-col my-1">
             <div class="text-lg text-lbfrouge-600 font-bold ">RGPD</div>
             <div  class="mb-1 text-sm text-justify">
                 Pour le fonctionnement des inscriptions à nos différentes activités, nous enregistrons quelques informations vous concernant :
