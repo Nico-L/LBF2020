@@ -1,6 +1,6 @@
 {%- for machine in lesMachines -%}
     {% set regExp = r/^four.*/g %}
-    <div class="w-320px border rounded-lg mb-4 {% include "components/classCartesMachines.njk" %}">
+    <div class="w-320px border rounded-lg mb-4 mx-1 {% include "components/classCartesMachines.njk" %}">
         <div class="bg-gray-100 rounded-t-lg">
             <img 
                 src="{{machine.urlImage | imgProxy({resizing_type: 'fill', width: '318', height: '180', gravity: 'ce'})}}"
