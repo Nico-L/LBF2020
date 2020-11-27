@@ -38,6 +38,8 @@ var dataChart = {}
 var chartDefini = false
 var flagVerifAnomInscription = false
 var flagVerifAnomReservations = false
+var occupeEnvoiLien = false
+var succesEnvoiLien = false
 
 const optionsImg = {
         'resizing_type': 'fill',
@@ -158,7 +160,6 @@ function recupDernieresInscriptions(id, token) {
 
 function recupResaMachine(id, token) {
     resaMachines(id, token).then((retour) => {
-        console.log('retour resaMachine', retour)
         const maintenant = new Date()
         flagResaMachineOK = true
         lesMachines.forEach((machine) => {
@@ -255,6 +256,48 @@ function compteAEffacer() {
         localStorage.setItem('userStrapi', JSON.stringify(donneesUtilisateur))
     })
 }
+
+function demandeLien() {
+    const email = donneesUtilisateur.user.email 
+        if (email==="") {
+            return
+        }
+        occupeEnvoiLien = true
+        succesEnvoiLien = false
+        var entetes = new Headers({"content-type": "application/json"});
+        var options = { 
+            method: 'POST',
+            headers: entetes,
+            mode: 'cors',
+            cache: 'default',
+            body: JSON.stringify({
+                email: email
+            })
+        };
+        fetch('https://cms.labonnefabrique.fr/auth/forgot-password', options)
+            .then((retour)=>
+                retour.json().then((retour2)=> {
+                    occupeEnvoiLien=false
+                    if (retour2.ok) {
+                        succesEnvoiLien = true
+                    } else {
+                        if (retour2.data[0].messages[0].id==="Auth.form.error.user.not-exist") {
+                            message="Cette adresse n'a pas été trouvée dans notre base, veuillez la vérifier."
+                            erreur="text-orangeLBF"
+                            return
+                        }
+                    if (retour2.data[0].messages[0].id==="Auth.form.error.email.format") {
+                            message="Merci d'entrer une adresse email valide."
+                            erreur="text-orangeLBF"
+                            return
+                        }
+                    }
+                })
+            ).catch((erreur)=>{
+                console.log('une erreur a eu lieu', erreur)
+            })
+    }
+
 </script>
 
 {#if flagIsLoggedIn}
@@ -331,6 +374,20 @@ function compteAEffacer() {
                 {/if}
             </div>
         {/if}
+        <div class="mx-auto w-5/6 md:w-full border-2 border-lbfviolet-800 p-2 rounded flex flex-col my-1">
+            <div class="text-lg text-lbfviolet-600 font-bold ">Changement de mot de passe</div>
+            <div class="text-justify">
+                Si vous devez changer votre mot de passer, merci de cliquer sur le bouton ci-dessous. 
+                Un lien vous sera envoyer vous permettant de mettre à jour votre mot de passe.
+            </div>
+            <div class="mt-2 text-center">
+                <Bouton occupe={occupeEnvoiLien} succes={succesEnvoiLien} border="border-1" largeur="w-full sm:w-2/6" couleur="text-violetLBF border-violetLBF" on:actionBouton={() => {demandeLien()}}>
+                    <div class="mx-auto flex flex-row justify-center">
+                        <div class="px-1 self-center">Envoyer un lien</div>
+                    </div>
+                </Bouton>
+            </div>
+        </div>
         <div class="mx-auto w-5/6 md:w-full border-2 border-lbfrouge-400 p-2 rounded flex flex-col my-1">
             <div class="text-lg text-lbfrouge-600 font-bold ">RGPD</div>
             <div  class="mb-1 text-sm text-justify">
