@@ -6,7 +6,7 @@ const purgecss = require("@fullhuman/postcss-purgecss")({
   defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
 });
 
-module.exports = {
+/*module.exports = {
   plugins: [
     require('postcss-import'),
     require('tailwindcss'),
@@ -17,9 +17,8 @@ module.exports = {
       ? [require("cssnano")]
       : [])
   ]
-};
+}; */
 
-/*
 module.exports = {
   plugins: [
     require("postcss-import"),
@@ -28,4 +27,4 @@ module.exports = {
     purgecss,
     require("cssnano")
   ]
-};*/
+};
