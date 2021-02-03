@@ -264,7 +264,7 @@ function insertInscrits() {
 
 //modal
 	function afficheModal() {
-        if (donneesUtilisateur.user.doitEtreEfface) {
+        if (donneesUtilisateur !== null && donneesUtilisateur.user.doitEtreEfface) {
                 window.location.replace(window.location.origin + '/dashboard')
             }
         verifInscrits()
