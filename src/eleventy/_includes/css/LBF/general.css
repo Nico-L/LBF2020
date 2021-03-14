@@ -1,6 +1,7 @@
 #nav-icon {
   margin: 0.5em;
-  width: 20px;
+  margin-right: 1rem;
+  width: 16px;
 }
 
 #nav-icon:after,
@@ -10,9 +11,36 @@
   border-radius: 2px;
   content: "";
   display: block;
-  height: 4px;
-  margin: 5px 0;
+  height: 3px;
+  margin: 3px 0;
   transition: all 0.1s ease-in-out;
+}
+
+/* 
+tranformation icon menu sur mobile
+*/
+#menu-toggle:checked ~ #menu {
+  display: block;
+}
+
+#menu-toggle:checked + label > #nav-icon::before {
+  transform: translateY(6px) rotate(135deg);
+}
+
+#menu-toggle:checked + label > #nav-icon:after {
+  transform: translateY(-6px) rotate(-135deg);
+}
+
+#menu-toggle:checked + label > #nav-icon > div {
+  transform: scale(0);
+}
+
+/*
+transition bandeau
+*/
+
+#bandeau {
+    transition: top 400ms cubic-bezier(.25,.37,.17,.96); 
 }
 
   h1,
@@ -69,25 +97,6 @@ h6,
 .body-2 {
   @apply text-sm;
   letter-spacing: 0.25px;
-}
-
-/* 
-tranformation icon menu sur mobile
-*/
-#menu-toggle:checked ~ #menu {
-  display: block;
-}
-
-#menu-toggle:checked + label > #nav-icon::before {
-  transform: translateY(9px) rotate(135deg);
-}
-
-#menu-toggle:checked + label > #nav-icon:after {
-  transform: translateY(-9px) rotate(-135deg);
-}
-
-#menu-toggle:checked + label > #nav-icon > div {
-  transform: scale(0);
 }
 
 .listeMachines ul {

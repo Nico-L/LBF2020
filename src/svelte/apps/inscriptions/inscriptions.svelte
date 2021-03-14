@@ -174,6 +174,7 @@ function insertInscrits() {
         let infoHoraires = dateFormatFr(date_atelier) + ' de ' + heureDebutSplit[0] + "h" + heureDebutSplit[1] + " à " + heureFinSplit[0] + "h" + heureFinSplit[1]
         var arrayMails = []
         arrayMails.push(emailInscription)
+        console.log('illu', url_illustration)
         imgProxyUrl(url_illustration, optionsImg).then((urlImage) => {
             var infoMail = {
                 subject: "Confirmation de votre inscription",
@@ -193,7 +194,7 @@ function insertInscrits() {
                 dynamicTemplateData: infoMail,
                 templateId: "d-3db7863e710b491e89681ccdf840a9f4"
             }
-            envoyerEmail(variables)
+            envoyerEmail(variables, donneesUtilisateur.jwt)
         })
     }
 

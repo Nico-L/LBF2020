@@ -98,7 +98,6 @@ if (localStorage.getItem("userStrapi")!==null) {
 onMount(() => {
     const extracted = /\?uuidReservation=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(&redirect=(.*))?/i.exec(urlEditResa.search)
     if (extracted!==null) {
-        console.log("test", extracted)
         if (extracted[3]) {
             adresseRedirect = "../" + extracted[3]
         }
@@ -111,7 +110,7 @@ onMount(() => {
                 dateChoisie = new Date(resa.date)
                 choixMachine = resa.machine.id
                 let datePourVerif = dateChoisie
-                let tempsDebutResa = resa.heuredebut.split(':')
+                let tempsDebutResa = resa.heureDebut.split(':')
                 datePourVerif.setHours(tempsDebutResa[0])
                 datePourVerif.setMinutes(tempsDebutResa[1])
                 if (datePourVerif < aujourdhui) {
@@ -251,12 +250,12 @@ function resetChoixHoraire()
  {
     choixHoraire = {debut: "", fin: "", choixOK: false, duree: 0}
      if (detailResaModif) {
-        detailResaModif.heuredebut = ""
-        detailResaModif.heurefin = ""
+        detailResaModif.heureDebut = ""
+        detailResaModif.heureFin = ""
         if (choixMachine === tempResaEnCours.machine.id) {
-            detailResaModif.heuredebut = tempResaEnCours.heuredebut
-            detailResaModif.heurefin = tempResaEnCours.heurefin
-            choixHoraire = {debut: tempResaEnCours.heuredebut, fin: tempResaEnCours.heurefin, choixOK: false, duree: 0}
+            detailResaModif.heureDebut = tempResaEnCours.heureDebut
+            detailResaModif.heureFin = tempResaEnCours.heureFin
+            choixHoraire = {debut: tempResaEnCours.heureDebut, fin: tempResaEnCours.heureFin, choixOK: false, duree: 0}
         }
         let zeDate = new Date(dateChoisie)
         constructionCreneaux(zeDate.toISOString());
@@ -353,8 +352,8 @@ function verifReserve(heure) {
     let heureSplit = heure.split(':')
     let retour = false
     listeReservationsFiltreMachine.forEach((resa) => {
-        let heureDebutSplit = resa.heuredebut.split(":")
-        let heureFinSplit = resa.heurefin.split(":")
+        let heureDebutSplit = resa.heureDebut.split(":")
+        let heureFinSplit = resa.heureFin.split(":")
         let dureeReservation = 60 * (Number(heureFinSplit[0]) - Number(heureDebutSplit[0])) + Number(heureFinSplit[1]) - Number(heureDebutSplit[1])
         let dureeToCheck = 60 * (Number(heureSplit[0]) - Number(heureDebutSplit[0])) + Number(heureSplit[1]) - Number(heureDebutSplit[1])      
         if (dureeToCheck >= 0 && dureeToCheck < dureeReservation) {retour = true}
@@ -367,8 +366,8 @@ function verifReserve(heure) {
 function enregistrerReservation() {
     saveEnCours = true
     const variables = {
-        heuredebut: choixHoraire.debut,
-        heurefin: choixHoraire.fin,
+        heureDebut: choixHoraire.debut,
+        heureFin: choixHoraire.fin,
         date: dateChoisiePourRequete,
         user: donneesUtilisateur.user.id.toString(),
         machine: choixMachine.toString(),
@@ -391,14 +390,13 @@ function modifierReservation() {
     busyModifResa = true
     const variables = {
         idReservation: detailResaModif.id.toString(),
-        heuredebut: choixHoraire.debut,
-        heurefin: choixHoraire.fin,
+        heureDebut: choixHoraire.debut,
+        heureFin: choixHoraire.fin,
         date: dateChoisiePourRequete,
         user: donneesUtilisateur.user.id.toString(),
         dureeReservation: choixHoraire.duree/60,
         machine: choixMachine.toString()
     }
-    console.log('variabels modif', variables)
     modifierResa(donneesUtilisateur.jwt, detailResaModif.id.toString(), variables).then((retour) => {
         busyModifResa = false
         flagVerifModif = false
@@ -426,8 +424,8 @@ function getIdMachine(tag) {
 
 function verifResaEnCours(creneau) {
     if (detailResaModif) {
-        let debutResaSplit = detailResaModif.heuredebut.split(':')
-        let finResaSplit = detailResaModif.heurefin.split(':')
+        let debutResaSplit = detailResaModif.heureDebut.split(':')
+        let finResaSplit = detailResaModif.heureFin.split(':')
         let minutesCreneau = creneau.split(':')
         let retour = false
         let dureeDebut = (Number(minutesCreneau[0]) - Number(debutResaSplit[0])) * 60 + Number(minutesCreneau[1]) - Number(debutResaSplit[1])
@@ -463,6 +461,10 @@ function retourPageModif() {
     } else {
         window.location.replace(adresseRedirect)
     }
+}
+
+function retourPageResa() {
+    window.location.replace(urlEditResa.origin + "/reservations/")
 }
 
 function mailConfirmation(uuidResa) {
@@ -580,12 +582,12 @@ function mailConfirmation(uuidResa) {
                 {/if}       
                 {#if donneesUtilisateur.user.rabo_degau}
                     <RadioBouton
-                    label="Rabo-Degau"
-                    cbClasses={tableCouleursLBF['vert'].classText}
-                    name="machineReservation"
-                    value={getIdMachine('rabo')}
-                    bind:selected={choixMachine}
-                    on:click={resetChoixHoraire}/>
+                        label="Rabo-Degau"
+                        cbClasses={tableCouleursLBF['vert'].classText}
+                        name="machineReservation"
+                        value={getIdMachine('rabo')}
+                        bind:selected={choixMachine}
+                        on:click={resetChoixHoraire}/>
                 {/if}  
             {/if}
             <RadioBouton
@@ -729,7 +731,7 @@ function mailConfirmation(uuidResa) {
     </Modal>
 {/if}
 {#if flagEffacerConfirme}
-    <Modal on:close={retourPageModif}>
+    <Modal on:close={retourPageResa}>
         <span slot="titre">Opération confirmée</span>
             Votre réservation a bien été supprimée.
         <span slot="boutonDefaut">Fermer</span>

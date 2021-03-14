@@ -1,0 +1,45 @@
+---
+title: test plugin image
+layout: articleLBF
+---
+
+<div class="mt-20 w-full max-w-1024px mx-auto" id="bobby">
+    <div class="galerie__mobile flex flex-row h-48 flex-nowrap w-full flex-shrink-0 overflow-x-scroll gap-2 mb-4 sm:hidden">
+       <a data-fslightbox="galerie-1-mobile" href="https://cms.labonnefabrique.fr/uploads/istock_609802128_2d52b50f03.webp">
+            {% imageGenerique "/uploads/istock_609802128_2d52b50f03.webp", "bob ?", "100vw", "galerie__img" %}
+        </a>
+        <a data-fslightbox="galerie-1-mobile" href="https://cms.labonnefabrique.fr/uploads/ixthugkrtb1rsxtzjmu4_10e06dc246.png">
+            {% imageGenerique "/uploads/ixthugkrtb1rsxtzjmu4_10e06dc246.png", "bob ?", "100vw", "galerie__img" %}
+        </a>
+        <a data-fslightbox="galerie-1-mobile" href="https://cms.labonnefabrique.fr/uploads/zuqacpcawiforkkja0ib_4d27f1fe57.jpg">
+            {% imageGenerique "/uploads/zuqacpcawiforkkja0ib_4d27f1fe57.jpg", "bob ?", "100vw", "galerie__img" %}
+        </a>
+        <a data-fslightbox="galerie-1-mobile" href="https://cms.labonnefabrique.fr/uploads/Poterie_enfant_dd9df1d983.jpg">
+            {% imageGenerique "/uploads/Poterie_enfant_dd9df1d983.jpg", "bob 6 ?", "100vw", "galerie__img" %}
+        </a>
+    </div>
+    <div class="hidden sm:grid w-full galerie">
+        <a data-fslightbox="galerie-1" href="https://cms.labonnefabrique.fr/uploads/istock_609802128_2d52b50f03.webp" class="galerie__6el">
+            {% imageGenerique "/uploads/istock_609802128_2d52b50f03.webp", "bob ?", "100vw", "galerie__img" %}
+        </a>
+        <a data-fslightbox="galerie-1" href="https://cms.labonnefabrique.fr/uploads/ixthugkrtb1rsxtzjmu4_10e06dc246.png" class="galerie__6el">
+            {% imageGenerique "/uploads/ixthugkrtb1rsxtzjmu4_10e06dc246.png", "bob ?", "100vw", "galerie__img" %}
+        </a>
+        <a data-fslightbox="galerie-1" href="https://cms.labonnefabrique.fr/uploads/zuqacpcawiforkkja0ib_4d27f1fe57.jpg" class="galerie__6el">
+            {% imageGenerique "/uploads/zuqacpcawiforkkja0ib_4d27f1fe57.jpg", "bob ?", "100vw", "galerie__img" %}
+        </a>
+        <a data-fslightbox="galerie-1" href="https://cms.labonnefabrique.fr/uploads/gravure_c07245db36.png" class="galerie__6el">
+            {% imageGenerique "/uploads/gravure_c07245db36.png", "bob ?", "100vw", "galerie__img" %}
+        </a>
+        <a data-fslightbox="galerie-1" href="https://cms.labonnefabrique.fr/uploads/1200px_Origami_crane_c06b5e4bb7.jpg" class="galerie__6el">
+            {% imageGenerique "/uploads/1200px_Origami_crane_c06b5e4bb7.jpg", "bob 5 ?", "100vw", "galerie__img" %}
+        </a>
+        <a data-fslightbox="galerie-1" href="https://cms.labonnefabrique.fr/uploads/Poterie_enfant_dd9df1d983.jpg" class="galerie__6el">
+            {% imageGenerique "/uploads/Poterie_enfant_dd9df1d983.jpg", "bob 6 ?", "100vw", "galerie__img" %}
+        </a>
+    </div>
+</div>
+
+{% block scripts %}
+<script src="/js/fslightbox.js" defer></script>
+{% endblock %}

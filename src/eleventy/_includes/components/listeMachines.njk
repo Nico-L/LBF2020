@@ -1,9 +1,8 @@
 {%- for machine in lesMachines -%}
-    {% set regExp = r/^four.*/g %}
     <div class="w-320px border rounded-lg mb-4 mx-1 {% include "components/classCartesMachines.njk" %}">
         <div class="bg-gray-100 rounded-t-lg">
             <img 
-                src="{{machine.urlImage | imgProxy({resizing_type: 'fill', width: '318', height: '180', gravity: 'ce'})}}"
+                src="{% imageBackground machine.illustration.media.url, 318 %}"
                 class="rounded-t-lg"
                 width="318"
                 height="180"/>
@@ -11,14 +10,14 @@
             <div class="text-base text-justify p-1 align-top rounded-br-lg listeMachines">{{machine.resume | safe}}</div>
         </div>
         <div class="rounded-b-lg">
-            {%if not machine.Abonnement%}
+            {%if not machine.surAbonnement%}
                 <div class="my-1 mx-2 text-right">
-                    <span class="text-xl font-medium">{{machine.tarifHoraire}}</span>
-                    <span class="text-base">&nbsp;€/h</span>
-                </div>
-            {% elif 'four' in machine.tag %}
-                <div class="my-1 mx-2 text-right text-base font-medium">
-                    tarif: nous contacter
+                    {% if machine.tarifHoraire !== "nous contacter" %}
+                        <span class="text-xl font-medium">{{machine.tarifHoraire}}</span>
+                        <span class="text-base">&nbsp;€/h</span>
+                    {% else %}
+                        <span class="text-base">Nous contacter</span>
+                    {% endif %}
                 </div>
             {% else %}
                 <div class="my-1 mx-2 text-right text-base font-medium">

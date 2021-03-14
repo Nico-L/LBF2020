@@ -1,0 +1,17 @@
+<div class="flex flex-row flex-wrap gap-1 justify-center">
+    {%- for lien in listeLiens -%}
+        <a class="sm:mx-8 mb-4 flex flex-row gap-1 w-11/12 sm:w-full p-2 border border-bleuLBF rounded-md" href={{lien.data.link}} target="_blank">
+            <div class="w-3/4 max-w-3/4 sm:max-w-4/6">
+                <h5 class="text-bleuLBF text-sm text-left truncate">{{lien.data.meta.title}}</h5>
+                <div class="text-sm twoLines">{{lien.data.meta.description}}</div>
+                <div class="flex flex-row mt-1 items-center">
+                    <img src="{% recupFavicon lien.data.link %}" class="h-6 w-6 object-cover" />
+                    <div class="leLien text-sm">{{lien.data.link}}</div>
+                </div>
+            </div>
+            {%- if lien.data.meta.image.url !== "" -%}
+                <img class="object-cover w-1/4 min-w-1/4 sm:w-2/6 sm:min-w-2/6 h-20 rounded-md " src="{{lien.data.meta.image.url}}">
+            {% endif %}
+        </a>
+    {%- endfor -%}
+</div>

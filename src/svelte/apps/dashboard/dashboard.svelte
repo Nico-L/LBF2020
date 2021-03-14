@@ -2,6 +2,7 @@
 import {onMount} from "svelte"
 import {verifJWT} from "./../../strapi/verifJWT.js"
 import {cinqDernieresInscriptions, resaMachines, anonInscriptions, anonReservations, aEffacer} from "./../../strapi/profil.js"
+import {getIllustrationById} from './../../strapi/illustrations.js'
 import {imgProxyUrl} from './../../strapi/imgProxy.js'
 import {Chart, DoughnutController, ArcElement, Legend, Tooltip} from 'chart.js'
 import {tableCouleursLBF} from "./../../utils/couleursLBF.js"
@@ -121,13 +122,14 @@ function recupDernieresInscriptions(id, token) {
     cinqDernieresInscriptions(id, token).then((retour) => {
         dernieresInscriptions = []
         retour.forEach((inscription) => {
+
             if (dernieresInscriptions.length === 0) {
                 dernieresInscriptions = [
                     {
                     uuid: inscription.uuid,
                     titreAtelier: inscription.atelier.titre,
                     idAtelier: inscription.atelier.id,
-                    urlImage: inscription.atelier.urlImage,
+                    idImage: inscription.atelier.illustration,
                     inscrits: [{nom: inscription.nom, prenom: inscription.prenom}],
                     user: inscription.user.id,
                     email: inscription.email
@@ -143,7 +145,7 @@ function recupDernieresInscriptions(id, token) {
                             uuid: inscription.uuid,
                             titreAtelier: inscription.atelier.titre,
                             idAtelier: inscription.atelier.id,
-                            urlImage: inscription.atelier.urlImage,
+                            idImage: inscription.atelier.illustration,
                             inscrits: [{nom: inscription.nom, prenom: inscription.prenom}],
                             user: inscription.user.id,
                             email: inscription.email
@@ -167,7 +169,7 @@ function recupResaMachine(id, token) {
         })
         retour.forEach((resa) => {
             var dateResa = new Date(resa.date)
-            const horaireDebut = resa.heuredebut.split(':')
+            const horaireDebut = resa.heureDebut.split(':')
             dateResa.setHours(horaireDebut[0])
             dateResa.setMinutes(horaireDebut[1])
             if (maintenant < dateResa) {
@@ -312,10 +314,14 @@ function demandeLien() {
                             {#each dernieresInscriptions as inscription}
                                 <div class="flex justify-start items-start mb-1 hover:bg-lbforange-100 p-1 rounded hover:cursor-pointer" on:click={() => {redirectIndex(inscription.uuid, inscription.idAtelier, inscription.email)}}>
                                     <div class="w-12">
-                                        {#await imgProxyUrl(inscription.urlImage, optionsImg)}
+                                        {#await getIllustrationById(inscription.idImage, donneesUtilisateur.jwt)}
                                             <img src = "../images/logos/logoHexagoneSeul.svg" height=40 width=40 class="rounded" alt="illustration atelier" />
-                                        {:then value}
-                                            <img src = "{value.imgProxyUrl}" height=40 width=40 class="rounded" alt="illustration atelier" />
+                                        {:then illustration}
+                                            {#await imgProxyUrl("https://cms.labonnefabrique.fr" + illustration.media.url, optionsImg)}
+                                                <img src = "../images/logos/logoHexagoneSeul.svg" height=40 width=40 class="rounded" alt="illustration atelier" />
+                                            {:then value}
+                                                <img src = "{value.imgProxyUrl}" height=40 width=40 class="rounded" alt="illustration atelier" />
+                                            {/await}
                                         {/await}
                                     </div>
                                     <div class="ml-1 text-left text-sm">
@@ -349,7 +355,7 @@ function demandeLien() {
                                         </svg>
                                     </div>
                                     <div class="ml-1">
-                                        <div class="text-sm">{dateDebutFin(resa.date, resa.heuredebut, resa.heurefin)}</div>
+                                        <div class="text-sm">{dateDebutFin(resa.date, resa.heureDebut, resa.heureFin)}</div>
                                         <div class={"mb-1 ml-2 text-sm font-semibold " + tableCouleursLBF[resa.machine.couleur].classText}> {resa.machine.nom}</div>
                                     </div>
                                 </div>

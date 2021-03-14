@@ -24,7 +24,7 @@ module.exports = {
     require("postcss-import"),
     require("tailwindcss"),
     require("autoprefixer"),
-    purgecss,
-    require("cssnano")
+    //purgecss,
+    //require("cssnano")
   ]
 };

@@ -2,6 +2,7 @@
 title: L'atelier de la Bonne Fabrique
 layout: indexLBF
 ---
+
 <div class="flex flex-row items-stretch flex-wrap justify-around">
 {% for atelier in lesAteliers %}
     <div class="relative min-w-340px w-340px bg-white border border-lbforange-600 rounded mx-1 my-1">
@@ -10,13 +11,13 @@ layout: indexLBF
         </div>
         <div 
             class="relative h-180px" 
-            style="background-image: url({{atelier.urlImage | imgProxy({resizing_type: 'fill', width: '338', height: '180', gravity: 'sm'})}})">
+            style="background-image: url({% imageBackground atelier.illustration.media.url, 338 %})">
             {% if atelier.surInscription %}
             <div class="absolute -bottom-2 left-0">
                 <inscription-atelier 
                     id_atelier="{{atelier.id}}" 
                     nb_participants="{{atelier.nbParticipants}}"
-                    url_illustration="{{atelier.urlImage}}" 
+                    url_illustration="https://cms.labonnefabrique.fr{{atelier.illustration.media.url}}" 
                     titre_atelier="{{atelier.titre}}" 
                     date_atelier="{{atelier.date}}"
                     heure_debut="{{atelier.debut}}"

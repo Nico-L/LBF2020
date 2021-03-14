@@ -14,10 +14,10 @@ var lesMachines = [];
     lesMachines.push({
     "id": {{machine.id}}, 
     "nom": "{{machine.nom}}", 
-    "tag": "{{machine.tag}}", 
-    "abonnement": {{machine.Abonnement}}, 
+    "tag": "{{machine.nomRaccourci}}", 
+    "abonnement": {{machine.surAbonnement}}, 
     "tarifHoraire": "{{machine.tarifHoraire}}",
-    "urlImage": "{{machine.illustration[0].formats.thumbnail.url}}"
+    "urlImage": "{{machine.illustration.media.url}}"
     });
 {%- endfor -%}
 </script>

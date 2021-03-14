@@ -1,0 +1,73 @@
+---
+pagination:
+    data: lesArticles
+    size: 1
+    alias: article
+permalink: "articles/{{ article.titre | slug }}/"
+layout: articleLBF
+eleventyComputed:
+    title: "{{ article.titre }}"
+---
+
+<div class="relative article__banniere">
+<img src="/images/img/91235f5d-720.webp" class="article__banniere__img" />
+
+    <div class="absolute right-0 bottom-0 w-full h-full md:h-auto bg-gray-900 bg-opacity-60 p-4 text-center md:text-right flex flex-col justify-center">
+        <h3 class="text-white mb-2">{{ article.titre }}</h3>
+        <div class="flex flex-row flex justify-center md:justify-end wrap gap-2 mb-2">
+            {%- if article.tags_articles.length > 0 -%}
+                {%- for tag in article.tags_articles -%}
+                    <div class="border-2 border-bleuLBF bg-bleuLBF text-gray-900 text-xs font-medium rounded-full px-1">{{tag.tag}}</div>
+                {%- endfor -%}
+            {%- endif -%}
+        </div>
+    </div>
+</div>
+<div class="mt-8">
+    {%- set listeLiens = [] -%}
+    {%- set listeLiensEnCours = false -%}
+    {%- for b in article.data.blocks -%}
+        {%- ifAsync b.type === "linkTool" -%}
+            {%- set listeLiensEnCours = true -%}
+            {%- set listeLiens = (listeLiens.push(b), listeLiens) -%}
+            {%- ifAsync loop.last -%}
+                {%- include "components/editorjsParser/linkTool.njk" -%}
+                {%- set listeLiens = [] -%}
+            {%- endif -%}
+        {%- else -%}
+            {%- ifAsync listeLiensEnCours -%}
+                {%- include "components/editorjsParser/linkTool.njk" -%}
+                {%- set listeLiens = [] -%}
+            {%- endif -%}
+            {%- set listeLiensEnCours = false -%}
+        {%- endif -%}
+
+        {%- if b.type === "header" -%}
+            {%- include "components/editorjsParser/header.njk" -%}
+        {%- endif -%}
+
+        {%- if b.type === "paragraph" -%}
+            {%- include "components/editorjsParser/paragraph.njk" -%}
+        {%- endif -%}
+
+        {%- if b.type === "list" -%}
+            {%- include "components/editorjsParser/lists.njk" -%}
+        {%- endif -%}
+
+        {%- ifAsync b.type === "galerie" -%}
+            {%- include "components/editorjsParser/galerie.njk" -%}
+        {%- endif -%}
+
+        {%- if b.type === "codeTool" -%}
+            {% highlight b.data.languageCode %}
+                {{ b.data.code}}
+            {% endhighlight %}
+        {%- endif -%}
+    {%- endfor -%}
+</div>
+{% include "layouts/footerArticles.njk" %}
+
+
+{% block scripts %}
+<script src="/js/fslightbox.js" defer></script>
+{% endblock %}

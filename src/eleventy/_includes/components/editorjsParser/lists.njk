@@ -1,0 +1,13 @@
+{% if b.data.style==="ordered" %}
+    <ol class="list list__ordered px-8 sm:px-16">
+        {% for item in b.data.items%}
+            <li>{{item}}</li>
+        {% endfor%}
+    </ol>
+{% else %}
+    <ul class="list list__unordered px-8 sm:px-16">
+        {% for item in b.data.items%}
+            <li>{{item}}</li>
+        {% endfor%}
+    </ul>
+{% endif %}

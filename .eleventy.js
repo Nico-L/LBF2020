@@ -1,6 +1,10 @@
 const { DateTime } = require("luxon");
 const fetch = require("node-fetch");
-//const util = require("util");
+const Image = require("@11ty/eleventy-img");
+const fetchFavicon = require('fetch-favicon').fetchFavicon
+const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+
+const util = require("util");
 const slugify = require("slugify");
 const mois = [
     "janvier",
@@ -44,11 +48,205 @@ const jours = [
 
 const tokenSite = process.env.TOKEN_SITE
 
+fetchFavicon('https://www.lemonde.fr').then((retour) => console.log('retour fav', retour))
+
+async function recupFavicon(url) {
+    const icon = await fetchFavicon(url)
+    return icon;
+}
+
+async function imageBackground(src, taille) {
+    const srcComplete = "https://cms.labonnefabrique.fr"+src
+    let imageData = await Image(srcComplete, {
+        widths: [taille],
+        formats: ['jpeg'],
+        outputDir: "./dist/images/img/",
+        urlPath: "/images/img/",
+    }); 
+    let dataImg = imageData.jpeg[imageData.jpeg.length - 1];
+    return dataImg.url
+}
+
+async function imageCarreBackground(src, taille) {
+    const srcComplete = "https://cms.labonnefabrique.fr"+src
+    let imageData = await Image(srcComplete, {
+        widths: [taille],
+        formats: ['png'],
+        outputDir: "./dist/images/img/",
+        urlPath: "/images/img/",
+        sharpPngOptions: {
+            quality: 100
+        }
+        
+    });
+    let dataImg = imageData.png[imageData.png.length - 1];
+    retour = `
+    <div 
+        class="w-${taille}px h-${taille}px rounded mx-auto"
+        style="
+            background-image: url(${dataImg.url});
+            background-size: cover;
+            background-repeat: no-repeat;
+        ">
+    </div>
+    `
+
+    return retour;
+}
+
+async function imageToCrop(src, alt, width, height) {
+    const srcComplete = "https://cms.labonnefabrique.fr"+src
+    const variables = {
+        url: srcComplete,
+        resizing_type: 'fill', 
+        width: width,
+        height: height,
+        gravity: 'ce'
+    }
+    const urlQuery = "https://cms.labonnefabrique.fr/imgproxy?token=" + tokenSite
+    const entetes = {"content-type": "application/json"}
+    var options = { 
+        method: 'POST',
+        headers: entetes,
+        mode: 'cors',
+        cache: 'default',
+        body: JSON.stringify(variables)
+    }
+
+    let metadata = await fetch(urlQuery, options)
+        .then((leJSON)=> {return leJSON.json()})
+        .then(async (retour)=> {
+            return await Image(retour.imgProxyUrl, {
+                widths: [320, null],
+                formats: ["webp", "jpeg"],
+                outputDir: "./dist/images/img/",
+                urlPath: "/images/img/"
+            });
+        })
+    let imageAttributes = {
+        alt,
+        sizes: "100vw",
+        loading: "lazy",
+        decoding: "async",
+    };
+
+  // You bet we throw an error on missing alt in `imageAttributes` (alt="" works okay)
+    return Image.generateHTML(metadata, imageAttributes);
+}
+
+async function imageFixedHeight(src, alt, targetHeight) {  
+   if(alt === undefined) {
+    // You bet we throw an error on missing alt (alt="" works okay)
+    throw new Error(`Missing \`alt\` on responsive image from: ${src}`);
+  }
+  const srcComplete = "https://cms.labonnefabrique.fr"+src
+  let imageData = await Image(srcComplete, {
+    widths: [20],
+    formats: ['png'],
+    outputDir: "./imgTemp/",
+    urlPath: "/images/img/"
+  });
+
+  const ratio = imageData.png[0].width/imageData.png[0].height;
+
+  let imageToShow = await Image(srcComplete, {
+    widths: [Math.floor(ratio*targetHeight)],
+    formats: ['png', 'png'],
+    outputDir: "./dist/images/img/",
+    urlPath: "/images/img/"
+  });
+
+let dataImg = imageToShow.png[imageToShow.png.length - 1];
+let datapng = imageToShow.png[imageToShow.png.length - 1];
+let retourPicture = `<picture>
+    <source media="(height: ${datapng.height}px;)" srcset="${datapng.url} ${datapng.width}w" alt="${alt}" type="image/png" loading="lazy" decoding="async">
+    <img src="${dataImg.url}" width="${dataImg.width}" height="${dataImg.height}" alt="${alt}" loading="lazy" decoding="async">
+    </picture>`;
+return retourPicture;
+}
+
+async function urlFullImage(src) {  
+  let imageData = await Image(src, {
+    widths: [null],
+    formats: ['jpeg'],
+    outputDir: "./dist/images/img/",
+    urlPath: "/images/img/"
+  });
+
+let dataImg = imageData.jpeg[imageData.jpeg.length - 1];
+return dataImg.url;
+}
+
+async function imageGenerique(src, alt, sizes, classe) {
+    const srcComplete = "https://cms.labonnefabrique.fr"+src   
+    let metadata = await Image(srcComplete, {
+        widths: [320, 720, 1024],
+        formats: ["webp", "jpeg"],
+        outputDir: "./dist/images/img/",
+        urlPath: "/images/img/"
+    });
+
+    let imageAttributes = {
+        alt,
+        sizes,
+        loading: "lazy",
+        decoding: "async",
+        class: classe
+    };
+
+    let lowsrc = metadata.jpeg[0];
+
+  // You bet we throw an error on missing alt in `imageAttributes` (alt="" works okay)
+    //return Image.generateHTML(metadata, imageAttributes);
+      return `<picture>
+    ${Object.values(metadata).map(imageFormat => {
+      return `  <source type="${imageFormat[0].sourceType}" srcset="${imageFormat.map(entry => entry.srcset).join(", ")}" sizes="${sizes}">`;
+    }).join("\n")}
+      <img
+        src="${lowsrc.url}"
+        alt="${alt}"
+        loading="lazy"
+        decoding="async">
+    </picture>`;
+}
+
+async function imageGalerie(src, alt, sizes, classe) {  
+    let metadata = await Image(src, {
+        widths: [320, 720, 1024],
+        formats: ["webp", "jpeg"],
+        outputDir: "./dist/images/img/",
+        urlPath: "/images/img/"
+    });
+
+    let imageAttributes = {
+        alt,
+        sizes,
+        loading: "lazy",
+        decoding: "async",
+        class: classe
+    };
+
+  // You bet we throw an error on missing alt in `imageAttributes` (alt="" works okay)
+    return Image.generateHTML(metadata, imageAttributes);
+}
+
 module.exports = function(eleventyConfig) {
+    //plugin
+    eleventyConfig.addPlugin(syntaxHighlight, {lineSeparator: "\n",});
+    //getFavicon 
+    eleventyConfig.addNunjucksAsyncShortcode("recupFavicon", recupFavicon)
+    // gestion images
+    eleventyConfig.addNunjucksAsyncShortcode("imageBackground", imageBackground)
+    eleventyConfig.addNunjucksAsyncShortcode("imageGalerie", imageGalerie);
+    eleventyConfig.addNunjucksAsyncShortcode("urlFullImage", urlFullImage);
+    eleventyConfig.addNunjucksAsyncShortcode("imageCarreBackground", imageCarreBackground);
+    eleventyConfig.addNunjucksAsyncShortcode("imageGenerique", imageGenerique);
+
   // Layout aliases for convenience
   eleventyConfig.addLayoutAlias("baseLBF", "layouts/baseLBF.njk");
   eleventyConfig.addLayoutAlias("auth", "layouts/auth.njk");
   eleventyConfig.addLayoutAlias("indexLBF", "layouts/indexLBF.njk");
+  eleventyConfig.addLayoutAlias("articleLBF", "layouts/articleLBF.njk");
   eleventyConfig.addLayoutAlias("baseLBFResaMachines", "layouts/baseLBFResaMachines.njk");
 
   //new slug for apostrophe
@@ -78,6 +276,23 @@ eleventyConfig.addFilter("getJour", function(value) {
     var d = DateTime.fromISO(value).setZone("Europe/Paris");
     return d.day;
 });
+
+eleventyConfig.addFilter("dateJourMoisHeure", function(value) {
+    const laDate = new Date(value)
+    const leJour = laDate.getDate();
+    const leMois = mois[laDate.getMonth()]
+    const lesMinutes = laDate.getMinutes() == 0 ? '00': laDate.getMinutes();
+    return 'le ' + leJour + ' ' + leMois + ' à ' + laDate.getHours() + ' h ' + lesMinutes
+})
+
+eleventyConfig.addFilter("shortDate", function(value) {
+    const laDate = new Date(value)
+    const leJour = laDate.getDate();
+    const annee = laDate.getFullYear();
+    const leMois = laDate.getMonth() + 1
+    //const lesMinutes = laDate.getMinutes() == 0 ? '00': laDate.getMinutes();
+    return leJour + '/' + leMois + '/' + annee
+})
 
   //récupération du mois (short) dans la fiche de l'atelier
 eleventyConfig.addFilter("getMoisShort", function(value) {

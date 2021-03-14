@@ -16,6 +16,5 @@ async function fetchAteliersData() {
 }
 
 module.exports = async function() {
-  //let result = await fetchAteliersData();
   return fetchAteliersData();
 };

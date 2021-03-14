@@ -16,7 +16,7 @@ export function nombreInscrits(atelierId) {
 }
 
 export function trouverInscrit(atelierId, email, token) {
-    const url = cmsUrl + "inscriptions-ateliers/?atelier_eq=" + atelierId + "&email_eq=" + email
+    const url = cmsUrl + "inscriptions-ateliers?atelier_eq=" + atelierId + "&user.email_eq=" + email
     return verifJWT(token).then((retour)=> 
         {
             const auth = "Bearer " + token
@@ -35,7 +35,7 @@ export function trouverInscrit(atelierId, email, token) {
 }
 
 export function trouverInscritByUuid(atelierId, email, uuid, token, urlRetour="") {
-    const url = cmsUrl + "inscriptions-ateliers/?atelier_eq=" + atelierId + "&email_eq=" + email + "&uuid_eq=" + uuid
+    const url = cmsUrl + "inscriptions-ateliers/?atelier_eq=" + atelierId + "&user.email_eq=" + email + "&uuid_eq=" + uuid
     return verifJWT(token, urlRetour).then((retour)=> 
         {
             const auth = "Bearer " + token

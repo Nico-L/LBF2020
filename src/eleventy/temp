@@ -1,0 +1,8 @@
+{%- set iconChoisie = false -%}
+                    {%- for icon in lien.data.meta.favicons -%}
+                    {{icon}}
+                        {%- if '.ico' in icon and not iconChoisie -%}
+                            {%- set iconChoisie = true -%}
+                            <img src="{{icon}}" class="h-6 w-6 object-cover" />
+                        {%- endif -%}
+                    {%- endfor -%}

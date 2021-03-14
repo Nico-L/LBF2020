@@ -2,6 +2,7 @@
 title: Les tarifs de l'atelier
 layout: baseLBF
 ---
+
 <div class="sm:mt-6 mt-12 mx-1 max-w-3xl text-justify">
   <h1 class="sm:text-3xl text-xl mb-2 text-center">{{title}}</h1>
 
@@ -22,7 +23,7 @@ layout: baseLBF
                     {% endfor %}.</p>
       <p>Nos abonnements :</p>
       <div class="flex flex-row justify-around mx-auto text-center mt-2 font-bold">
-        {% for abonnement in abonnements.Tarifs %}
+        {% for abonnement in abonnements.abonnements %}
             <div class="mx-3 border-2 border-lbfvert-200 rounded shadow-md bg-white px-1 py-1">
                 <div class="font-bold mt-1">{{abonnement.duree}}</div>
                 <div class="font-normal my-1">{{abonnement.tarif}} €</div>
@@ -45,11 +46,11 @@ layout: baseLBF
     <div class="hidden md:flex md:flex-col md:w-1/2 md:ml-4">
       <p>Le coût des machines est fonction de la durée d'occupation.</p>
           {% for machine in lesMachines %}
-            {% if not machine.Abonnement %}
+            {% if not machine.surAbonnement %}
                 <div class="flex flex-row">
                     <div class="font-medium"> {{machine.nom}} :&nbsp;</div>
                     <div class="">
-                        {{machine.tarifHoraire}}&nbsp;€/h
+                        {{machine.tarifHoraire}}&nbsp;{% if machine.tarifHoraire !== "nous contacter" %}€/h{% endif %}
                     </div>
                 </div>
             {% endif %}

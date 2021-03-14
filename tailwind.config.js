@@ -1,4 +1,8 @@
 module.exports = {
+purge: {
+    enabled: true,
+    content: ["./src/eleventy/**/*.njk","./src/svelte/**/*.svelte"],
+  },
   theme: {
     minWidth: {
         '0': '0',
@@ -28,12 +32,17 @@ module.exports = {
         '3xl': '48rem',
         '320px': '320px',
         '500px': '500px',
-        '620px': '620px'
+        '620px': '620px',
+        '720px': '720px',
+        '1024px': '1024px'
     },
     maxHeight: {
            '0': '0',
+           '1/6': '17%',
            '5/6': '83%',
            'full': '100%',
+           '120px': '120px',
+           '320px': '320px'
           },
     colors: {
       transparent: "transparent",
@@ -41,13 +50,18 @@ module.exports = {
       white: "#fff",
       fondLBF: "#FCFCFC",
       orangeLBF: "#ee732e",
+      orangeLBFT: "#ee732e55",
       bleuLBF: "#4bbcc4",
       bleuLBFT: "#4bbcc455",
+      bleuLBFTT: "#4bbcc420",
       vertLBF: "#93c021",
       vertLBFT: "#93c02155",
+      vertLBFTT: "#93c02120",
       rougeLBF: "#e02933",
+      rougeLBFT: "#e0293355",
       jauneLBF: "#fcc62d",
-      violetLBF: "#5E4B99",
+      jauneLBFT: "#fcc62d55",
+      violetLBF: "#5e4b99",
       lbfviolet: {
         50:"#EBE8F2",
         100:"#CDC7E0",
@@ -142,6 +156,12 @@ module.exports = {
       "10px": "10px",
       "200px": "200px",
       "40px": "40px",
+      "60px": "60px",
+      "80px": "80px",
+      "100px": "100px",
+        '120px': '120px',
+        '200px': '200px',
+        '250px': '250px',
       "340px": "340px",
       "180px": "180px",
       "480px": "480px",
@@ -197,6 +217,9 @@ module.exports = {
       }
     }
   },
+  plugins: [
+        require('tailwind-scrollbar')
+    ],
   variants: {
     cursor: ["hover", "focus", "disabled"],
     backgroundColor: ["hover", "focus", "disabled"],

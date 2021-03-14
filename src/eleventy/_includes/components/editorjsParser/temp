@@ -1,0 +1,12 @@
+ href="{% urlFullImage image.url %}" data-alt="galerie 1 image {{loop.index}}"
+
+ {% imageGalerie image.url, "galerie 1 image {{loop.index}}", "100vw", "galerie__img" %}
+
+
+<div class="hidden sm:grid w-full galerie">
+    {%- for image in b.data.urls -%}
+        <a data-fslightbox="galerie-1"  href="{% urlFullImage image.url %}" data-alt="galerie 1 image {{loop.index}}" class="galerie__{{nEl}}el">
+            {% imageGalerie image.url, "galerie 1 image {{loop.index}}", "100vw", "galerie__img"  %}
+        </a>
+    {%- endfor -%}
+</div>

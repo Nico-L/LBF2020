@@ -1,11 +1,7 @@
-/* purgecss start ignore */
 @import "tailwindcss/base";
-/* purgecss end ignore */
-@import "./LBF/LBF.css";
-
-/* purgecss start ignore */
 @import "tailwindcss/components";
-/* purgecss end ignore */
-
-/*@tailwind utilities;*/
 @import "tailwindcss/utilities";
+
+@import "./LBF/links.css";
+@import "./LBF/general.css";
+@import "./LBF/articles.css";

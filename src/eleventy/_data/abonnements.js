@@ -1,9 +1,11 @@
 const fetch = require("node-fetch");
 const tokenSite = process.env.TOKEN_SITE
 
+const adresseFetch = "https://cms.labonnefabrique.fr/abonnements-machines?token=" + tokenSite
+
 async function fetchAbonnements() {
-  const leFetch = await fetch("https://cms.labonnefabrique.fr/abonnements-machines", {
-    method: "get",
+  const leFetch = await fetch(adresseFetch, {
+    method: "GET",
     headers: {
       "Content-Type": "application/json"
     },
@@ -14,7 +16,5 @@ async function fetchAbonnements() {
 }
 
 module.exports = async function() {
-  //let result = await fetchMachinesData();
-  //console.log("retour",result)
   return fetchAbonnements();
 };
