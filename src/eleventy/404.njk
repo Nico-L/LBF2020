@@ -1,0 +1,21 @@
+---
+title: Oups! il n'y a rien ici
+permalink: 404.html
+layout: indexLBF
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+  </head>
+  <body>
+    <h1>{{ title }}</h1>
+    <p>La page que vous essayez de joindre n'existe pas.</p>
+    <ul>
+        <li> La page d'accueil est <a href="{{ "/" | url }}">ici</a></li>
+        <li> La liste de nos machines est <a href="{{ "/machines/" | url }}>là</a></li>
+        <li> Pour réserver un créneau sur une de nos machines, c'est par <a href="{{ "/reservations/" | url }}>ici</a></li>
+  </body>
+</html>
