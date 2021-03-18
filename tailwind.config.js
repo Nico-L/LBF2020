@@ -1,6 +1,6 @@
 module.exports = {
 purge: {
-    enabled: true,
+    enabled: false,
     content: ["./src/eleventy/**/*.njk","./src/svelte/**/*.svelte"],
   },
   theme: {
@@ -51,6 +51,7 @@ purge: {
       fondLBF: "#FCFCFC",
       orangeLBF: "#ee732e",
       orangeLBFT: "#ee732e55",
+      orangeLBFfonce: "#C15D25",
       bleuLBF: "#4bbcc4",
       bleuLBFT: "#4bbcc455",
       bleuLBFTT: "#4bbcc420",

@@ -48,8 +48,6 @@ const jours = [
 
 const tokenSite = process.env.TOKEN_SITE
 
-fetchFavicon('https://www.lemonde.fr').then((retour) => console.log('retour fav', retour))
-
 async function recupFavicon(url) {
     const icon = await fetchFavicon(url)
     return icon;
@@ -70,7 +68,7 @@ async function imageBackground(src, taille) {
 async function imageCarreBackground(src, taille) {
     const srcComplete = "https://cms.labonnefabrique.fr"+src
     let imageData = await Image(srcComplete, {
-        widths: [taille],
+        widths: [100],
         formats: ['png'],
         outputDir: "./dist/images/img/",
         urlPath: "/images/img/",
@@ -82,8 +80,10 @@ async function imageCarreBackground(src, taille) {
     let dataImg = imageData.png[imageData.png.length - 1];
     retour = `
     <div 
-        class="w-${taille}px h-${taille}px rounded mx-auto"
+        class="rounded mx-auto object-cover"
         style="
+            height: ${taille}px;
+            width: ${taille}px;
             background-image: url(${dataImg.url});
             background-size: cover;
             background-repeat: no-repeat;
@@ -94,47 +94,7 @@ async function imageCarreBackground(src, taille) {
     return retour;
 }
 
-async function imageToCrop(src, alt, width, height) {
-    const srcComplete = "https://cms.labonnefabrique.fr"+src
-    const variables = {
-        url: srcComplete,
-        resizing_type: 'fill', 
-        width: width,
-        height: height,
-        gravity: 'ce'
-    }
-    const urlQuery = "https://cms.labonnefabrique.fr/imgproxy?token=" + tokenSite
-    const entetes = {"content-type": "application/json"}
-    var options = { 
-        method: 'POST',
-        headers: entetes,
-        mode: 'cors',
-        cache: 'default',
-        body: JSON.stringify(variables)
-    }
-
-    let metadata = await fetch(urlQuery, options)
-        .then((leJSON)=> {return leJSON.json()})
-        .then(async (retour)=> {
-            return await Image(retour.imgProxyUrl, {
-                widths: [320, null],
-                formats: ["webp", "jpeg"],
-                outputDir: "./dist/images/img/",
-                urlPath: "/images/img/"
-            });
-        })
-    let imageAttributes = {
-        alt,
-        sizes: "100vw",
-        loading: "lazy",
-        decoding: "async",
-    };
-
-  // You bet we throw an error on missing alt in `imageAttributes` (alt="" works okay)
-    return Image.generateHTML(metadata, imageAttributes);
-}
-
-async function imageFixedHeight(src, alt, targetHeight) {  
+async function imageFixedHeight(src, alt, targetHeight, classe) {  
    if(alt === undefined) {
     // You bet we throw an error on missing alt (alt="" works okay)
     throw new Error(`Missing \`alt\` on responsive image from: ${src}`);
@@ -160,7 +120,7 @@ let dataImg = imageToShow.png[imageToShow.png.length - 1];
 let datapng = imageToShow.png[imageToShow.png.length - 1];
 let retourPicture = `<picture>
     <source media="(height: ${datapng.height}px;)" srcset="${datapng.url} ${datapng.width}w" alt="${alt}" type="image/png" loading="lazy" decoding="async">
-    <img src="${dataImg.url}" width="${dataImg.width}" height="${dataImg.height}" alt="${alt}" loading="lazy" decoding="async">
+    <img src="${dataImg.url}" width="${dataImg.width}" height="${dataImg.height}" alt="${alt}" class="${classe} loading="lazy" decoding="async">
     </picture>`;
 return retourPicture;
 }
@@ -240,7 +200,7 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addNunjucksAsyncShortcode("imageGalerie", imageGalerie);
     eleventyConfig.addNunjucksAsyncShortcode("urlFullImage", urlFullImage);
     eleventyConfig.addNunjucksAsyncShortcode("imageCarreBackground", imageCarreBackground);
-    eleventyConfig.addNunjucksAsyncShortcode("imageGenerique", imageGenerique);
+    //eleventyConfig.addNunjucksAsyncShortcode("imageGenerique", imageGenerique);
 
   // Layout aliases for convenience
   eleventyConfig.addLayoutAlias("baseLBF", "layouts/baseLBF.njk");
