@@ -58,7 +58,7 @@ async function imageBackground(src, largeur, hauteur, classes="", type) {
   const srcComplete = "https://cms.labonnefabrique.fr"+src
   let imageData = await Image(srcComplete, {
       widths: [taille],
-      formats: ['png'],
+      formats: ['jpeg'],
       outputDir: "./dist/images/img/",
       urlPath: "/images/img/",
       sharpPngOptions: {
@@ -66,7 +66,7 @@ async function imageBackground(src, largeur, hauteur, classes="", type) {
       }
       
   });
-  let dataImg = imageData.png[imageData.png.length - 1];
+  let dataImg = imageData.jpeg[imageData.jpeg.length - 1];
   classes = classes == "" ? "" : "class=" + classes
   retour = `
   <div 
