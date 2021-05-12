@@ -1,11 +1,7 @@
 {%- for machine in lesMachines -%}
     <div class="w-320px border rounded-lg mb-4 mx-1 {% include "components/classCartesMachines.njk" %}">
-        <div class="bg-gray-100 rounded-t-lg">
-            <img 
-                src="{% imageBackground machine.illustration.media.url, 318 %}"
-                class="rounded-t-lg"
-                width="318"
-                height="180"/>
+        <div class="bg-gray-100 rounded-t-lg overflow-hidden">
+            {% imageBackground machine.illustration.media.url, 318, 180, "rounded-lg", "desktop" %}            
             <div class="text-xl p-1 text-center font-bold capitalize mt-1 align-middle">{{machine.nom}}</div>
             <div class="text-base text-justify p-1 align-top rounded-br-lg listeMachines">{{machine.resume | safe}}</div>
         </div>

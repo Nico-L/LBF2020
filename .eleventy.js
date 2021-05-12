@@ -53,7 +53,7 @@ async function recupFavicon(url) {
     return icon;
 }
 
-async function imageBackground(src, largeur, hauteur, classes, type) {
+async function imageBackground(src, largeur, hauteur, classes="", type) {
   let taille = type == "mobile" ? 3*largeur : largeur
   const srcComplete = "https://cms.labonnefabrique.fr"+src
   let imageData = await Image(srcComplete, {
@@ -67,9 +67,10 @@ async function imageBackground(src, largeur, hauteur, classes, type) {
       
   });
   let dataImg = imageData.png[imageData.png.length - 1];
+  classes = classes == "" ? "" : "class=" + classes
   retour = `
   <div 
-      class=${classes}
+      ${classes}
       style="
           height: ${hauteur}px;
           width: ${largeur}px;
