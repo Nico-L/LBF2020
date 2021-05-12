@@ -4,7 +4,6 @@
 # build artefacts
 /dist
 /src/site/css
-/src/eleventy/_includes/js
 src/eleventy/css
 yarn.lock
 package-lock.json
