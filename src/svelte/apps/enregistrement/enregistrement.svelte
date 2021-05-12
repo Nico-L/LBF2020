@@ -105,7 +105,7 @@
                             .then((leJSON) => leJSON.json())
                             .then((user)=> {
                                 localStorage.setItem("userStrapi", JSON.stringify(user))
-                                window.location.replace(window.location.origin)
+                                window.location.assign(window.location.origin)
                             })
                     }
                 })

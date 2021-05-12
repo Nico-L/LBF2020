@@ -53,16 +53,34 @@ async function recupFavicon(url) {
     return icon;
 }
 
-async function imageBackground(src, taille) {
-    const srcComplete = "https://cms.labonnefabrique.fr"+src
-    let imageData = await Image(srcComplete, {
-        widths: [taille],
-        formats: ['jpeg'],
-        outputDir: "./dist/images/img/",
-        urlPath: "/images/img/",
-    }); 
-    let dataImg = imageData.jpeg[imageData.jpeg.length - 1];
-    return dataImg.url
+async function imageBackground(src, largeur, hauteur, classes, type) {
+  let taille = type == "mobile" ? 3*largeur : largeur
+  const srcComplete = "https://cms.labonnefabrique.fr"+src
+  let imageData = await Image(srcComplete, {
+      widths: [taille],
+      formats: ['png'],
+      outputDir: "./dist/images/img/",
+      urlPath: "/images/img/",
+      sharpPngOptions: {
+          quality: 100
+      }
+      
+  });
+  let dataImg = imageData.png[imageData.png.length - 1];
+  retour = `
+  <div 
+      class=${classes}
+      style="
+          height: ${hauteur}px;
+          width: ${largeur}px;
+          background-image: url(${dataImg.url});
+          background-size: cover;
+          background-repeat: no-repeat;
+      ">
+  </div>
+  `
+
+  return retour;
 }
 
 async function imageCarreBackground(src, taille) {
@@ -126,7 +144,8 @@ return retourPicture;
 }
 
 async function urlFullImage(src) {  
-  let imageData = await Image(src, {
+  const srcComplete = "https://cms.labonnefabrique.fr"+src   
+  let imageData = await Image(srcComplete, {
     widths: [null],
     formats: ['jpeg'],
     outputDir: "./dist/images/img/",
@@ -170,8 +189,9 @@ async function imageGenerique(src, alt, sizes, classe) {
     </picture>`;
 }
 
-async function imageGalerie(src, alt, sizes, classe) {  
-    let metadata = await Image(src, {
+async function imageGalerie(src, alt, sizes, classe) {
+  const srcComplete = "https://cms.labonnefabrique.fr"+src   
+    let metadata = await Image(srcComplete, {
         widths: [320, 720, 1024],
         formats: ["webp", "jpeg"],
         outputDir: "./dist/images/img/",
@@ -206,7 +226,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addLayoutAlias("baseLBF", "layouts/baseLBF.njk");
   eleventyConfig.addLayoutAlias("auth", "layouts/auth.njk");
   eleventyConfig.addLayoutAlias("indexLBF", "layouts/indexLBF.njk");
-  eleventyConfig.addLayoutAlias("articleLBF", "layouts/articleLBF.njk");
+  eleventyConfig.addLayoutAlias("galerieLBF", "layouts/galerieLBF.njk");
   eleventyConfig.addLayoutAlias("baseLBFResaMachines", "layouts/baseLBFResaMachines.njk");
 
   //new slug for apostrophe

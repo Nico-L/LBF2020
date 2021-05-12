@@ -58,7 +58,7 @@
         {#if succes}
             <div class="mb-2 text-justify text-sm text-gray-900">Un mail vous a été envoyé. Il peut mettre quelques minutes à vous parvenir.</div>
             <div class="mt-2">
-                <Bouton border="border-1" largeur="w-full" couleur="text-vertLBF border-vertLBF" on:actionBouton={() => {window.location.replace(urlLogin)}}>
+                <Bouton border="border-1" largeur="w-full" couleur="text-vertLBF border-vertLBF" on:actionBouton={() => {window.location.assign(urlLogin)}}>
                     <div class="mx-auto flex flex-row justify-center">
                         <div class="px-1 self-center">connexion</div>
                         <div class="px-1 self-center"><Fa icon={faSignInAlt} size="lg" class="mx-auto" /></div>

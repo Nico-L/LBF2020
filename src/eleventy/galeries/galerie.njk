@@ -1,0 +1,23 @@
+---
+pagination:
+    data: lesGaleries
+    size: 1
+    alias: galerie
+permalink: "galeries/{{ galerie.titre | slug }}/"
+layout: indexLBF
+eleventyComputed:
+    title: "{{ galerie.titre }}"
+---
+
+<div class="p-4 max-w-720px">
+    <div class="text-sm my-1 bedcrumb">
+        <a href="/">Accueil </a> > <a href="/galeries/">Galeries</a> > <a href="/galeries/{{ galerie.titre | slug }}/">{{galerie.titre}}</a>
+    </div>
+    <div class="h3 text-lbfbleu-700">{{galerie.titre}}</div>
+    {%- include "components/galerie.njk" -%}
+    <div class="text-base description">{{galerie.description | safe}}</div>
+</div>
+
+{% block scripts %}
+<script src="/js/fslightbox.js" defer></script>
+{% endblock %}

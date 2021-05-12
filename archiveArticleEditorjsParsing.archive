@@ -1,12 +1,12 @@
 ---
 pagination:
-    data: lesArticles
+    data: lesGaleries
     size: 1
-    alias: article
-permalink: "articles/{{ article.titre | slug }}/"
+    alias: galerie
+permalink: "galerie/{{ galerie.titre | slug }}/"
 layout: articleLBF
 eleventyComputed:
-    title: "{{ article.titre }}"
+    title: "{{ galerie.titre }}"
 ---
 
 <div class="relative article__banniere">

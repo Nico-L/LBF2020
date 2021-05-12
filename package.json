@@ -9,7 +9,7 @@
     "url": "https://github.com/Nico-L/LBF2020"
   },
   "scripts": {
-    "build": "npm-run-all build:svelte build:css build:html",
+    "build": "NODE_ENV=production npm-run-all build:svelte build:css build:html",
     "build:css": "postcss src/eleventy/_includes/css/tailwind.css -o src/eleventy/css/styles.css",
     "build:html": "eleventy",
     "build:svelte": "rollup -c",

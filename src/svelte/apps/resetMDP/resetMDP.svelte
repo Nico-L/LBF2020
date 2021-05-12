@@ -15,12 +15,12 @@
     if (extracted!==null) {
         code = extracted[1]
     } else {
-        window.location.replace(window.location.origin)
+        window.location.assign(window.location.origin)
     }
 
     function renvoiOubliMDP() {
         var urlLogin = window.location.origin + "/oubliMDP"
-        window.location.replace(urlLogin)
+        window.location.assign(urlLogin)
     }
 
     function resetMDP() {
@@ -44,7 +44,7 @@
                 retour.json().then((retour2)=> {
                     if (retour2.jwt && retour2.user) {
                         localStorage.setItem('userStrapi', JSON.stringify(retour2))
-                        window.location.replace(window.location.origin)
+                        window.location.assign(window.location.origin)
                     } else {
                         if (retour2.data[0].messages[0].id==="Auth.form.error.password.matching") {
                             message="Les mots de passe ne coincident pas. Merci d'essayer à nouveau."

@@ -1,0 +1,26 @@
+<h3 class="text-lbfbleu-800">La galerie de l'atelier</h3>
+<p>Vous trouverez sur cette page la liste des travaux de nos adhérents. Chaque page propose une courte description de l'objet ou de l'événement avec quelques photos.</p>
+<div class="rounded border border-bleuLBF p-2 my-4 filtre">
+    <div class="h5 border-lbfbleu-700">Filtres par mot clés</div>
+    <p>En cliquant sur les mots clés, vous accéderez aux galeries liées</p>
+    <div class="flex flex-row flex-wrap gap-2 mt-1">
+        {%- set estTous = true -%}
+        {%- for tagLoop in lesTags -%}
+            {%- if tagLoop.tag == tag.tag -%}
+                {%- set estTous = false -%}
+                <div class="font-medium rounded py-1 px-2 border border-lbfbleu-900 text-lbfbleu-900 min-w-16 flex justify-center items-center">{{tagLoop.tag}}</div>
+            {%- else -%}
+                <a href="/galeries/tags/{{tagLoop.tag | slug}}/">
+                    <div class="font-medium rounded py-1 px-2 border border-bleuLBF bg-bleuLBF hover:bg-fondLBF cursor-pointer text-gray-900 min-w-16 flex justify-center items-center">{{tagLoop.tag}}</div>
+                </a>
+            {%- endif -%}
+        {%- endfor -%}
+        <a href="/galeries/">
+            {%- if estTous -%}
+                <div class="font-medium rounded py-1 px-2 border border-lbfbleu-900 text-lbfbleu-900 min-w-16 flex justify-center items-center">Tous</div>
+            {%- else -%}
+                <div class="font-medium rounded py-1 px-2 border border-bleuLBF bg-bleuLBF hover:bg-fondLBF cursor-pointer text-gray-900 min-w-16 flex justify-center items-center">Tous</div>
+            {%- endif -%}
+        </a>
+    </div>
+</div>

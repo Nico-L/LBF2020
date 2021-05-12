@@ -80,7 +80,7 @@
             if (extracted[5]) {
                 adresseRedirect = "../" + extracted[5]
             }
-            if (donneesUtilisateur.user.email !== emailModif) {window.location.replace(window.location.origin)}
+            if (donneesUtilisateur.user.email !== emailModif) {window.location.assign(window.location.origin)}
             if (donneesUtilisateur.jwt) {
                 trouverInscritByUuid(id_atelier, emailModif.toLowerCase(), uuidAtelierModif, donneesUtilisateur.jwt, urlModifInscription)
                     .then((inscrits) => {
@@ -90,10 +90,10 @@
                             actionEnCours = false
                             flagEmailVerifie = true
                             afficheModal()
-                        } else if (id_atelier === idAtelierUrl) { window.location.replace(window.location.origin)}
+                        } else if (id_atelier === idAtelierUrl) { window.location.assign(window.location.origin)}
                 })
             } else {
-                window.location.replace(window.location.origin + '/login/' + urlModifInscription)
+                window.location.assign(window.location.origin + '/login/' + urlModifInscription)
             }
         }
         nbInscrits()
@@ -266,7 +266,7 @@ function insertInscrits() {
 //modal
 	function afficheModal() {
         if (donneesUtilisateur !== null && donneesUtilisateur.user.doitEtreEfface) {
-                window.location.replace(window.location.origin + '/dashboard')
+                window.location.assign(window.location.origin + '/dashboard')
             }
         verifInscrits()
         if (donneesUtilisateur !== null) {
@@ -274,15 +274,15 @@ function insertInscrits() {
                 showModalInscription = true
             })
         } else {
-            window.location.replace(window.location.origin + '/login/')
+            window.location.assign(window.location.origin + '/login/')
         }
 	}
 
     function redirect() {
         if (adresseRedirect==="") {
-            window.location.replace(window.location.origin)
+            window.location.assign(window.location.origin)
         } else {
-            window.location.replace(adresseRedirect)
+            window.location.assign(adresseRedirect)
         }
     }
 

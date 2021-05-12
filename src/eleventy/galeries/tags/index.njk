@@ -1,0 +1,25 @@
+---
+pagination:
+    data: lesTags
+    size: 1
+    alias: tag
+permalink: "galeries/tags/{{ tag.tag | slug }}/"
+layout: indexLBF
+eleventyComputed:
+    title: "{{ tag.tag }}"
+---
+{%- set galeriesFiltrees=[] -%}
+{%- for galerie in lesGaleries -%}
+    {%- for tagLoop in galerie.tags -%}
+        {%- if tagLoop.tag == tag.tag -%}
+            {%- set galeriesFiltrees = (galeriesFiltrees.push(galerie), galeriesFiltrees) -%}
+        {%- endif -%}
+    {%- endfor -%}
+{%- endfor -%}
+<div class="p-2 max-w-720px">
+    {%- include "components/enteteGaleries.njk" -%}
+    <div class="flex flex-col md:flex-row flex-wrap gap-2">
+        {%- include "components/listeGaleries.njk" -%}
+    </div>
+</div>
+

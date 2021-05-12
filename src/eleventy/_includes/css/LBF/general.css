@@ -102,3 +102,49 @@ h6,
 .listeMachines ul {
     @apply list-disc list-inside;
 }
+
+p {
+  @apply text-justify;
+}
+
+.description a,
+.bedcrumb a
+{
+  @apply font-bold rounded px-1;
+}
+
+.description a:nth-child(1),
+.bedcrumb a:nth-child(1) 
+{
+  @apply text-lbfbleu-800;
+}
+
+.description a:nth-child(1):hover, 
+.bedcrumb a:nth-child(1):hover
+{
+  @apply bg-bleuLBFT;
+}
+
+.description a:nth-child(2),
+.bedcrumb a:nth-child(2)
+{
+  @apply text-lbfvert-600;
+}
+
+.description a:nth-child(2):hover,
+.bedcrumb a:nth-child(2):hover
+{
+  @apply bg-vertLBFT;
+}
+
+.description a:nth-child(3),
+.bedcrumb a:nth-child(3)
+{
+  @apply text-lbfjaune-800;
+}
+
+.description a:nth-child(3):hover,
+.bedcrumb a:nth-child(3):hover
+{
+  @apply bg-jauneLBFT;
+}

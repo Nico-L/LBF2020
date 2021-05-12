@@ -83,7 +83,7 @@ if (localStorage.getItem("userStrapi")!==null) {
     flagVerifStorage = true
     donneesUtilisateur = JSON.parse(localStorage.getItem("userStrapi"))
     if (donneesUtilisateur.user.doitEtreEfface) {
-        window.location.replace(window.location.origin + '/dashboard')
+        window.location.assign(window.location.origin + '/dashboard')
     }
     const aujourdhui = new Date()
     const dateAbonnement = new Date(donneesUtilisateur.user.abonnementMachine)
@@ -92,7 +92,7 @@ if (localStorage.getItem("userStrapi")!==null) {
         flagVerifStorage = false
     })
 } else {
-    window.location.replace(window.location.origin + '/login/?' + urlEditResa.pathname + urlEditResa.search)
+    window.location.assign(window.location.origin + '/login/?' + urlEditResa.pathname + urlEditResa.search)
 }
 
 onMount(() => {
@@ -447,24 +447,24 @@ function verifEffacer() {
 }
 
 function retourAccueil() {
-    window.location.replace(urlEditResa.origin)
+    window.location.assign(urlEditResa.origin)
 }
 
 function retourResa() {
     let url = urlEditResa.origin + urlEditResa.pathname
-    window.location.replace(url)
+    window.location.assign(url)
 }
 
 function retourPageModif() {
     if (adresseRedirect==="") {
         window.location.reload(true);
     } else {
-        window.location.replace(adresseRedirect)
+        window.location.assign(adresseRedirect)
     }
 }
 
 function retourPageResa() {
-    window.location.replace(urlEditResa.origin + "/reservations/")
+    window.location.assign(urlEditResa.origin + "/reservations/")
 }
 
 function mailConfirmation(uuidResa) {

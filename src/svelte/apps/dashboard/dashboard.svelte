@@ -87,7 +87,7 @@ onMount(() => {
 		}, 1000);
     if (localStorage.getItem("userStrapi")===null) {
         flagIsLoggedIn = false
-        window.location.replace(window.location.origin + '/login/?' + urlDashboard.pathname + urlDashboard.search)
+        window.location.assign(window.location.origin + '/login/?' + urlDashboard.pathname + urlDashboard.search)
     } else {
         donneesUtilisateur = JSON.parse(localStorage.getItem("userStrapi"))
         doitEtreEfface = donneesUtilisateur.user.doitEtreEfface
@@ -107,13 +107,13 @@ onMount(() => {
 })
 
 function redirectIndex(uuid, atelier, email) {
-    window.location.replace(
+    window.location.assign(
         window.location.origin + "/?uuidInscription=" + uuid + "&email=" + email + "&idAtelier=" + atelier + "&redirect=dashboard"
         )
 }
 
 function redirectResaMachine(uuid) {
-    window.location.replace(
+    window.location.assign(
         window.location.origin + "/reservations?uuidReservation=" + uuid + "&redirect=dashboard"
         )
 }
