@@ -1328,6 +1328,10 @@ video {
   min-width: 25%;
 }
 
+.min-w-3\/4 {
+  min-width: 75%;
+}
+
 .min-w-340px {
   min-width: 340px;
 }

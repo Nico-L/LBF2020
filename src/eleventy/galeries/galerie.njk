@@ -13,7 +13,10 @@ eleventyComputed:
     <div class="text-sm my-1 bedcrumb">
         <a href="/">Accueil </a> > <a href="/galeries/">Galeries</a> > <a href="/galeries/{{ galerie.titre | slug }}/">{{galerie.titre}}</a>
     </div>
-    <div class="h3 text-lbfbleu-700">{{galerie.titre}}</div>
+    <div class="flex flex-row flex-wrap justify-between items-end">
+        <div class="h3 min-w-3/4 text-lbfbleu-700">{{galerie.titre}}</div>
+        <div class="text-sm px-2 rounded max-w-1/2">Par <span class="font-medium text-lbfbleu-700">{{galerie.auteur}}</span></div>
+    </div>
     {%- include "components/galerie.njk" -%}
     <div class="text-base description">{{galerie.description | safe}}</div>
 </div>
