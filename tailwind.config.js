@@ -42,6 +42,7 @@ purge: {
            '5/6': '83%',
            'full': '100%',
            '120px': '120px',
+           '110px': '110px',
            '320px': '320px'
           },
     colors: {
@@ -221,6 +222,7 @@ purge: {
     }
   },
   plugins: [
+    require('@tailwindcss/line-clamp'),
         require('tailwind-scrollbar')
     ],
   variants: {

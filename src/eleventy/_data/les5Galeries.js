@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 const tokenSite = process.env.TOKEN_SITE
 
-const adresseFetch = "https://cms.labonnefabrique.fr/galeries?token=" + tokenSite + "&_sort=updated_at:DESC"
+const adresseFetch = "https://cms.labonnefabrique.fr/galeries?token=" + tokenSite + "&_sort=updated_at:DESC&_limit=5"
 
 async function fetchGaleriesData() {
   const leFetch = await fetch(adresseFetch, {

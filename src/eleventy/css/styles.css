@@ -2682,6 +2682,10 @@ pre[data-line] {
     height: 2rem;
   }
 
+  .md\:h-10 {
+    height: 2.5rem;
+  }
+
   .md\:h-16 {
     height: 4rem;
   }

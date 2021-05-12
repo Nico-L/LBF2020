@@ -14,20 +14,23 @@
                 </div>
             </div>
             {%- if galerie.description !== "<p><br></p>" -%}
-                <div class="px-2 h-full text-sm md:text-base overflow-hidden min-w-0 h-full">{{galerie.description | safe}}</div>
+                <div class="px-2 h-full text-sm md:text-base overflow-hidden min-w-0 h-full flex flex-col gap-2 flex-nowrap">
+                    <div class="overflow-hidden">{{galerie.description | safe}}</div>
+                    <div class="flex-shrink-0 h-8 md:h-10 md:mt-1">...</div>
+                    </div>
             {%- endif -%}
         </div>
         <div class="flex flex-row flex wrap gap-2 my-2">
             {%- if galerie.tags.length > 0 -%}
                 {%- for tag in galerie.tags -%}
-                    <div class="border-2 border-bleuLBF bg-bleuLBF text-gray-900 text-xs font-medium rounded px-1">{{tag.tag}}</div>
+                    <div class="border-2 border-bleuLBF bg-bleuLBF text-gray-900 text-xs font-medium rounded px-1 flex flex-col">{{tag.tag}}</div>
                 {%- endfor -%}
             {%- endif -%}
         </div>
         <div class="flex flex-row text-xs gap-2 justify-end mt-2">
             <div class="flex flex-row">
                 <div class="font-medium text-center text-lbfbleu-700 flex flex-row flex-wrap mr-1">Publié le : </div>
-                <div>{{galerie.updated_at | shortDate}}</div>
+                <div>{{galerie.created_at | shortDate}}</div>
             </div>
             <div class="flex flex-row">
                 <div class="font-medium text-lbfbleu-700 flex flex-row flex-wrap mr-1">Dernière mise à jour : </div>
