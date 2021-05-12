@@ -1,12 +1,11 @@
 ---
+title: Les galeries de la Bonne Fabrique
 pagination:
     data: lesTags
     size: 1
     alias: tag
 permalink: "galeries/tags/{{ tag.tag | slug }}/"
 layout: indexLBF
-eleventyComputed:
-    title: "{{ tag.tag }}"
 ---
 {%- set galeriesFiltrees=[] -%}
 {%- for galerie in lesGaleries -%}

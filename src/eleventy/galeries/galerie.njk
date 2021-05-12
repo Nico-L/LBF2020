@@ -6,7 +6,7 @@ pagination:
 permalink: "galeries/{{ galerie.titre | slug }}/"
 layout: indexLBF
 eleventyComputed:
-    title: "{{ galerie.titre }}"
+    title: "{{ galerie.titre | safe }}"
 ---
 
 <div class="p-4 max-w-720px">
