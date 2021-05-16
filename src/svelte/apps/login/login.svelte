@@ -13,8 +13,8 @@
     var urlModifInscription = window.location.search
     var urlRetour = window.location.origin
 
-    if (window.location.search.assign('?', '').indexOf('?') >= 0 || window.location.search.slice(window.location.search.length -1) === "/") {
-        urlRetour += window.location.search.assign('?', '')
+    if (window.location.search.indexOf('?') >= 0 || window.location.search.slice(window.location.search.length -1) === "/") {
+        urlRetour += window.location.search.replace("?","")
     } else {
         urlRetour += "/" + window.location.search
     }
