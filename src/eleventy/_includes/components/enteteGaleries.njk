@@ -3,7 +3,22 @@
 <div class="rounded border border-bleuLBF p-2 my-4 filtre">
     <div class="h5 border-lbfbleu-700">Filtres par mot clés</div>
     <p>En cliquant sur les mots clés, vous accéderez aux galeries liées</p>
-    <div class="flex flex-row flex-wrap gap-2 mt-1">
+    <div class="flex flex-row gap-2 justify-around flex-wrap">
+        {%- for categorie in lesCategories -%}
+            <div class="flex flex-col max-w-1/6 mx-1">
+                <div class="font-medium text-bleuLBF mr-2 capitalize">{{categorie.nom}}</div>
+                <select name="{{categorie.nom}}" id="{{categorie.nom}}" onchange="selectionTag(this)" class="border border-bleuLBF p-1 rounded">
+                    <option value="tous">Tous</option>
+                    {%- for tagLoop in lesTags -%}
+                        {%- if tagLoop.categorie.nom == categorie.nom -%}
+                            <option value="{{tagLoop.tag | slug}}">{{tagLoop.tag}}</option>
+                        {%- endif -%}
+                    {%- endfor -%}
+                </select>
+            </div>
+        {%- endfor -%}
+    </div>
+    <!-- <div class="flex flex-row flex-wrap gap-2 mt-1">
         {%- set estTous = true -%}
         {%- for tagLoop in lesTags -%}
             {%- if tagLoop.tag == tag.tag -%}
@@ -22,5 +37,5 @@
                 <div class="font-medium rounded py-1 px-2 border border-bleuLBF bg-bleuLBF hover:bg-fondLBF cursor-pointer text-gray-900 min-w-16 flex justify-center items-center">Tous</div>
             {%- endif -%}
         </a>
-    </div>
+    </div> -->
 </div>
