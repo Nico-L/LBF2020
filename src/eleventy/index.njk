@@ -9,20 +9,27 @@ layout: indexLBF
         <div class="h-14 ml-16 flex flex-row content-center">
             <h1 class="text-lg font-bold mx-auto my-auto pl-2">{{atelier.titre}}</h1>
         </div>
+        <!-- {% imageBackground atelier.illustration.media.url, 338, 180, "relative h-180px", "mobile" %} -->
         <div 
             class="relative h-180px" 
-            style="background-image: url({% imageBackground atelier.illustration.media.url, 338 %})">
+            style="
+                height: 180px;
+                width: 338px;
+                background-image: url( {%- urlImage atelier.illustration.media.url, 338, 'mobile' -%})"
+                background-size: cover;
+                background-repeat: no-repeat;
+            >
             {% if atelier.surInscription %}
-            <div class="absolute -bottom-2 left-0">
-                <inscription-atelier 
-                    id_atelier="{{atelier.id}}" 
-                    nb_participants="{{atelier.nbParticipants}}"
-                    url_illustration="https://cms.labonnefabrique.fr{{atelier.illustration.media.url}}" 
-                    titre_atelier="{{atelier.titre}}" 
-                    date_atelier="{{atelier.date}}"
-                    heure_debut="{{atelier.debut}}"
-                    heure_fin="{{atelier.fin}}"/>
-            </div>
+                <div class="absolute -bottom-2 left-0">
+                    <inscription-atelier 
+                        id_atelier="{{atelier.id}}" 
+                        nb_participants="{{atelier.nbParticipants}}"
+                        url_illustration="https://cms.labonnefabrique.fr{{atelier.illustration.media.url}}" 
+                        titre_atelier="{{atelier.titre}}" 
+                        date_atelier="{{atelier.date}}"
+                        heure_debut="{{atelier.debut}}"
+                        heure_fin="{{atelier.fin}}"/>
+                </div>
             {% endif %}
         </div>
         <div class="absolute top-0 left-0 bg-orangeLBF min-h-16 h-16 w-16 rounded-br mb-4">
@@ -68,13 +75,6 @@ layout: indexLBF
             <div class="mt-3 text-justify">Les conditions sanitaires nous empêchent de vous proposer notre programmation habituelle. Nous reprendrons nos activités dès que la situation nous le permettra.</div>
         </div>
     {% endfor %}
-    <div class="p-2 max-w-720px"> 
-        <div class="mt-3 text-justify description">En attendant, nos adhérents ont du talent ! Voici ce qu'ils ont fabriqué à l'atelier. Vous trouverez d'autres exemples dans <a href="/galeries/">nos galeries</a>.</div>
-        <div class="flex flex-col md:flex-row flex-wrap gap-2">
-            {%- set galeriesFiltrees = les5Galeries -%}
-            {%- include "components/listeGaleries.njk" -%}
-        </div>
-    </div>
 </div>
 
 

@@ -58,6 +58,23 @@ async function recupFavicon(url) {
     const icon = await fetchFavicon(url)
     return icon;
 }
+async function urlImage(src, largeur, type) {
+  let taille = type == "mobile" ? 3*largeur : largeur
+  const srcComplete = "https://cms.labonnefabrique.fr"+src
+  let imageData = await Image(srcComplete, {
+      widths: [taille],
+      formats: ['jpeg'],
+      outputDir: "./dist/images/img/",
+      urlPath: "/images/img/",
+      sharpPngOptions: {
+          quality: 100
+      },
+      cacheOptions: cacheOptions
+      
+  });
+  let dataImg = imageData.jpeg[imageData.jpeg.length - 1];
+  return dataImg.url
+}
 
 async function imageBackground(src, largeur, hauteur, classes="", type) {
   let taille = type == "mobile" ? 3*largeur : largeur
@@ -136,8 +153,7 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addNunjucksAsyncShortcode("imageBackground", imageBackground)
     eleventyConfig.addNunjucksAsyncShortcode("imageGalerie", imageGalerie);
     eleventyConfig.addNunjucksAsyncShortcode("urlFullImage", urlFullImage);
-    //eleventyConfig.addNunjucksAsyncShortcode("imageCarreBackground", imageCarreBackground);
-    //eleventyConfig.addNunjucksAsyncShortcode("imageGenerique", imageGenerique);
+    eleventyConfig.addNunjucksAsyncShortcode("urlImage", urlImage);
 
   // Layout aliases for convenience
   eleventyConfig.addLayoutAlias("baseLBF", "layouts/baseLBF.njk");
