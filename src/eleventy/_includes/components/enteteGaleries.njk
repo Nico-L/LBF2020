@@ -11,31 +11,11 @@
                     <option value="tous">Tous</option>
                     {%- for tagLoop in lesTags -%}
                         {%- if tagLoop.categorie.nom == categorie.nom -%}
-                            <option value="{{tagLoop.tag | slug}}">{{tagLoop.tag}}</option>
+                            <option value="{{tagLoop.tag | slug}}" class="capitalize">{{tagLoop.tag}}</option>
                         {%- endif -%}
                     {%- endfor -%}
                 </select>
             </div>
         {%- endfor -%}
     </div>
-    <!-- <div class="flex flex-row flex-wrap gap-2 mt-1">
-        {%- set estTous = true -%}
-        {%- for tagLoop in lesTags -%}
-            {%- if tagLoop.tag == tag.tag -%}
-                {%- set estTous = false -%}
-                <div class="font-medium rounded py-1 px-2 border border-lbfbleu-900 text-lbfbleu-900 min-w-16 flex justify-center items-center">{{tagLoop.tag}}</div>
-            {%- else -%}
-                <a href="/galeries/tags/{{tagLoop.tag | slug}}/">
-                    <div class="font-medium rounded py-1 px-2 border border-bleuLBF bg-bleuLBF hover:bg-fondLBF cursor-pointer text-gray-900 min-w-16 flex justify-center items-center">{{tagLoop.tag}}</div>
-                </a>
-            {%- endif -%}
-        {%- endfor -%}
-        <a href="/galeries/">
-            {%- if estTous -%}
-                <div class="font-medium rounded py-1 px-2 border border-lbfbleu-900 text-lbfbleu-900 min-w-16 flex justify-center items-center">Tous</div>
-            {%- else -%}
-                <div class="font-medium rounded py-1 px-2 border border-bleuLBF bg-bleuLBF hover:bg-fondLBF cursor-pointer text-gray-900 min-w-16 flex justify-center items-center">Tous</div>
-            {%- endif -%}
-        </a>
-    </div> -->
 </div>
