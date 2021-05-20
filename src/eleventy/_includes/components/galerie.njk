@@ -1,15 +1,16 @@
 {% set nEl = galerie.illustrations.length %}
 {% set idGalerie = galerie.id %}
+{% set illus = galerie.illustrations|sort(false, false, "id")%}
 <div class="my-2">
     <div class="galerie__mobile flex flex-row h-48 flex-nowrap w-full flex-shrink-0 overflow-x-scroll gap-2 sm:hidden">
-        {%- for image in galerie.illustrations -%}
+        {%- for image in illus -%}
             <a data-fslightbox="galerie-{{idGalerie}}-mobile" href="{% urlFullImage image.media.url %}" data-alt="galerie 1 image {{loop.index}}">
                 {% imageGalerie image.media.url, galerie.titre + " " + loop.index, "100vw", "galerie__img" %}
             </a>
         {%- endfor -%}
     </div>
     <div class="hidden sm:grid w-full galerie">
-        {%- for image in galerie.illustrations -%}
+        {%- for image in illus -%}
             <a data-fslightbox="galerie-{{idGalerie}}"  href="{% urlFullImage image.media.url %}" data-alt="galerie 1 image {{loop.index}}" class="galerie__{{nEl}}el">
                 {% imageGalerie image.media.url, galerie.titre + " " + loop.index, "100vw", "galerie__img"  %}
             </a>

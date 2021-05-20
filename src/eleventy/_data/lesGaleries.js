@@ -15,7 +15,5 @@ async function fetchGaleriesData() {
 }
 
 module.exports = async function() {
-  /*let result = await fetchGaleriesData();
-  console.log('fetchGaleriesData', result)*/
   return fetchGaleriesData();
 };
