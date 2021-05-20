@@ -9,16 +9,9 @@ layout: indexLBF
         <div class="h-14 ml-16 flex flex-row content-center">
             <h1 class="text-lg font-bold mx-auto my-auto pl-2">{{atelier.titre}}</h1>
         </div>
-        <!-- {% imageBackground atelier.illustration.media.url, 338, 180, "relative h-180px", "mobile" %} -->
-        <div 
-            class="relative h-180px" 
-            style="
-                height: 180px;
-                width: 338px;
-                background-image: url( {%- urlImage atelier.illustration.media.url, 338, 'mobile' -%})"
-                background-size: cover;
-                background-repeat: no-repeat;
-            >
+        <div class="relative h-180px">
+            {% imageBackground atelier.illustration.media.url, 338, 180, "", "mobile" %}
+            <!-- {%- imageGalerie atelier.illustration.media.url, atelier.titre, "100vw", "object-cover h-full w-full"-%} -->
             {% if atelier.surInscription %}
                 <div class="absolute -bottom-2 left-0">
                     <inscription-atelier 
