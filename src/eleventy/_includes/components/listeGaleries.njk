@@ -7,11 +7,13 @@
         <div class="text-sm px-2 mb-2">Par <span class="text-lbfbleu-800">{{galerie.auteur}}</span></div>
         <div class="flex flex-row divide-x divide-lbfbleu-700 justify-between h-120px md:h-240px" }>
             <div class="px-2 flex-shrink-0 text-gray-700 flex justify-center items-center">
-                <div class="md:hidden rounded">
-                    {% imageBackground illus[0].media.url, 100, 120, "rounded", "mobile" %}
+                <div class="md:hidden rounded w-100px h-120px">
+                    <!-- {% imageBackground illus[0].media.url, 100, 120, "rounded", "mobile" %} -->
+                    {%- imageGalerie illus[0].media.url, galerie.titre, "100vw", "object-cover rounded h-full w-full", 300 -%}
                 </div>
-                <div class="hidden md:block rounded">
-                    {% imageBackground illus[0].media.url, 320, 240, "rounded", "desktop" %}
+                <div class="hidden md:block rounded w-320px h-240px">
+                    <!-- {% imageBackground illus[0].media.url, 320, 240, "rounded", "desktop" %} -->
+                    {%- imageGalerie illus[0].media.url, galerie.titre, "100vw", "object-cover rounded h-full w-full", 320, 240 -%}
                 </div>
             </div>
             {%- if galerie.description !== "<p><br></p>" -%}

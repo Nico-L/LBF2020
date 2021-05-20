@@ -102,10 +102,16 @@ let dataImg = imageData.jpeg[imageData.jpeg.length - 1];
 return dataImg.url;
 }
 
-async function imageGalerie(src, alt, sizes, classe) {
+async function imageGalerie(src, alt, sizes, classe, w = "", h) {
+  var widthsTemp = []
+  if (w) {
+    widthsTemp = [w]
+  } else {
+    widthsTemp = [320, 720, 1024]
+  }
   const srcComplete = "https://cms.labonnefabrique.fr"+src   
     let metadata = await Image(srcComplete, {
-        widths: [320, 720, 1024],
+        widths: widthsTemp,
         formats: ["webp", "jpeg"],
         outputDir: "./dist/images/img/",
         urlPath: "/images/img/",
