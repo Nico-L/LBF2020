@@ -18,16 +18,18 @@ layout: baseLBF
 
         <div class="w-84 mx-1 border-2 border-lbfvert-500 p-2 rounded flex flex-col my-2">
       <div class="text-lg text-lbfvert-800 font-bold ">Nos abonnements machines à bois</div>
-      <p>Ces abonnements vous donnent libre accès aux machines : {% for machine in abonnementsMachines %}
+      <p>Ces abonnements vous donnent libre accès aux machines : {% for machine in lesMachines %}
                     {% if loop.last %} et {{machine.titre}}{% else %}{{machine.titre}}, {% endif %}
                     {% endfor %}.</p>
       <p>Nos abonnements :</p>
       <div class="flex flex-row justify-around mx-auto text-center mt-2 font-bold">
         {% for abonnement in abonnements.abonnements %}
+          {% if abonnement.duree !== "" %}
             <div class="mx-3 border-2 border-lbfvert-200 rounded shadow-md bg-white px-1 py-1">
                 <div class="font-bold mt-1">{{abonnement.duree}}</div>
                 <div class="font-normal my-1">{{abonnement.tarif}} €</div>
             </div>
+          {% endif %}  
         {% endfor %}
         </div>
 
@@ -47,10 +49,10 @@ layout: baseLBF
       <p>Le coût des machines est fonction de la durée d'occupation.</p>
           {% for machine in lesMachines %}
             {% if not machine.surAbonnement %}
-                <div class="flex flex-row">
+                <div class="flex flex-row flex-wrap">
                     <div class="font-medium"> {{machine.nom}} :&nbsp;</div>
                     <div class="">
-                        {{machine.tarifHoraire}}&nbsp;{% if machine.tarifHoraire !== "nous contacter" %}€/h{% endif %}
+                        {{machine.tarifHoraire}}&nbsp;{% if machine.tarifHoraire !== "nous contacter" and machine.tarifHoraire !== "prix libre"%}€/h{% endif %}
                     </div>
                 </div>
             {% endif %}
