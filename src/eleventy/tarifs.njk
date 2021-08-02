@@ -18,9 +18,10 @@ layout: baseLBF
 
         <div class="w-84 mx-1 border-2 border-lbfvert-500 p-2 rounded flex flex-col my-2">
       <div class="text-lg text-lbfvert-800 font-bold ">Nos abonnements machines à bois</div>
-      <p>Ces abonnements vous donnent libre accès aux machines : {% for machine in lesMachines %}
-                    {% if loop.last %} et {{machine.titre}}{% else %}{{machine.titre}}, {% endif %}
-                    {% endfor %}.</p>
+      <p>Ces abonnements vous donnent libre accès aux machines :
+        {% for machine in lesMachinesAbonnement %}
+            {% if loop.last %} et {{machine.nom | lower |capitalize}}{% else %}{{machine.nom | lower |capitalize}}, {% endif %}
+        {% endfor %}.</p>
       <p>Nos abonnements :</p>
       <div class="flex flex-row justify-around mx-auto text-center mt-2 font-bold">
         {% for abonnement in abonnements.abonnements %}
