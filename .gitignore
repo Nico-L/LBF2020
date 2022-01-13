@@ -8,7 +8,6 @@ src/eleventy/css
 yarn.lock
 package-lock.json
 .cache
-.cacheImg
 imgTemp/
 
 # secrets
