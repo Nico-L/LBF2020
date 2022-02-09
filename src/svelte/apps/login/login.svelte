@@ -98,10 +98,10 @@
         <img src="/images/logos/logoHexagoneSeul.svg" class="mx-auto my-2 h-32 w-32" alt="logo Bonne Fabrique">
         <!-- <div class="mb-2 text-justify text-sm text-gray-900">
             Pour vous inscrire à un atelier, ou réserver une machine, vous devez être enregistré et identifié. Cela nous permet de sécuriser l'accès à nos données. 
-        </div> -->
+        </div>
         <div class="text-rougeLBF text-sm">
             <span class="font-medium">ATTENTION :</span> nous avons perdu toutes nos données suite à l'incendie du data center de notre ancien serveur, y compris tous les comptes utilisateurs. Si vous voyez ce message pour la première fois, vous devez sans doute vous inscrire à nouveau. Toutes nos excuses pour le désagrément.
-        </div>
+        </div> -->
         <div class={"mb-2 text-justify text-sm " + erreur}>{message}</div>
         <input 
             class="text-sm mb-2 bg-gray-200 text-gray-900 focus:outline-none border border-bleuLBFT rounded py-1 px-2 block w-full appearance-none leading-normal"
