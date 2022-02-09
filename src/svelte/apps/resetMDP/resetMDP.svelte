@@ -43,6 +43,7 @@
             .then((retour)=>
                 retour.json().then((retour2)=> {
                     if (retour2.jwt && retour2.user) {
+                        console.log('user retour', retour2.user)
                         localStorage.setItem('userStrapi', JSON.stringify(retour2))
                         window.location.assign(window.location.origin)
                     } else {
